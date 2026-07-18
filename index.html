@@ -1,303 +1,806 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>BODY TRANSPORT SOLUTIONS | Refrigerated Human Remains Transport South Africa</title>
-<meta name="description" content="BODY TRANSPORT SOLUTIONS provides professional refrigerated human-remains transport and repatriation support for funeral parlours, mortuaries, hospitals and approved providers across South Africa.">
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Ccircle cx='32' cy='32' r='32' fill='%231A73E8'/%3E%3Ctext x='32' y='41' font-size='26' font-family='Arial' font-weight='700' fill='white' text-anchor='middle'%3EBT%3C/text%3E%3C/svg%3E">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="css/style.css">
+<script src="./support.js"></script>
 </head>
 <body>
-<script src="js/partials.js"></script>
-<script>document.write(BTS.headerHTML('home'));</script>
+<x-dc>
+<helmet>
+  <title>BODY TRANSPORT SOLUTIONS | Refrigerated Human Remains Transport South Africa</title>
+  <meta name="description" content="BODY TRANSPORT SOLUTIONS provides professional refrigerated human-remains transport and repatriation support for funeral parlours, mortuaries, hospitals and approved providers across South Africa.">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+  <style>
+    html, body { margin: 0; padding: 0; background: #FFFFFF; }
+    body { font-family: 'Roboto', Arial, sans-serif; color: #202124; -webkit-font-smoothing: antialiased; }
+    a { color: #1A73E8; text-decoration: none; }
+    a:hover { color: #174EA6; }
+    input::placeholder, textarea::placeholder { color: #9AA0A6; }
+    input:focus, textarea:focus, select:focus { outline: 2px solid #1A73E8; outline-offset: 0; border-color: #1A73E8; }
+    ::-webkit-scrollbar { height: 0; }
+  </style>
+</helmet>
 
-<main>
+<div style="min-height:100vh;display:flex;flex-direction:column;background:#FFFFFF">
 
-  <!-- Hero -->
-  <section class="section-hero">
-    <div class="container grid grid-auto-340 grid-2col">
-      <div style="display:flex;flex-direction:column;gap:18px">
-        <div class="eyebrow-row">
-          <span class="chip chip-green"><span class="chip-dot"></span>Available 24/7</span>
-          <span class="chip chip-blue">Proudly South African 🇿🇦</span>
+  <!-- ============ HEADER ============ -->
+  <header style="position:sticky;top:0;z-index:50;background:#FFFFFF;border-bottom:1px solid #DADCE0">
+    <div style="max-width:1140px;margin:0 auto;padding:10px 16px 0;display:flex;align-items:center;gap:12px">
+      <a href="#home" onClick="{{ goHome }}" style="display:flex;align-items:center;gap:10px;cursor:pointer;min-width:0">
+        <div style="width:38px;height:38px;border-radius:50%;background:#1A73E8;display:grid;place-items:center;font-weight:700;font-size:14px;color:#FFFFFF;flex-shrink:0">BT</div>
+        <div style="display:flex;flex-direction:column;line-height:1.15;min-width:0">
+          <span style="font-weight:700;font-size:15px;color:#202124;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">Body Transport Solutions</span>
+          <span style="font-size:11px;color:#5F6368;white-space:nowrap">Transport-only · 24/7 · South Africa</span>
         </div>
-        <h1 class="h1-hero">We move the deceased. Anywhere in South Africa.</h1>
-        <p class="lede max-520">One refrigerated vehicle. A trained team. The right paperwork. You call — we collect — we deliver. That's it.</p>
-        <div style="display:flex;gap:12px;flex-wrap:wrap;margin-top:4px">
-          <a href="/request" class="btn btn-primary btn-lg">Request transport</a>
-          <a href="#" class="btn btn-outline btn-lg js-wa-link">WhatsApp us</a>
-        </div>
-        <div class="trust-strip">
-          <span>Registered (Pty) Ltd</span><span>&middot;</span><span>Reg 2026/464849/07</span><span>&middot;</span><span>Tax 9001928366</span><span>&middot;</span><span>Based in KwaZulu-Natal</span>
-        </div>
-      </div>
-      <div class="image-slot image-slot-hero">
-        <svg class="image-slot-icon" width="120" height="120" viewBox="0 0 24 24" fill="none"><path d="M4 18V9L8 5H14V18M14 10H18V18" stroke="#FFFFFF" stroke-opacity="0.35" stroke-width="1.2" stroke-linejoin="round"></path><path d="M2 18H20" stroke="#FFFFFF" stroke-opacity="0.35" stroke-width="1.2" stroke-linecap="round"></path></svg>
-        <span class="image-slot-caption">Refrigerated VW Transporter — vehicle photo coming soon</span>
-      </div>
+      </a>
+      <a href="#request" onClick="{{ goRequest }}" style="margin-left:auto;flex-shrink:0;background:#1A73E8;color:#FFFFFF;font-weight:500;font-size:14px;padding:10px 20px;border-radius:999px;cursor:pointer" style-hover="background:#174EA6;color:#FFFFFF">Request transport</a>
     </div>
-  </section>
+    <nav style="max-width:1140px;margin:0 auto;padding:8px 12px 10px;display:flex;gap:4px;overflow-x:auto;white-space:nowrap">
+      <sc-for list="{{ navItems }}" as="item" hint-placeholder-count="8">
+        <a href="{{ item.href }}" onClick="{{ item.onClick }}" style="font-size:14px;font-weight:500;padding:8px 14px;border-radius:999px;cursor:pointer;color:{{ item.color }};background:{{ item.bg }};flex-shrink:0" style-hover="background:#E8F0FE;color:#1A73E8">{{ item.label }}</a>
+      </sc-for>
+    </nav>
+    <div style="height:4px;background:linear-gradient(90deg,#007749 0% 20%,#FFB81C 20% 40%,#E03C31 40% 60%,#001489 60% 80%,#111111 80% 100%)"></div>
+  </header>
 
-  <!-- Simple 1-2-3 pitch -->
-  <section class="section section-alt">
-    <div class="container">
-      <h2 class="h2-md">Simple as 1 — 2 — 3</h2>
-      <p class="sub-text" style="margin-bottom:28px">No complicated process. No hidden steps.</p>
-      <div class="grid grid-auto-260">
-        <div class="card card-pad-lg" style="display:flex;flex-direction:column;gap:10px">
-          <div class="icon-circle num">1</div>
-          <div style="font-weight:700;font-size:17px;color:var(--text)">You call or WhatsApp</div>
-          <p style="font-size:14px;line-height:1.6;color:var(--text-secondary)">Tell us where to collect, where to deliver, and when. We confirm the price and paperwork straight away.</p>
-        </div>
-        <div class="card card-pad-lg" style="display:flex;flex-direction:column;gap:10px">
-          <div class="icon-circle num">2</div>
-          <div style="font-weight:700;font-size:17px;color:var(--text)">We collect</div>
-          <p style="font-size:14px;line-height:1.6;color:var(--text-secondary)">Our driver collects from the hospital, mortuary or funeral parlour — respectfully, in a refrigerated vehicle, with signed records.</p>
-        </div>
-        <div class="card card-pad-lg" style="display:flex;flex-direction:column;gap:10px">
-          <div class="icon-circle num">3</div>
-          <div style="font-weight:700;font-size:17px;color:var(--text)">We deliver, signed for</div>
-          <p style="font-size:14px;line-height:1.6;color:var(--text-secondary)">The receiving party signs the handover note. You get proper chain-of-custody paperwork on every job.</p>
-        </div>
-      </div>
-    </div>
-  </section>
+  <main style="flex:1">
 
-  <!-- Why choose us -->
-  <section class="section" style="padding-bottom:8px">
-    <div class="container">
-      <h2 class="h2-md">Why funeral parlours choose us</h2>
-      <p class="sub-text" style="margin-bottom:24px">What the industry expects from a transport partner — done properly.</p>
-      <div class="grid grid-auto-240" style="gap:12px">
-        <div class="card card-pad-sm" style="display:flex;flex-direction:column;gap:8px">
-          <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M10 2V18M4 5.5L16 14.5M16 5.5L4 14.5" stroke="#1A73E8" stroke-width="1.6" stroke-linecap="round"></path></svg>
-          <span style="font-weight:700;font-size:15px;color:var(--text)">Temperature-controlled refrigeration</span>
-          <span style="font-size:13.5px;line-height:1.55;color:var(--text-secondary)">Refrigerated compartment maintained and monitored on every route, short or long.</span>
-        </div>
-        <div class="card card-pad-sm" style="display:flex;flex-direction:column;gap:8px">
-          <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M10 1.5L17 4.5V9.5C17 14 14 17.5 10 18.5C6 17.5 3 14 3 9.5V4.5L10 1.5Z" stroke="#1A73E8" stroke-width="1.6" stroke-linejoin="round"></path><path d="M7 10L9.2 12L13.5 7.5" stroke="#1A73E8" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"></path></svg>
-          <span style="font-weight:700;font-size:15px;color:var(--text)">Signed chain-of-custody, every job</span>
-          <span style="font-size:13.5px;line-height:1.55;color:var(--text-secondary)">Collection and receiving notes signed at both ends — your paper trail is always complete.</span>
-        </div>
-        <div class="card card-pad-sm" style="display:flex;flex-direction:column;gap:8px">
-          <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M10 18C10 18 16.5 13 16.5 8C16.5 4.4 13.6 1.5 10 1.5C6.4 1.5 3.5 4.4 3.5 8C3.5 13 10 18 10 18Z" stroke="#1A73E8" stroke-width="1.6" stroke-linejoin="round"></path><circle cx="10" cy="8" r="2.2" stroke="#1A73E8" stroke-width="1.6"></circle></svg>
-          <span style="font-weight:700;font-size:15px;color:var(--text)">Updates from collection to delivery</span>
-          <span style="font-size:13.5px;line-height:1.55;color:var(--text-secondary)">You know where the vehicle is — status updates by WhatsApp along the route.</span>
-        </div>
-        <div class="card card-pad-sm" style="display:flex;flex-direction:column;gap:8px">
-          <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><circle cx="10" cy="10" r="8" stroke="#1A73E8" stroke-width="1.6"></circle><path d="M10 5.5V10L13 12.5" stroke="#1A73E8" stroke-width="1.6" stroke-linecap="round"></path></svg>
-          <span style="font-weight:700;font-size:15px;color:var(--text)">24/7, 365 days</span>
-          <span style="font-size:13.5px;line-height:1.55;color:var(--text-secondary)">Deaths don't keep office hours. Neither do we — after-hours and weekend collections.</span>
-        </div>
-        <div class="card card-pad-sm" style="display:flex;flex-direction:column;gap:8px">
-          <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><rect x="2.5" y="5.5" width="11" height="9" rx="1.5" stroke="#1A73E8" stroke-width="1.6"></rect><path d="M13.5 8.5H16L17.5 11V14.5H13.5" stroke="#1A73E8" stroke-width="1.6" stroke-linejoin="round"></path><circle cx="6" cy="15" r="1.6" stroke="#1A73E8" stroke-width="1.4"></circle><circle cx="15" cy="15" r="1.6" stroke="#1A73E8" stroke-width="1.4"></circle></svg>
-          <span style="font-weight:700;font-size:15px;color:var(--text)">Dedicated vehicle, never shared loads</span>
-          <span style="font-size:13.5px;line-height:1.55;color:var(--text-secondary)">A purpose-built refrigerated transporter used for human remains transport only.</span>
-        </div>
-        <div class="card card-pad-sm" style="display:flex;flex-direction:column;gap:8px">
-          <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><rect x="4" y="2.5" width="12" height="15" rx="1.5" stroke="#1A73E8" stroke-width="1.6"></rect><path d="M7 6.5H13M7 10H13M7 13.5H10.5" stroke="#1A73E8" stroke-width="1.6" stroke-linecap="round"></path></svg>
-          <span style="font-weight:700;font-size:15px;color:var(--text)">Invoice-based, no complications</span>
-          <span style="font-size:13.5px;line-height:1.55;color:var(--text-secondary)">Straightforward business relationship — a confirmed quote per job, invoiced properly.</span>
-        </div>
-      </div>
-    </div>
-  </section>
+  <!-- ============ HOME ============ -->
+  <sc-if value="{{ pageHome }}" hint-placeholder-val="{{ true }}">
+    <div data-screen-label="Home">
 
-  <!-- Compliance disclaimer strip -->
-  <section style="padding:20px">
-    <div class="container disclaimer-strip">
-      <svg width="18" height="18" viewBox="0 0 18 18" fill="none"><path d="M9 1.5L15 4V8.5C15 12.5 12.5 15.5 9 16.5C5.5 15.5 3 12.5 3 8.5V4L9 1.5Z" stroke="#B06000" stroke-width="1.4" stroke-linejoin="round"></path></svg>
-      <p><strong style="color:var(--text)">Transport-only service provider.</strong> We do not operate as a funeral parlour, mortuary, embalming facility, crematorium, burial service or funeral policy provider. All transportation is conducted in support of authorised funeral parlours, mortuaries, hospitals, insurers or approved responsible parties, subject to applicable documentation and legal requirements.</p>
-    </div>
-  </section>
-
-  <!-- What we do -->
-  <section class="section">
-    <div class="container">
-      <h2 class="h2-lg">What we do</h2>
-      <p class="body-text max-720" style="margin-bottom:32px">Dedicated refrigerated transport of human remains between approved facilities — hospitals, mortuaries, funeral parlours, crematoria, burial destinations and long-distance repatriation routes. Transport support only: no funeral arrangement, storage, preparation or embalming.</p>
-      <div class="grid grid-auto-260">
-        <div class="card card-pad-md" style="display:flex;align-items:center;gap:14px">
-          <div class="icon-circle sm">
-            <svg width="18" height="18" viewBox="0 0 22 22" fill="none"><path d="M4 18V9L8 5H14V18M14 10H18V18" stroke="#1A73E8" stroke-width="1.6" stroke-linejoin="round"></path><path d="M2 18H20" stroke="#1A73E8" stroke-width="1.6" stroke-linecap="round"></path></svg>
+      <!-- Hero -->
+      <section style="padding:clamp(44px,7vw,80px) 20px clamp(36px,5vw,56px)">
+        <div style="max-width:1140px;margin:0 auto;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,340px),1fr));gap:clamp(28px,4vw,56px);align-items:center">
+          <div style="display:flex;flex-direction:column;gap:18px">
+            <div style="display:flex;gap:8px;flex-wrap:wrap">
+              <span style="display:inline-flex;align-items:center;gap:8px;font-size:13px;font-weight:500;color:#137333;background:#E6F4EA;border-radius:999px;padding:6px 14px"><span style="width:8px;height:8px;border-radius:50%;background:#137333"></span>Available 24/7</span>
+              <span style="display:inline-flex;align-items:center;gap:8px;font-size:13px;font-weight:500;color:#174EA6;background:#E8F0FE;border-radius:999px;padding:6px 14px">Proudly South African 🇿🇦</span>
+            </div>
+            <h1 style="font-weight:700;font-size:clamp(32px,6vw,52px);line-height:1.12;margin:0;letter-spacing:-0.02em;color:#202124;text-wrap:balance">We move the deceased. Anywhere in South Africa.</h1>
+            <p style="font-size:clamp(16px,2.5vw,19px);line-height:1.6;color:#5F6368;margin:0;max-width:520px;text-wrap:pretty">One refrigerated vehicle. A trained team. The right paperwork. You call — we collect — we deliver. That's it.</p>
+            <div style="display:flex;gap:12px;flex-wrap:wrap;margin-top:4px">
+              <a href="#request" onClick="{{ goRequest }}" style="background:#1A73E8;color:#FFFFFF;font-weight:500;font-size:16px;padding:14px 28px;border-radius:999px;cursor:pointer" style-hover="background:#174EA6;color:#FFFFFF">Request transport</a>
+              <a href="{{ waLink }}" style="border:1px solid #DADCE0;color:#1A73E8;font-weight:500;font-size:16px;padding:14px 28px;border-radius:999px;cursor:pointer;display:flex;align-items:center;gap:8px" style-hover="background:#F8F9FA;color:#174EA6">WhatsApp us</a>
+            </div>
+            <div style="display:flex;gap:16px;flex-wrap:wrap;margin-top:8px;font-size:12.5px;color:#5F6368">
+              <span>Registered (Pty) Ltd</span><span>·</span><span>Reg 2026/464849/07</span><span>·</span><span>Tax 9001928366</span><span>·</span><span>Based in KwaZulu-Natal</span>
+            </div>
           </div>
-          <span style="font-weight:500;font-size:15px;color:var(--text)">Hospital to funeral parlour</span>
-        </div>
-        <div class="card card-pad-md" style="display:flex;align-items:center;gap:14px">
-          <div class="icon-circle sm">
-            <svg width="18" height="18" viewBox="0 0 22 22" fill="none"><rect x="3" y="6" width="16" height="12" rx="1.5" stroke="#1A73E8" stroke-width="1.6"></rect><path d="M8 6V4H14V6M8 11H14M8 14.5H12" stroke="#1A73E8" stroke-width="1.6" stroke-linecap="round"></path></svg>
+          <div style="position:relative;height:clamp(260px,40vw,400px);border-radius:24px;overflow:hidden;border:1px solid #DADCE0">
+            <x-import component-from-global-scope="image-slot" from="./image-slot.js" id="hero-vehicle" shape="rect" placeholder="Refrigerated VW Transporter — vehicle photo" hint-size="100%,100%"></x-import>
           </div>
-          <span style="font-weight:500;font-size:15px;color:var(--text)">Mortuary to funeral parlour</span>
         </div>
-        <div class="card card-pad-md" style="display:flex;align-items:center;gap:14px">
-          <div class="icon-circle sm">
-            <svg width="18" height="18" viewBox="0 0 22 22" fill="none"><circle cx="4.5" cy="11" r="2.5" stroke="#1A73E8" stroke-width="1.6"></circle><circle cx="17.5" cy="11" r="2.5" stroke="#1A73E8" stroke-width="1.6"></circle><path d="M7 11H15" stroke="#1A73E8" stroke-width="1.6" stroke-dasharray="2.5 2.5"></path></svg>
+      </section>
+
+      <!-- Simple 1-2-3 pitch -->
+      <section style="background:#F8F9FA;padding:clamp(40px,6vw,64px) 20px">
+        <div style="max-width:1140px;margin:0 auto">
+          <h2 style="font-weight:700;font-size:clamp(22px,4vw,30px);margin:0 0 6px;color:#202124;letter-spacing:-0.01em">Simple as 1 — 2 — 3</h2>
+          <p style="font-size:15px;color:#5F6368;margin:0 0 28px">No complicated process. No hidden steps.</p>
+          <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,260px),1fr));gap:14px">
+            <div style="background:#FFFFFF;border:1px solid #DADCE0;border-radius:16px;padding:26px;display:flex;flex-direction:column;gap:10px">
+              <div style="width:40px;height:40px;border-radius:50%;background:#E8F0FE;color:#1A73E8;font-weight:700;font-size:17px;display:grid;place-items:center">1</div>
+              <div style="font-weight:700;font-size:17px;color:#202124">You call or WhatsApp</div>
+              <p style="font-size:14px;line-height:1.6;color:#5F6368;margin:0">Tell us where to collect, where to deliver, and when. We confirm the price and paperwork straight away.</p>
+            </div>
+            <div style="background:#FFFFFF;border:1px solid #DADCE0;border-radius:16px;padding:26px;display:flex;flex-direction:column;gap:10px">
+              <div style="width:40px;height:40px;border-radius:50%;background:#E8F0FE;color:#1A73E8;font-weight:700;font-size:17px;display:grid;place-items:center">2</div>
+              <div style="font-weight:700;font-size:17px;color:#202124">We collect</div>
+              <p style="font-size:14px;line-height:1.6;color:#5F6368;margin:0">Our driver collects from the hospital, mortuary or funeral parlour — respectfully, in a refrigerated vehicle, with signed records.</p>
+            </div>
+            <div style="background:#FFFFFF;border:1px solid #DADCE0;border-radius:16px;padding:26px;display:flex;flex-direction:column;gap:10px">
+              <div style="width:40px;height:40px;border-radius:50%;background:#E8F0FE;color:#1A73E8;font-weight:700;font-size:17px;display:grid;place-items:center">3</div>
+              <div style="font-weight:700;font-size:17px;color:#202124">We deliver, signed for</div>
+              <p style="font-size:14px;line-height:1.6;color:#5F6368;margin:0">The receiving party signs the handover note. You get proper chain-of-custody paperwork on every job.</p>
+            </div>
           </div>
-          <span style="font-weight:500;font-size:15px;color:var(--text)">Funeral parlour to funeral parlour</span>
         </div>
-        <div class="card card-pad-md" style="display:flex;align-items:center;gap:14px">
-          <div class="icon-circle sm">
-            <svg width="18" height="18" viewBox="0 0 22 22" fill="none"><path d="M3 17C6 11 9 7 19 4" stroke="#1A73E8" stroke-width="1.6" stroke-linecap="round" stroke-dasharray="3 3"></path><circle cx="3" cy="17" r="2" fill="#1A73E8"></circle><circle cx="19" cy="4" r="2" stroke="#1A73E8" stroke-width="1.6"></circle></svg>
+      </section>
+
+      <!-- Why choose us -->
+      <section style="padding:clamp(48px,7vw,72px) 20px 8px">
+        <div style="max-width:1140px;margin:0 auto">
+          <h2 style="font-weight:700;font-size:clamp(22px,4vw,30px);margin:0 0 6px;color:#202124;letter-spacing:-0.01em">Why funeral parlours choose us</h2>
+          <p style="font-size:15px;color:#5F6368;margin:0 0 24px">What the industry expects from a transport partner — done properly.</p>
+          <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,240px),1fr));gap:12px">
+            <div style="border:1px solid #DADCE0;border-radius:16px;padding:20px;display:flex;flex-direction:column;gap:8px">
+              <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M10 2V18M4 5.5L16 14.5M16 5.5L4 14.5" stroke="#1A73E8" stroke-width="1.6" stroke-linecap="round"></path></svg>
+              <span style="font-weight:700;font-size:15px;color:#202124">Temperature-controlled refrigeration</span>
+              <span style="font-size:13.5px;line-height:1.55;color:#5F6368">Refrigerated compartment maintained and monitored on every route, short or long.</span>
+            </div>
+            <div style="border:1px solid #DADCE0;border-radius:16px;padding:20px;display:flex;flex-direction:column;gap:8px">
+              <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M10 1.5L17 4.5V9.5C17 14 14 17.5 10 18.5C6 17.5 3 14 3 9.5V4.5L10 1.5Z" stroke="#1A73E8" stroke-width="1.6" stroke-linejoin="round"></path><path d="M7 10L9.2 12L13.5 7.5" stroke="#1A73E8" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+              <span style="font-weight:700;font-size:15px;color:#202124">Signed chain-of-custody, every job</span>
+              <span style="font-size:13.5px;line-height:1.55;color:#5F6368">Collection and receiving notes signed at both ends — your paper trail is always complete.</span>
+            </div>
+            <div style="border:1px solid #DADCE0;border-radius:16px;padding:20px;display:flex;flex-direction:column;gap:8px">
+              <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M10 18C10 18 16.5 13 16.5 8C16.5 4.4 13.6 1.5 10 1.5C6.4 1.5 3.5 4.4 3.5 8C3.5 13 10 18 10 18Z" stroke="#1A73E8" stroke-width="1.6" stroke-linejoin="round"></path><circle cx="10" cy="8" r="2.2" stroke="#1A73E8" stroke-width="1.6"></circle></svg>
+              <span style="font-weight:700;font-size:15px;color:#202124">Updates from collection to delivery</span>
+              <span style="font-size:13.5px;line-height:1.55;color:#5F6368">You know where the vehicle is — status updates by WhatsApp along the route.</span>
+            </div>
+            <div style="border:1px solid #DADCE0;border-radius:16px;padding:20px;display:flex;flex-direction:column;gap:8px">
+              <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><circle cx="10" cy="10" r="8" stroke="#1A73E8" stroke-width="1.6"></circle><path d="M10 5.5V10L13 12.5" stroke="#1A73E8" stroke-width="1.6" stroke-linecap="round"></path></svg>
+              <span style="font-weight:700;font-size:15px;color:#202124">24/7, 365 days</span>
+              <span style="font-size:13.5px;line-height:1.55;color:#5F6368">Deaths don't keep office hours. Neither do we — after-hours and weekend collections.</span>
+            </div>
+            <div style="border:1px solid #DADCE0;border-radius:16px;padding:20px;display:flex;flex-direction:column;gap:8px">
+              <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><rect x="2.5" y="5.5" width="11" height="9" rx="1.5" stroke="#1A73E8" stroke-width="1.6"></rect><path d="M13.5 8.5H16L17.5 11V14.5H13.5" stroke="#1A73E8" stroke-width="1.6" stroke-linejoin="round"></path><circle cx="6" cy="15" r="1.6" stroke="#1A73E8" stroke-width="1.4"></circle><circle cx="15" cy="15" r="1.6" stroke="#1A73E8" stroke-width="1.4"></circle></svg>
+              <span style="font-weight:700;font-size:15px;color:#202124">Dedicated vehicle, never shared loads</span>
+              <span style="font-size:13.5px;line-height:1.55;color:#5F6368">A purpose-built refrigerated transporter used for human remains transport only.</span>
+            </div>
+            <div style="border:1px solid #DADCE0;border-radius:16px;padding:20px;display:flex;flex-direction:column;gap:8px">
+              <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><rect x="4" y="2.5" width="12" height="15" rx="1.5" stroke="#1A73E8" stroke-width="1.6"></rect><path d="M7 6.5H13M7 10H13M7 13.5H10.5" stroke="#1A73E8" stroke-width="1.6" stroke-linecap="round"></path></svg>
+              <span style="font-weight:700;font-size:15px;color:#202124">Invoice-based, no complications</span>
+              <span style="font-size:13.5px;line-height:1.55;color:#5F6368">Straightforward business relationship — a confirmed quote per job, invoiced properly.</span>
+            </div>
           </div>
-          <span style="font-weight:500;font-size:15px;color:var(--text)">Province-to-province transfers</span>
         </div>
-        <div class="card card-pad-md" style="display:flex;align-items:center;gap:14px">
-          <div class="icon-circle sm">
-            <svg width="18" height="18" viewBox="0 0 22 22" fill="none"><circle cx="11" cy="11" r="8" stroke="#1A73E8" stroke-width="1.6"></circle><path d="M3 11H19M11 3C13.5 5.5 13.5 16.5 11 19M11 3C8.5 5.5 8.5 16.5 11 19" stroke="#1A73E8" stroke-width="1.4"></path></svg>
+      </section>
+
+      <!-- Compliance disclaimer strip -->
+      <section style="padding:20px">
+        <div style="max-width:1140px;margin:0 auto;background:#FEF7E0;border:1px solid #FDE293;border-radius:12px;padding:16px 20px;display:flex;gap:12px;align-items:flex-start">
+          <svg width="18" height="18" viewBox="0 0 18 18" fill="none" style="flex-shrink:0;margin-top:2px"><path d="M9 1.5L15 4V8.5C15 12.5 12.5 15.5 9 16.5C5.5 15.5 3 12.5 3 8.5V4L9 1.5Z" stroke="#B06000" stroke-width="1.4" stroke-linejoin="round"></path></svg>
+          <p style="margin:0;font-size:13px;line-height:1.6;color:#5F6368"><strong style="color:#202124">Transport-only service provider.</strong> We do not operate as a funeral parlour, mortuary, embalming facility, crematorium, burial service or funeral policy provider. All transportation is conducted in support of authorised funeral parlours, mortuaries, hospitals, insurers or approved responsible parties, subject to applicable documentation and legal requirements.</p>
+        </div>
+      </section>
+
+      <!-- What we do -->
+      <section style="padding:clamp(48px,7vw,80px) 20px">
+        <div style="max-width:1140px;margin:0 auto">
+          <h2 style="font-weight:700;font-size:clamp(24px,4.5vw,34px);margin:0 0 12px;letter-spacing:-0.01em;color:#202124">What we do</h2>
+          <p style="font-size:16px;line-height:1.65;color:#5F6368;max-width:720px;margin:0 0 32px;text-wrap:pretty">Dedicated refrigerated transport of human remains between approved facilities — hospitals, mortuaries, funeral parlours, crematoria, burial destinations and long-distance repatriation routes. Transport support only: no funeral arrangement, storage, preparation or embalming.</p>
+          <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,260px),1fr));gap:14px">
+            <div style="background:#FFFFFF;border:1px solid #DADCE0;border-radius:16px;padding:22px;display:flex;align-items:center;gap:14px" style-hover="box-shadow:0 1px 6px rgba(60,64,67,0.15)">
+              <div style="width:38px;height:38px;border-radius:50%;background:#E8F0FE;display:grid;place-items:center;flex-shrink:0">
+                <svg width="18" height="18" viewBox="0 0 22 22" fill="none"><path d="M4 18V9L8 5H14V18M14 10H18V18" stroke="#1A73E8" stroke-width="1.6" stroke-linejoin="round"></path><path d="M2 18H20" stroke="#1A73E8" stroke-width="1.6" stroke-linecap="round"></path></svg>
+              </div>
+              <span style="font-weight:500;font-size:15px;color:#202124">Hospital to funeral parlour</span>
+            </div>
+            <div style="background:#FFFFFF;border:1px solid #DADCE0;border-radius:16px;padding:22px;display:flex;align-items:center;gap:14px" style-hover="box-shadow:0 1px 6px rgba(60,64,67,0.15)">
+              <div style="width:38px;height:38px;border-radius:50%;background:#E8F0FE;display:grid;place-items:center;flex-shrink:0">
+                <svg width="18" height="18" viewBox="0 0 22 22" fill="none"><rect x="3" y="6" width="16" height="12" rx="1.5" stroke="#1A73E8" stroke-width="1.6"></rect><path d="M8 6V4H14V6M8 11H14M8 14.5H12" stroke="#1A73E8" stroke-width="1.6" stroke-linecap="round"></path></svg>
+              </div>
+              <span style="font-weight:500;font-size:15px;color:#202124">Mortuary to funeral parlour</span>
+            </div>
+            <div style="background:#FFFFFF;border:1px solid #DADCE0;border-radius:16px;padding:22px;display:flex;align-items:center;gap:14px" style-hover="box-shadow:0 1px 6px rgba(60,64,67,0.15)">
+              <div style="width:38px;height:38px;border-radius:50%;background:#E8F0FE;display:grid;place-items:center;flex-shrink:0">
+                <svg width="18" height="18" viewBox="0 0 22 22" fill="none"><circle cx="4.5" cy="11" r="2.5" stroke="#1A73E8" stroke-width="1.6"></circle><circle cx="17.5" cy="11" r="2.5" stroke="#1A73E8" stroke-width="1.6"></circle><path d="M7 11H15" stroke="#1A73E8" stroke-width="1.6" stroke-dasharray="2.5 2.5"></path></svg>
+              </div>
+              <span style="font-weight:500;font-size:15px;color:#202124">Funeral parlour to funeral parlour</span>
+            </div>
+            <div style="background:#FFFFFF;border:1px solid #DADCE0;border-radius:16px;padding:22px;display:flex;align-items:center;gap:14px" style-hover="box-shadow:0 1px 6px rgba(60,64,67,0.15)">
+              <div style="width:38px;height:38px;border-radius:50%;background:#E8F0FE;display:grid;place-items:center;flex-shrink:0">
+                <svg width="18" height="18" viewBox="0 0 22 22" fill="none"><path d="M3 17C6 11 9 7 19 4" stroke="#1A73E8" stroke-width="1.6" stroke-linecap="round" stroke-dasharray="3 3"></path><circle cx="3" cy="17" r="2" fill="#1A73E8"></circle><circle cx="19" cy="4" r="2" stroke="#1A73E8" stroke-width="1.6"></circle></svg>
+              </div>
+              <span style="font-weight:500;font-size:15px;color:#202124">Province-to-province transfers</span>
+            </div>
+            <div style="background:#FFFFFF;border:1px solid #DADCE0;border-radius:16px;padding:22px;display:flex;align-items:center;gap:14px" style-hover="box-shadow:0 1px 6px rgba(60,64,67,0.15)">
+              <div style="width:38px;height:38px;border-radius:50%;background:#E8F0FE;display:grid;place-items:center;flex-shrink:0">
+                <svg width="18" height="18" viewBox="0 0 22 22" fill="none"><circle cx="11" cy="11" r="8" stroke="#1A73E8" stroke-width="1.6"></circle><path d="M3 11H19M11 3C13.5 5.5 13.5 16.5 11 19M11 3C8.5 5.5 8.5 16.5 11 19" stroke="#1A73E8" stroke-width="1.4"></path></svg>
+              </div>
+              <span style="font-weight:500;font-size:15px;color:#202124">Long-distance repatriation support</span>
+            </div>
+            <div style="background:#FFFFFF;border:1px solid #DADCE0;border-radius:16px;padding:22px;display:flex;align-items:center;gap:14px" style-hover="box-shadow:0 1px 6px rgba(60,64,67,0.15)">
+              <div style="width:38px;height:38px;border-radius:50%;background:#E8F0FE;display:grid;place-items:center;flex-shrink:0">
+                <svg width="18" height="18" viewBox="0 0 22 22" fill="none"><circle cx="11" cy="11" r="8" stroke="#1A73E8" stroke-width="1.6"></circle><path d="M11 6.5V11L14 13.5" stroke="#1A73E8" stroke-width="1.6" stroke-linecap="round"></path></svg>
+              </div>
+              <span style="font-weight:500;font-size:15px;color:#202124">After-hours collection support</span>
+            </div>
           </div>
-          <span style="font-weight:500;font-size:15px;color:var(--text)">Long-distance repatriation support</span>
         </div>
-        <div class="card card-pad-md" style="display:flex;align-items:center;gap:14px">
-          <div class="icon-circle sm">
-            <svg width="18" height="18" viewBox="0 0 22 22" fill="none"><circle cx="11" cy="11" r="8" stroke="#1A73E8" stroke-width="1.6"></circle><path d="M11 6.5V11L14 13.5" stroke="#1A73E8" stroke-width="1.6" stroke-linecap="round"></path></svg>
+      </section>
+
+      <!-- Who we serve -->
+      <section style="padding:0 20px clamp(48px,7vw,80px)">
+        <div style="max-width:1140px;margin:0 auto">
+          <h2 style="font-weight:700;font-size:clamp(22px,4vw,28px);margin:0 0 22px;color:#202124">Who we work with</h2>
+          <div style="display:flex;flex-wrap:wrap;gap:10px">
+            <sc-for list="{{ whoWeServe }}" as="s" hint-placeholder-count="6">
+              <span style="font-size:14px;font-weight:500;color:#202124;background:#F8F9FA;border:1px solid #DADCE0;border-radius:999px;padding:10px 20px;display:flex;align-items:center;gap:9px"><svg width="14" height="14" viewBox="0 0 15 15" fill="none"><path d="M2 8.5L6 12L13 3.5" stroke="#137333" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"></path></svg>{{ s }}</span>
+            </sc-for>
           </div>
-          <span style="font-weight:500;font-size:15px;color:var(--text)">After-hours collection support</span>
         </div>
+      </section>
+
+      <!-- Vehicle -->
+      <section style="background:#F8F9FA;padding:clamp(48px,7vw,80px) 20px">
+        <div style="max-width:1140px;margin:0 auto;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,340px),1fr));gap:clamp(28px,4vw,56px);align-items:center">
+          <div style="position:relative;height:clamp(240px,38vw,360px);border-radius:24px;overflow:hidden;border:1px solid #DADCE0">
+            <x-import component-from-global-scope="image-slot" from="./image-slot.js" id="vehicle-interior" shape="rect" placeholder="Refrigerated compartment / vehicle interior photo" hint-size="100%,100%"></x-import>
+          </div>
+          <div>
+            <h2 style="font-weight:700;font-size:clamp(24px,4.5vw,34px);margin:0 0 12px;letter-spacing:-0.01em;color:#202124">Dedicated refrigerated VW Transporter</h2>
+            <p style="font-size:16px;line-height:1.65;color:#5F6368;margin:0 0 22px;text-wrap:pretty">A purpose-built Volkswagen Transporter with a refrigerated compartment and dedicated transport area — designed for respectful, hygienic conveyance of human remains.</p>
+            <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,220px),1fr));gap:10px 20px">
+              <sc-for list="{{ vehicleFeatures }}" as="v" hint-placeholder-count="6">
+                <div style="display:flex;gap:10px;align-items:center"><svg width="15" height="15" viewBox="0 0 15 15" fill="none" style="flex-shrink:0"><path d="M2 8.5L6 12L13 3.5" stroke="#137333" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"></path></svg><span style="font-size:14px;font-weight:500;color:#3C4043">{{ v }}</span></div>
+              </sc-for>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Compliance-first -->
+      <section style="padding:clamp(48px,7vw,80px) 20px">
+        <div style="max-width:1140px;margin:0 auto">
+          <h2 style="font-weight:700;font-size:clamp(24px,4.5vw,34px);margin:0 0 12px;letter-spacing:-0.01em;color:#202124;max-width:680px;text-wrap:balance">Paperwork done properly, every single job</h2>
+          <p style="font-size:16px;line-height:1.65;color:#5F6368;max-width:720px;margin:0 0 32px;text-wrap:pretty">Every transport job is backed by the correct documentation from the authorised parties: collection instructions, release notes, receiving notes, route sheets, chain-of-custody records, cleaning logs and incident reporting where required.</p>
+          <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,220px),1fr));gap:12px">
+            <sc-for list="{{ complianceCards }}" as="c" hint-placeholder-count="6">
+              <div style="border:1px solid #DADCE0;border-radius:12px;padding:16px 18px;display:flex;align-items:center;gap:12px">
+                <svg width="16" height="16" viewBox="0 0 16 16" fill="none" style="flex-shrink:0"><rect x="3" y="1.5" width="10" height="13" rx="1.5" stroke="#1A73E8" stroke-width="1.4"></rect><path d="M5.5 5H10.5M5.5 8H10.5M5.5 11H8.5" stroke="#1A73E8" stroke-width="1.4" stroke-linecap="round"></path></svg>
+                <span style="font-weight:500;font-size:14px;color:#202124">{{ c }}</span>
+              </div>
+            </sc-for>
+          </div>
+        </div>
+      </section>
+
+      <!-- Routes -->
+      <section style="padding:0 20px clamp(48px,7vw,80px)">
+        <div style="max-width:1140px;margin:0 auto;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,320px),1fr));gap:clamp(28px,4vw,56px);align-items:start">
+          <div>
+            <h2 style="font-weight:700;font-size:clamp(24px,4.5vw,34px);margin:0 0 12px;letter-spacing:-0.01em;color:#202124">KwaZulu-Natal based. National reach.</h2>
+            <p style="font-size:16px;line-height:1.65;color:#5F6368;margin:0 0 20px;text-wrap:pretty">Based in the Cato Ridge / Camperdown / Durban corridor, we run routes across KwaZulu-Natal and to every province in South Africa.</p>
+            <a href="#areas" onClick="{{ goAreas }}" style="font-weight:500;font-size:15px;color:#1A73E8;display:inline-flex;align-items:center;gap:8px">View all areas covered <span aria-hidden="true">→</span></a>
+          </div>
+          <div style="background:#FFFFFF;border:1px solid #DADCE0;border-radius:16px;overflow:hidden">
+            <sc-for list="{{ routes }}" as="r" hint-placeholder-count="7">
+              <div style="display:flex;align-items:center;gap:12px;padding:14px 20px;border-bottom:1px solid #F1F3F4;flex-wrap:wrap">
+                <span style="width:8px;height:8px;border-radius:50%;background:#1A73E8;flex-shrink:0"></span>
+                <span style="font-weight:500;font-size:15px;color:#202124">{{ r.from }}</span>
+                <svg width="24" height="8" viewBox="0 0 26 8" fill="none" style="flex-shrink:0"><path d="M1 4H22M22 4L19 1.5M22 4L19 6.5" stroke="#5F6368" stroke-width="1.3" stroke-linecap="round"></path></svg>
+                <span style="font-weight:500;font-size:15px;color:#202124">{{ r.to }}</span>
+              </div>
+            </sc-for>
+          </div>
+        </div>
+      </section>
+
+      <!-- FAQ -->
+      <section style="background:#F8F9FA;padding:clamp(48px,7vw,72px) 20px;margin-bottom:clamp(48px,7vw,72px)">
+        <div style="max-width:860px;margin:0 auto">
+          <h2 style="font-weight:700;font-size:clamp(22px,4vw,30px);margin:0 0 24px;color:#202124;letter-spacing:-0.01em">Common questions</h2>
+          <div style="display:flex;flex-direction:column;gap:12px">
+            <div style="background:#FFFFFF;border:1px solid #DADCE0;border-radius:16px;padding:22px 24px">
+              <div style="font-weight:700;font-size:15.5px;color:#202124;margin-bottom:6px">Are you a funeral parlour?</div>
+              <p style="font-size:14.5px;line-height:1.6;color:#5F6368;margin:0">No. We are a transport-only company. We do not arrange funerals, store, prepare, embalm, cremate or bury. We move human remains between approved facilities — that's our whole job.</p>
+            </div>
+            <div style="background:#FFFFFF;border:1px solid #DADCE0;border-radius:16px;padding:22px 24px">
+              <div style="font-weight:700;font-size:15.5px;color:#202124;margin-bottom:6px">Can a family contact you directly?</div>
+              <p style="font-size:14.5px;line-height:1.6;color:#5F6368;margin:0">Yes — we'll gladly take your call and guide you, but transport is carried out in support of an authorised funeral parlour, mortuary, hospital or insurer, with the correct documentation in place.</p>
+            </div>
+            <div style="background:#FFFFFF;border:1px solid #DADCE0;border-radius:16px;padding:22px 24px">
+              <div style="font-weight:700;font-size:15.5px;color:#202124;margin-bottom:6px">How quickly can you collect?</div>
+              <p style="font-size:14.5px;line-height:1.6;color:#5F6368;margin:0">We operate 24/7, including after-hours and weekends. Once the paperwork and route are confirmed, we dispatch — availability depends on scheduling, distance and vehicle readiness.</p>
+            </div>
+            <div style="background:#FFFFFF;border:1px solid #DADCE0;border-radius:16px;padding:22px 24px">
+              <div style="font-weight:700;font-size:15.5px;color:#202124;margin-bottom:6px">Do you cover the whole of South Africa?</div>
+              <p style="font-size:14.5px;line-height:1.6;color:#5F6368;margin:0">Yes. We are based in KwaZulu-Natal (Cato Ridge / Camperdown / Durban corridor) and run routes to all nine provinces.</p>
+            </div>
+            <div style="background:#FFFFFF;border:1px solid #DADCE0;border-radius:16px;padding:22px 24px">
+              <div style="font-weight:700;font-size:15.5px;color:#202124;margin-bottom:6px">What paperwork is needed?</div>
+              <p style="font-size:14.5px;line-height:1.6;color:#5F6368;margin:0">Typically a collection instruction, death documentation, a release note from the facility and a receiving note at the destination. We confirm exactly what's needed for your route when you contact us — see our <a href="#compliance" onClick="{{ goCompliance }}" style="font-weight:500">Compliance page</a>.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Emergency CTA -->
+      <section style="padding:0 20px clamp(64px,9vw,96px)">
+        <div style="max-width:1140px;margin:0 auto;background:#1A73E8;border-radius:24px;padding:clamp(32px,5vw,52px);display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),1fr));gap:28px;align-items:center">
+          <div>
+            <h2 style="font-weight:700;font-size:clamp(24px,4.5vw,32px);margin:0 0 12px;color:#FFFFFF;letter-spacing:-0.01em">Need urgent transport right now?</h2>
+            <p style="font-size:16px;line-height:1.65;color:#D2E3FC;margin:0;text-wrap:pretty">Call or WhatsApp — we confirm the collection point, destination, paperwork, availability and route in one conversation.</p>
+          </div>
+          <div style="display:flex;flex-direction:column;gap:12px">
+            <a href="{{ waLink }}" style="background:#FFFFFF;color:#1A73E8;font-weight:500;font-size:16px;padding:15px 28px;border-radius:999px;cursor:pointer;text-align:center" style-hover="background:#E8F0FE;color:#174EA6">Call / WhatsApp now</a>
+            <a href="#request" onClick="{{ goRequest }}" style="border:1px solid rgba(255,255,255,0.5);color:#FFFFFF;font-weight:500;font-size:15px;padding:14px 28px;border-radius:999px;cursor:pointer;text-align:center" style-hover="background:rgba(255,255,255,0.12);color:#FFFFFF">Submit a transport request</a>
+          </div>
+        </div>
+      </section>
+
+    </div>
+  </sc-if>
+
+  <!-- ============ ABOUT ============ -->
+  <sc-if value="{{ pageAbout }}" hint-placeholder-val="{{ false }}">
+    <div data-screen-label="About">
+      <section style="background:#F8F9FA;padding:clamp(44px,7vw,72px) 20px">
+        <div style="max-width:1140px;margin:0 auto">
+          <h1 style="font-weight:700;font-size:clamp(28px,5.5vw,42px);margin:0;letter-spacing:-0.02em;color:#202124">About Body Transport Solutions</h1>
+        </div>
+      </section>
+      <section style="padding:clamp(44px,7vw,72px) 20px clamp(64px,9vw,88px)">
+        <div style="max-width:1140px;margin:0 auto;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,320px),1fr));gap:32px;align-items:start">
+          <div style="display:flex;flex-direction:column;gap:24px">
+            <p style="font-size:17px;line-height:1.7;color:#3C4043;margin:0;text-wrap:pretty">BODY TRANSPORT SOLUTIONS (PTY) LTD is a South African transport-only company focused on refrigerated human-remains transport and repatriation support. We support funeral parlours, mortuaries, hospitals and approved service providers that require reliable, respectful and professional transport capacity.</p>
+            <div style="background:#E8F0FE;border-radius:16px;padding:24px 28px">
+              <div style="font-weight:700;font-size:13px;letter-spacing:0.08em;text-transform:uppercase;color:#174EA6;margin-bottom:10px">In plain language</div>
+              <p style="font-size:15px;line-height:1.7;color:#202124;margin:0">We are not a funeral parlour. We are not a mortuary. We do not prepare, embalm, store, cremate, bury or arrange funerals. We transport — that's our whole job, and we do it properly.</p>
+            </div>
+          </div>
+          <div style="background:#FFFFFF;border:1px solid #DADCE0;border-radius:16px;padding:clamp(24px,4vw,34px)">
+            <div style="font-weight:700;font-size:13px;letter-spacing:0.08em;text-transform:uppercase;color:#5F6368;margin-bottom:20px">Company details</div>
+            <div style="display:grid;grid-template-columns:auto 1fr;gap:14px 20px;font-size:14px;line-height:1.5">
+              <span style="color:#5F6368">Company</span><span style="color:#202124;font-weight:500">BODY TRANSPORT SOLUTIONS (PTY) LTD</span>
+              <span style="color:#5F6368">Reg No.</span><span style="color:#202124;font-weight:500">2026/464849/07</span>
+              <span style="color:#5F6368">Tax No.</span><span style="color:#202124;font-weight:500">9001928366</span>
+              <span style="color:#5F6368">Base</span><span style="color:#202124;font-weight:500">Cato Ridge / Camperdown / Durban corridor, KwaZulu-Natal</span>
+              <span style="color:#5F6368">Vehicle</span><span style="color:#202124;font-weight:500">Refrigerated Volkswagen Transporter</span>
+              <span style="color:#5F6368">Service</span><span style="color:#202124;font-weight:500">Transport-only human remains logistics</span>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+  </sc-if>
+
+  <!-- ============ SERVICES ============ -->
+  <sc-if value="{{ pageServices }}" hint-placeholder-val="{{ false }}">
+    <div data-screen-label="Services">
+      <section style="background:#F8F9FA;padding:clamp(44px,7vw,72px) 20px">
+        <div style="max-width:1140px;margin:0 auto">
+          <h1 style="font-weight:700;font-size:clamp(28px,5.5vw,42px);margin:0;letter-spacing:-0.02em;color:#202124">Human remains transport services</h1>
+        </div>
+      </section>
+      <section style="padding:clamp(44px,7vw,72px) 20px clamp(64px,9vw,88px)">
+        <div style="max-width:1140px;margin:0 auto;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),1fr));gap:14px">
+          <sc-for list="{{ services }}" as="s" hint-placeholder-count="6">
+            <div style="background:#FFFFFF;border:1px solid #DADCE0;border-radius:16px;padding:clamp(22px,3.5vw,30px)" style-hover="box-shadow:0 1px 6px rgba(60,64,67,0.15)">
+              <div style="width:36px;height:36px;border-radius:50%;background:#E8F0FE;color:#1A73E8;font-weight:700;font-size:14px;display:grid;place-items:center;margin-bottom:14px">{{ s.num }}</div>
+              <h3 style="font-weight:700;font-size:18px;margin:0 0 8px;color:#202124">{{ s.title }}</h3>
+              <p style="font-size:14px;line-height:1.6;color:#5F6368;margin:0">{{ s.copy }}</p>
+            </div>
+          </sc-for>
+        </div>
+      </section>
+    </div>
+  </sc-if>
+
+  <!-- ============ COMPLIANCE ============ -->
+  <sc-if value="{{ pageCompliance }}" hint-placeholder-val="{{ false }}">
+    <div data-screen-label="Compliance">
+      <section style="background:#F8F9FA;padding:clamp(44px,7vw,72px) 20px">
+        <div style="max-width:1140px;margin:0 auto">
+          <h1 style="font-weight:700;font-size:clamp(28px,5.5vw,42px);margin:0 0 16px;letter-spacing:-0.02em;color:#202124">Compliance &amp; documentation</h1>
+          <p style="font-size:16px;line-height:1.65;color:#5F6368;max-width:800px;margin:0;text-wrap:pretty">BODY TRANSPORT SOLUTIONS operates as a transport-only service provider. All transport is subject to applicable South African legal, municipal, health and documentation requirements. The company does not replace official documents issued by the Department of Home Affairs, SAPS, hospitals, mortuaries, funeral parlours, municipalities or the Department of Health.</p>
+        </div>
+      </section>
+      <section style="padding:clamp(44px,7vw,64px) 20px 32px">
+        <div style="max-width:1140px;margin:0 auto">
+          <h2 style="font-weight:700;font-size:clamp(20px,3.5vw,26px);margin:0 0 20px;color:#202124">Compliance themes</h2>
+          <div style="display:flex;flex-wrap:wrap;gap:10px">
+            <sc-for list="{{ complianceThemes }}" as="t" hint-placeholder-count="8">
+              <span style="font-size:13.5px;font-weight:500;color:#202124;background:#F8F9FA;border:1px solid #DADCE0;border-radius:999px;padding:9px 18px">{{ t }}</span>
+            </sc-for>
+          </div>
+        </div>
+      </section>
+      <section style="padding:24px 20px clamp(64px,9vw,88px)">
+        <div style="max-width:1140px;margin:0 auto;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,320px),1fr));gap:24px;align-items:start">
+          <div style="background:#FFFFFF;border:1px solid #DADCE0;border-radius:16px;padding:clamp(24px,4vw,36px)">
+            <h2 style="font-weight:700;font-size:20px;margin:0 0 20px;color:#202124">Documents usually required or requested</h2>
+            <div style="display:grid;gap:12px">
+              <sc-for list="{{ docList }}" as="d" hint-placeholder-count="10">
+                <div style="display:flex;gap:12px;align-items:flex-start">
+                  <svg width="15" height="15" viewBox="0 0 15 15" fill="none" style="flex-shrink:0;margin-top:3px"><path d="M2 8.5L6 12L13 3.5" stroke="#137333" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+                  <span style="font-size:14.5px;line-height:1.55;color:#3C4043">{{ d }}</span>
+                </div>
+              </sc-for>
+            </div>
+          </div>
+          <div style="background:#FEF7E0;border:1px solid #FDE293;border-radius:16px;padding:26px">
+            <div style="font-weight:700;font-size:12px;letter-spacing:0.1em;text-transform:uppercase;color:#B06000;margin-bottom:12px">Please note</div>
+            <p style="font-size:14px;line-height:1.7;color:#5F6368;margin:0">Requirements may vary depending on location, cause of death, disease risk, destination, inter-provincial movement, cross-border movement, and the authorised parties involved. Clients must confirm official requirements with the relevant authorities where needed.</p>
+          </div>
+        </div>
+      </section>
+    </div>
+  </sc-if>
+
+  <!-- ============ JOB PROCESS ============ -->
+  <sc-if value="{{ pageProcess }}" hint-placeholder-val="{{ false }}">
+    <div data-screen-label="Job Process">
+      <section style="background:#F8F9FA;padding:clamp(44px,7vw,72px) 20px">
+        <div style="max-width:1140px;margin:0 auto">
+          <h1 style="font-weight:700;font-size:clamp(28px,5.5vw,42px);margin:0;letter-spacing:-0.02em;color:#202124">How a transport job works</h1>
+        </div>
+      </section>
+      <section style="padding:clamp(44px,7vw,72px) 20px clamp(64px,9vw,88px)">
+        <div style="max-width:760px;margin:0 auto;display:flex;flex-direction:column">
+          <sc-for list="{{ steps }}" as="s" hint-placeholder-count="7">
+            <div style="display:grid;grid-template-columns:56px 1fr;gap:20px">
+              <div style="display:flex;flex-direction:column;align-items:center">
+                <div style="width:42px;height:42px;border-radius:50%;background:#E8F0FE;color:#1A73E8;font-weight:700;font-size:16px;display:grid;place-items:center;flex-shrink:0">{{ s.num }}</div>
+                <div style="width:2px;flex:1;background:#DADCE0;min-height:24px"></div>
+              </div>
+              <div style="padding-bottom:30px">
+                <h3 style="font-weight:700;font-size:19px;margin:8px 0 6px;color:#202124">{{ s.title }}</h3>
+                <p style="font-size:15px;line-height:1.65;color:#5F6368;margin:0;max-width:600px">{{ s.copy }}</p>
+              </div>
+            </div>
+          </sc-for>
+        </div>
+      </section>
+    </div>
+  </sc-if>
+
+  <!-- ============ AREAS ============ -->
+  <sc-if value="{{ pageAreas }}" hint-placeholder-val="{{ false }}">
+    <div data-screen-label="Areas Covered">
+      <section style="background:#F8F9FA;padding:clamp(44px,7vw,72px) 20px">
+        <div style="max-width:1140px;margin:0 auto">
+          <h1 style="font-weight:700;font-size:clamp(28px,5.5vw,42px);margin:0 0 14px;letter-spacing:-0.02em;color:#202124">National transport support</h1>
+          <p style="font-size:16px;line-height:1.65;color:#5F6368;max-width:720px;margin:0">Based in KwaZulu-Natal. Supporting local, regional and national transport requests.</p>
+        </div>
+      </section>
+      <section style="padding:clamp(44px,7vw,72px) 20px clamp(64px,9vw,88px)">
+        <div style="max-width:1140px;margin:0 auto">
+          <h2 style="font-weight:700;font-size:20px;margin:0 0 18px;color:#202124">Local &amp; regional — KwaZulu-Natal</h2>
+          <div style="display:flex;flex-wrap:wrap;gap:10px;margin-bottom:40px">
+            <sc-for list="{{ localAreas }}" as="a" hint-placeholder-count="7">
+              <span style="font-size:14px;font-weight:500;color:#202124;background:#F8F9FA;border:1px solid #DADCE0;border-radius:999px;padding:10px 20px;display:flex;align-items:center;gap:9px"><span style="width:7px;height:7px;border-radius:50%;background:#1A73E8"></span>{{ a }}</span>
+            </sc-for>
+          </div>
+          <h2 style="font-weight:700;font-size:20px;margin:0 0 18px;color:#202124">National — all provinces</h2>
+          <div style="display:flex;flex-wrap:wrap;gap:10px;margin-bottom:40px">
+            <sc-for list="{{ provinces }}" as="p" hint-placeholder-count="8">
+              <span style="font-size:14px;font-weight:500;color:#202124;background:#F8F9FA;border:1px solid #DADCE0;border-radius:999px;padding:10px 20px;display:flex;align-items:center;gap:9px"><span style="width:7px;height:7px;border-radius:50%;background:#137333"></span>{{ p }}</span>
+            </sc-for>
+          </div>
+          <div style="background:#FEF7E0;border:1px solid #FDE293;border-radius:12px;padding:18px 24px;max-width:680px">
+            <p style="font-size:13.5px;line-height:1.65;color:#5F6368;margin:0"><strong style="color:#202124">Note:</strong> Availability depends on scheduling, distance, documentation and vehicle readiness.</p>
+          </div>
+        </div>
+      </section>
+    </div>
+  </sc-if>
+
+  <!-- ============ PARTNERS ============ -->
+  <sc-if value="{{ pagePartners }}" hint-placeholder-val="{{ false }}">
+    <div data-screen-label="Funeral Parlour Partners">
+      <section style="background:#F8F9FA;padding:clamp(44px,7vw,72px) 20px">
+        <div style="max-width:1140px;margin:0 auto">
+          <h1 style="font-weight:700;font-size:clamp(28px,5.5vw,42px);margin:0 0 14px;letter-spacing:-0.02em;color:#202124">Support for funeral parlours</h1>
+          <p style="font-size:16px;line-height:1.65;color:#5F6368;max-width:760px;margin:0;text-wrap:pretty">When your vehicles are unavailable, unsuitable for long-distance work, or already booked — we provide discreet, professional overflow transport support. Invoice-based, no complications.</p>
+        </div>
+      </section>
+      <section style="padding:clamp(44px,7vw,72px) 20px clamp(64px,9vw,88px)">
+        <div style="max-width:1140px;margin:0 auto">
+          <h2 style="font-weight:700;font-size:22px;margin:0 0 22px;color:#202124">Partner benefits</h2>
+          <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,220px),1fr));gap:12px;margin-bottom:40px">
+            <sc-for list="{{ partnerBenefits }}" as="b" hint-placeholder-count="8">
+              <div style="background:#FFFFFF;border:1px solid #DADCE0;border-radius:16px;padding:20px;display:flex;flex-direction:column;gap:10px">
+                <svg width="15" height="15" viewBox="0 0 15 15" fill="none"><path d="M2 8.5L6 12L13 3.5" stroke="#137333" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+                <span style="font-weight:500;font-size:14px;line-height:1.45;color:#202124">{{ b }}</span>
+              </div>
+            </sc-for>
+          </div>
+          <div style="background:#1A73E8;border-radius:24px;padding:clamp(28px,5vw,44px);display:flex;align-items:center;justify-content:space-between;gap:28px;flex-wrap:wrap">
+            <div style="min-width:min(100%,300px)">
+              <h3 style="font-weight:700;font-size:clamp(20px,4vw,24px);margin:0 0 8px;color:#FFFFFF">Set up an invoice-based transport relationship</h3>
+              <p style="font-size:15px;color:#D2E3FC;margin:0">Reliable backup capacity — without owning a long-distance refrigerated vehicle.</p>
+            </div>
+            <a href="#request" onClick="{{ goRequest }}" style="background:#FFFFFF;color:#1A73E8;font-weight:500;font-size:15px;padding:14px 28px;border-radius:999px;cursor:pointer;flex-shrink:0" style-hover="background:#E8F0FE;color:#174EA6">Partner with us</a>
+          </div>
+        </div>
+      </section>
+    </div>
+  </sc-if>
+
+  <!-- ============ REQUEST ============ -->
+  <sc-if value="{{ pageRequest }}" hint-placeholder-val="{{ false }}">
+    <div data-screen-label="Emergency Transport Request">
+      <section style="background:#F8F9FA;padding:clamp(44px,7vw,72px) 20px">
+        <div style="max-width:1140px;margin:0 auto">
+          <h1 style="font-weight:700;font-size:clamp(28px,5.5vw,42px);margin:0 0 14px;letter-spacing:-0.02em;color:#202124">Request transport assistance</h1>
+          <p style="font-size:15px;line-height:1.65;color:#5F6368;max-width:640px;margin:0">Fastest response for urgent jobs: call or WhatsApp <a href="{{ waLink }}" style="font-weight:500">{{ whatsapp }}</a>. Otherwise use the form below.</p>
+        </div>
+      </section>
+      <section style="padding:clamp(36px,6vw,56px) 20px clamp(64px,9vw,88px)">
+        <div style="max-width:780px;margin:0 auto">
+          <sc-if value="{{ sent }}" hint-placeholder-val="{{ false }}">
+            <div style="background:#E6F4EA;border:1px solid #CEEAD6;border-radius:16px;padding:clamp(28px,5vw,44px);text-align:center;display:flex;flex-direction:column;gap:12px;align-items:center">
+              <svg width="36" height="36" viewBox="0 0 36 36" fill="none"><circle cx="18" cy="18" r="16" stroke="#137333" stroke-width="2"></circle><path d="M11 18.5L16 23L25 12.5" stroke="#137333" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+              <h3 style="font-weight:700;font-size:22px;margin:0;color:#202124">Request received</h3>
+              <p style="font-size:15px;color:#5F6368;margin:0;max-width:460px">Thank you. We will contact you shortly to confirm collection point, destination, documentation and availability. For urgent jobs, please also call or WhatsApp directly.</p>
+            </div>
+          </sc-if>
+          <sc-if value="{{ notSent }}" hint-placeholder-val="{{ true }}">
+            <div style="background:#FFFFFF;border:1px solid #DADCE0;border-radius:16px;padding:clamp(20px,4vw,36px)">
+              <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,280px),1fr));gap:16px 18px">
+                <label style="display:flex;flex-direction:column;gap:6px"><span style="font-size:13px;font-weight:500;color:#3C4043">Name</span><input type="text" style="border:1px solid #DADCE0;border-radius:8px;padding:12px 14px;font-size:15px;font-family:'Roboto',sans-serif"></label>
+                <label style="display:flex;flex-direction:column;gap:6px"><span style="font-size:13px;font-weight:500;color:#3C4043">Company / Funeral parlour</span><input type="text" style="border:1px solid #DADCE0;border-radius:8px;padding:12px 14px;font-size:15px;font-family:'Roboto',sans-serif"></label>
+                <label style="display:flex;flex-direction:column;gap:6px"><span style="font-size:13px;font-weight:500;color:#3C4043">Phone</span><input type="tel" style="border:1px solid #DADCE0;border-radius:8px;padding:12px 14px;font-size:15px;font-family:'Roboto',sans-serif"></label>
+                <label style="display:flex;flex-direction:column;gap:6px"><span style="font-size:13px;font-weight:500;color:#3C4043">WhatsApp number</span><input type="tel" style="border:1px solid #DADCE0;border-radius:8px;padding:12px 14px;font-size:15px;font-family:'Roboto',sans-serif"></label>
+                <label style="display:flex;flex-direction:column;gap:6px;grid-column:1 / -1"><span style="font-size:13px;font-weight:500;color:#3C4043">Email</span><input type="email" style="border:1px solid #DADCE0;border-radius:8px;padding:12px 14px;font-size:15px;font-family:'Roboto',sans-serif"></label>
+                <label style="display:flex;flex-direction:column;gap:6px"><span style="font-size:13px;font-weight:500;color:#3C4043">Collection point</span><input type="text" placeholder="Facility name, town / suburb" style="border:1px solid #DADCE0;border-radius:8px;padding:12px 14px;font-size:15px;font-family:'Roboto',sans-serif"></label>
+                <label style="display:flex;flex-direction:column;gap:6px"><span style="font-size:13px;font-weight:500;color:#3C4043">Destination</span><input type="text" placeholder="Facility name, town / suburb" style="border:1px solid #DADCE0;border-radius:8px;padding:12px 14px;font-size:15px;font-family:'Roboto',sans-serif"></label>
+                <label style="display:flex;flex-direction:column;gap:6px"><span style="font-size:13px;font-weight:500;color:#3C4043">Date and time required</span><input type="text" placeholder="e.g. 12 July, 08:00" style="border:1px solid #DADCE0;border-radius:8px;padding:12px 14px;font-size:15px;font-family:'Roboto',sans-serif"></label>
+                <label style="display:flex;flex-direction:column;gap:6px"><span style="font-size:13px;font-weight:500;color:#3C4043">Is this urgent?</span><select style="border:1px solid #DADCE0;border-radius:8px;padding:12px 14px;font-size:15px;font-family:'Roboto',sans-serif;background:#FFFFFF;color:#202124"><option>Not urgent — scheduled</option><option>Urgent — within 24 hours</option><option>Emergency — immediate</option></select></label>
+                <label style="display:flex;flex-direction:column;gap:6px"><span style="font-size:13px;font-weight:500;color:#3C4043">Deceased name <span style="color:#9AA0A6;font-weight:400">(optional)</span></span><input type="text" style="border:1px solid #DADCE0;border-radius:8px;padding:12px 14px;font-size:15px;font-family:'Roboto',sans-serif"></label>
+                <label style="display:flex;flex-direction:column;gap:6px"><span style="font-size:13px;font-weight:500;color:#3C4043">Documentation available?</span><select style="border:1px solid #DADCE0;border-radius:8px;padding:12px 14px;font-size:15px;font-family:'Roboto',sans-serif;background:#FFFFFF;color:#202124"><option>Yes — all documentation available</option><option>Partially — some documents pending</option><option>Not yet — need guidance</option></select></label>
+                <label style="display:flex;flex-direction:column;gap:6px"><span style="font-size:13px;font-weight:500;color:#3C4043">Special handling required?</span><select style="border:1px solid #DADCE0;border-radius:8px;padding:12px 14px;font-size:15px;font-family:'Roboto',sans-serif;background:#FFFFFF;color:#202124"><option>No</option><option>Yes — will explain in message</option><option>Unsure</option></select></label>
+                <label style="display:flex;flex-direction:column;gap:6px;grid-column:1 / -1"><span style="font-size:13px;font-weight:500;color:#3C4043">Message</span><textarea rows="4" placeholder="Any additional details" style="border:1px solid #DADCE0;border-radius:8px;padding:12px 14px;font-size:15px;font-family:'Roboto',sans-serif;resize:vertical"></textarea></label>
+              </div>
+              <div style="display:flex;align-items:center;justify-content:space-between;gap:18px;margin-top:24px;flex-wrap:wrap">
+                <p style="font-size:12.5px;color:#5F6368;margin:0;max-width:420px">Information submitted is treated confidentially and used only to respond to the transport request.</p>
+                <button onClick="{{ submitForm }}" style="background:#1A73E8;color:#FFFFFF;font-weight:500;font-size:15px;padding:13px 30px;border-radius:999px;border:none;cursor:pointer;font-family:'Roboto',sans-serif" style-hover="background:#174EA6">Submit request</button>
+              </div>
+            </div>
+          </sc-if>
+        </div>
+      </section>
+    </div>
+  </sc-if>
+
+  <!-- ============ CONTACT ============ -->
+  <sc-if value="{{ pageContact }}" hint-placeholder-val="{{ false }}">
+    <div data-screen-label="Contact">
+      <section style="background:#F8F9FA;padding:clamp(44px,7vw,72px) 20px">
+        <div style="max-width:1140px;margin:0 auto">
+          <h1 style="font-weight:700;font-size:clamp(28px,5.5vw,42px);margin:0 0 14px;letter-spacing:-0.02em;color:#202124">Contact Body Transport Solutions</h1>
+          <p style="font-size:16px;color:#5F6368;margin:0">For urgent transport requests, WhatsApp or call directly.</p>
+        </div>
+      </section>
+      <section style="padding:clamp(44px,7vw,72px) 20px clamp(64px,9vw,88px)">
+        <div style="max-width:1140px;margin:0 auto;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,320px),1fr));gap:24px;align-items:start">
+          <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,200px),1fr));gap:12px">
+            <a href="{{ telLink }}" style="background:#FFFFFF;border:1px solid #DADCE0;border-radius:16px;padding:22px;display:flex;flex-direction:column;gap:6px;cursor:pointer" style-hover="box-shadow:0 1px 6px rgba(60,64,67,0.15)">
+              <span style="font-size:12px;font-weight:500;letter-spacing:0.08em;text-transform:uppercase;color:#5F6368">Phone</span>
+              <span style="font-weight:700;font-size:17px;color:#202124">{{ phone }}</span>
+            </a>
+            <a href="{{ waLink }}" style="background:#FFFFFF;border:1px solid #DADCE0;border-radius:16px;padding:22px;display:flex;flex-direction:column;gap:6px;cursor:pointer" style-hover="box-shadow:0 1px 6px rgba(60,64,67,0.15)">
+              <span style="font-size:12px;font-weight:500;letter-spacing:0.08em;text-transform:uppercase;color:#5F6368">WhatsApp</span>
+              <span style="font-weight:700;font-size:17px;color:#202124">{{ whatsapp }}</span>
+            </a>
+            <a href="{{ mailLink }}" style="background:#FFFFFF;border:1px solid #DADCE0;border-radius:16px;padding:22px;display:flex;flex-direction:column;gap:6px;cursor:pointer;grid-column:1 / -1" style-hover="box-shadow:0 1px 6px rgba(60,64,67,0.15)">
+              <span style="font-size:12px;font-weight:500;letter-spacing:0.08em;text-transform:uppercase;color:#5F6368">Email</span>
+              <span style="font-weight:700;font-size:16px;color:#202124;word-break:break-all">{{ email }}</span>
+            </a>
+            <div style="background:#FFFFFF;border:1px solid #DADCE0;border-radius:16px;padding:22px;display:flex;flex-direction:column;gap:6px">
+              <span style="font-size:12px;font-weight:500;letter-spacing:0.08em;text-transform:uppercase;color:#5F6368">Base</span>
+              <span style="font-weight:500;font-size:14px;line-height:1.5;color:#202124">Cato Ridge / Camperdown / Durban corridor, KwaZulu-Natal</span>
+            </div>
+            <div style="background:#FFFFFF;border:1px solid #DADCE0;border-radius:16px;padding:22px;display:flex;flex-direction:column;gap:6px">
+              <span style="font-size:12px;font-weight:500;letter-spacing:0.08em;text-transform:uppercase;color:#5F6368">Service</span>
+              <span style="font-weight:500;font-size:14px;line-height:1.5;color:#202124">KwaZulu-Natal and national transport support</span>
+            </div>
+          </div>
+          <div style="background:#1A73E8;border-radius:24px;padding:clamp(28px,5vw,44px);display:flex;flex-direction:column;gap:14px">
+            <h3 style="font-weight:700;font-size:clamp(20px,4vw,24px);margin:0;color:#FFFFFF">Available 24/7 for urgent transport</h3>
+            <p style="font-size:15px;line-height:1.7;color:#D2E3FC;margin:0">We confirm the collection point, destination, documentation requirements, vehicle availability and route in one conversation.</p>
+            <div style="display:flex;gap:12px;flex-wrap:wrap;margin-top:4px">
+              <a href="{{ waLink }}" style="background:#FFFFFF;color:#1A73E8;font-weight:500;font-size:15px;padding:13px 24px;border-radius:999px;cursor:pointer" style-hover="background:#E8F0FE;color:#174EA6">WhatsApp now</a>
+              <a href="#request" onClick="{{ goRequest }}" style="border:1px solid rgba(255,255,255,0.5);color:#FFFFFF;font-weight:500;font-size:15px;padding:13px 24px;border-radius:999px;cursor:pointer" style-hover="background:rgba(255,255,255,0.12);color:#FFFFFF">Submit a request</a>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+  </sc-if>
+
+  </main>
+
+  <!-- ============ FOOTER ============ -->
+  <footer style="background:#F8F9FA;border-top:1px solid #DADCE0;color:#5F6368;padding:clamp(40px,6vw,56px) 20px 120px">
+    <div style="max-width:1140px;margin:0 auto;display:flex;flex-direction:column;gap:28px">
+      <div style="display:flex;justify-content:space-between;gap:36px;flex-wrap:wrap">
+        <div style="display:flex;flex-direction:column;gap:12px;max-width:380px">
+          <div style="display:flex;align-items:center;gap:10px">
+            <div style="width:30px;height:30px;border-radius:50%;background:#1A73E8;display:grid;place-items:center;font-weight:700;font-size:12px;color:#FFFFFF">BT</div>
+            <span style="font-weight:700;font-size:15px;color:#202124">Body Transport Solutions</span>
+          </div>
+          <p style="font-size:13px;line-height:1.65;margin:0">National human remains transport &amp; repatriation support. Based in the Cato Ridge / Camperdown / Durban corridor, KwaZulu-Natal.</p>
+          <p style="font-size:12px;margin:0;color:#80868B">Reg No. 2026/464849/07 · Tax No. 9001928366</p>
+          <div style="height:4px;width:120px;border-radius:2px;background:linear-gradient(90deg,#007749 0% 20%,#FFB81C 20% 40%,#E03C31 40% 60%,#001489 60% 80%,#111111 80% 100%)"></div>
+        </div>
+        <div style="display:flex;gap:56px;flex-wrap:wrap">
+          <nav style="display:flex;flex-direction:column;gap:9px">
+            <span style="font-size:11px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:#80868B;margin-bottom:4px">Pages</span>
+            <sc-for list="{{ footerNav }}" as="f" hint-placeholder-count="5">
+              <a href="{{ f.href }}" onClick="{{ f.onClick }}" style="font-size:13px;color:#5F6368;cursor:pointer" style-hover="color:#1A73E8">{{ f.label }}</a>
+            </sc-for>
+          </nav>
+          <div style="display:flex;flex-direction:column;gap:9px">
+            <span style="font-size:11px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:#80868B;margin-bottom:4px">Contact</span>
+            <a href="{{ telLink }}" style="font-size:13px;color:#5F6368" style-hover="color:#1A73E8">{{ phone }}</a>
+            <a href="{{ waLink }}" style="font-size:13px;color:#5F6368" style-hover="color:#1A73E8">WhatsApp 24/7</a>
+            <a href="{{ mailLink }}" style="font-size:13px;color:#5F6368" style-hover="color:#1A73E8">{{ email }}</a>
+          </div>
+        </div>
+      </div>
+      <div style="border-top:1px solid #DADCE0;padding-top:20px">
+        <p style="font-size:12px;line-height:1.7;margin:0;color:#80868B;max-width:1040px">BODY TRANSPORT SOLUTIONS (PTY) LTD is a transport-only service provider. We do not operate as a funeral parlour, mortuary, embalming facility, crematorium, burial service or funeral policy provider. All services are subject to applicable documentation, legal, municipal, health and transport requirements.</p>
       </div>
     </div>
-  </section>
+  </footer>
 
-  <!-- Who we serve -->
-  <section style="padding:0 20px clamp(48px,7vw,80px)">
-    <div class="container">
-      <h2 class="h2-sm">Who we work with</h2>
-      <div style="display:flex;flex-wrap:wrap;gap:10px">
-        <span class="pill-tag"><svg width="14" height="14" viewBox="0 0 15 15" fill="none"><path d="M2 8.5L6 12L13 3.5" stroke="#137333" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"></path></svg>Funeral parlours</span>
-        <span class="pill-tag"><svg width="14" height="14" viewBox="0 0 15 15" fill="none"><path d="M2 8.5L6 12L13 3.5" stroke="#137333" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"></path></svg>Mortuaries</span>
-        <span class="pill-tag"><svg width="14" height="14" viewBox="0 0 15 15" fill="none"><path d="M2 8.5L6 12L13 3.5" stroke="#137333" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"></path></svg>Hospitals</span>
-        <span class="pill-tag"><svg width="14" height="14" viewBox="0 0 15 15" fill="none"><path d="M2 8.5L6 12L13 3.5" stroke="#137333" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"></path></svg>Insurance providers</span>
-        <span class="pill-tag"><svg width="14" height="14" viewBox="0 0 15 15" fill="none"><path d="M2 8.5L6 12L13 3.5" stroke="#137333" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"></path></svg>Repatriation companies</span>
-        <span class="pill-tag"><svg width="14" height="14" viewBox="0 0 15 15" fill="none"><path d="M2 8.5L6 12L13 3.5" stroke="#137333" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"></path></svg>Families working through authorised providers</span>
-      </div>
-    </div>
-  </section>
+  <!-- Sticky call / WhatsApp bar -->
+  <div style="position:fixed;bottom:16px;left:16px;right:16px;z-index:60;display:flex;gap:10px;justify-content:center;pointer-events:none">
+    <a href="{{ telLink }}" style="pointer-events:auto;flex:1;max-width:220px;background:#1A73E8;color:#FFFFFF;display:flex;align-items:center;justify-content:center;gap:9px;padding:14px 20px;border-radius:999px;box-shadow:0 4px 16px rgba(60,64,67,0.3);cursor:pointer;font-weight:500;font-size:15px" style-hover="background:#174EA6;color:#FFFFFF">
+      <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 2.5C3 2.5 5 2 5.5 3.5L6.5 5.5C6.8 6.2 5.5 7 5.5 7.5C5.5 8.5 7.5 10.5 8.5 10.5C9 10.5 9.8 9.2 10.5 9.5L12.5 10.5C14 11 13.5 13 13.5 13C13 14 11.5 14.2 10.5 14C6.5 13 3 9.5 2 5.5C1.8 4.5 2 3 3 2.5Z" stroke="#FFFFFF" stroke-width="1.3" stroke-linejoin="round"></path></svg>
+      Call now
+    </a>
+    <a href="{{ waLink }}" style="pointer-events:auto;flex:1;max-width:220px;background:#137333;color:#FFFFFF;display:flex;align-items:center;justify-content:center;gap:9px;padding:14px 20px;border-radius:999px;box-shadow:0 4px 16px rgba(60,64,67,0.3);cursor:pointer;font-weight:500;font-size:15px" style-hover="background:#0D5626;color:#FFFFFF">
+      <svg width="16" height="16" viewBox="0 0 18 18" fill="none"><path d="M9 1.5C13.1 1.5 16.5 4.9 16.5 9C16.5 13.1 13.1 16.5 9 16.5C7.7 16.5 6.5 16.2 5.4 15.6L1.5 16.5L2.5 12.8C1.9 11.7 1.5 10.4 1.5 9C1.5 4.9 4.9 1.5 9 1.5Z" stroke="#FFFFFF" stroke-width="1.4" stroke-linejoin="round"></path><path d="M6.2 6.8C6.2 6.8 6.6 6 7 6C7.4 6 8 7.2 8 7.5C8 7.8 7.4 8.2 7.4 8.5C7.4 9 8.9 10.6 9.5 10.6C9.8 10.6 10.2 10 10.5 10C10.8 10 12 10.7 12 11C12 11.5 11.2 11.9 11.2 11.9" stroke="#FFFFFF" stroke-width="1.3" stroke-linecap="round"></path></svg>
+      WhatsApp
+    </a>
+  </div>
 
-  <!-- Vehicle -->
-  <section class="section section-alt">
-    <div class="container grid grid-auto-340 grid-2col">
-      <div class="image-slot image-slot-vehicle">
-        <svg class="image-slot-icon" width="110" height="110" viewBox="0 0 20 20" fill="none"><path d="M10 1.5L17 4.5V9.5C17 14 14 17.5 10 18.5C6 17.5 3 14 3 9.5V4.5L10 1.5Z" stroke="#FFFFFF" stroke-opacity="0.35" stroke-width="1" stroke-linejoin="round"></path></svg>
-        <span class="image-slot-caption">Refrigerated compartment / vehicle interior — photo coming soon</span>
-      </div>
-      <div>
-        <h2 class="h2-lg">Dedicated refrigerated VW Transporter</h2>
-        <p class="body-text" style="margin-bottom:22px">A purpose-built Volkswagen Transporter with a refrigerated compartment and dedicated transport area — designed for respectful, hygienic conveyance of human remains.</p>
-        <div class="grid grid-auto-220" style="gap:10px 20px">
-          <div class="check-item"><svg width="15" height="15" viewBox="0 0 15 15" fill="none"><path d="M2 8.5L6 12L13 3.5" stroke="#137333" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"></path></svg><span>Refrigerated compartment</span></div>
-          <div class="check-item"><svg width="15" height="15" viewBox="0 0 15 15" fill="none"><path d="M2 8.5L6 12L13 3.5" stroke="#137333" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"></path></svg><span>Separate transport area</span></div>
-          <div class="check-item"><svg width="15" height="15" viewBox="0 0 15 15" fill="none"><path d="M2 8.5L6 12L13 3.5" stroke="#137333" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"></path></svg><span>Washable non-porous interior</span></div>
-          <div class="check-item"><svg width="15" height="15" viewBox="0 0 15 15" fill="none"><path d="M2 8.5L6 12L13 3.5" stroke="#137333" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"></path></svg><span>Dedicated loading system</span></div>
-          <div class="check-item"><svg width="15" height="15" viewBox="0 0 15 15" fill="none"><path d="M2 8.5L6 12L13 3.5" stroke="#137333" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"></path></svg><span>Designed for cleaning and disinfection</span></div>
-          <div class="check-item"><svg width="15" height="15" viewBox="0 0 15 15" fill="none"><path d="M2 8.5L6 12L13 3.5" stroke="#137333" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"></path></svg><span>Suitable for long-distance transport</span></div>
-        </div>
-      </div>
-    </div>
-  </section>
+</div>
 
-  <!-- Compliance-first -->
-  <section class="section">
-    <div class="container">
-      <h2 class="h2-lg max-680" style="text-wrap:balance">Paperwork done properly, every single job</h2>
-      <p class="body-text max-720" style="margin-bottom:32px">Every transport job is backed by the correct documentation from the authorised parties: collection instructions, release notes, receiving notes, route sheets, chain-of-custody records, cleaning logs and incident reporting where required.</p>
-      <div class="grid grid-auto-220">
-        <div class="card card-pad-md" style="display:flex;align-items:center;gap:12px;padding:16px 18px;border-radius:12px">
-          <svg width="16" height="16" viewBox="0 0 16 16" fill="none" style="flex-shrink:0"><rect x="3" y="1.5" width="10" height="13" rx="1.5" stroke="#1A73E8" stroke-width="1.4"></rect><path d="M5.5 5H10.5M5.5 8H10.5M5.5 11H8.5" stroke="#1A73E8" stroke-width="1.4" stroke-linecap="round"></path></svg>
-          <span style="font-weight:500;font-size:14px;color:var(--text)">Collection instruction</span>
-        </div>
-        <div class="card card-pad-md" style="display:flex;align-items:center;gap:12px;padding:16px 18px;border-radius:12px">
-          <svg width="16" height="16" viewBox="0 0 16 16" fill="none" style="flex-shrink:0"><rect x="3" y="1.5" width="10" height="13" rx="1.5" stroke="#1A73E8" stroke-width="1.4"></rect><path d="M5.5 5H10.5M5.5 8H10.5M5.5 11H8.5" stroke="#1A73E8" stroke-width="1.4" stroke-linecap="round"></path></svg>
-          <span style="font-weight:500;font-size:14px;color:var(--text)">Death documentation</span>
-        </div>
-        <div class="card card-pad-md" style="display:flex;align-items:center;gap:12px;padding:16px 18px;border-radius:12px">
-          <svg width="16" height="16" viewBox="0 0 16 16" fill="none" style="flex-shrink:0"><rect x="3" y="1.5" width="10" height="13" rx="1.5" stroke="#1A73E8" stroke-width="1.4"></rect><path d="M5.5 5H10.5M5.5 8H10.5M5.5 11H8.5" stroke="#1A73E8" stroke-width="1.4" stroke-linecap="round"></path></svg>
-          <span style="font-weight:500;font-size:14px;color:var(--text)">Release note</span>
-        </div>
-        <div class="card card-pad-md" style="display:flex;align-items:center;gap:12px;padding:16px 18px;border-radius:12px">
-          <svg width="16" height="16" viewBox="0 0 16 16" fill="none" style="flex-shrink:0"><rect x="3" y="1.5" width="10" height="13" rx="1.5" stroke="#1A73E8" stroke-width="1.4"></rect><path d="M5.5 5H10.5M5.5 8H10.5M5.5 11H8.5" stroke="#1A73E8" stroke-width="1.4" stroke-linecap="round"></path></svg>
-          <span style="font-weight:500;font-size:14px;color:var(--text)">Receiving note</span>
-        </div>
-        <div class="card card-pad-md" style="display:flex;align-items:center;gap:12px;padding:16px 18px;border-radius:12px">
-          <svg width="16" height="16" viewBox="0 0 16 16" fill="none" style="flex-shrink:0"><rect x="3" y="1.5" width="10" height="13" rx="1.5" stroke="#1A73E8" stroke-width="1.4"></rect><path d="M5.5 5H10.5M5.5 8H10.5M5.5 11H8.5" stroke="#1A73E8" stroke-width="1.4" stroke-linecap="round"></path></svg>
-          <span style="font-weight:500;font-size:14px;color:var(--text)">Chain of custody</span>
-        </div>
-        <div class="card card-pad-md" style="display:flex;align-items:center;gap:12px;padding:16px 18px;border-radius:12px">
-          <svg width="16" height="16" viewBox="0 0 16 16" fill="none" style="flex-shrink:0"><rect x="3" y="1.5" width="10" height="13" rx="1.5" stroke="#1A73E8" stroke-width="1.4"></rect><path d="M5.5 5H10.5M5.5 8H10.5M5.5 11H8.5" stroke="#1A73E8" stroke-width="1.4" stroke-linecap="round"></path></svg>
-          <span style="font-weight:500;font-size:14px;color:var(--text)">Vehicle cleaning log</span>
-        </div>
-      </div>
-    </div>
-  </section>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;phone&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;+27 61 589 1505&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Contact details&quot;},&quot;whatsapp&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;+27 61 589 1505&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Contact details&quot;},&quot;email&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;info@bodytransportsolutions.co.za&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Contact details&quot;}}">
+class Component extends DCLogic {
+  state = { page: 'home', sent: false };
 
-  <!-- Routes -->
-  <section style="padding:0 20px clamp(48px,7vw,80px)">
-    <div class="container grid grid-auto-320 grid-2col-start">
-      <div>
-        <h2 class="h2-lg">KwaZulu-Natal based. National reach.</h2>
-        <p class="body-text" style="margin-bottom:20px">Based in the Cato Ridge / Camperdown / Durban corridor, we run routes across KwaZulu-Natal and to every province in South Africa.</p>
-        <a href="/areas" style="font-weight:500;font-size:15px;color:var(--blue);display:inline-flex;align-items:center;gap:8px">View all areas covered <span aria-hidden="true">&rarr;</span></a>
-      </div>
-      <div class="card" style="overflow:hidden">
-        <div class="route-row"><span class="pill-dot pill-dot-blue" style="width:8px;height:8px"></span><span class="route-name">Durban</span><svg width="24" height="8" viewBox="0 0 26 8" fill="none"><path d="M1 4H22M22 4L19 1.5M22 4L19 6.5" stroke="#5F6368" stroke-width="1.3" stroke-linecap="round"></path></svg><span class="route-name">Johannesburg</span></div>
-        <div class="route-row"><span class="pill-dot pill-dot-blue" style="width:8px;height:8px"></span><span class="route-name">Durban</span><svg width="24" height="8" viewBox="0 0 26 8" fill="none"><path d="M1 4H22M22 4L19 1.5M22 4L19 6.5" stroke="#5F6368" stroke-width="1.3" stroke-linecap="round"></path></svg><span class="route-name">Pietermaritzburg</span></div>
-        <div class="route-row"><span class="pill-dot pill-dot-blue" style="width:8px;height:8px"></span><span class="route-name">Durban</span><svg width="24" height="8" viewBox="0 0 26 8" fill="none"><path d="M1 4H22M22 4L19 1.5M22 4L19 6.5" stroke="#5F6368" stroke-width="1.3" stroke-linecap="round"></path></svg><span class="route-name">Eastern Cape</span></div>
-        <div class="route-row"><span class="pill-dot pill-dot-blue" style="width:8px;height:8px"></span><span class="route-name">Durban</span><svg width="24" height="8" viewBox="0 0 26 8" fill="none"><path d="M1 4H22M22 4L19 1.5M22 4L19 6.5" stroke="#5F6368" stroke-width="1.3" stroke-linecap="round"></path></svg><span class="route-name">Cape Town</span></div>
-        <div class="route-row"><span class="pill-dot pill-dot-blue" style="width:8px;height:8px"></span><span class="route-name">KZN</span><svg width="24" height="8" viewBox="0 0 26 8" fill="none"><path d="M1 4H22M22 4L19 1.5M22 4L19 6.5" stroke="#5F6368" stroke-width="1.3" stroke-linecap="round"></path></svg><span class="route-name">Limpopo</span></div>
-        <div class="route-row"><span class="pill-dot pill-dot-blue" style="width:8px;height:8px"></span><span class="route-name">KZN</span><svg width="24" height="8" viewBox="0 0 26 8" fill="none"><path d="M1 4H22M22 4L19 1.5M22 4L19 6.5" stroke="#5F6368" stroke-width="1.3" stroke-linecap="round"></path></svg><span class="route-name">Mpumalanga</span></div>
-        <div class="route-row"><span class="pill-dot pill-dot-blue" style="width:8px;height:8px"></span><span class="route-name">Inter-provincial</span><svg width="24" height="8" viewBox="0 0 26 8" fill="none"><path d="M1 4H22M22 4L19 1.5M22 4L19 6.5" stroke="#5F6368" stroke-width="1.3" stroke-linecap="round"></path></svg><span class="route-name">On request</span></div>
-      </div>
-    </div>
-  </section>
+  pages = [
+    { key: 'home', label: 'Home' },
+    { key: 'about', label: 'About' },
+    { key: 'services', label: 'Services' },
+    { key: 'compliance', label: 'Compliance' },
+    { key: 'process', label: 'Job Process' },
+    { key: 'areas', label: 'Areas' },
+    { key: 'partners', label: 'Partners' },
+    { key: 'contact', label: 'Contact' }
+  ];
 
-  <!-- FAQ -->
-  <section class="section section-alt" style="margin-bottom:clamp(48px,7vw,72px)">
-    <div class="container-narrow">
-      <h2 class="h2-md" style="margin-bottom:24px">Common questions</h2>
-      <div style="display:flex;flex-direction:column;gap:12px">
-        <div class="faq-item">
-          <div class="faq-q">Are you a funeral parlour?</div>
-          <p class="faq-a">No. We are a transport-only company. We do not arrange funerals, store, prepare, embalm, cremate or bury. We move human remains between approved facilities — that's our whole job.</p>
-        </div>
-        <div class="faq-item">
-          <div class="faq-q">Can a family contact you directly?</div>
-          <p class="faq-a">Yes — we'll gladly take your call and guide you, but transport is carried out in support of an authorised funeral parlour, mortuary, hospital or insurer, with the correct documentation in place.</p>
-        </div>
-        <div class="faq-item">
-          <div class="faq-q">How quickly can you collect?</div>
-          <p class="faq-a">We operate 24/7, including after-hours and weekends. Once the paperwork and route are confirmed, we dispatch — availability depends on scheduling, distance and vehicle readiness.</p>
-        </div>
-        <div class="faq-item">
-          <div class="faq-q">Do you cover the whole of South Africa?</div>
-          <p class="faq-a">Yes. We are based in KwaZulu-Natal (Cato Ridge / Camperdown / Durban corridor) and run routes to all nine provinces.</p>
-        </div>
-        <div class="faq-item">
-          <div class="faq-q">What paperwork is needed?</div>
-          <p class="faq-a">Typically a collection instruction, death documentation, a release note from the facility and a receiving note at the destination. We confirm exactly what's needed for your route when you contact us — see our <a href="/compliance" style="font-weight:500">Compliance page</a>.</p>
-        </div>
-      </div>
-    </div>
-  </section>
+  componentDidMount() {
+    const apply = () => {
+      const h = (window.location.hash || '').replace('#', '');
+      const keys = this.pages.map(p => p.key).concat(['request']);
+      if (keys.includes(h) && h !== this.state.page) this.setState({ page: h, sent: false });
+    };
+    this._onHash = apply;
+    window.addEventListener('hashchange', apply);
+    apply();
+  }
 
-  <!-- Emergency CTA -->
-  <section style="padding:0 20px clamp(64px,9vw,96px)">
-    <div class="container callout-blue grid grid-auto-300 grid-2col">
-      <div>
-        <h2 class="h2-lg" style="margin-bottom:12px">Need urgent transport right now?</h2>
-        <p class="body-text">Call or WhatsApp — we confirm the collection point, destination, paperwork, availability and route in one conversation.</p>
-      </div>
-      <div style="display:flex;flex-direction:column;gap:12px">
-        <a href="#" class="btn btn-white btn-lg js-wa-link">Call / WhatsApp now</a>
-        <a href="/request" class="btn btn-ghost-onblue btn-md">Submit a transport request</a>
-      </div>
-    </div>
-  </section>
+  componentWillUnmount() {
+    window.removeEventListener('hashchange', this._onHash);
+  }
 
-</main>
+  go(key) {
+    this.setState({ page: key, sent: false });
+    try { history.replaceState(null, '', '#' + key); } catch (e) {}
+    window.scrollTo(0, 0);
+  }
 
-<script>document.write(BTS.footerHTML()); document.write(BTS.stickyBarHTML());</script>
-<script>document.querySelectorAll('.js-wa-link').forEach(function(a){ a.href = BTS.waLink; });</script>
+  renderVals() {
+    const p = this.state.page;
+    const phone = this.props.phone ?? '+27 61 589 1505';
+    const whatsapp = this.props.whatsapp ?? '+27 61 589 1505';
+    const email = this.props.email ?? 'info@bodytransportsolutions.co.za';
+    const digits = String(whatsapp).replace(/[^0-9]/g, '');
+
+    const mk = (key) => (e) => { if (e && e.preventDefault) e.preventDefault(); this.go(key); };
+
+    const navItems = this.pages.map(it => ({
+      label: it.label,
+      href: '#' + it.key,
+      onClick: mk(it.key),
+      color: p === it.key ? '#174EA6' : '#5F6368',
+      bg: p === it.key ? '#E8F0FE' : 'transparent'
+    }));
+
+    const footerNav = this.pages.concat([{ key: 'request', label: 'Request Transport' }]).map(it => ({
+      label: it.label,
+      href: '#' + it.key,
+      onClick: mk(it.key)
+    }));
+
+    return {
+      pageHome: p === 'home',
+      pageAbout: p === 'about',
+      pageServices: p === 'services',
+      pageCompliance: p === 'compliance',
+      pageProcess: p === 'process',
+      pageAreas: p === 'areas',
+      pagePartners: p === 'partners',
+      pageRequest: p === 'request',
+      pageContact: p === 'contact',
+      navItems,
+      footerNav,
+      goHome: mk('home'),
+      goRequest: mk('request'),
+      goAreas: mk('areas'),
+      goCompliance: mk('compliance'),
+      phone,
+      whatsapp,
+      email,
+      telLink: 'tel:' + String(phone).replace(/[^+0-9]/g, ''),
+      waLink: digits ? 'https://wa.me/' + digits : '#contact',
+      mailLink: 'mailto:' + email,
+      sent: this.state.sent,
+      notSent: !this.state.sent,
+      submitForm: () => this.setState({ sent: true }),
+      whoWeServe: [
+        'Funeral parlours',
+        'Mortuaries',
+        'Hospitals',
+        'Insurance providers',
+        'Repatriation companies',
+        'Families working through authorised providers'
+      ],
+      vehicleFeatures: [
+        'Refrigerated compartment',
+        'Separate transport area',
+        'Washable non-porous interior',
+        'Dedicated loading system',
+        'Designed for cleaning and disinfection',
+        'Suitable for long-distance transport'
+      ],
+      complianceCards: [
+        'Collection instruction',
+        'Death documentation',
+        'Release note',
+        'Receiving note',
+        'Chain of custody',
+        'Vehicle cleaning log'
+      ],
+      complianceThemes: [
+        'Transport-only operation',
+        'Refrigerated vehicle',
+        'Vehicle cleaning and disinfection',
+        'Chain-of-custody records',
+        'Collection and receiving documentation',
+        'Environmental Health / municipal guidance',
+        'R363 Management of Human Remains awareness',
+        'Client-provided authorisations and permits where required'
+      ],
+      routes: [
+        { from: 'Durban', to: 'Johannesburg' },
+        { from: 'Durban', to: 'Pietermaritzburg' },
+        { from: 'Durban', to: 'Eastern Cape' },
+        { from: 'Durban', to: 'Cape Town' },
+        { from: 'KZN', to: 'Limpopo' },
+        { from: 'KZN', to: 'Mpumalanga' },
+        { from: 'Inter-provincial', to: 'On request' }
+      ],
+      docList: [
+        'Collection instruction from authorised client',
+        'Death documentation',
+        'Burial order where already issued',
+        'SAPS transport certificate or movement authority where required',
+        'Release note from hospital / mortuary / funeral parlour',
+        'Receiving note signed by destination',
+        'ID or passport copy of deceased if available',
+        'Special handling declaration where needed',
+        'Cleaning and disinfection log',
+        'Incident report if abnormal event occurs'
+      ],
+      steps: [
+        { num: '1', title: 'Transport request', copy: 'You contact us with the collection point, destination, deceased details and urgency.' },
+        { num: '2', title: 'Documentation check', copy: 'We confirm available documentation and any special handling requirements.' },
+        { num: '3', title: 'Route confirmation', copy: 'We confirm distance, timing, driver, vehicle availability and estimated cost.' },
+        { num: '4', title: 'Collection', copy: 'Our driver collects from the authorised facility or responsible party and records collection details.' },
+        { num: '5', title: 'Transport', copy: 'Human remains are transported respectfully in the refrigerated vehicle.' },
+        { num: '6', title: 'Delivery & sign-off', copy: 'The receiving party signs the receiving note and confirms handover.' },
+        { num: '7', title: 'Cleaning log', copy: 'The vehicle compartment is cleaned and disinfected after transport.' }
+      ],
+      localAreas: ['Durban', 'Cato Ridge', 'Camperdown', 'Pietermaritzburg', 'Pinetown', 'Hillcrest', 'KwaZulu-Natal'],
+      provinces: ['Gauteng', 'Eastern Cape', 'Western Cape', 'Limpopo', 'Mpumalanga', 'Free State', 'North West', 'Northern Cape'],
+      partnerBenefits: [
+        'No need to own long-distance refrigerated transport',
+        'Reliable backup vehicle',
+        'Professional documentation',
+        'Province-to-province transfer support',
+        'After-hours support',
+        'Respectful handling',
+        'Clean, dedicated vehicle',
+        'Invoice-based business relationship'
+      ]
+    };
+  }
+}
+</script>
 </body>
 </html>
