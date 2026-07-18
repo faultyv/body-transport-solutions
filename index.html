@@ -164,16 +164,15 @@
     main div[style*="border: 1px solid rgb(218, 220, 224)"][style*="border-radius: 12px"]:not(:has(input, select, textarea)) {
       transition: box-shadow .25s ease, transform .25s ease;
     }
-    main div[style*="border: 1px solid rgb(218, 220, 224)"][style*="border-radius: 16px"]:not(:has(input, select, textarea)):hover,
-    main div[style*="border: 1px solid rgb(218, 220, 224)"][style*="border-radius: 12px"]:not(:has(input, select, textarea)):hover {
-      transform: translateY(-3px);
-      box-shadow: 0 8px 24px rgba(60,64,67,.13);
-    }
+    /* Icon pop when its card is hovered (no floating cards) */
+    main div[style*="border-radius: 50%"][style*="background: rgb(232, 240, 254)"] { transition: transform .25s cubic-bezier(.34,1.56,.64,1); }
+    main div:hover > div[style*="border-radius: 50%"][style*="background: rgb(232, 240, 254)"] { transform: scale(1.1); }
 
     /* Photos: slow zoom on hover */
-    img[src*="fridge"], img[src*="airflow"], .hero-vehicle img { transition: transform .7s cubic-bezier(.2,.6,.2,1); }
+    img[src*="fridge"], img[src*="airflow"] { transition: transform .7s cubic-bezier(.2,.6,.2,1); }
     div:hover > img[src*="fridge"], div:hover > img[src*="airflow"] { transform: scale(1.045); }
-    .hero-vehicle:hover img { transform: scale(1.05); }
+    .hero-vehicle img { animation: btsKen 26s ease-in-out infinite alternate; }
+    @keyframes btsKen { from { transform: scale(1.01); } to { transform: scale(1.07) translateY(-1.5%); } }
 
     /* Page switch: content rises in */
     main > [data-screen-label] { animation: btsPage .38s cubic-bezier(.2,.7,.3,1) both; }
@@ -207,7 +206,8 @@
     }
     main div[style*="border: 1px solid rgb(218, 220, 224)"][style*="border-radius: 16px"]:not(:has(input, select, textarea)):hover,
     main div[style*="border: 1px solid rgb(218, 220, 224)"][style*="border-radius: 12px"]:not(:has(input, select, textarea)):hover {
-      box-shadow: 0 2px 4px rgba(60,64,67,.08), 0 14px 34px rgba(60,64,67,.16) !important;
+      box-shadow: 0 2px 4px rgba(60,64,67,.07), 0 10px 26px rgba(60,64,67,.13) !important;
+      border-color: #D2E3FC !important;
     }
 
     /* Icon & number circles: gradient fill with fine ring */
@@ -352,6 +352,31 @@
     .bts-map-arr { fill: #B7D6FF; font-weight: 500; font-size: 16.5px; font-style: italic; font-family: 'Roboto', Arial, sans-serif; }
     .bts-map-ocean { fill: rgba(255,255,255,.16); font-style: italic; letter-spacing: .35em; font-size: 22px; font-family: 'Roboto', Arial, sans-serif; }
 
+    /* Primary CTAs: periodic light sweep */
+    a[style*="border-radius: 999px"][style*="background: rgb(26, 115, 232)"],
+    button[style*="border-radius: 999px"][style*="background: rgb(26, 115, 232)"],
+    .bts-cta { position: relative; overflow: hidden; }
+    a[style*="border-radius: 999px"][style*="background: rgb(26, 115, 232)"]::before,
+    button[style*="border-radius: 999px"][style*="background: rgb(26, 115, 232)"]::before,
+    .bts-cta::before {
+      content: ''; position: absolute; inset: 0; pointer-events: none;
+      background: linear-gradient(115deg, transparent 32%, rgba(255,255,255,.38) 50%, transparent 68%);
+      transform: translateX(-130%); animation: btsSheen 6s ease-in-out infinite;
+    }
+    @keyframes btsSheen { 0%, 70% { transform: translateX(-130%); } 88%, 100% { transform: translateX(130%); } }
+
+    /* Sticky WhatsApp button: gentle heartbeat every few seconds */
+    div[style*="position: fixed"][style*="bottom: 16px"] a:last-child { animation: btsUp .5s .35s cubic-bezier(.2,.7,.3,1) both, btsBreath 7s 2s ease-in-out infinite; }
+    @keyframes btsBreath { 0%, 86%, 100% { transform: scale(1); } 91% { transform: scale(1.045); } 95% { transform: scale(.99); } }
+
+    /* Route map: larger labels on small screens, footer chip hidden */
+    @media (max-width: 640px) {
+      .bts-map-city { font-size: 26px; } .bts-map-time { font-size: 21px; }
+      .bts-map-hublabel { font-size: 27px; } .bts-map-hubsub { font-size: 19px; }
+      .bts-map-arr { font-size: 20px; } .bts-map-ocean { font-size: 24px; }
+      .bts-map-foot { display: none; }
+    }
+
     @media (prefers-reduced-motion: reduce) {
       *, *::before, *::after { animation: none !important; transition: none !important; }
     }
@@ -461,7 +486,7 @@
             <div style="border:1px solid #DADCE0;border-radius:16px;padding:20px;display:flex;flex-direction:column;gap:8px">
               <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><circle cx="10" cy="10" r="8" stroke="#1A73E8" stroke-width="1.6"></circle><path d="M10 5.5V10L13 12.5" stroke="#1A73E8" stroke-width="1.6" stroke-linecap="round"></path></svg>
               <span style="font-weight:700;font-size:15px;color:#202124">24/7, 365 days</span>
-              <span style="font-size:13.5px;line-height:1.55;color:#5F6368">Deaths don't keep office hours. Neither do we — after-hours and weekend collections.</span>
+              <span style="font-size:13.5px;line-height:1.55;color:#5F6368">Available around the clock — after-hours, weekend and public-holiday collections.</span>
             </div>
             <div style="border:1px solid #DADCE0;border-radius:16px;padding:20px;display:flex;flex-direction:column;gap:8px">
               <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><rect x="2.5" y="5.5" width="11" height="9" rx="1.5" stroke="#1A73E8" stroke-width="1.6"></rect><path d="M13.5 8.5H16L17.5 11V14.5H13.5" stroke="#1A73E8" stroke-width="1.6" stroke-linejoin="round"></path><circle cx="6" cy="15" r="1.6" stroke="#1A73E8" stroke-width="1.4"></circle><circle cx="15" cy="15" r="1.6" stroke="#1A73E8" stroke-width="1.4"></circle></svg>
@@ -834,7 +859,7 @@
             </div>
             <div style="background:#E8F0FE;border-radius:14px;padding:16px 20px;display:flex;align-items:center;gap:14px">
               <svg width="22" height="22" viewBox="0 0 22 22" fill="none" style="flex-shrink:0"><path d="M9 3.5C9 2.4 9.9 1.5 11 1.5C12.1 1.5 13 2.4 13 3.5V11.3C14.2 12 15 13.3 15 14.8C15 17 13.2 18.8 11 18.8C8.8 18.8 7 17 7 14.8C7 13.3 7.8 12 9 11.3V3.5Z" stroke="#1A73E8" stroke-width="1.5" stroke-linejoin="round"></path><circle cx="11" cy="14.8" r="1.8" fill="#1A73E8"></circle></svg>
-              <p style="margin:0;font-size:13.5px;line-height:1.6;color:#174EA6"><strong style="color:#0B57D0">R363 storage standard: ≤5&nbsp;°C within 3 hours.</strong> Our compartment runs at 0–3&nbsp;°C — comfortably inside the standard, from collection to hand-over.</p>
+              <p style="margin:0;font-size:13.5px;line-height:1.6;color:#174EA6"><strong style="color:#0B57D0">Refrigerated at 0–3&nbsp;°C, door to door.</strong> The compartment is pre-cooled before collection and held at 0–3&nbsp;°C throughout transport, from collection to hand-over.</p>
             </div>
           </div>
         </div>
@@ -842,7 +867,7 @@
       <section style="padding:0 20px">
         <div style="max-width:1140px;margin:0 auto;background:#F8F9FA;border:1px solid #DADCE0;border-radius:12px;padding:16px 20px;display:flex;gap:12px;align-items:flex-start">
           <svg width="18" height="18" viewBox="0 0 18 18" fill="none" style="flex-shrink:0;margin-top:2px"><path d="M9 1.5L15 4V8.5C15 12.5 12.5 15.5 9 16.5C5.5 15.5 3 12.5 3 8.5V4L9 1.5Z" stroke="#1A73E8" stroke-width="1.4" stroke-linejoin="round"></path></svg>
-          <p style="margin:0;font-size:13px;line-height:1.6;color:#5F6368"><strong style="color:#202124">Transport-only — no storage premises.</strong> We do not store human remains, so the premises-based Certificate of Competence requirement does not apply to our operation. Municipal applications (such as eThekwini's) disclose our transportation methods and vehicle registration details. Storage standard under Regulation 10(6), National Health Act 61 of 2003 · Regulation R363.</p>
+          <p style="margin:0;font-size:13px;line-height:1.6;color:#5F6368"><strong style="color:#202124">Transport-only — no storage premises.</strong> We do not store human remains; every job is a direct, refrigerated collect-and-deliver run. Where a municipal application applies (for example eThekwini), it discloses our transportation methods and vehicle registration details.</p>
         </div>
       </section>
       <section style="padding:24px 20px clamp(64px,9vw,88px)">
