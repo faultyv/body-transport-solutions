@@ -91,6 +91,54 @@
         top: 14px;
       }
     }
+
+    /* ===== UI polish & motion ===== */
+    ::selection { background: #D2E3FC; }
+    a, button { transition: background-color .18s ease, color .18s ease, border-color .18s ease, box-shadow .22s ease, transform .16s ease; }
+    a:focus-visible, button:focus-visible { outline: 3px solid #A8C7FA; outline-offset: 2px; border-radius: 8px; }
+
+    /* Pill buttons: lift on hover, press on click */
+    a[style*="border-radius: 999px"]:hover { transform: translateY(-1px); }
+    a[style*="border-radius: 999px"]:active { transform: translateY(0) scale(.975); transition-duration: .08s; }
+    button[style*="border-radius: 999px"]:hover { transform: translateY(-1px); box-shadow: 0 2px 8px rgba(26,115,232,.35); }
+    button[style*="border-radius: 999px"]:active { transform: translateY(0) scale(.975); }
+
+    /* Cards: gentle lift (forms excluded) */
+    main div[style*="border: 1px solid rgb(218, 220, 224)"][style*="border-radius: 16px"]:not(:has(input, select, textarea)),
+    main div[style*="border: 1px solid rgb(218, 220, 224)"][style*="border-radius: 12px"]:not(:has(input, select, textarea)) {
+      transition: box-shadow .25s ease, transform .25s ease;
+    }
+    main div[style*="border: 1px solid rgb(218, 220, 224)"][style*="border-radius: 16px"]:not(:has(input, select, textarea)):hover,
+    main div[style*="border: 1px solid rgb(218, 220, 224)"][style*="border-radius: 12px"]:not(:has(input, select, textarea)):hover {
+      transform: translateY(-3px);
+      box-shadow: 0 8px 24px rgba(60,64,67,.13);
+    }
+
+    /* Photos: slow zoom on hover */
+    img[src*="fridge"], .hero-vehicle img { transition: transform .7s cubic-bezier(.2,.6,.2,1); }
+    div:hover > img[src*="fridge"] { transform: scale(1.045); }
+    .hero-vehicle:hover img { transform: scale(1.05); }
+
+    /* Page switch: content rises in */
+    main > [data-screen-label] { animation: btsPage .38s cubic-bezier(.2,.7,.3,1) both; }
+    @keyframes btsPage { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: none; } }
+
+    /* Sticky call bar: slides up after load */
+    div[style*="position: fixed"][style*="bottom: 16px"] { animation: btsUp .5s .35s cubic-bezier(.2,.7,.3,1) both; }
+    @keyframes btsUp { from { opacity: 0; transform: translateY(72px); } to { opacity: 1; transform: none; } }
+
+    /* Scroll-driven reveals (browsers with scroll-timeline support only) */
+    @supports (animation-timeline: view()) {
+      main section { animation: btsRise both ease; animation-timeline: view(); animation-range: entry 0% entry 38%; }
+      main section [style*="display: grid"] > * { animation: btsRise both ease; animation-timeline: view(); animation-range: entry 0% entry 30%; }
+      [data-screen-label="Emergency Transport Request"] [style*="display: grid"] > *,
+      [data-screen-label="Emergency Transport Request"] section { animation: none; }
+      @keyframes btsRise { from { opacity: .001; transform: translateY(26px); } to { opacity: 1; transform: none; } }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { animation: none !important; transition: none !important; }
+    }
   </style>
 </helmet>
 
@@ -127,7 +175,7 @@
               <span style="display:inline-flex;align-items:center;gap:8px;font-size:13px;font-weight:500;color:#174EA6;background:#E8F0FE;border-radius:999px;padding:6px 14px">Proudly South African 🇿🇦</span>
             </div>
             <h1 style="font-weight:700;font-size:clamp(32px,6vw,52px);line-height:1.12;margin:0;letter-spacing:-0.02em;color:#202124;text-wrap:balance">We move the deceased. Across KZN and surrounding provinces.</h1>
-            <p style="font-size:clamp(16px,2.5vw,19px);line-height:1.6;color:#5F6368;margin:0;max-width:520px;text-wrap:pretty">One refrigerated vehicle. A trained team. The right paperwork. You call — we collect — we deliver. That's it.</p>
+            <p style="font-size:clamp(16px,2.5vw,19px);line-height:1.6;color:#5F6368;margin:0;max-width:520px;text-wrap:pretty">One dedicated refrigerated vehicle. A trained team. The right paperwork. You call — we collect — we deliver. Respectfully, every time.</p>
             <div style="display:flex;gap:12px;flex-wrap:wrap;margin-top:4px">
               <a href="#request" onClick="{{ goRequest }}" style="background:#1A73E8;color:#FFFFFF;font-weight:500;font-size:16px;padding:14px 28px;border-radius:999px;cursor:pointer" style-hover="background:#174EA6;color:#FFFFFF">Request transport</a>
               <a href="{{ waLink }}" style="border:1px solid #DADCE0;color:#1A73E8;font-weight:500;font-size:16px;padding:14px 28px;border-radius:999px;cursor:pointer;display:flex;align-items:center;gap:8px" style-hover="background:#F8F9FA;color:#174EA6">WhatsApp us</a>
@@ -278,7 +326,7 @@
       <section style="background:#F8F9FA;padding:clamp(48px,7vw,80px) 20px">
         <div style="max-width:1140px;margin:0 auto;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,340px),1fr));gap:clamp(28px,4vw,56px);align-items:center">
           <div style="position:relative;height:clamp(240px,38vw,360px);border-radius:24px;overflow:hidden;border:1px solid #DADCE0">
-            <img src="./assets/fridge.jpg" alt="Refrigerated compartment with stainless steel interior and dedicated loading tray" style="width:100%;height:100%;object-fit:cover;display:block">
+            <img src="./assets/fridge.jpg" loading="lazy" decoding="async" alt="Refrigerated compartment with stainless steel interior and dedicated loading tray" style="width:100%;height:100%;object-fit:cover;display:block">
           </div>
           <div>
             <h2 style="font-weight:700;font-size:clamp(24px,4.5vw,34px);margin:0 0 12px;letter-spacing:-0.01em;color:#202124">Dedicated refrigerated VW Transporter</h2>
