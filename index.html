@@ -352,6 +352,134 @@
     .bts-map-arr { fill: #B7D6FF; font-weight: 500; font-size: 16.5px; font-style: italic; font-family: 'Roboto', Arial, sans-serif; }
     .bts-map-ocean { fill: rgba(255,255,255,.16); font-style: italic; letter-spacing: .35em; font-size: 22px; font-family: 'Roboto', Arial, sans-serif; }
 
+    /* ===== Mobile usability & accessibility ===== */
+    html { scroll-behavior: smooth; scroll-padding-top: 76px; }
+    body { overflow-x: hidden; }
+    .bts-skip-link {
+      position: fixed; top: 10px; left: 10px; z-index: 100;
+      padding: 11px 16px; border-radius: 10px;
+      background: #202124; color: #FFFFFF; font-weight: 700; font-size: 14px;
+      transform: translateY(-160%); box-shadow: 0 4px 16px rgba(60,64,67,.3);
+    }
+    .bts-skip-link:focus { transform: translateY(0); color: #FFFFFF; }
+    .bts-mobile-nav { display: none; }
+    .bts-sticky-actions { display: none !important; }
+    input, select, textarea, button { box-sizing: border-box; }
+    input, select, textarea { max-width: 100%; }
+
+    /* View-timeline support varies widely and must never hide page content. */
+    @supports (animation-timeline: view()) {
+      main section,
+      main section [style*="display: grid"] > *,
+      main div[style*="width: 2px"][style*="background: rgb(218, 220, 224)"] {
+        animation: none !important;
+        opacity: 1 !important;
+        transform: none !important;
+      }
+    }
+
+    @media (hover: none) {
+      .hero-vehicle:hover img,
+      div:hover > img[src*="fridge"],
+      div:hover > img[src*="airflow"],
+      main div[style*="border-radius: 16px"]:hover,
+      main div[style*="border-radius: 12px"]:hover {
+        transform: none !important;
+      }
+    }
+
+    @media (max-width: 760px) {
+      html { scroll-padding-top: 68px; }
+      .bts-header { background: rgba(255,255,255,.96); }
+      .bts-header-inner {
+        min-height: 64px; padding: 7px 12px; flex-wrap: nowrap;
+        gap: 8px; position: relative;
+      }
+      .bts-brand { order: 1; margin-right: auto; min-width: 0; }
+      .bts-brand img { width: 122px; height: auto; max-height: 40px; }
+      .bts-tabs { display: none; }
+      .bts-actions { order: 3; margin-left: 0; gap: 0; }
+      .bts-callbtn { display: none; }
+      .bts-cta {
+        min-height: 44px; padding: 0 15px; display: inline-flex; align-items: center;
+        font-size: 13.5px; box-shadow: none;
+      }
+      .bts-mobile-nav { display: block; order: 2; position: relative; }
+      .bts-mobile-nav summary {
+        width: 44px; height: 44px; display: grid; place-items: center;
+        border: 1px solid #DADCE0; border-radius: 50%; color: #3C4043;
+        background: #FFFFFF; cursor: pointer; list-style: none;
+        -webkit-tap-highlight-color: transparent;
+      }
+      .bts-mobile-nav summary::-webkit-details-marker { display: none; }
+      .bts-mobile-nav summary svg { pointer-events: none; }
+      .bts-mobile-nav[open] summary { background: #E8F0FE; border-color: #D2E3FC; color: #0B57D0; }
+      .bts-mobile-links {
+        position: absolute; top: calc(100% + 9px); right: -148px;
+        width: min(320px, calc(100vw - 24px)); max-height: calc(100vh - 92px);
+        overflow-y: auto; overscroll-behavior: contain;
+        padding: 8px; border: 1px solid #DADCE0; border-radius: 18px;
+        background: #FFFFFF; box-shadow: 0 16px 40px rgba(60,64,67,.22);
+      }
+      .bts-mobile-link {
+        min-height: 48px; padding: 0 14px; border-radius: 12px;
+        display: flex; align-items: center; color: #3C4043;
+        font-size: 15px; font-weight: 500;
+      }
+      .bts-mobile-link:hover, .bts-mobile-link:focus-visible { background: #F1F3F4; color: #0B57D0; }
+
+      main section { padding-left: 16px !important; padding-right: 16px !important; }
+      .bts-hero { padding-top: 28px !important; padding-bottom: 38px !important; }
+      .bts-hero-grid { gap: 26px !important; }
+      .bts-hero-copy { gap: 15px !important; }
+      .bts-hero-copy h1 { font-size: clamp(32px, 9.2vw, 40px) !important; line-height: 1.08 !important; }
+      .bts-hero-copy p { font-size: 16px !important; line-height: 1.55 !important; }
+      .bts-hero-actions { display: grid !important; grid-template-columns: 1fr; gap: 10px !important; }
+      .bts-hero-actions a {
+        width: 100%; min-height: 50px; box-sizing: border-box;
+        display: flex !important; align-items: center; justify-content: center;
+        padding: 0 22px !important;
+      }
+      .bts-hero-meta {
+        display: grid !important; grid-template-columns: 1fr 1fr;
+        gap: 7px 12px !important; line-height: 1.35;
+      }
+      .bts-hero-meta span:nth-child(even) { display: none; }
+      .hero-vehicle { border-radius: 18px; aspect-ratio: 4 / 3; }
+      .hero-vehicle__label { left: 12px; top: 12px; max-width: calc(100% - 24px); }
+
+      .bts-diagram { aspect-ratio: 4 / 3; border-radius: 18px; }
+      .bts-diagram > img { object-fit: cover; object-position: center; }
+      .bts-diagram .bts-pin,
+      .bts-diagram .bts-diagram-badge { display: none; }
+
+      input, select, textarea {
+        width: 100%; min-height: 48px; font-size: 16px !important;
+      }
+      textarea { min-height: 120px; }
+      button { min-height: 48px; }
+
+      .bts-sticky-actions {
+        position: fixed !important; left: 0 !important; right: 0 !important; bottom: 0 !important;
+        z-index: 60; display: grid !important; grid-template-columns: 1fr 1fr;
+        gap: 10px !important; padding: 10px 12px calc(10px + env(safe-area-inset-bottom));
+        background: rgba(255,255,255,.96); border-top: 1px solid #DADCE0;
+        box-shadow: 0 -8px 24px rgba(60,64,67,.12);
+        backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
+      }
+      .bts-sticky-actions a {
+        min-height: 48px; max-width: none !important; padding: 0 12px !important;
+        box-shadow: none !important; font-size: 15px !important;
+      }
+      footer { padding-bottom: calc(104px + env(safe-area-inset-bottom)) !important; }
+    }
+
+    @media (max-width: 359px) {
+      .bts-brand img { width: 108px; }
+      .bts-cta { padding: 0 12px; font-size: 13px; }
+      .bts-mobile-links { right: -139px; }
+    }
+
     @media (prefers-reduced-motion: reduce) {
       *, *::before, *::after { animation: none !important; transition: none !important; }
     }
@@ -359,6 +487,8 @@
 </helmet>
 
 <div style="min-height:100vh;display:flex;flex-direction:column;background:#FFFFFF">
+
+  <a class="bts-skip-link" href="#main-content">Skip to main content</a>
 
   <!-- ============ HEADER ============ -->
   <div class="bts-ribbon"></div>
@@ -369,9 +499,19 @@
       </a>
       <nav class="bts-tabs" aria-label="Main navigation">
         <sc-for list="{{ navItems }}" as="item" hint-placeholder-count="8">
-          <a href="{{ item.href }}" onClick="{{ item.onClick }}" class="bts-tab" style="color:{{ item.color }};border-bottom-color:{{ item.underline }}" style-hover="color:#202124">{{ item.label }}</a>
+          <a href="{{ item.href }}" onClick="{{ item.onClick }}" class="bts-tab" aria-current="{{ item.current }}" style="color:{{ item.color }};border-bottom-color:{{ item.underline }}" style-hover="color:#202124">{{ item.label }}</a>
         </sc-for>
       </nav>
+      <details class="bts-mobile-nav">
+        <summary aria-label="Open site navigation">
+          <svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true"><path d="M3 5.5H17M3 10H17M3 14.5H17" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"></path></svg>
+        </summary>
+        <nav class="bts-mobile-links" aria-label="Mobile navigation">
+          <sc-for list="{{ navItems }}" as="item" hint-placeholder-count="8">
+            <a href="{{ item.href }}" onClick="{{ item.onClick }}" class="bts-mobile-link" aria-current="{{ item.current }}">{{ item.label }}</a>
+          </sc-for>
+        </nav>
+      </details>
       <div class="bts-actions">
         <a href="{{ telLink }}" class="bts-callbtn" aria-label="Call Body Transport Solutions now" title="Call now">
           <svg width="17" height="17" viewBox="0 0 16 16" fill="none"><path d="M3 2.5C3 2.5 5 2 5.5 3.5L6.5 5.5C6.8 6.2 5.5 7 5.5 7.5C5.5 8.5 7.5 10.5 8.5 10.5C9 10.5 9.8 9.2 10.5 9.5L12.5 10.5C14 11 13.5 13 13.5 13C13 14 11.5 14.2 10.5 14C6.5 13 3 9.5 2 5.5C1.8 4.5 2 3 3 2.5Z" stroke="#1A73E8" stroke-width="1.4" stroke-linejoin="round"></path></svg>
@@ -381,27 +521,27 @@
     </div>
   </header>
 
-  <main style="flex:1">
+  <main id="main-content" style="flex:1">
 
   <!-- ============ HOME ============ -->
   <sc-if value="{{ pageHome }}" hint-placeholder-val="{{ true }}">
     <div data-screen-label="Home">
 
       <!-- Hero -->
-      <section style="padding:clamp(44px,7vw,80px) 20px clamp(36px,5vw,56px)">
-        <div style="max-width:1140px;margin:0 auto;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,340px),1fr));gap:clamp(28px,4vw,56px);align-items:center">
-          <div style="display:flex;flex-direction:column;gap:18px">
+      <section class="bts-hero" style="padding:clamp(44px,7vw,80px) 20px clamp(36px,5vw,56px)">
+        <div class="bts-hero-grid" style="max-width:1140px;margin:0 auto;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,340px),1fr));gap:clamp(28px,4vw,56px);align-items:center">
+          <div class="bts-hero-copy" style="display:flex;flex-direction:column;gap:18px">
             <div style="display:flex;gap:8px;flex-wrap:wrap">
               <span style="display:inline-flex;align-items:center;gap:8px;font-size:13px;font-weight:500;color:#137333;background:#E6F4EA;border-radius:999px;padding:6px 14px"><span style="width:8px;height:8px;border-radius:50%;background:#137333"></span>Available 24/7</span>
               <span style="display:inline-flex;align-items:center;gap:8px;font-size:13px;font-weight:500;color:#174EA6;background:#E8F0FE;border-radius:999px;padding:6px 14px">Proudly South African 🇿🇦</span>
             </div>
             <h1 style="font-weight:700;font-size:clamp(32px,6vw,52px);line-height:1.12;margin:0;letter-spacing:-0.02em;color:#202124;text-wrap:balance">We move the deceased. <span class="bts-grad">Across KZN and surrounding provinces.</span></h1>
             <p style="font-size:clamp(16px,2.5vw,19px);line-height:1.6;color:#5F6368;margin:0;max-width:520px;text-wrap:pretty">One dedicated refrigerated vehicle. A trained team. The right paperwork. You call — we collect — we deliver. Respectfully, every time.</p>
-            <div style="display:flex;gap:12px;flex-wrap:wrap;margin-top:4px">
+            <div class="bts-hero-actions" style="display:flex;gap:12px;flex-wrap:wrap;margin-top:4px">
               <a href="#request" onClick="{{ goRequest }}" style="background:#1A73E8;color:#FFFFFF;font-weight:500;font-size:16px;padding:14px 28px;border-radius:999px;cursor:pointer" style-hover="background:#174EA6;color:#FFFFFF">Request transport</a>
               <a href="{{ waLink }}" style="border:1px solid #DADCE0;color:#1A73E8;font-weight:500;font-size:16px;padding:14px 28px;border-radius:999px;cursor:pointer;display:flex;align-items:center;gap:8px" style-hover="background:#F8F9FA;color:#174EA6">WhatsApp us</a>
             </div>
-            <div style="display:flex;gap:16px;flex-wrap:wrap;margin-top:8px;font-size:12.5px;color:#5F6368">
+            <div class="bts-hero-meta" style="display:flex;gap:16px;flex-wrap:wrap;margin-top:8px;font-size:12.5px;color:#5F6368">
               <span>Registered (Pty) Ltd</span><span>·</span><span>Reg 2026/464849/07</span><span>·</span><span>Tax 9001928366</span><span>·</span><span>Based in KwaZulu-Natal</span>
             </div>
           </div>
@@ -800,7 +940,7 @@
             <h2 style="font-weight:700;font-size:clamp(22px,4vw,30px);margin:0 0 6px;letter-spacing:-0.01em;color:#202124">Features aligned with <span class="bts-grad">R363</span></h2>
             <p style="font-size:14px;color:#5F6368;margin:0 0 24px">South African human-remains regulations — Regulation R363, National Health Act 61 of 2003.</p>
             <div class="bts-diagram" style="margin-bottom:clamp(24px,4vw,36px)">
-              <img src="./assets/airflow.jpg" loading="lazy" decoding="async" alt="Annotated view of the refrigerated compartment: evaporator cooling system, forced-air circulation, drainage pipe, non-porous stainless steel and secure transport platform">
+              <img src="./assets/airflow.jpg" loading="lazy" decoding="async" alt="Stainless-steel refrigeration box inside the vehicle, with evaporator cooling, a black drainage pipe, four steel legs and a secure transport platform">
               <svg class="bts-air" viewBox="0 0 1600 900" fill="none" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
                 <path d="M800 265 C 700 350, 560 390, 470 530" stroke="#9CC7FF" stroke-width="10" stroke-linecap="round" opacity=".38" style="filter:blur(2px)"></path>
                 <path d="M800 265 C 762 360, 706 430, 645 565" stroke="#B7D6FF" stroke-width="9" stroke-linecap="round" opacity=".34" style="filter:blur(2px)"></path>
@@ -1142,7 +1282,7 @@
   </footer>
 
   <!-- Sticky call / WhatsApp bar -->
-  <div style="position:fixed;bottom:16px;left:16px;right:16px;z-index:60;display:flex;gap:10px;justify-content:center;pointer-events:none">
+  <div class="bts-sticky-actions" aria-label="Quick contact options" style="position:fixed;bottom:16px;left:16px;right:16px;z-index:60;display:flex;gap:10px;justify-content:center;pointer-events:none">
     <a href="{{ telLink }}" style="pointer-events:auto;flex:1;max-width:220px;background:#1A73E8;color:#FFFFFF;display:flex;align-items:center;justify-content:center;gap:9px;padding:14px 20px;border-radius:999px;box-shadow:0 4px 16px rgba(60,64,67,0.3);cursor:pointer;font-weight:500;font-size:15px" style-hover="background:#174EA6;color:#FFFFFF">
       <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 2.5C3 2.5 5 2 5.5 3.5L6.5 5.5C6.8 6.2 5.5 7 5.5 7.5C5.5 8.5 7.5 10.5 8.5 10.5C9 10.5 9.8 9.2 10.5 9.5L12.5 10.5C14 11 13.5 13 13.5 13C13 14 11.5 14.2 10.5 14C6.5 13 3 9.5 2 5.5C1.8 4.5 2 3 3 2.5Z" stroke="#FFFFFF" stroke-width="1.3" stroke-linejoin="round"></path></svg>
       Call now
@@ -1197,6 +1337,10 @@ class Component extends DCLogic {
 
   go(key) {
     this.setState({ page: key, sent: false });
+    try {
+      const mobileNav = document.querySelector('.bts-mobile-nav');
+      if (mobileNav) mobileNav.removeAttribute('open');
+    } catch (e) {}
     try { history.replaceState(null, '', '#' + key); } catch (e) {}
     window.scrollTo(0, 0);
   }
@@ -1215,7 +1359,8 @@ class Component extends DCLogic {
       href: '#' + it.key,
       onClick: mk(it.key),
       color: p === it.key ? '#1A73E8' : '#5F6368',
-      underline: p === it.key ? '#1A73E8' : 'transparent'
+      underline: p === it.key ? '#1A73E8' : 'transparent',
+      current: p === it.key ? 'page' : undefined
     }));
 
     const footerNav = this.pages.concat([{ key: 'request', label: 'Request Transport' }]).map(it => ({
