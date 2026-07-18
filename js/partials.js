@@ -3,8 +3,8 @@
  * Update PHONE / WHATSAPP / EMAIL below once — every page picks it up.
  */
 (function () {
-  var PHONE = '+27 00 000 0000';
-  var WHATSAPP = '+27 00 000 0000';
+  var PHONE = '+27 61 589 1505';
+  var WHATSAPP = '+27 61 589 1505';
   var EMAIL = 'info@bodytransportsolutions.co.za';
 
   var waDigits = WHATSAPP.replace(/[^0-9]/g, '');
