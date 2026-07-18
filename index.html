@@ -109,6 +109,7 @@
     .bts-brand { display: flex; align-items: center; flex-shrink: 0; cursor: pointer; }
     .bts-brand img { height: 42px; width: auto; display: block; mix-blend-mode: multiply; }
     .bts-tabs {
+      position: relative;
       display: flex; align-items: stretch; align-self: stretch; gap: 2px;
       margin-left: 10px; overflow-x: auto; scrollbar-width: none; white-space: nowrap;
     }
@@ -116,10 +117,16 @@
     .bts-tab {
       display: flex; align-items: center; padding: 0 13px;
       font-size: 14px; font-weight: 500; cursor: pointer;
-      border-bottom: 3px solid transparent; border-top: 3px solid transparent;
-      transition: color .15s ease, border-color .15s ease, background-color .15s ease;
+      transition: color .15s ease, background-color .15s ease;
     }
-    .bts-tab:hover { background: rgba(26,115,232,.05); }
+    .bts-tab:hover { background: rgba(26,115,232,.05); border-radius: 10px 10px 0 0; }
+    .bts-tab-ind {
+      position: absolute; bottom: 0; height: 3px; background: #1A73E8;
+      border-radius: 3px 3px 0 0;
+      transition: left .35s cubic-bezier(.4,0,.2,1), width .35s cubic-bezier(.4,0,.2,1);
+    }
+    .bts-header { animation: btsHeaderIn .45s ease both; }
+    @keyframes btsHeaderIn { from { transform: translateY(-14px); opacity: 0; } to { transform: none; opacity: 1; } }
     .bts-actions { margin-left: auto; display: flex; align-items: center; gap: 10px; flex-shrink: 0; }
     .bts-callbtn {
       width: 40px; height: 40px; border-radius: 50%;
@@ -377,8 +384,55 @@
       .bts-map-foot { display: none; }
     }
 
+    /* ===== Storytelling animations ===== */
+
+    /* Job process: a pulse travels down each timeline segment — the job moving forward */
+    main div[style*="width: 2px"][style*="background: rgb(218, 220, 224)"] { position: relative; overflow: visible; }
+    main div[style*="width: 2px"][style*="background: rgb(218, 220, 224)"]::after {
+      content: ''; position: absolute; left: 50%; top: 0; width: 7px; height: 7px;
+      border-radius: 50%; background: #1A73E8; transform: translateX(-50%);
+      box-shadow: 0 0 8px rgba(26,115,232,.6);
+      animation: btsTravel 2.8s ease-in-out infinite;
+    }
+    @keyframes btsTravel { 0% { top: -2%; opacity: 0; } 12% { opacity: 1; } 82% { opacity: 1; } 100% { top: 98%; opacity: 0; } }
+
+    /* 1-2-3 step arrows: nudge forward in sequence — the flow of a request */
+    @media (min-width: 960px) {
+      .bts-steps > div:nth-child(1)::after { animation: btsNudge 3.6s ease-in-out infinite; }
+      .bts-steps > div:nth-child(2)::after { animation: btsNudge 3.6s 1.2s ease-in-out infinite; }
+    }
+    @keyframes btsNudge { 0%, 20%, 100% { transform: translateY(-50%) translateX(0); } 10% { transform: translateY(-50%) translateX(4px); } }
+
+    /* Route rows: arrows push toward the destination */
+    main svg[viewBox="0 0 26 8"] { animation: btsGo 2.4s ease-in-out infinite; }
+    main div[style*="overflow: hidden"] > div:nth-child(2) svg[viewBox="0 0 26 8"] { animation-delay: .3s; }
+    main div[style*="overflow: hidden"] > div:nth-child(3) svg[viewBox="0 0 26 8"] { animation-delay: .6s; }
+    main div[style*="overflow: hidden"] > div:nth-child(4) svg[viewBox="0 0 26 8"] { animation-delay: .9s; }
+    main div[style*="overflow: hidden"] > div:nth-child(5) svg[viewBox="0 0 26 8"] { animation-delay: 1.2s; }
+    main div[style*="overflow: hidden"] > div:nth-child(6) svg[viewBox="0 0 26 8"] { animation-delay: 1.5s; }
+    main div[style*="overflow: hidden"] > div:nth-child(7) svg[viewBox="0 0 26 8"] { animation-delay: 1.8s; }
+    @keyframes btsGo { 0%, 35%, 100% { transform: translateX(0); } 18% { transform: translateX(4px); } }
+
+    /* Temperature-controlled card: the snowflake slowly turns — refrigeration running */
+    main svg:has(> path[d^="M10 2V18M4 5.5"]) { transform-box: fill-box; transform-origin: center; animation: btsSnow 14s linear infinite; }
+    @keyframes btsSnow { to { transform: rotate(360deg); } }
+
+    /* 0-3C tile: cold breathing glow — active cooling */
+    .bts-cold { animation: btsCold 3.2s ease-in-out infinite; }
+    @keyframes btsCold {
+      0%, 100% { box-shadow: inset 0 0 0 1px rgba(26,115,232,.14), 0 2px 8px rgba(26,115,232,.14); }
+      50% { box-shadow: inset 0 0 0 1px rgba(26,115,232,.3), 0 2px 16px rgba(26,115,232,.4); }
+    }
+
+    /* Request received: the checkmark draws itself — confirmation */
+    [data-screen-label="Emergency Transport Request"] svg path[d^="M11 18.5"] {
+      stroke-dasharray: 26; stroke-dashoffset: 26; animation: btsCheck .7s .25s ease-out forwards;
+    }
+    @keyframes btsCheck { to { stroke-dashoffset: 0; } }
+
     @media (prefers-reduced-motion: reduce) {
       *, *::before, *::after { animation: none !important; transition: none !important; }
+      .bts-map-live { display: none; }
     }
   </style>
 </helmet>
@@ -394,8 +448,9 @@
       </a>
       <nav class="bts-tabs" aria-label="Main navigation">
         <sc-for list="{{ navItems }}" as="item" hint-placeholder-count="8">
-          <a href="{{ item.href }}" onClick="{{ item.onClick }}" class="bts-tab" style="color:{{ item.color }};border-bottom-color:{{ item.underline }}" style-hover="color:#202124">{{ item.label }}</a>
+          <a href="{{ item.href }}" onClick="{{ item.onClick }}" class="bts-tab" data-act="{{ item.act }}" style="color:{{ item.color }}" style-hover="color:#202124">{{ item.label }}</a>
         </sc-for>
+        <span class="bts-tab-ind" style="left:{{ indLeft }};width:{{ indWidth }}"></span>
       </nav>
       <div class="bts-actions">
         <a href="{{ telLink }}" class="bts-callbtn" aria-label="Call Body Transport Solutions now" title="Call now">
@@ -570,23 +625,9 @@
 
       <!-- Vehicle -->
       <section style="background:#F8F9FA;padding:clamp(48px,7vw,80px) 20px">
-        <div style="max-width:1140px;margin:0 auto;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,340px),1fr));gap:clamp(28px,4vw,56px);align-items:center">
-          <div style="position:relative;height:clamp(240px,38vw,360px);border-radius:24px;overflow:hidden;border:1px solid #DADCE0">
-            <img src="./assets/fridge.jpg" loading="lazy" decoding="async" alt="Stainless steel refrigerated compartment with dedicated loading tray" style="width:100%;height:100%;object-fit:cover;object-position:50% 45%;display:block">
-            <div class="hero-vehicle__label"><span class="hero-vehicle__label-dot"></span>Forced-air refrigeration · 0–3&nbsp;°C</div>
-          </div>
-          <div>
-            <h2 style="font-weight:700;font-size:clamp(24px,4.5vw,34px);margin:0 0 12px;letter-spacing:-0.01em;color:#202124">Dedicated refrigerated <span class="bts-grad">VW Transporter</span></h2>
-            <p style="font-size:16px;line-height:1.65;color:#5F6368;margin:0 0 22px;text-wrap:pretty">A purpose-built Volkswagen Transporter with a refrigerated compartment and dedicated transport area — designed for respectful, hygienic conveyance of human remains.</p>
-            <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,220px),1fr));gap:10px 20px">
-              <sc-for list="{{ vehicleFeatures }}" as="v" hint-placeholder-count="6">
-                <div style="display:flex;gap:10px;align-items:center"><svg width="15" height="15" viewBox="0 0 15 15" fill="none" style="flex-shrink:0"><path d="M2 8.5L6 12L13 3.5" stroke="#137333" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"></path></svg><span style="font-size:14px;font-weight:500;color:#3C4043">{{ v }}</span></div>
-              </sc-for>
-            </div>
-          </div>
-        </div>
-        <div style="max-width:1140px;margin:clamp(24px,4vw,40px) auto 0">
-          <div class="bts-diagram">
+        <div style="max-width:1140px;margin:0 auto">
+          <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,340px),1fr));gap:clamp(28px,4vw,52px);align-items:center;margin-bottom:clamp(20px,3.5vw,32px)">
+            <div class="bts-diagram">
             <img src="./assets/airflow.jpg" loading="lazy" decoding="async" alt="Annotated view of the refrigerated compartment: evaporator cooling system, forced-air circulation, drainage pipe, non-porous stainless steel and secure transport platform">
             <svg class="bts-air" viewBox="0 0 1600 900" fill="none" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
               <path d="M800 265 C 700 350, 560 390, 470 530" stroke="#9CC7FF" stroke-width="10" stroke-linecap="round" opacity=".38" style="filter:blur(2px)"></path>
@@ -596,10 +637,27 @@
             </svg>
             <div class="bts-diagram-badge"><b>R363</b><span>SA Management of Human Remains Regulations</span></div>
             <div class="bts-pin" style="top:24%;left:48%"><span class="bts-pin-lbl"><span class="bts-pin-chip">Evaporator cooling system</span><span class="bts-pin-line"></span></span></div>
-            <div class="bts-pin" style="top:42%;left:42%"><span class="bts-pin-lbl"><span class="bts-pin-chip">Forced-air circulation</span><span class="bts-pin-line"></span></span></div>
             <div class="bts-pin rev" style="top:40%;left:59%"><span class="bts-pin-lbl"><span class="bts-pin-chip">Drainage pipe</span><span class="bts-pin-line"></span></span></div>
-            <div class="bts-pin" style="top:58%;left:34%"><span class="bts-pin-lbl"><span class="bts-pin-chip">Non-porous stainless steel</span><span class="bts-pin-line"></span></span></div>
-            <div class="bts-pin rev" style="top:72%;left:66%"><span class="bts-pin-lbl"><span class="bts-pin-chip">Secure transport platform</span><span class="bts-pin-line"></span></span></div>
+            <div class="bts-pin rev" style="top:58%;left:34%"><span class="bts-pin-lbl"><span class="bts-pin-chip">Non-porous stainless steel</span><span class="bts-pin-line"></span></span></div>
+            <div class="bts-pin" style="top:72%;left:66%"><span class="bts-pin-lbl"><span class="bts-pin-chip">Secure transport platform</span><span class="bts-pin-line"></span></span></div>
+          </div>
+            <div>
+              <h2 style="font-weight:700;font-size:clamp(24px,4.5vw,34px);margin:0 0 12px;letter-spacing:-0.01em;color:#202124;text-wrap:balance">A dedicated refrigeration system — <span class="bts-grad">built for direct transport.</span></h2>
+              <p style="font-size:16px;line-height:1.65;color:#5F6368;margin:0 0 18px;text-wrap:pretty">The stainless-steel compartment of our Volkswagen Transporter combines forced-air cooling, an easy-clean transport platform and a dedicated condensate drainage line — designed for respectful, hygienic conveyance of human remains.</p>
+              <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,220px),1fr));gap:8px 18px;margin-bottom:18px">
+                <sc-for list="{{ vehicleFeatures }}" as="v" hint-placeholder-count="6">
+                  <div style="display:flex;gap:10px;align-items:center"><svg width="15" height="15" viewBox="0 0 15 15" fill="none" style="flex-shrink:0"><path d="M2 8.5L6 12L13 3.5" stroke="#137333" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"></path></svg><span style="font-size:14px;font-weight:500;color:#3C4043">{{ v }}</span></div>
+                </sc-for>
+              </div>
+              <p style="font-weight:700;font-size:15px;color:#202124;margin:0 0 14px">Operating range: 0–3&nbsp;°C throughout transport.</p>
+              <a href="#compliance" onClick="{{ goCompliance }}" style="font-weight:500;font-size:15px;color:#1A73E8;display:inline-flex;align-items:center;gap:8px">Understand the R363 context <span aria-hidden="true">&rarr;</span></a>
+            </div>
+          </div>
+          <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,220px),1fr));gap:12px">
+            <div class="card" style="background:#FFFFFF;border:1px solid #DADCE0;border-radius:16px;padding:18px 20px;display:flex;align-items:center;gap:14px"><div style="width:38px;height:38px;border-radius:50%;background:#E8F0FE;display:grid;place-items:center;flex-shrink:0" class="bts-cold"><svg width="18" height="18" viewBox="0 0 22 22" fill="none"><path d="M9 3.5C9 2.4 9.9 1.5 11 1.5C12.1 1.5 13 2.4 13 3.5V11.3C14.2 12 15 13.3 15 14.8C15 17 13.2 18.8 11 18.8C8.8 18.8 7 17 7 14.8C7 13.3 7.8 12 9 11.3V3.5Z" stroke="#1A73E8" stroke-width="1.5" stroke-linejoin="round"></path><circle cx="11" cy="14.8" r="1.8" fill="#1A73E8"></circle></svg></div><div style="display:flex;flex-direction:column;gap:2px"><span style="font-weight:700;font-size:16px;color:#202124">0–3&nbsp;°C</span><span style="font-size:12.5px;color:#5F6368">Operating range</span></div></div>
+            <div class="card" style="background:#FFFFFF;border:1px solid #DADCE0;border-radius:16px;padding:18px 20px;display:flex;align-items:center;gap:14px"><div style="width:38px;height:38px;border-radius:50%;background:#E8F0FE;display:grid;place-items:center;flex-shrink:0"><svg width="18" height="18" viewBox="0 0 22 22" fill="none"><rect x="4" y="2.5" width="14" height="17" rx="1.5" stroke="#1A73E8" stroke-width="1.6"></rect><path d="M7.5 7H14.5M7.5 10.5H14.5M7.5 14H11.5" stroke="#1A73E8" stroke-width="1.6" stroke-linecap="round"></path></svg></div><div style="display:flex;flex-direction:column;gap:2px"><span style="font-weight:700;font-size:16px;color:#202124">Signed</span><span style="font-size:12.5px;color:#5F6368">Handover records, every job</span></div></div>
+            <div class="card" style="background:#FFFFFF;border:1px solid #DADCE0;border-radius:16px;padding:18px 20px;display:flex;align-items:center;gap:14px"><div style="width:38px;height:38px;border-radius:50%;background:#E8F0FE;display:grid;place-items:center;flex-shrink:0"><svg width="18" height="18" viewBox="0 0 22 22" fill="none"><path d="M5 13C5 13 6.7 11.3 8.5 13C10.3 14.7 12 13 12 13M12 8C12 8 13.7 6.3 15.5 8C17.3 9.7 19 8 19 8" stroke="#1A73E8" stroke-width="1.6" stroke-linecap="round"></path><path d="M3 18H19" stroke="#1A73E8" stroke-width="1.6" stroke-linecap="round"></path></svg></div><div style="display:flex;flex-direction:column;gap:2px"><span style="font-weight:700;font-size:16px;color:#202124">Cleaning log</span><span style="font-size:12.5px;color:#5F6368">After every transport</span></div></div>
+            <div class="card" style="background:#FFFFFF;border:1px solid #DADCE0;border-radius:16px;padding:18px 20px;display:flex;align-items:center;gap:14px"><div style="width:38px;height:38px;border-radius:50%;background:#E8F0FE;display:grid;place-items:center;flex-shrink:0"><svg width="18" height="18" viewBox="0 0 20 20" fill="none"><rect x="2.5" y="5.5" width="11" height="9" rx="1.5" stroke="#1A73E8" stroke-width="1.6"></rect><path d="M13.5 8.5H16L17.5 11V14.5H13.5" stroke="#1A73E8" stroke-width="1.6" stroke-linejoin="round"></path><circle cx="6" cy="15" r="1.6" stroke="#1A73E8" stroke-width="1.4"></circle><circle cx="15" cy="15" r="1.6" stroke="#1A73E8" stroke-width="1.4"></circle></svg></div><div style="display:flex;flex-direction:column;gap:2px"><span style="font-weight:700;font-size:16px;color:#202124">Direct</span><span style="font-size:12.5px;color:#5F6368">Collect &amp; deliver — no storage</span></div></div>
           </div>
         </div>
       </section>
@@ -677,7 +735,13 @@
             <circle cx="182" cy="748" r="7" fill="#FFFFFF"></circle>
             <circle class="bts-hub-ring" cx="431" cy="595" r="12" fill="none" stroke="#FFB81C" stroke-width="3"></circle>
             <circle cx="431" cy="595" r="9" fill="#FFB81C" stroke="#0B2545" stroke-width="3"></circle>
-            <text class="bts-map-city" x="550" y="622">Durban</text>
+            <g class="bts-map-live">
+      <circle r="5" fill="#FFB81C" opacity=".9"><animateMotion dur="7s" repeatCount="indefinite" path="M431 595 C 560 600 700 500 747 422"></animateMotion></circle>
+      <circle r="4.5" fill="#FFB81C" opacity=".85"><animateMotion dur="5.5s" begin="2s" repeatCount="indefinite" path="M431 595 C 500 650 470 730 403 785"></animateMotion></circle>
+      <circle r="4" fill="#FFB81C" opacity=".85"><animateMotion dur="3.5s" begin="1s" repeatCount="indefinite" path="M431 595 Q490 605 532 627"></animateMotion></circle>
+      <circle r="4.5" fill="#FFB81C" opacity=".85"><animateMotion dur="8s" begin="3.5s" repeatCount="indefinite" path="M431 595 C 360 480 290 330 292 226"></animateMotion></circle>
+    </g>
+    <text class="bts-map-city" x="550" y="622">Durban</text>
             <text class="bts-map-time" x="550" y="645">&#177;45 min</text>
             <text class="bts-map-city" x="376" y="552" text-anchor="end">Pietermaritzburg</text>
             <text class="bts-map-time" x="376" y="574" text-anchor="end">&#177;30 min</text>
@@ -966,7 +1030,13 @@
             <circle cx="182" cy="748" r="7" fill="#FFFFFF"></circle>
             <circle class="bts-hub-ring" cx="431" cy="595" r="12" fill="none" stroke="#FFB81C" stroke-width="3"></circle>
             <circle cx="431" cy="595" r="9" fill="#FFB81C" stroke="#0B2545" stroke-width="3"></circle>
-            <text class="bts-map-city" x="550" y="622">Durban</text>
+            <g class="bts-map-live">
+      <circle r="5" fill="#FFB81C" opacity=".9"><animateMotion dur="7s" repeatCount="indefinite" path="M431 595 C 560 600 700 500 747 422"></animateMotion></circle>
+      <circle r="4.5" fill="#FFB81C" opacity=".85"><animateMotion dur="5.5s" begin="2s" repeatCount="indefinite" path="M431 595 C 500 650 470 730 403 785"></animateMotion></circle>
+      <circle r="4" fill="#FFB81C" opacity=".85"><animateMotion dur="3.5s" begin="1s" repeatCount="indefinite" path="M431 595 Q490 605 532 627"></animateMotion></circle>
+      <circle r="4.5" fill="#FFB81C" opacity=".85"><animateMotion dur="8s" begin="3.5s" repeatCount="indefinite" path="M431 595 C 360 480 290 330 292 226"></animateMotion></circle>
+    </g>
+    <text class="bts-map-city" x="550" y="622">Durban</text>
             <text class="bts-map-time" x="550" y="645">&#177;45 min</text>
             <text class="bts-map-city" x="376" y="552" text-anchor="end">Pietermaritzburg</text>
             <text class="bts-map-time" x="376" y="574" text-anchor="end">&#177;30 min</text>
@@ -1183,7 +1253,7 @@
 </x-dc>
 <script type="text/x-dc" data-dc-script data-props="{&quot;phone&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;+27 61 589 1505&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Contact details&quot;},&quot;whatsapp&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;+27 61 589 1505&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Contact details&quot;},&quot;email&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;info@bodytransportsolutions.co.za&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Contact details&quot;}}">
 class Component extends DCLogic {
-  state = { page: 'home', sent: false, scrolled: false };
+  state = { page: 'home', sent: false, scrolled: false, ind: { l: 0, w: 0 } };
 
   pages = [
     { key: 'home', label: 'Home' },
@@ -1200,7 +1270,7 @@ class Component extends DCLogic {
     const apply = () => {
       const h = (window.location.hash || '').replace('#', '');
       const keys = this.pages.map(p => p.key).concat(['request']);
-      if (keys.includes(h) && h !== this.state.page) this.setState({ page: h, sent: false });
+      if (keys.includes(h) && h !== this.state.page) { this.setState({ page: h, sent: false }); if (this._measure) this._measure(); }
     };
     this._onHash = apply;
     window.addEventListener('hashchange', apply);
@@ -1213,17 +1283,30 @@ class Component extends DCLogic {
     this._onScroll = onScroll;
     window.addEventListener('scroll', onScroll, { passive: true });
     onScroll();
+
+    const measure = () => {
+      const el = document.querySelector('.bts-tab[data-act="1"]');
+      if (!el) return;
+      const l = el.offsetLeft, w = el.offsetWidth;
+      if (this.state.ind.l !== l || this.state.ind.w !== w) this.setState({ ind: { l, w } });
+    };
+    this._measure = () => setTimeout(measure, 40);
+    window.addEventListener('resize', this._measure);
+    if (document.fonts && document.fonts.ready) document.fonts.ready.then(this._measure);
+    this._measure();
   }
 
   componentWillUnmount() {
     window.removeEventListener('hashchange', this._onHash);
     window.removeEventListener('scroll', this._onScroll);
+    window.removeEventListener('resize', this._measure);
   }
 
   go(key) {
     this.setState({ page: key, sent: false });
     try { history.replaceState(null, '', '#' + key); } catch (e) {}
     window.scrollTo(0, 0);
+    if (this._measure) this._measure();
   }
 
   renderVals() {
@@ -1240,7 +1323,7 @@ class Component extends DCLogic {
       href: '#' + it.key,
       onClick: mk(it.key),
       color: p === it.key ? '#1A73E8' : '#5F6368',
-      underline: p === it.key ? '#1A73E8' : 'transparent'
+      act: p === it.key ? '1' : '0'
     }));
 
     const footerNav = this.pages.concat([{ key: 'request', label: 'Request Transport' }]).map(it => ({
@@ -1271,6 +1354,8 @@ class Component extends DCLogic {
       telLink: 'tel:' + String(phone).replace(/[^+0-9]/g, ''),
       waLink: digits ? 'https://wa.me/' + digits : '#contact',
       mailLink: 'mailto:' + email,
+      indLeft: this.state.ind.l + 'px',
+      indWidth: this.state.ind.w + 'px',
       headerBorder: this.state.scrolled ? '1px solid transparent' : '1px solid #E8EAED',
       headerShadow: this.state.scrolled ? '0 1px 2px rgba(60,64,67,0.3), 0 1px 3px 1px rgba(60,64,67,0.15)' : 'none',
       sent: this.state.sent,
