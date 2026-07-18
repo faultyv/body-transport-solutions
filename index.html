@@ -312,6 +312,24 @@
     }
     @keyframes btsPanelLight { 0%, 100% { background-position: 100% 0%, 0 0; } 50% { background-position: 55% 35%, 0 0; } }
 
+    /* ===== Annotated fridge diagram ===== */
+    .bts-diagram { position: relative; width: 100%; aspect-ratio: 16 / 9; border-radius: 24px; overflow: hidden; border: 1px solid #DADCE0; isolation: isolate; }
+    .bts-diagram > img { width: 100%; height: 100%; object-fit: cover; display: block; }
+    .bts-air { position: absolute; inset: 0; width: 100%; height: 100%; z-index: 1; mix-blend-mode: screen; pointer-events: none; }
+    .bts-air path { stroke-dasharray: 18 162; animation: btsFlow 3.6s linear infinite; }
+    .bts-air path:nth-child(2) { animation-delay: .6s; }
+    .bts-air path:nth-child(3) { animation-delay: 1.2s; }
+    .bts-air path:nth-child(4) { animation-delay: 1.8s; }
+    @keyframes btsFlow { to { stroke-dashoffset: -180; } }
+    .bts-pin-row { position: absolute; display: flex; align-items: center; z-index: 3; }
+    .bts-pin-row.rev { flex-direction: row-reverse; }
+    .bts-pin-chip { background: rgba(255,255,255,.95); border: 1px solid #D2E3FC; color: #0B57D0; font-weight: 600; font-size: clamp(9px,1.15vw,12.5px); line-height: 1.15; padding: 5px 10px; border-radius: 999px; box-shadow: 0 2px 8px rgba(60,64,67,.22); white-space: nowrap; backdrop-filter: blur(6px); }
+    .bts-pin-line { height: 1.5px; background: #4C8DF6; width: clamp(12px,2.6vw,34px); flex-shrink: 0; }
+    .bts-pin-dot { width: 9px; height: 9px; border-radius: 50%; background: #1A73E8; box-shadow: 0 0 0 3px rgba(255,255,255,.85); flex-shrink: 0; animation: btsPulseBlue 2.6s ease-out infinite; }
+    .bts-diagram-badge { position: absolute; top: 12px; left: 12px; z-index: 3; background: #137333; color: #FFFFFF; border-radius: 12px; padding: 8px 14px; box-shadow: 0 3px 12px rgba(19,115,51,.35); }
+    .bts-diagram-badge b { display: block; font-size: clamp(13px,1.6vw,17px); line-height: 1.1; }
+    .bts-diagram-badge span { display: block; font-size: clamp(8px,1vw,10.5px); opacity: .92; margin-top: 2px; }
+
     @media (prefers-reduced-motion: reduce) {
       *, *::before, *::after { animation: none !important; transition: none !important; }
     }
@@ -712,9 +730,20 @@
               <p style="margin:0;font-size:13.5px;line-height:1.6;color:#174EA6"><strong style="color:#0B57D0">R363 storage standard: ≤5&nbsp;°C within 3 hours.</strong> Our compartment runs at 0–3&nbsp;°C — comfortably inside the standard, from collection to hand-over.</p>
             </div>
           </div>
-          <div style="position:relative;height:clamp(240px,34vw,340px);border-radius:24px;overflow:hidden;border:1px solid #DADCE0">
-            <img src="./assets/airflow.jpg" loading="lazy" decoding="async" alt="Forced-air refrigeration circulating cold air through the stainless steel transport compartment" style="width:100%;height:100%;object-fit:cover;display:block">
-            <div class="hero-vehicle__label"><span class="hero-vehicle__label-dot"></span>Forced-air refrigeration · 0–3&nbsp;°C</div>
+          <div class="bts-diagram">
+            <img src="./assets/airflow.jpg" loading="lazy" decoding="async" alt="Annotated view of the refrigerated compartment: evaporator cooling system, forced-air circulation, drainage pipe, non-porous stainless steel and secure transport platform">
+            <svg class="bts-air" viewBox="0 0 1600 900" fill="none" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+              <path d="M800 265 C 700 350, 560 390, 470 530" stroke="#9CC7FF" stroke-width="10" stroke-linecap="round" opacity=".38" style="filter:blur(2px)"></path>
+              <path d="M800 265 C 762 360, 706 430, 645 565" stroke="#B7D6FF" stroke-width="9" stroke-linecap="round" opacity=".34" style="filter:blur(2px)"></path>
+              <path d="M800 265 C 838 360, 894 430, 955 565" stroke="#B7D6FF" stroke-width="9" stroke-linecap="round" opacity=".34" style="filter:blur(2px)"></path>
+              <path d="M800 265 C 900 350, 1040 390, 1130 530" stroke="#9CC7FF" stroke-width="10" stroke-linecap="round" opacity=".38" style="filter:blur(2px)"></path>
+            </svg>
+            <div class="bts-diagram-badge"><b>R363</b><span>SA Management of Human Remains Regulations</span></div>
+            <div class="bts-pin-row" style="top:22%;left:13%"><span class="bts-pin-chip">Evaporator cooling system</span><span class="bts-pin-line"></span><span class="bts-pin-dot"></span></div>
+            <div class="bts-pin-row" style="top:39%;left:7%"><span class="bts-pin-chip">Forced-air circulation</span><span class="bts-pin-line"></span><span class="bts-pin-dot"></span></div>
+            <div class="bts-pin-row rev" style="top:37%;right:8%"><span class="bts-pin-chip">Drainage pipe</span><span class="bts-pin-line"></span><span class="bts-pin-dot"></span></div>
+            <div class="bts-pin-row" style="top:56%;left:5%"><span class="bts-pin-chip">Non-porous stainless steel</span><span class="bts-pin-line"></span><span class="bts-pin-dot"></span></div>
+            <div class="bts-pin-row rev" style="top:66%;right:10%"><span class="bts-pin-chip">Secure transport platform</span><span class="bts-pin-line"></span><span class="bts-pin-dot"></span></div>
           </div>
         </div>
       </section>
