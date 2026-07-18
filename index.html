@@ -189,7 +189,12 @@
       main section [style*="display: grid"] > * { animation: btsRise both ease; animation-timeline: view(); animation-range: entry 0% entry 30%; }
       [data-screen-label="Emergency Transport Request"] [style*="display: grid"] > *,
       [data-screen-label="Emergency Transport Request"] section { animation: none; }
+      main div[style*="width: 2px"][style*="background: rgb(218, 220, 224)"] {
+        transform-origin: top;
+        animation: btsLineDraw both ease; animation-timeline: view(); animation-range: entry 0% entry 70%;
+      }
       @keyframes btsRise { from { opacity: .001; transform: translateY(26px); } to { opacity: 1; transform: none; } }
+      @keyframes btsLineDraw { from { transform: scaleY(.25); opacity: .35; } to { transform: scaleY(1); opacity: 1; } }
     }
 
     /* ===== Premium visual layer: shadows, icons, frames, depth ===== */
@@ -260,6 +265,53 @@
     /* Header call button: match the premium ring language */
     .bts-callbtn { box-shadow: inset 0 0 0 1px rgba(255,255,255,.4), 0 1px 3px rgba(60,64,67,.08); }
 
+    /* ===== Type & infographic layer ===== */
+
+    /* Living gradient on key heading phrases */
+    @supports (-webkit-background-clip: text) or (background-clip: text) {
+      .bts-grad {
+        background-image: linear-gradient(92deg, #1A73E8 0%, #0B57D0 35%, #4C8DF6 65%, #1A73E8 100%);
+        background-size: 220% 100%;
+        -webkit-background-clip: text; background-clip: text;
+        color: transparent; -webkit-text-fill-color: transparent;
+        animation: btsGradShift 7s ease-in-out infinite;
+      }
+      @keyframes btsGradShift { 0%, 100% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } }
+    }
+
+    /* 1-2-3 steps: connector arrows between cards (wide screens) */
+    @media (min-width: 960px) {
+      .bts-steps > div { position: relative; }
+      .bts-steps > div:not(:last-child)::after {
+        content: '\2192'; position: absolute; top: 50%; right: -19px; transform: translateY(-50%);
+        width: 24px; height: 24px; border-radius: 50%;
+        background: #FFFFFF; border: 1px solid #D2E3FC; color: #1A73E8;
+        font-size: 13px; font-weight: 700; line-height: 1;
+        display: grid; place-items: center; z-index: 2;
+        box-shadow: 0 2px 8px rgba(26,115,232,.18);
+      }
+    }
+
+    /* Green checks become circular badges */
+    main svg:has(> path[stroke="#137333"]) {
+      background: #E6F4EA; border-radius: 50%; padding: 3px;
+      box-shadow: inset 0 0 0 1px rgba(19,115,51,.15);
+      flex-shrink: 0;
+    }
+
+    /* Live status pulse: 24/7 dot (green) and route dots (blue, inside routes card) */
+    span[style*="background: rgb(19, 115, 51)"][style*="border-radius: 50%"] { animation: btsPulse 2.2s ease-out infinite; }
+    main div[style*="overflow: hidden"] span[style*="background: rgb(26, 115, 232)"][style*="border-radius: 50%"] { animation: btsPulseBlue 2.6s ease-out infinite; }
+    @keyframes btsPulse { 0% { box-shadow: 0 0 0 0 rgba(19,115,51,.35); } 70% { box-shadow: 0 0 0 7px rgba(19,115,51,0); } 100% { box-shadow: 0 0 0 0 rgba(19,115,51,0); } }
+    @keyframes btsPulseBlue { 0% { box-shadow: 0 0 0 0 rgba(26,115,232,.35); } 70% { box-shadow: 0 0 0 6px rgba(26,115,232,0); } 100% { box-shadow: 0 0 0 0 rgba(26,115,232,0); } }
+
+    /* Blue panels: corner light drifts slowly */
+    main div[style*="background: rgb(26, 115, 232)"][style*="border-radius: 24px"] {
+      background-size: 250% 250%, 100% 100%;
+      animation: btsPanelLight 9s ease-in-out infinite;
+    }
+    @keyframes btsPanelLight { 0%, 100% { background-position: 100% 0%, 0 0; } 50% { background-position: 55% 35%, 0 0; } }
+
     @media (prefers-reduced-motion: reduce) {
       *, *::before, *::after { animation: none !important; transition: none !important; }
     }
@@ -303,7 +355,7 @@
               <span style="display:inline-flex;align-items:center;gap:8px;font-size:13px;font-weight:500;color:#137333;background:#E6F4EA;border-radius:999px;padding:6px 14px"><span style="width:8px;height:8px;border-radius:50%;background:#137333"></span>Available 24/7</span>
               <span style="display:inline-flex;align-items:center;gap:8px;font-size:13px;font-weight:500;color:#174EA6;background:#E8F0FE;border-radius:999px;padding:6px 14px">Proudly South African 🇿🇦</span>
             </div>
-            <h1 style="font-weight:700;font-size:clamp(32px,6vw,52px);line-height:1.12;margin:0;letter-spacing:-0.02em;color:#202124;text-wrap:balance">We move the deceased. Across KZN and surrounding provinces.</h1>
+            <h1 style="font-weight:700;font-size:clamp(32px,6vw,52px);line-height:1.12;margin:0;letter-spacing:-0.02em;color:#202124;text-wrap:balance">We move the deceased. <span class="bts-grad">Across KZN and surrounding provinces.</span></h1>
             <p style="font-size:clamp(16px,2.5vw,19px);line-height:1.6;color:#5F6368;margin:0;max-width:520px;text-wrap:pretty">One dedicated refrigerated vehicle. A trained team. The right paperwork. You call — we collect — we deliver. Respectfully, every time.</p>
             <div style="display:flex;gap:12px;flex-wrap:wrap;margin-top:4px">
               <a href="#request" onClick="{{ goRequest }}" style="background:#1A73E8;color:#FFFFFF;font-weight:500;font-size:16px;padding:14px 28px;border-radius:999px;cursor:pointer" style-hover="background:#174EA6;color:#FFFFFF">Request transport</a>
@@ -323,9 +375,9 @@
       <!-- Simple 1-2-3 pitch -->
       <section style="background:#F8F9FA;padding:clamp(40px,6vw,64px) 20px">
         <div style="max-width:1140px;margin:0 auto">
-          <h2 style="font-weight:700;font-size:clamp(22px,4vw,30px);margin:0 0 6px;color:#202124;letter-spacing:-0.01em">Simple as 1 — 2 — 3</h2>
+          <h2 style="font-weight:700;font-size:clamp(22px,4vw,30px);margin:0 0 6px;color:#202124;letter-spacing:-0.01em">Simple as <span class="bts-grad">1 — 2 — 3</span></h2>
           <p style="font-size:15px;color:#5F6368;margin:0 0 28px">No complicated process. No hidden steps.</p>
-          <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,260px),1fr));gap:14px">
+          <div class="bts-steps" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,260px),1fr));gap:14px">
             <div style="background:#FFFFFF;border:1px solid #DADCE0;border-radius:16px;padding:26px;display:flex;flex-direction:column;gap:10px">
               <div style="width:40px;height:40px;border-radius:50%;background:#E8F0FE;color:#1A73E8;font-weight:700;font-size:17px;display:grid;place-items:center">1</div>
               <div style="font-weight:700;font-size:17px;color:#202124">You call or WhatsApp</div>
@@ -348,7 +400,7 @@
       <!-- Why choose us -->
       <section style="padding:clamp(48px,7vw,72px) 20px 8px">
         <div style="max-width:1140px;margin:0 auto">
-          <h2 style="font-weight:700;font-size:clamp(22px,4vw,30px);margin:0 0 6px;color:#202124;letter-spacing:-0.01em">Why funeral parlours choose us</h2>
+          <h2 style="font-weight:700;font-size:clamp(22px,4vw,30px);margin:0 0 6px;color:#202124;letter-spacing:-0.01em">Why <span class="bts-grad">funeral parlours</span> choose us</h2>
           <p style="font-size:15px;color:#5F6368;margin:0 0 24px">What the industry expects from a transport partner — done properly.</p>
           <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,240px),1fr));gap:12px">
             <div style="border:1px solid #DADCE0;border-radius:16px;padding:20px;display:flex;flex-direction:column;gap:8px">
@@ -464,7 +516,7 @@
             </div>
           </div>
           <div>
-            <h2 style="font-weight:700;font-size:clamp(24px,4.5vw,34px);margin:0 0 12px;letter-spacing:-0.01em;color:#202124">Dedicated refrigerated VW Transporter</h2>
+            <h2 style="font-weight:700;font-size:clamp(24px,4.5vw,34px);margin:0 0 12px;letter-spacing:-0.01em;color:#202124">Dedicated refrigerated <span class="bts-grad">VW Transporter</span></h2>
             <p style="font-size:16px;line-height:1.65;color:#5F6368;margin:0 0 22px;text-wrap:pretty">A purpose-built Volkswagen Transporter with a refrigerated compartment and dedicated transport area — designed for respectful, hygienic conveyance of human remains.</p>
             <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,220px),1fr));gap:10px 20px">
               <sc-for list="{{ vehicleFeatures }}" as="v" hint-placeholder-count="6">
@@ -478,7 +530,7 @@
       <!-- Compliance-first -->
       <section style="padding:clamp(48px,7vw,80px) 20px">
         <div style="max-width:1140px;margin:0 auto">
-          <h2 style="font-weight:700;font-size:clamp(24px,4.5vw,34px);margin:0 0 12px;letter-spacing:-0.01em;color:#202124;max-width:680px;text-wrap:balance">Paperwork done properly, every single job</h2>
+          <h2 style="font-weight:700;font-size:clamp(24px,4.5vw,34px);margin:0 0 12px;letter-spacing:-0.01em;color:#202124;max-width:680px;text-wrap:balance">Paperwork done properly, <span class="bts-grad">every single job</span></h2>
           <p style="font-size:16px;line-height:1.65;color:#5F6368;max-width:720px;margin:0 0 32px;text-wrap:pretty">Every transport job is backed by the correct documentation from the authorised parties: collection instructions, release notes, receiving notes, route sheets, chain-of-custody records, cleaning logs and incident reporting where required.</p>
           <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,220px),1fr));gap:12px">
             <sc-for list="{{ complianceCards }}" as="c" hint-placeholder-count="6">
@@ -495,7 +547,7 @@
       <section style="padding:0 20px clamp(48px,7vw,80px)">
         <div style="max-width:1140px;margin:0 auto;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,320px),1fr));gap:clamp(28px,4vw,56px);align-items:start">
           <div>
-            <h2 style="font-weight:700;font-size:clamp(24px,4.5vw,34px);margin:0 0 12px;letter-spacing:-0.01em;color:#202124">Cato Ridge based. KZN focused.</h2>
+            <h2 style="font-weight:700;font-size:clamp(24px,4.5vw,34px);margin:0 0 12px;letter-spacing:-0.01em;color:#202124">Cato Ridge based. <span class="bts-grad">KZN focused.</span></h2>
             <p style="font-size:16px;line-height:1.65;color:#5F6368;margin:0 0 20px;text-wrap:pretty">Our base in Cato Ridge sits right on the N3 — ±10 minutes from Camperdown, ±30 from Pietermaritzburg and ±45 from Durban. We are transport-only and do not store human remains, so we focus on routes we can collect and deliver quickly, with surrounding provinces by prior arrangement.</p>
             <a href="#areas" onClick="{{ goAreas }}" style="font-weight:500;font-size:15px;color:#1A73E8;display:inline-flex;align-items:center;gap:8px">View all areas covered <span aria-hidden="true">→</span></a>
           </div>
@@ -563,7 +615,7 @@
     <div data-screen-label="About">
       <section style="background:#F8F9FA;padding:clamp(44px,7vw,72px) 20px">
         <div style="max-width:1140px;margin:0 auto">
-          <h1 style="font-weight:700;font-size:clamp(28px,5.5vw,42px);margin:0;letter-spacing:-0.02em;color:#202124">About Body Transport Solutions</h1>
+          <h1 style="font-weight:700;font-size:clamp(28px,5.5vw,42px);margin:0;letter-spacing:-0.02em;color:#202124">About <span class="bts-grad">Body Transport Solutions</span></h1>
         </div>
       </section>
       <section style="padding:clamp(44px,7vw,72px) 20px clamp(64px,9vw,88px)">
@@ -596,7 +648,7 @@
     <div data-screen-label="Services">
       <section style="background:#F8F9FA;padding:clamp(44px,7vw,72px) 20px">
         <div style="max-width:1140px;margin:0 auto">
-          <h1 style="font-weight:700;font-size:clamp(28px,5.5vw,42px);margin:0;letter-spacing:-0.02em;color:#202124">Human remains transport services</h1>
+          <h1 style="font-weight:700;font-size:clamp(28px,5.5vw,42px);margin:0;letter-spacing:-0.02em;color:#202124">Human remains <span class="bts-grad">transport services</span></h1>
         </div>
       </section>
       <section style="padding:clamp(44px,7vw,72px) 20px clamp(64px,9vw,88px)">
@@ -618,7 +670,7 @@
     <div data-screen-label="Compliance">
       <section style="background:#F8F9FA;padding:clamp(44px,7vw,72px) 20px">
         <div style="max-width:1140px;margin:0 auto">
-          <h1 style="font-weight:700;font-size:clamp(28px,5.5vw,42px);margin:0 0 16px;letter-spacing:-0.02em;color:#202124">Compliance &amp; documentation</h1>
+          <h1 style="font-weight:700;font-size:clamp(28px,5.5vw,42px);margin:0 0 16px;letter-spacing:-0.02em;color:#202124">Compliance &amp; <span class="bts-grad">documentation</span></h1>
           <p style="font-size:16px;line-height:1.65;color:#5F6368;max-width:800px;margin:0;text-wrap:pretty">BODY TRANSPORT SOLUTIONS operates as a transport-only service provider. All transport is subject to applicable South African legal, municipal, health and documentation requirements. The company does not replace official documents issued by the Department of Home Affairs, SAPS, hospitals, mortuaries, funeral parlours, municipalities or the Department of Health.</p>
         </div>
       </section>
@@ -659,7 +711,7 @@
     <div data-screen-label="Job Process">
       <section style="background:#F8F9FA;padding:clamp(44px,7vw,72px) 20px">
         <div style="max-width:1140px;margin:0 auto">
-          <h1 style="font-weight:700;font-size:clamp(28px,5.5vw,42px);margin:0;letter-spacing:-0.02em;color:#202124">How a transport job works</h1>
+          <h1 style="font-weight:700;font-size:clamp(28px,5.5vw,42px);margin:0;letter-spacing:-0.02em;color:#202124">How a <span class="bts-grad">transport job</span> works</h1>
         </div>
       </section>
       <section style="padding:clamp(44px,7vw,72px) 20px clamp(64px,9vw,88px)">
@@ -686,7 +738,7 @@
     <div data-screen-label="Areas Covered">
       <section style="background:#F8F9FA;padding:clamp(44px,7vw,72px) 20px">
         <div style="max-width:1140px;margin:0 auto">
-          <h1 style="font-weight:700;font-size:clamp(28px,5.5vw,42px);margin:0 0 14px;letter-spacing:-0.02em;color:#202124">KZN-focused transport support</h1>
+          <h1 style="font-weight:700;font-size:clamp(28px,5.5vw,42px);margin:0 0 14px;letter-spacing:-0.02em;color:#202124"><span class="bts-grad">KZN-focused</span> transport support</h1>
           <p style="font-size:16px;line-height:1.65;color:#5F6368;max-width:720px;margin:0">Based in Cato Ridge on the N3. We are transport-only and do not store human remains — so we prioritise routes closest to our base and schedule longer transfers by arrangement.</p>
         </div>
       </section>
@@ -717,7 +769,7 @@
     <div data-screen-label="Funeral Parlour Partners">
       <section style="background:#F8F9FA;padding:clamp(44px,7vw,72px) 20px">
         <div style="max-width:1140px;margin:0 auto">
-          <h1 style="font-weight:700;font-size:clamp(28px,5.5vw,42px);margin:0 0 14px;letter-spacing:-0.02em;color:#202124">Support for funeral parlours</h1>
+          <h1 style="font-weight:700;font-size:clamp(28px,5.5vw,42px);margin:0 0 14px;letter-spacing:-0.02em;color:#202124">Support for <span class="bts-grad">funeral parlours</span></h1>
           <p style="font-size:16px;line-height:1.65;color:#5F6368;max-width:760px;margin:0;text-wrap:pretty">When your vehicles are unavailable, unsuitable for long-distance work, or already booked — we provide discreet, professional overflow transport support. Invoice-based, no complications.</p>
         </div>
       </section>
@@ -749,7 +801,7 @@
     <div data-screen-label="Emergency Transport Request">
       <section style="background:#F8F9FA;padding:clamp(44px,7vw,72px) 20px">
         <div style="max-width:1140px;margin:0 auto">
-          <h1 style="font-weight:700;font-size:clamp(28px,5.5vw,42px);margin:0 0 14px;letter-spacing:-0.02em;color:#202124">Request transport assistance</h1>
+          <h1 style="font-weight:700;font-size:clamp(28px,5.5vw,42px);margin:0 0 14px;letter-spacing:-0.02em;color:#202124">Request <span class="bts-grad">transport assistance</span></h1>
           <p style="font-size:15px;line-height:1.65;color:#5F6368;max-width:640px;margin:0">Fastest response for urgent jobs: call or WhatsApp <a href="{{ waLink }}" style="font-weight:500">{{ whatsapp }}</a>. Otherwise use the form below.</p>
         </div>
       </section>
@@ -795,7 +847,7 @@
     <div data-screen-label="Contact">
       <section style="background:#F8F9FA;padding:clamp(44px,7vw,72px) 20px">
         <div style="max-width:1140px;margin:0 auto">
-          <h1 style="font-weight:700;font-size:clamp(28px,5.5vw,42px);margin:0 0 14px;letter-spacing:-0.02em;color:#202124">Contact Body Transport Solutions</h1>
+          <h1 style="font-weight:700;font-size:clamp(28px,5.5vw,42px);margin:0 0 14px;letter-spacing:-0.02em;color:#202124">Contact <span class="bts-grad">Body Transport Solutions</span></h1>
           <p style="font-size:16px;color:#5F6368;margin:0">For urgent transport requests, WhatsApp or call directly.</p>
         </div>
       </section>
