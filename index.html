@@ -3,13 +3,14 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="icon" type="image/png" href="./assets/favicon.png">
 <script src="./support.js"></script>
 </head>
 <body>
 <x-dc>
 <helmet>
   <title>BODY TRANSPORT SOLUTIONS | Refrigerated Human Remains Transport KwaZulu-Natal</title>
-  <meta name="description" content="BODY TRANSPORT SOLUTIONS provides professional refrigerated human-remains transport and repatriation support for funeral parlours, mortuaries and hospitals across KwaZulu-Natal and surrounding provinces. Based in Cato Ridge on the N3.">
+  <meta name="description" content="24/7 refrigerated human-remains transport across KwaZulu-Natal and surrounding provinces. Direct collection and delivery, signed handover records and route updates from a Cato Ridge base.">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -352,6 +353,138 @@
     .bts-map-arr { fill: #B7D6FF; font-weight: 500; font-size: 16.5px; font-style: italic; font-family: 'Roboto', Arial, sans-serif; }
     .bts-map-ocean { fill: rgba(255,255,255,.16); font-style: italic; letter-spacing: .35em; font-size: 22px; font-family: 'Roboto', Arial, sans-serif; }
 
+    /* ===== Final art direction: vehicle-led, calm and operational ===== */
+    :root {
+      --bts-navy: #071A33;
+      --bts-blue: #1A73E8;
+      --bts-blue-dark: #0B57D0;
+      --bts-text: #202124;
+      --bts-muted: #5F6368;
+      --bts-border: #DADCE0;
+      --bts-soft: #F8F9FA;
+    }
+    .bts-header-inner { max-width: 1240px; min-height: 68px; }
+    .bts-header { border-bottom: 1px solid rgba(218,220,224,.72); }
+    .bts-brand img { height: 46px; }
+    .bts-hero {
+      position: relative; overflow: hidden;
+      background:
+        radial-gradient(circle at 82% 22%, rgba(232,240,254,.76), transparent 29%),
+        linear-gradient(180deg, #FFFFFF 0%, #FFFFFF 78%, #F8FAFF 100%);
+    }
+    .bts-hero::before {
+      content: ''; position: absolute; width: 620px; height: 620px;
+      right: -280px; top: -360px; border: 1px solid rgba(26,115,232,.10);
+      border-radius: 50%; pointer-events: none;
+      box-shadow: 0 0 0 70px rgba(26,115,232,.025), 0 0 0 150px rgba(26,115,232,.018);
+    }
+    .bts-hero-grid {
+      position: relative; z-index: 1; max-width: 1240px !important;
+      grid-template-columns: minmax(0,.82fr) minmax(500px,1.18fr) !important;
+      gap: clamp(36px,5vw,72px) !important;
+    }
+    .bts-trust-labels { display: flex; gap: 8px; flex-wrap: wrap; }
+    .bts-hero-copy { animation: btsHeroCopy .65s cubic-bezier(.2,.75,.25,1) both; }
+    .bts-hero-copy h1 { max-width: 610px; }
+    .bts-primary-button, .bts-secondary-button {
+      min-height: 50px; display: inline-flex !important; align-items: center; justify-content: center;
+      gap: 9px; box-sizing: border-box;
+    }
+    .bts-secondary-button svg { flex: 0 0 auto; }
+    .hero-vehicle {
+      height: clamp(360px,40vw,500px); border: 0; border-radius: 26px;
+      background: var(--bts-navy);
+      box-shadow: 0 22px 60px rgba(7,26,51,.24), 0 4px 14px rgba(60,64,67,.10);
+      animation: btsHeroVehicle .72s .08s cubic-bezier(.2,.75,.25,1) both;
+    }
+    .hero-vehicle::after {
+      background: none;
+      box-shadow: inset 0 0 0 1px rgba(255,255,255,.24), inset 0 -42px 70px rgba(7,26,51,.12);
+    }
+    .hero-vehicle img { object-position: 50% 52%; transform: scale(1.035); }
+    .hero-vehicle:hover img { transform: scale(1.065); }
+    .bts-hero-route {
+      position: absolute; z-index: 2; left: -3%; right: -2%; bottom: 2%;
+      width: 106%; height: 34%; pointer-events: none; overflow: visible;
+    }
+    .bts-hero-route .route-base { fill: none; stroke: rgba(168,199,250,.35); stroke-width: 2; }
+    .bts-hero-route .route-flow {
+      fill: none; stroke: #8AB4F8; stroke-width: 2.5; stroke-linecap: round;
+      stroke-dasharray: 10 92; animation: btsHeroRoute 3.8s linear infinite;
+    }
+    .bts-hero-route circle { fill: #1A73E8; stroke: rgba(255,255,255,.95); stroke-width: 3; }
+    .bts-proof-rail {
+      position: relative; z-index: 3; max-width: 980px; margin: -28px auto 0;
+      display: grid; grid-template-columns: repeat(3,1fr);
+      background: rgba(255,255,255,.96); border: 1px solid #E4E8EE; border-radius: 20px;
+      box-shadow: 0 12px 32px rgba(60,64,67,.13), 0 2px 5px rgba(60,64,67,.05);
+      backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px);
+      animation: btsProofRail .62s .32s cubic-bezier(.2,.75,.25,1) both;
+    }
+    .bts-proof-item { display: flex; align-items: center; gap: 13px; padding: 17px 25px; min-width: 0; }
+    .bts-proof-item + .bts-proof-item { border-left: 1px solid #E8EAED; }
+    .bts-proof-icon {
+      width: 42px; height: 42px; flex: 0 0 auto; border-radius: 50%;
+      display: grid; place-items: center; color: #1A73E8;
+      background: linear-gradient(135deg,#EDF4FE,#D8E7FC);
+      box-shadow: inset 0 0 0 1px rgba(26,115,232,.10);
+    }
+    .bts-proof-copy b { display: block; color: #202124; font-size: 14px; line-height: 1.25; }
+    .bts-proof-copy span { display: block; color: #5F6368; font-size: 12.5px; line-height: 1.35; margin-top: 2px; }
+    .bts-flow-section { border-top: 1px solid #EEF1F5; }
+    .bts-flow-section .bts-steps > div { min-height: 150px; }
+
+    .bts-system-section { background: #FFFFFF; }
+    .bts-system-shell { max-width: 1240px; margin: 0 auto; }
+    .bts-system-grid {
+      display: grid; grid-template-columns: minmax(0,1.18fr) minmax(330px,.82fr);
+      gap: clamp(34px,5vw,72px); align-items: center;
+    }
+    .bts-system-media .bts-diagram {
+      border-radius: 22px; border-color: #E4E8EE;
+      box-shadow: 0 16px 42px rgba(7,26,51,.16);
+    }
+    .bts-system-copy h2 { max-width: 540px; }
+    .bts-system-copy p { max-width: 560px; }
+    .bts-system-link {
+      display: inline-flex; align-items: center; gap: 8px; margin-top: 2px;
+      color: #1A73E8; font-size: 14.5px; font-weight: 600;
+    }
+    .bts-system-link:hover { gap: 11px; }
+    .bts-evidence-rail {
+      margin-top: 34px; display: grid; grid-template-columns: repeat(4,1fr);
+      border: 1px solid #E4E8EE; border-radius: 20px; overflow: hidden;
+      box-shadow: 0 8px 26px rgba(60,64,67,.08);
+    }
+    .bts-evidence-item { display: flex; align-items: center; gap: 12px; padding: 18px 20px; background: #FFFFFF; }
+    .bts-evidence-item + .bts-evidence-item { border-left: 1px solid #E8EAED; }
+    .bts-evidence-item svg { flex: 0 0 auto; }
+    .bts-evidence-item b { display: block; font-size: 13.5px; color: #202124; line-height: 1.25; }
+    .bts-evidence-item span { display: block; font-size: 12.5px; color: #5F6368; line-height: 1.35; margin-top: 2px; }
+    .bts-regulatory-note {
+      max-width: 1000px; margin: 24px auto 0; display: grid; grid-template-columns: 48px 1fr;
+      gap: 14px 20px; padding: 19px 22px; border: 1px solid #D2E3FC;
+      border-radius: 16px; background: linear-gradient(135deg,#F8FBFF,#EEF5FF);
+    }
+    .bts-regulatory-note > svg { grid-row: 1 / span 2; margin: 2px auto 0; }
+    .bts-regulatory-note p { margin: 0; color: #3C4043; font-size: 13.5px; line-height: 1.62; }
+    .bts-regulatory-note p + p { padding-top: 12px; border-top: 1px solid #D2E3FC; }
+    @keyframes btsHeroCopy { from { opacity: 0; transform: translateY(18px); } to { opacity: 1; transform: none; } }
+    @keyframes btsHeroVehicle { from { opacity: 0; transform: translateY(18px) scale(.985); } to { opacity: 1; transform: none; } }
+    @keyframes btsProofRail { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: none; } }
+    @keyframes btsHeroRoute { to { stroke-dashoffset: -102; } }
+
+    @media (max-width: 980px) {
+      .bts-hero-grid, .bts-system-grid { grid-template-columns: 1fr !important; }
+      .bts-hero-grid { max-width: 760px !important; }
+      .hero-vehicle { height: auto; aspect-ratio: 16 / 10; }
+      .bts-proof-rail { max-width: 720px; margin-top: 18px; }
+      .bts-system-copy { max-width: 720px; }
+      .bts-evidence-rail { grid-template-columns: repeat(2,1fr); }
+      .bts-evidence-item:nth-child(3) { border-left: 0; border-top: 1px solid #E8EAED; }
+      .bts-evidence-item:nth-child(4) { border-top: 1px solid #E8EAED; }
+    }
+
     /* ===== Mobile usability & accessibility ===== */
     html { scroll-behavior: smooth; scroll-padding-top: 76px; }
     body { overflow-x: hidden; }
@@ -447,6 +580,24 @@
       .bts-hero-meta span:nth-child(even) { display: none; }
       .hero-vehicle { border-radius: 18px; aspect-ratio: 4 / 3; }
       .hero-vehicle__label { left: 12px; top: 12px; max-width: calc(100% - 24px); }
+      .bts-trust-labels > span { font-size: 12px !important; padding: 6px 11px !important; }
+      .bts-proof-rail { margin-top: 14px; border-radius: 16px; }
+      .bts-proof-item { padding: 11px 6px; gap: 7px; flex-direction: column; text-align: center; }
+      .bts-proof-item + .bts-proof-item { border-left-color: #EEF1F5; }
+      .bts-proof-icon { width: 34px; height: 34px; }
+      .bts-proof-icon svg { width: 16px; height: 16px; }
+      .bts-proof-copy b { font-size: 11.5px; }
+      .bts-proof-copy span { font-size: 10.5px; }
+
+      .bts-system-grid { gap: 25px; }
+      .bts-system-copy h2 { font-size: clamp(26px,8vw,34px) !important; }
+      .bts-evidence-rail { margin-top: 24px; border-radius: 16px; }
+      .bts-evidence-item { padding: 14px 12px; gap: 9px; }
+      .bts-evidence-item b { font-size: 12.5px; }
+      .bts-evidence-item span { font-size: 11.5px; }
+      .bts-regulatory-note { grid-template-columns: 1fr; padding: 18px; gap: 11px; }
+      .bts-regulatory-note > svg { grid-row: auto; margin: 0; }
+      .bts-regulatory-note p { font-size: 12.5px; }
 
       .bts-diagram { aspect-ratio: 4 / 3; border-radius: 18px; }
       .bts-diagram > img { object-fit: cover; object-position: center; }
@@ -531,47 +682,63 @@
       <section class="bts-hero" style="padding:clamp(44px,7vw,80px) 20px clamp(36px,5vw,56px)">
         <div class="bts-hero-grid" style="max-width:1140px;margin:0 auto;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,340px),1fr));gap:clamp(28px,4vw,56px);align-items:center">
           <div class="bts-hero-copy" style="display:flex;flex-direction:column;gap:18px">
-            <div style="display:flex;gap:8px;flex-wrap:wrap">
+            <div class="bts-trust-labels">
               <span style="display:inline-flex;align-items:center;gap:8px;font-size:13px;font-weight:500;color:#137333;background:#E6F4EA;border-radius:999px;padding:6px 14px"><span style="width:8px;height:8px;border-radius:50%;background:#137333"></span>Available 24/7</span>
               <span style="display:inline-flex;align-items:center;gap:8px;font-size:13px;font-weight:500;color:#174EA6;background:#E8F0FE;border-radius:999px;padding:6px 14px">Proudly South African 🇿🇦</span>
             </div>
-            <h1 style="font-weight:700;font-size:clamp(32px,6vw,52px);line-height:1.12;margin:0;letter-spacing:-0.02em;color:#202124;text-wrap:balance">We move the deceased. <span class="bts-grad">Across KZN and surrounding provinces.</span></h1>
-            <p style="font-size:clamp(16px,2.5vw,19px);line-height:1.6;color:#5F6368;margin:0;max-width:520px;text-wrap:pretty">One dedicated refrigerated vehicle. A trained team. The right paperwork. You call — we collect — we deliver. Respectfully, every time.</p>
+            <h1 style="font-weight:700;font-size:clamp(32px,6vw,52px);line-height:1.1;margin:0;letter-spacing:-0.025em;color:#202124;text-wrap:balance">Dignified refrigerated transport. <span class="bts-grad">Across KZN and surrounding provinces.</span></h1>
+            <p style="font-size:clamp(16px,2.5vw,19px);line-height:1.6;color:#5F6368;margin:0;max-width:560px;text-wrap:pretty">Direct collection and delivery between hospitals, mortuaries, funeral parlours and authorised destinations — 24/7, with a dedicated vehicle, signed handover records and route updates.</p>
             <div class="bts-hero-actions" style="display:flex;gap:12px;flex-wrap:wrap;margin-top:4px">
-              <a href="#request" onClick="{{ goRequest }}" style="background:#1A73E8;color:#FFFFFF;font-weight:500;font-size:16px;padding:14px 28px;border-radius:999px;cursor:pointer" style-hover="background:#174EA6;color:#FFFFFF">Request transport</a>
-              <a href="{{ waLink }}" style="border:1px solid #DADCE0;color:#1A73E8;font-weight:500;font-size:16px;padding:14px 28px;border-radius:999px;cursor:pointer;display:flex;align-items:center;gap:8px" style-hover="background:#F8F9FA;color:#174EA6">WhatsApp us</a>
-            </div>
-            <div class="bts-hero-meta" style="display:flex;gap:16px;flex-wrap:wrap;margin-top:8px;font-size:12.5px;color:#5F6368">
-              <span>Registered (Pty) Ltd</span><span>·</span><span>Reg 2026/464849/07</span><span>·</span><span>Tax 9001928366</span><span>·</span><span>Based in KwaZulu-Natal</span>
+              <a href="#request" onClick="{{ goRequest }}" class="bts-primary-button" style="background:#1A73E8;color:#FFFFFF;font-weight:500;font-size:16px;padding:14px 28px;border-radius:999px;cursor:pointer" style-hover="background:#174EA6;color:#FFFFFF">Request transport</a>
+              <a href="{{ waLink }}" class="bts-secondary-button" style="border:1px solid #DADCE0;color:#1A73E8;font-weight:500;font-size:16px;padding:14px 28px;border-radius:999px;cursor:pointer;display:flex;align-items:center;gap:8px" style-hover="background:#F8F9FA;color:#174EA6"><svg width="18" height="18" viewBox="0 0 20 20" fill="none" aria-hidden="true"><circle cx="10" cy="10" r="7.5" stroke="#1E8E3E" stroke-width="1.6"></circle><path d="M6.7 14.1L7.2 12.4C6.6 11.6 6.3 10.7 6.3 9.8C6.3 7.7 8 6 10.1 6C12.2 6 13.9 7.7 13.9 9.8C13.9 11.9 12.2 13.6 10.1 13.6C9.3 13.6 8.5 13.3 7.9 12.9L6.7 14.1Z" stroke="#1E8E3E" stroke-width="1.25" stroke-linejoin="round"></path></svg>WhatsApp us</a>
             </div>
           </div>
           <div class="hero-vehicle">
             <img src="./assets/hero-vehicle.webp" alt="White refrigerated Body Transport Solutions vehicle" width="1536" height="1024" fetchpriority="high">
             <div class="hero-vehicle__label"><span class="hero-vehicle__label-dot"></span>Dedicated refrigerated vehicle</div>
+            <svg class="bts-hero-route" viewBox="0 0 900 260" aria-hidden="true">
+              <path class="route-base" d="M18 212C178 124 316 242 458 164C590 92 698 108 880 40"></path>
+              <path class="route-flow" d="M18 212C178 124 316 242 458 164C590 92 698 108 880 40"></path>
+              <circle cx="28" cy="206" r="7"></circle><circle cx="874" cy="43" r="7"></circle>
+            </svg>
+          </div>
+        </div>
+        <div class="bts-proof-rail" aria-label="Transport highlights">
+          <div class="bts-proof-item">
+            <span class="bts-proof-icon"><svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true"><path d="M8 3.5C8 2.4 8.9 1.5 10 1.5C11.1 1.5 12 2.4 12 3.5V11.2C13.2 11.9 14 13.2 14 14.7C14 16.9 12.2 18.7 10 18.7C7.8 18.7 6 16.9 6 14.7C6 13.2 6.8 11.9 8 11.2V3.5Z" stroke="currentColor" stroke-width="1.5"></path><circle cx="10" cy="14.7" r="1.7" fill="currentColor"></circle></svg></span>
+            <span class="bts-proof-copy"><b>0–3°C</b><span>Operating range</span></span>
+          </div>
+          <div class="bts-proof-item">
+            <span class="bts-proof-icon"><svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true"><rect x="2.5" y="6" width="10.5" height="8" rx="1.5" stroke="currentColor" stroke-width="1.5"></rect><path d="M13 8.5H16L17.5 11V14H13M5.5 14V16M15.5 14V16" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"></path><circle cx="5.5" cy="15.5" r="1.5" stroke="currentColor" stroke-width="1.4"></circle><circle cx="15.5" cy="15.5" r="1.5" stroke="currentColor" stroke-width="1.4"></circle></svg></span>
+            <span class="bts-proof-copy"><b>Direct</b><span>Collect &amp; deliver</span></span>
+          </div>
+          <div class="bts-proof-item">
+            <span class="bts-proof-icon"><svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true"><path d="M10 18C10 18 16 13.2 16 8.2C16 4.8 13.3 2 10 2C6.7 2 4 4.8 4 8.2C4 13.2 10 18 10 18Z" stroke="currentColor" stroke-width="1.5"></path><circle cx="10" cy="8.2" r="2.1" stroke="currentColor" stroke-width="1.5"></circle></svg></span>
+            <span class="bts-proof-copy"><b>Cato Ridge</b><span>KwaZulu-Natal</span></span>
           </div>
         </div>
       </section>
 
       <!-- Simple 1-2-3 pitch -->
-      <section style="background:#F8F9FA;padding:clamp(40px,6vw,64px) 20px">
+      <section class="bts-flow-section" style="background:#F8F9FA;padding:clamp(40px,6vw,64px) 20px">
         <div style="max-width:1140px;margin:0 auto">
-          <h2 style="font-weight:700;font-size:clamp(22px,4vw,30px);margin:0 0 6px;color:#202124;letter-spacing:-0.01em">Simple as <span class="bts-grad">1 — 2 — 3</span></h2>
-          <p style="font-size:15px;color:#5F6368;margin:0 0 28px">No complicated process. No hidden steps.</p>
+          <h2 style="font-weight:700;font-size:clamp(22px,4vw,30px);margin:0 0 6px;color:#202124;letter-spacing:-0.01em">One call. One direct journey. <span class="bts-grad">One signed handover.</span></h2>
+          <p style="font-size:15px;color:#5F6368;margin:0 0 28px">A clear process from the first message to the receiving signature.</p>
           <div class="bts-steps" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,260px),1fr));gap:14px">
             <div style="background:#FFFFFF;border:1px solid #DADCE0;border-radius:16px;padding:26px;display:flex;flex-direction:column;gap:10px">
               <div style="width:40px;height:40px;border-radius:50%;background:#E8F0FE;color:#1A73E8;font-weight:700;font-size:17px;display:grid;place-items:center">1</div>
               <div style="font-weight:700;font-size:17px;color:#202124">You call or WhatsApp</div>
-              <p style="font-size:14px;line-height:1.6;color:#5F6368;margin:0">Tell us where to collect, where to deliver, and when. We confirm the price and paperwork straight away.</p>
+              <p style="font-size:14px;line-height:1.6;color:#5F6368;margin:0">Share the collection point, destination and timing. We confirm availability, estimated cost and the handover documents needed.</p>
             </div>
             <div style="background:#FFFFFF;border:1px solid #DADCE0;border-radius:16px;padding:26px;display:flex;flex-direction:column;gap:10px">
               <div style="width:40px;height:40px;border-radius:50%;background:#E8F0FE;color:#1A73E8;font-weight:700;font-size:17px;display:grid;place-items:center">2</div>
               <div style="font-weight:700;font-size:17px;color:#202124">We collect</div>
-              <p style="font-size:14px;line-height:1.6;color:#5F6368;margin:0">Our driver collects from the hospital, mortuary or funeral parlour — respectfully, in a refrigerated vehicle, with signed records.</p>
+              <p style="font-size:14px;line-height:1.6;color:#5F6368;margin:0">We collect from the authorised facility in the dedicated refrigerated vehicle and record the release details.</p>
             </div>
             <div style="background:#FFFFFF;border:1px solid #DADCE0;border-radius:16px;padding:26px;display:flex;flex-direction:column;gap:10px">
               <div style="width:40px;height:40px;border-radius:50%;background:#E8F0FE;color:#1A73E8;font-weight:700;font-size:17px;display:grid;place-items:center">3</div>
               <div style="font-weight:700;font-size:17px;color:#202124">We deliver, signed for</div>
-              <p style="font-size:14px;line-height:1.6;color:#5F6368;margin:0">The receiving party signs the handover note. You get proper chain-of-custody paperwork on every job.</p>
+              <p style="font-size:14px;line-height:1.6;color:#5F6368;margin:0">The receiving party signs the handover record, completing a clear documented transfer from collection to delivery.</p>
             </div>
           </div>
         </div>
@@ -581,37 +748,37 @@
       <section style="padding:clamp(48px,7vw,72px) 20px 8px">
         <div style="max-width:1140px;margin:0 auto">
           <h2 style="font-weight:700;font-size:clamp(22px,4vw,30px);margin:0 0 6px;color:#202124;letter-spacing:-0.01em">Why <span class="bts-grad">funeral parlours</span> choose us</h2>
-          <p style="font-size:15px;color:#5F6368;margin:0 0 24px">What the industry expects from a transport partner — done properly.</p>
+          <p style="font-size:15px;color:#5F6368;margin:0 0 24px">Extra transport capacity without losing visibility, documentation or professional standards.</p>
           <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,240px),1fr));gap:12px">
             <div style="border:1px solid #DADCE0;border-radius:16px;padding:20px;display:flex;flex-direction:column;gap:8px">
               <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M10 2V18M4 5.5L16 14.5M16 5.5L4 14.5" stroke="#1A73E8" stroke-width="1.6" stroke-linecap="round"></path></svg>
               <span style="font-weight:700;font-size:15px;color:#202124">Temperature-controlled refrigeration</span>
-              <span style="font-size:13.5px;line-height:1.55;color:#5F6368">Refrigerated compartment maintained and monitored on every route, short or long.</span>
+              <span style="font-size:13.5px;line-height:1.55;color:#5F6368">A dedicated compartment with a stated 0–3°C operating range during transport.</span>
             </div>
             <div style="border:1px solid #DADCE0;border-radius:16px;padding:20px;display:flex;flex-direction:column;gap:8px">
               <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M10 1.5L17 4.5V9.5C17 14 14 17.5 10 18.5C6 17.5 3 14 3 9.5V4.5L10 1.5Z" stroke="#1A73E8" stroke-width="1.6" stroke-linejoin="round"></path><path d="M7 10L9.2 12L13.5 7.5" stroke="#1A73E8" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"></path></svg>
               <span style="font-weight:700;font-size:15px;color:#202124">Signed chain-of-custody, every job</span>
-              <span style="font-size:13.5px;line-height:1.55;color:#5F6368">Collection and receiving notes signed at both ends — your paper trail is always complete.</span>
+              <span style="font-size:13.5px;line-height:1.55;color:#5F6368">Release and receiving records support a clear handover at both ends of the journey.</span>
             </div>
             <div style="border:1px solid #DADCE0;border-radius:16px;padding:20px;display:flex;flex-direction:column;gap:8px">
               <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M10 18C10 18 16.5 13 16.5 8C16.5 4.4 13.6 1.5 10 1.5C6.4 1.5 3.5 4.4 3.5 8C3.5 13 10 18 10 18Z" stroke="#1A73E8" stroke-width="1.6" stroke-linejoin="round"></path><circle cx="10" cy="8" r="2.2" stroke="#1A73E8" stroke-width="1.6"></circle></svg>
               <span style="font-weight:700;font-size:15px;color:#202124">Updates from collection to delivery</span>
-              <span style="font-size:13.5px;line-height:1.55;color:#5F6368">You know where the vehicle is — status updates by WhatsApp along the route.</span>
+              <span style="font-size:13.5px;line-height:1.55;color:#5F6368">Practical WhatsApp updates keep the authorised client informed along the route.</span>
             </div>
             <div style="border:1px solid #DADCE0;border-radius:16px;padding:20px;display:flex;flex-direction:column;gap:8px">
               <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><circle cx="10" cy="10" r="8" stroke="#1A73E8" stroke-width="1.6"></circle><path d="M10 5.5V10L13 12.5" stroke="#1A73E8" stroke-width="1.6" stroke-linecap="round"></path></svg>
               <span style="font-weight:700;font-size:15px;color:#202124">24/7, 365 days</span>
-              <span style="font-size:13.5px;line-height:1.55;color:#5F6368">Deaths don't keep office hours. Neither do we — after-hours and weekend collections.</span>
+              <span style="font-size:13.5px;line-height:1.55;color:#5F6368">After-hours, weekend and urgent collection support, subject to availability and documents.</span>
             </div>
             <div style="border:1px solid #DADCE0;border-radius:16px;padding:20px;display:flex;flex-direction:column;gap:8px">
               <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><rect x="2.5" y="5.5" width="11" height="9" rx="1.5" stroke="#1A73E8" stroke-width="1.6"></rect><path d="M13.5 8.5H16L17.5 11V14.5H13.5" stroke="#1A73E8" stroke-width="1.6" stroke-linejoin="round"></path><circle cx="6" cy="15" r="1.6" stroke="#1A73E8" stroke-width="1.4"></circle><circle cx="15" cy="15" r="1.6" stroke="#1A73E8" stroke-width="1.4"></circle></svg>
               <span style="font-weight:700;font-size:15px;color:#202124">Dedicated vehicle, never shared loads</span>
-              <span style="font-size:13.5px;line-height:1.55;color:#5F6368">A purpose-built refrigerated transporter used for human remains transport only.</span>
+              <span style="font-size:13.5px;line-height:1.55;color:#5F6368">A refrigerated transporter reserved for the direct conveyance of human remains.</span>
             </div>
             <div style="border:1px solid #DADCE0;border-radius:16px;padding:20px;display:flex;flex-direction:column;gap:8px">
               <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><rect x="4" y="2.5" width="12" height="15" rx="1.5" stroke="#1A73E8" stroke-width="1.6"></rect><path d="M7 6.5H13M7 10H13M7 13.5H10.5" stroke="#1A73E8" stroke-width="1.6" stroke-linecap="round"></path></svg>
-              <span style="font-weight:700;font-size:15px;color:#202124">Invoice-based, no complications</span>
-              <span style="font-size:13.5px;line-height:1.55;color:#5F6368">Straightforward business relationship — a confirmed quote per job, invoiced properly.</span>
+              <span style="font-weight:700;font-size:15px;color:#202124">Clear per-job quoting</span>
+              <span style="font-size:13.5px;line-height:1.55;color:#5F6368">Availability, route and estimated cost are confirmed before the vehicle is dispatched.</span>
             </div>
           </div>
         </div>
@@ -628,8 +795,8 @@
       <!-- What we do -->
       <section style="padding:clamp(48px,7vw,80px) 20px">
         <div style="max-width:1140px;margin:0 auto">
-          <h2 style="font-weight:700;font-size:clamp(24px,4.5vw,34px);margin:0 0 12px;letter-spacing:-0.01em;color:#202124">What we do</h2>
-          <p style="font-size:16px;line-height:1.65;color:#5F6368;max-width:720px;margin:0 0 32px;text-wrap:pretty">Dedicated refrigerated transport of human remains between approved facilities — hospitals, mortuaries, funeral parlours, crematoria, burial destinations and long-distance repatriation routes. Transport support only: no funeral arrangement, storage, preparation or embalming.</p>
+          <h2 style="font-weight:700;font-size:clamp(24px,4.5vw,34px);margin:0 0 12px;letter-spacing:-0.01em;color:#202124">Direct transport between <span class="bts-grad">authorised points.</span></h2>
+          <p style="font-size:16px;line-height:1.65;color:#5F6368;max-width:760px;margin:0 0 32px;text-wrap:pretty">We provide refrigerated collection and delivery between hospitals, mortuaries, funeral parlours, crematoria and authorised destinations, including longer inter-provincial routes by arrangement. We handle the journey and documented handover — not funeral arrangements, preparation, embalming or storage.</p>
           <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,260px),1fr));gap:14px">
             <div style="background:#FFFFFF;border:1px solid #DADCE0;border-radius:16px;padding:22px;display:flex;align-items:center;gap:14px" style-hover="box-shadow:0 1px 6px rgba(60,64,67,0.15)">
               <div style="width:38px;height:38px;border-radius:50%;background:#E8F0FE;display:grid;place-items:center;flex-shrink:0">
@@ -684,37 +851,41 @@
       </section>
 
       <!-- Vehicle -->
-      <section style="background:#F8F9FA;padding:clamp(48px,7vw,80px) 20px">
-        <div style="max-width:1140px;margin:0 auto;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,340px),1fr));gap:clamp(28px,4vw,56px);align-items:center">
-          <div style="position:relative;height:clamp(240px,38vw,360px);border-radius:24px;overflow:hidden;border:1px solid #DADCE0">
-            <img src="./assets/fridge.jpg" loading="lazy" decoding="async" alt="Stainless steel refrigerated compartment with dedicated loading tray" style="width:100%;height:100%;object-fit:cover;object-position:50% 45%;display:block">
-            <div class="hero-vehicle__label"><span class="hero-vehicle__label-dot"></span>Forced-air refrigeration · 0–3&nbsp;°C</div>
-          </div>
-          <div>
-            <h2 style="font-weight:700;font-size:clamp(24px,4.5vw,34px);margin:0 0 12px;letter-spacing:-0.01em;color:#202124">Dedicated refrigerated <span class="bts-grad">VW Transporter</span></h2>
-            <p style="font-size:16px;line-height:1.65;color:#5F6368;margin:0 0 22px;text-wrap:pretty">A purpose-built Volkswagen Transporter with a refrigerated compartment and dedicated transport area — designed for respectful, hygienic conveyance of human remains.</p>
-            <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,220px),1fr));gap:10px 20px">
-              <sc-for list="{{ vehicleFeatures }}" as="v" hint-placeholder-count="6">
-                <div style="display:flex;gap:10px;align-items:center"><svg width="15" height="15" viewBox="0 0 15 15" fill="none" style="flex-shrink:0"><path d="M2 8.5L6 12L13 3.5" stroke="#137333" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"></path></svg><span style="font-size:14px;font-weight:500;color:#3C4043">{{ v }}</span></div>
-              </sc-for>
+      <section class="bts-system-section" style="padding:clamp(56px,8vw,92px) 20px">
+        <div class="bts-system-shell">
+          <div class="bts-system-grid">
+            <div class="bts-system-media">
+              <div class="bts-diagram">
+                <img src="./assets/airflow.jpg" loading="lazy" decoding="async" alt="Stainless-steel refrigeration box inside the vehicle with evaporator cooling, a black condensate drainage pipe and a four-leg secure transport platform">
+                <svg class="bts-air" viewBox="0 0 1600 900" fill="none" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+                  <path d="M800 265 C 700 350, 560 390, 470 530" stroke="#9CC7FF" stroke-width="10" stroke-linecap="round" opacity=".38" style="filter:blur(2px)"></path>
+                  <path d="M800 265 C 762 360, 706 430, 645 565" stroke="#B7D6FF" stroke-width="9" stroke-linecap="round" opacity=".34" style="filter:blur(2px)"></path>
+                  <path d="M800 265 C 838 360, 894 430, 955 565" stroke="#B7D6FF" stroke-width="9" stroke-linecap="round" opacity=".34" style="filter:blur(2px)"></path>
+                  <path d="M800 265 C 900 350, 1040 390, 1130 530" stroke="#9CC7FF" stroke-width="10" stroke-linecap="round" opacity=".38" style="filter:blur(2px)"></path>
+                </svg>
+                <div class="bts-pin" style="top:24%;left:48%"><span class="bts-pin-lbl"><span class="bts-pin-chip">Evaporator &amp; forced-air cooling</span><span class="bts-pin-line"></span></span></div>
+                <div class="bts-pin rev" style="top:40%;left:59%"><span class="bts-pin-lbl"><span class="bts-pin-chip">Black condensate drainage pipe</span><span class="bts-pin-line"></span></span></div>
+                <div class="bts-pin" style="top:58%;left:34%"><span class="bts-pin-lbl"><span class="bts-pin-chip">Non-absorbent stainless steel</span><span class="bts-pin-line"></span></span></div>
+                <div class="bts-pin rev" style="top:72%;left:66%"><span class="bts-pin-lbl"><span class="bts-pin-chip">Four-leg secure transport platform</span><span class="bts-pin-line"></span></span></div>
+              </div>
+            </div>
+            <div class="bts-system-copy">
+              <h2 style="font-weight:700;font-size:clamp(27px,4.7vw,42px);line-height:1.12;margin:0 0 18px;letter-spacing:-0.025em;color:#202124;text-wrap:balance">A dedicated refrigeration system — <span class="bts-grad">built for direct transport.</span></h2>
+              <p style="font-size:16px;line-height:1.68;color:#5F6368;margin:0 0 14px;text-wrap:pretty">The stainless-steel compartment combines forced-air cooling, an easy-clean transport platform and a dedicated condensate drainage line.</p>
+              <p style="font-size:16px;line-height:1.68;color:#3C4043;margin:0 0 18px"><strong style="color:#202124">Stated operating range: 0–3&nbsp;°C during transport.</strong></p>
+              <a href="#compliance" onClick="{{ goCompliance }}" class="bts-system-link">Understand the R363 context <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8H13M9.5 4.5L13 8L9.5 11.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path></svg></a>
             </div>
           </div>
-        </div>
-        <div style="max-width:1140px;margin:clamp(24px,4vw,40px) auto 0">
-          <div class="bts-diagram">
-            <img src="./assets/airflow.jpg" loading="lazy" decoding="async" alt="Annotated view of the refrigerated compartment: evaporator cooling system, forced-air circulation, drainage pipe, non-porous stainless steel and secure transport platform">
-            <svg class="bts-air" viewBox="0 0 1600 900" fill="none" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
-              <path d="M800 265 C 700 350, 560 390, 470 530" stroke="#9CC7FF" stroke-width="10" stroke-linecap="round" opacity=".38" style="filter:blur(2px)"></path>
-              <path d="M800 265 C 762 360, 706 430, 645 565" stroke="#B7D6FF" stroke-width="9" stroke-linecap="round" opacity=".34" style="filter:blur(2px)"></path>
-              <path d="M800 265 C 838 360, 894 430, 955 565" stroke="#B7D6FF" stroke-width="9" stroke-linecap="round" opacity=".34" style="filter:blur(2px)"></path>
-              <path d="M800 265 C 900 350, 1040 390, 1130 530" stroke="#9CC7FF" stroke-width="10" stroke-linecap="round" opacity=".38" style="filter:blur(2px)"></path>
-            </svg>
-            <div class="bts-diagram-badge"><b>R363</b><span>SA Management of Human Remains Regulations</span></div>
-            <div class="bts-pin" style="top:24%;left:48%"><span class="bts-pin-lbl"><span class="bts-pin-chip">Evaporator cooling system</span><span class="bts-pin-line"></span></span></div>
-            <div class="bts-pin" style="top:42%;left:42%"><span class="bts-pin-lbl"><span class="bts-pin-chip">Forced-air circulation</span><span class="bts-pin-line"></span></span></div>
-            <div class="bts-pin rev" style="top:40%;left:59%"><span class="bts-pin-lbl"><span class="bts-pin-chip">Drainage pipe</span><span class="bts-pin-line"></span></span></div>
-            <div class="bts-pin" style="top:58%;left:34%"><span class="bts-pin-lbl"><span class="bts-pin-chip">Non-porous stainless steel</span><span class="bts-pin-line"></span></span></div>
-            <div class="bts-pin rev" style="top:72%;left:66%"><span class="bts-pin-lbl"><span class="bts-pin-chip">Secure transport platform</span><span class="bts-pin-line"></span></span></div>
+          <div class="bts-evidence-rail" aria-label="Operational features">
+            <div class="bts-evidence-item"><svg width="22" height="22" viewBox="0 0 22 22" fill="none"><path d="M9 3.5C9 2.4 9.9 1.5 11 1.5C12.1 1.5 13 2.4 13 3.5V11.3C14.2 12 15 13.3 15 14.8C15 17 13.2 18.8 11 18.8C8.8 18.8 7 17 7 14.8C7 13.3 7.8 12 9 11.3V3.5Z" stroke="#1A73E8" stroke-width="1.5"></path></svg><div><b>0–3°C</b><span>Operating range</span></div></div>
+            <div class="bts-evidence-item"><svg width="22" height="22" viewBox="0 0 22 22" fill="none"><rect x="4" y="2.5" width="14" height="17" rx="2" stroke="#1A73E8" stroke-width="1.5"></rect><path d="M7.5 7H14.5M7.5 11H14.5M7.5 15H11" stroke="#1A73E8" stroke-width="1.5" stroke-linecap="round"></path></svg><div><b>Signed</b><span>Handover records</span></div></div>
+            <div class="bts-evidence-item"><svg width="22" height="22" viewBox="0 0 22 22" fill="none"><path d="M7 4H15M9 4V2.5H13V4M6 7H16V18.5H6V7Z" stroke="#1A73E8" stroke-width="1.5" stroke-linejoin="round"></path><path d="M9 11L10.5 12.5L13.5 9.5" stroke="#1A73E8" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path></svg><div><b>Cleaning log</b><span>After transport</span></div></div>
+            <div class="bts-evidence-item"><svg width="22" height="22" viewBox="0 0 22 22" fill="none"><rect x="2.5" y="7" width="11.5" height="8" rx="1.5" stroke="#1A73E8" stroke-width="1.5"></rect><path d="M14 9.5H17L19 12V15H14" stroke="#1A73E8" stroke-width="1.5" stroke-linejoin="round"></path><circle cx="6" cy="16" r="1.7" stroke="#1A73E8" stroke-width="1.4"></circle><circle cx="16.5" cy="16" r="1.7" stroke="#1A73E8" stroke-width="1.4"></circle></svg><div><b>Direct</b><span>Collect &amp; deliver</span></div></div>
+          </div>
+          <div class="bts-regulatory-note">
+            <svg width="34" height="34" viewBox="0 0 34 34" fill="none" aria-hidden="true"><circle cx="17" cy="17" r="16" fill="#E8F0FE"></circle><path d="M17 14V24M17 10.5V10.4" stroke="#1A73E8" stroke-width="2.2" stroke-linecap="round"></path></svg>
+            <p><strong style="color:#202124">R363 is South Africa’s 2013 regulation for the management of human remains.</strong> It sets requirements for approved preparation and storage premises, and regulation 13 states that transport may not endanger public health.</p>
+            <p><strong style="color:#202124">The ≤5°C within three hours requirement is a premises storage benchmark.</strong> Body Transport Solutions provides direct transport only and does not advertise preparation or storage services. Route-specific documents remain subject to the authorised facilities and relevant authorities.</p>
           </div>
         </div>
       </section>
@@ -722,8 +893,8 @@
       <!-- Compliance-first -->
       <section style="padding:clamp(48px,7vw,80px) 20px">
         <div style="max-width:1140px;margin:0 auto">
-          <h2 style="font-weight:700;font-size:clamp(24px,4.5vw,34px);margin:0 0 12px;letter-spacing:-0.01em;color:#202124;max-width:680px;text-wrap:balance">Paperwork done properly, <span class="bts-grad">every single job</span></h2>
-          <p style="font-size:16px;line-height:1.65;color:#5F6368;max-width:720px;margin:0 0 32px;text-wrap:pretty">Every transport job is backed by the correct documentation from the authorised parties: collection instructions, release notes, receiving notes, route sheets, chain-of-custody records, cleaning logs and incident reporting where required.</p>
+          <h2 style="font-weight:700;font-size:clamp(24px,4.5vw,34px);margin:0 0 12px;letter-spacing:-0.01em;color:#202124;max-width:720px;text-wrap:balance">A documented handover, <span class="bts-grad">not just a vehicle journey.</span></h2>
+          <p style="font-size:16px;line-height:1.65;color:#5F6368;max-width:760px;margin:0 0 32px;text-wrap:pretty">Each job is supported by information from the authorised parties and by transport records appropriate to the route: collection instructions, release details, receiving signatures, route records, cleaning logs and incident reporting where required.</p>
           <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,220px),1fr));gap:12px">
             <sc-for list="{{ complianceCards }}" as="c" hint-placeholder-count="6">
               <div style="border:1px solid #DADCE0;border-radius:12px;padding:16px 18px;display:flex;align-items:center;gap:12px">
@@ -739,8 +910,8 @@
       <section style="padding:0 20px clamp(48px,7vw,80px)">
         <div style="max-width:1140px;margin:0 auto;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,320px),1fr));gap:clamp(28px,4vw,56px);align-items:start">
           <div>
-            <h2 style="font-weight:700;font-size:clamp(24px,4.5vw,34px);margin:0 0 12px;letter-spacing:-0.01em;color:#202124">Cato Ridge based. <span class="bts-grad">KZN focused.</span></h2>
-            <p style="font-size:16px;line-height:1.65;color:#5F6368;margin:0 0 20px;text-wrap:pretty">Our base in Cato Ridge sits right on the N3 — ±10 minutes from Camperdown, ±30 from Pietermaritzburg and ±45 from Durban. We are transport-only and do not store human remains, so we focus on routes we can collect and deliver quickly, with surrounding provinces by prior arrangement.</p>
+            <h2 style="font-weight:700;font-size:clamp(24px,4.5vw,34px);margin:0 0 12px;letter-spacing:-0.01em;color:#202124">Cato Ridge based. <span class="bts-grad">KZN connected.</span></h2>
+            <p style="font-size:16px;line-height:1.65;color:#5F6368;margin:0 0 20px;text-wrap:pretty">Our Cato Ridge base gives direct access to the N3 for Durban, Pietermaritzburg, the Midlands and longer routes by arrangement. Because we provide transport rather than storage, every booking is planned as a direct collection-and-delivery journey.</p>
             <a href="#areas" onClick="{{ goAreas }}" style="font-weight:500;font-size:15px;color:#1A73E8;display:inline-flex;align-items:center;gap:8px">View all areas covered <span aria-hidden="true">→</span></a>
           </div>
           <div style="background:#FFFFFF;border:1px solid #DADCE0;border-radius:16px;overflow:hidden">
@@ -921,7 +1092,7 @@
       <section style="background:#F8F9FA;padding:clamp(44px,7vw,72px) 20px">
         <div style="max-width:1140px;margin:0 auto">
           <h1 style="font-weight:700;font-size:clamp(28px,5.5vw,42px);margin:0 0 16px;letter-spacing:-0.02em;color:#202124">Compliance &amp; <span class="bts-grad">documentation</span></h1>
-          <p style="font-size:16px;line-height:1.65;color:#5F6368;max-width:800px;margin:0;text-wrap:pretty">BODY TRANSPORT SOLUTIONS operates as a transport-only service provider. All transport is subject to applicable South African legal, municipal, health and documentation requirements. The company does not replace official documents issued by the Department of Home Affairs, SAPS, hospitals, mortuaries, funeral parlours, municipalities or the Department of Health.</p>
+          <p style="font-size:16px;line-height:1.65;color:#5F6368;max-width:820px;margin:0;text-wrap:pretty">BODY TRANSPORT SOLUTIONS provides direct transport only. R363 covers the management of human remains, including approved preparation and storage premises, while regulation 13 states that transportation may not endanger public health. Route-specific documents and authorisations remain subject to the relevant facilities and authorities.</p>
         </div>
       </section>
       <section style="padding:clamp(44px,7vw,64px) 20px 32px">
@@ -937,10 +1108,10 @@
       <section style="padding:32px 20px 24px">
         <div style="max-width:1140px;margin:0 auto">
           <div>
-            <h2 style="font-weight:700;font-size:clamp(22px,4vw,30px);margin:0 0 6px;letter-spacing:-0.01em;color:#202124">Features aligned with <span class="bts-grad">R363</span></h2>
-            <p style="font-size:14px;color:#5F6368;margin:0 0 24px">South African human-remains regulations — Regulation R363, National Health Act 61 of 2003.</p>
+            <h2 style="font-weight:700;font-size:clamp(22px,4vw,30px);margin:0 0 6px;letter-spacing:-0.01em;color:#202124"><span class="bts-grad">R363:</span> what it means here</h2>
+            <p style="font-size:14px;color:#5F6368;margin:0 0 24px">South Africa’s 2013 Regulations Relating to the Management of Human Remains, made under the National Health Act 61 of 2003.</p>
             <div class="bts-diagram" style="margin-bottom:clamp(24px,4vw,36px)">
-              <img src="./assets/airflow.jpg" loading="lazy" decoding="async" alt="Stainless-steel refrigeration box inside the vehicle, with evaporator cooling, a black drainage pipe, four steel legs and a secure transport platform">
+              <img src="./assets/airflow.jpg" loading="lazy" decoding="async" alt="Stainless-steel refrigeration box inside the vehicle, with evaporator cooling, a black condensate drainage pipe, four steel legs and a secure transport platform">
               <svg class="bts-air" viewBox="0 0 1600 900" fill="none" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
                 <path d="M800 265 C 700 350, 560 390, 470 530" stroke="#9CC7FF" stroke-width="10" stroke-linecap="round" opacity=".38" style="filter:blur(2px)"></path>
                 <path d="M800 265 C 762 360, 706 430, 645 565" stroke="#B7D6FF" stroke-width="9" stroke-linecap="round" opacity=".34" style="filter:blur(2px)"></path>
@@ -948,11 +1119,10 @@
                 <path d="M800 265 C 900 350, 1040 390, 1130 530" stroke="#9CC7FF" stroke-width="10" stroke-linecap="round" opacity=".38" style="filter:blur(2px)"></path>
               </svg>
               <div class="bts-diagram-badge"><b>R363</b><span>SA Management of Human Remains Regulations</span></div>
-              <div class="bts-pin" style="top:24%;left:48%"><span class="bts-pin-lbl"><span class="bts-pin-chip">Evaporator cooling system</span><span class="bts-pin-line"></span></span></div>
-              <div class="bts-pin" style="top:42%;left:42%"><span class="bts-pin-lbl"><span class="bts-pin-chip">Forced-air circulation</span><span class="bts-pin-line"></span></span></div>
-              <div class="bts-pin rev" style="top:40%;left:59%"><span class="bts-pin-lbl"><span class="bts-pin-chip">Drainage pipe</span><span class="bts-pin-line"></span></span></div>
-              <div class="bts-pin" style="top:58%;left:34%"><span class="bts-pin-lbl"><span class="bts-pin-chip">Non-porous stainless steel</span><span class="bts-pin-line"></span></span></div>
-              <div class="bts-pin rev" style="top:72%;left:66%"><span class="bts-pin-lbl"><span class="bts-pin-chip">Secure transport platform</span><span class="bts-pin-line"></span></span></div>
+              <div class="bts-pin" style="top:24%;left:48%"><span class="bts-pin-lbl"><span class="bts-pin-chip">Evaporator &amp; forced-air cooling</span><span class="bts-pin-line"></span></span></div>
+              <div class="bts-pin rev" style="top:40%;left:59%"><span class="bts-pin-lbl"><span class="bts-pin-chip">Black condensate drainage pipe</span><span class="bts-pin-line"></span></span></div>
+              <div class="bts-pin" style="top:58%;left:34%"><span class="bts-pin-lbl"><span class="bts-pin-chip">Non-absorbent stainless steel</span><span class="bts-pin-line"></span></span></div>
+              <div class="bts-pin rev" style="top:72%;left:66%"><span class="bts-pin-lbl"><span class="bts-pin-chip">Four-leg secure transport platform</span><span class="bts-pin-line"></span></span></div>
             </div>
             <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,240px),1fr));gap:16px 22px;margin-bottom:20px">
               <div style="display:flex;align-items:center;gap:14px">
@@ -961,11 +1131,11 @@
               </div>
               <div style="display:flex;align-items:center;gap:14px">
                 <div style="width:38px;height:38px;border-radius:50%;background:#E8F0FE;display:grid;place-items:center;flex-shrink:0"><svg width="18" height="18" viewBox="0 0 20 20" fill="none"><path d="M4 12C4 12 5.5 10.5 7 12C8.5 13.5 10 12 10 12M10 8C10 8 11.5 6.5 13 8C14.5 9.5 16 8 16 8" stroke="#1A73E8" stroke-width="1.6" stroke-linecap="round"></path><path d="M3 16H17" stroke="#1A73E8" stroke-width="1.6" stroke-linecap="round"></path></svg></div>
-                <div><div style="font-weight:700;font-size:14.5px;color:#202124">Easy-clean surfaces</div><div style="font-size:13px;color:#5F6368">Designed for cleaning and disinfection, with suitable tray and drainage</div></div>
+                <div><div style="font-weight:700;font-size:14.5px;color:#202124">Easy-clean and drainage design</div><div style="font-size:13px;color:#5F6368">Stainless surfaces, transport tray and a dedicated black condensate drainage pipe</div></div>
               </div>
               <div style="display:flex;align-items:center;gap:14px">
                 <div style="width:38px;height:38px;border-radius:50%;background:#E8F0FE;display:grid;place-items:center;flex-shrink:0"><svg width="18" height="18" viewBox="0 0 20 20" fill="none"><path d="M10 2V18M4 5.5L16 14.5M16 5.5L4 14.5" stroke="#1A73E8" stroke-width="1.6" stroke-linecap="round"></path></svg></div>
-                <div><div style="font-weight:700;font-size:14.5px;color:#202124">Controlled refrigeration</div><div style="font-size:13px;color:#5F6368">Compartment held at 0–3&nbsp;°C on every route</div></div>
+                <div><div style="font-weight:700;font-size:14.5px;color:#202124">Controlled refrigeration</div><div style="font-size:13px;color:#5F6368">Stated transport operating range of 0–3&nbsp;°C</div></div>
               </div>
               <div style="display:flex;align-items:center;gap:14px">
                 <div style="width:38px;height:38px;border-radius:50%;background:#E8F0FE;display:grid;place-items:center;flex-shrink:0"><svg width="18" height="18" viewBox="0 0 20 20" fill="none"><rect x="3" y="6" width="14" height="11" rx="1.5" stroke="#1A73E8" stroke-width="1.6"></rect><path d="M7 6V4.5C7 3 8.3 2 10 2C11.7 2 13 3 13 4.5V6" stroke="#1A73E8" stroke-width="1.6" stroke-linecap="round"></path></svg></div>
@@ -974,7 +1144,7 @@
             </div>
             <div style="background:#E8F0FE;border-radius:14px;padding:16px 20px;display:flex;align-items:center;gap:14px">
               <svg width="22" height="22" viewBox="0 0 22 22" fill="none" style="flex-shrink:0"><path d="M9 3.5C9 2.4 9.9 1.5 11 1.5C12.1 1.5 13 2.4 13 3.5V11.3C14.2 12 15 13.3 15 14.8C15 17 13.2 18.8 11 18.8C8.8 18.8 7 17 7 14.8C7 13.3 7.8 12 9 11.3V3.5Z" stroke="#1A73E8" stroke-width="1.5" stroke-linejoin="round"></path><circle cx="11" cy="14.8" r="1.8" fill="#1A73E8"></circle></svg>
-              <p style="margin:0;font-size:13.5px;line-height:1.6;color:#174EA6"><strong style="color:#0B57D0">R363 storage standard: ≤5&nbsp;°C within 3 hours.</strong> Our compartment runs at 0–3&nbsp;°C — comfortably inside the standard, from collection to hand-over.</p>
+              <p style="margin:0;font-size:13.5px;line-height:1.6;color:#174EA6"><strong style="color:#0B57D0">Temperature context:</strong> R363’s ≤5&nbsp;°C within three hours requirement is a surface-temperature benchmark for human remains received on approved premises. Our stated operating range during transport is 0–3&nbsp;°C.</p>
             </div>
           </div>
         </div>
@@ -982,7 +1152,7 @@
       <section style="padding:0 20px">
         <div style="max-width:1140px;margin:0 auto;background:#F8F9FA;border:1px solid #DADCE0;border-radius:12px;padding:16px 20px;display:flex;gap:12px;align-items:flex-start">
           <svg width="18" height="18" viewBox="0 0 18 18" fill="none" style="flex-shrink:0;margin-top:2px"><path d="M9 1.5L15 4V8.5C15 12.5 12.5 15.5 9 16.5C5.5 15.5 3 12.5 3 8.5V4L9 1.5Z" stroke="#1A73E8" stroke-width="1.4" stroke-linejoin="round"></path></svg>
-          <p style="margin:0;font-size:13px;line-height:1.6;color:#5F6368"><strong style="color:#202124">Transport-only — no storage premises.</strong> We do not store human remains, so the premises-based Certificate of Competence requirement does not apply to our operation. Municipal applications (such as eThekwini's) disclose our transportation methods and vehicle registration details. Storage standard under Regulation 10(6), National Health Act 61 of 2003 · Regulation R363.</p>
+          <p style="margin:0;font-size:13px;line-height:1.6;color:#5F6368"><strong style="color:#202124">Transport-only — no preparation or storage service.</strong> R363 Certificates of Competence are issued for approved funeral undertaker premises or mortuaries used for preparation or storage. We provide the direct journey between authorised points; documentation and any municipal requirements are confirmed with the relevant parties for each route.</p>
         </div>
       </section>
       <section style="padding:24px 20px clamp(64px,9vw,88px)">
