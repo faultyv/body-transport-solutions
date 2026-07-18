@@ -330,6 +330,28 @@
     .bts-diagram-badge b { display: block; font-size: clamp(13px,1.6vw,17px); line-height: 1.1; }
     .bts-diagram-badge span { display: block; font-size: clamp(8px,1vw,10.5px); opacity: .92; margin-top: 2px; }
 
+    /* ===== Animated KZN route map ===== */
+    .bts-map-wrap { position: relative; max-width: 880px; margin: clamp(24px,4vw,40px) auto 0; border-radius: 24px; overflow: hidden; border: 1px solid rgba(26,115,232,.25); box-shadow: 0 18px 44px rgba(11,37,69,.35); isolation: isolate; }
+    .bts-map-wrap svg { display: block; width: 100%; height: auto; }
+    .bts-map-title { position: absolute; top: 14px; right: 16px; text-align: right; z-index: 2; color: #FFFFFF; background: rgba(11,37,69,.45); border: 1px solid rgba(156,199,255,.25); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); border-radius: 14px; padding: 10px 16px; }
+    .bts-map-title b { display: block; font-size: clamp(14px,1.9vw,19px); line-height: 1.15; }
+    .bts-map-title span { display: block; font-size: clamp(9px,1.2vw,12px); color: #B7D6FF; margin-top: 3px; }
+    .bts-map-foot { position: absolute; bottom: 12px; left: 16px; z-index: 2; display: flex; align-items: center; gap: 10px; color: rgba(255,255,255,.65); font-size: clamp(8.5px,1.1vw,11.5px); }
+    .bts-map-flag { height: 4px; width: 90px; border-radius: 2px; background: linear-gradient(90deg,#007749 0% 20%,#FFB81C 20% 40%,#E03C31 40% 60%,#001489 60% 80%,#111111 80% 100%); }
+    .bts-route-base { fill: none; stroke: rgba(156,199,255,.28); stroke-width: 3; }
+    .bts-route-flow { fill: none; stroke: #9CC7FF; stroke-width: 3.5; stroke-linecap: round; stroke-dasharray: 12 138; animation: btsRouteFlow 3s linear infinite; opacity: .9; }
+    .bts-route-flow:nth-of-type(odd) { animation-delay: .8s; }
+    .bts-route-dash { fill: none; stroke: rgba(156,199,255,.45); stroke-width: 2.5; stroke-dasharray: 6 10; stroke-linecap: round; }
+    .bts-hub-ring { transform-box: fill-box; transform-origin: center; animation: btsHubPulse 2.4s ease-out infinite; }
+    @keyframes btsRouteFlow { to { stroke-dashoffset: -150; } }
+    @keyframes btsHubPulse { 0% { transform: scale(1); opacity: .9; } 100% { transform: scale(2.2); opacity: 0; } }
+    .bts-map-city { fill: #E8F0FE; font-weight: 500; font-size: 21px; font-family: 'Roboto', Arial, sans-serif; }
+    .bts-map-time { fill: #9CC7FF; font-weight: 400; font-size: 17px; font-family: 'Roboto', Arial, sans-serif; }
+    .bts-map-hublabel { fill: #FFB81C; font-weight: 700; font-size: 22px; font-family: 'Roboto', Arial, sans-serif; }
+    .bts-map-hubsub { fill: rgba(255,184,28,.75); font-weight: 400; font-size: 15px; font-family: 'Roboto', Arial, sans-serif; }
+    .bts-map-arr { fill: #B7D6FF; font-weight: 500; font-size: 16.5px; font-style: italic; font-family: 'Roboto', Arial, sans-serif; }
+    .bts-map-ocean { fill: rgba(255,255,255,.16); font-style: italic; letter-spacing: .35em; font-size: 22px; font-family: 'Roboto', Arial, sans-serif; }
+
     @media (prefers-reduced-motion: reduce) {
       *, *::before, *::after { animation: none !important; transition: none !important; }
     }
@@ -592,6 +614,64 @@
             </sc-for>
           </div>
         </div>
+      
+        <div class="bts-map-wrap">
+          <svg viewBox="0 0 1000 900" role="img" aria-label="Animated map of KwaZulu-Natal showing refrigerated transport routes from the Cato Ridge hub">
+            <defs>
+              <linearGradient id="btsMapBg" x1="0" y1="0" x2="1" y2="1">
+                <stop offset="0" stop-color="#0B2545"></stop><stop offset="1" stop-color="#123B70"></stop>
+              </linearGradient>
+              <pattern id="btsMapDots" width="26" height="26" patternUnits="userSpaceOnUse">
+                <circle cx="2" cy="2" r="1.3" fill="rgba(255,255,255,0.05)"></circle>
+              </pattern>
+            </defs>
+            <rect width="1000" height="900" fill="url(#btsMapBg)"></rect>
+            <rect width="1000" height="900" fill="url(#btsMapDots)"></rect>
+            <path d="M918 68 L826 310 L747 422 L618 506 L532 627 L403 785 L350 841 L221 795 L157 739 L124 636 L81 515 L157 403 L253 254 L296 170 L478 142 L650 87 Z" fill="rgba(37,72,128,.55)" stroke="rgba(156,199,255,.35)" stroke-width="2" stroke-linejoin="round"></path>
+            <text class="bts-map-ocean" x="700" y="712" transform="rotate(-38 700 712)">INDIAN OCEAN</text>
+            <path class="bts-route-base" d="M431 595 Q490 605 532 627"></path>
+            <path class="bts-route-base" d="M431 595 Q410 580 388 571"></path>
+            <path class="bts-route-base" d="M431 595 C 500 650 470 730 403 785"></path>
+            <path class="bts-route-base" d="M431 595 C 560 600 700 500 747 422"></path>
+            <path class="bts-route-base" d="M431 595 C 360 480 290 330 292 226"></path>
+            <path class="bts-route-base" d="M431 595 C 330 660 240 720 182 748"></path>
+            <path class="bts-route-flow" d="M431 595 Q490 605 532 627"></path>
+            <path class="bts-route-flow" d="M431 595 Q410 580 388 571"></path>
+            <path class="bts-route-flow" d="M431 595 C 500 650 470 730 403 785"></path>
+            <path class="bts-route-flow" d="M431 595 C 560 600 700 500 747 422"></path>
+            <path class="bts-route-flow" d="M431 595 C 360 480 290 330 292 226"></path>
+            <path class="bts-route-flow" d="M431 595 C 330 660 240 720 182 748"></path>
+            <path class="bts-route-dash" d="M292 226 C 260 160 215 118 158 88"></path>
+            <path class="bts-route-dash" d="M182 748 C 145 788 115 818 82 848"></path>
+            <circle cx="532" cy="627" r="7" fill="#FFFFFF"></circle>
+            <circle cx="388" cy="571" r="7" fill="#FFFFFF"></circle>
+            <circle cx="403" cy="785" r="7" fill="#FFFFFF"></circle>
+            <circle cx="747" cy="422" r="7" fill="#FFFFFF"></circle>
+            <circle cx="292" cy="226" r="7" fill="#FFFFFF"></circle>
+            <circle cx="260" cy="375" r="4.5" fill="rgba(255,255,255,.7)"></circle>
+            <circle cx="182" cy="748" r="7" fill="#FFFFFF"></circle>
+            <circle class="bts-hub-ring" cx="431" cy="595" r="12" fill="none" stroke="#FFB81C" stroke-width="3"></circle>
+            <circle cx="431" cy="595" r="9" fill="#FFB81C" stroke="#0B2545" stroke-width="3"></circle>
+            <text class="bts-map-city" x="550" y="622">Durban</text>
+            <text class="bts-map-time" x="550" y="645">&#177;45 min</text>
+            <text class="bts-map-city" x="376" y="552" text-anchor="end">Pietermaritzburg</text>
+            <text class="bts-map-time" x="376" y="574" text-anchor="end">&#177;30 min</text>
+            <text class="bts-map-city" x="403" y="818" text-anchor="middle">Port Shepstone</text>
+            <text class="bts-map-time" x="403" y="840" text-anchor="middle">&#177;2 hrs</text>
+            <text class="bts-map-city" x="765" y="416">Richards Bay</text>
+            <text class="bts-map-time" x="765" y="439">&#177;2.5 hrs</text>
+            <text class="bts-map-city" x="310" y="218">Newcastle</text>
+            <text class="bts-map-time" x="310" y="241">&#177;3 hrs</text>
+            <text class="bts-map-time" x="274" y="366">Ladysmith</text>
+            <text class="bts-map-city" x="182" y="726" text-anchor="middle">Kokstad</text>
+            <text class="bts-map-hublabel" x="449" y="574">CATO RIDGE</text>
+            <text class="bts-map-hubsub" x="449" y="595">HUB &#183; N3 corridor</text>
+            <text class="bts-map-arr" x="170" y="76">Gauteng &#183; by arrangement</text>
+            <text class="bts-map-arr" x="100" y="842">Eastern Cape &#183; by arrangement</text>
+          </svg>
+          <div class="bts-map-title"><b>KZN route network</b><span>Daily refrigerated transfers &#183; surrounding provinces by arrangement</span></div>
+          <div class="bts-map-foot"><span class="bts-map-flag"></span><span>Proudly South African &#183; Transport-only operator</span></div>
+        </div>
       </section>
 
       <!-- FAQ -->
@@ -821,6 +901,65 @@
         <div style="max-width:1140px;margin:0 auto">
           <h1 style="font-weight:700;font-size:clamp(28px,5.5vw,42px);margin:0 0 14px;letter-spacing:-0.02em;color:#202124"><span class="bts-grad">KZN-focused</span> transport support</h1>
           <p style="font-size:16px;line-height:1.65;color:#5F6368;max-width:720px;margin:0">Based in Cato Ridge on the N3. We are transport-only and do not store human remains — so we prioritise routes closest to our base and schedule longer transfers by arrangement.</p>
+        </div>
+      </section>
+      <section style="padding:clamp(32px,5vw,48px) 20px 0">
+        <div class="bts-map-wrap">
+          <svg viewBox="0 0 1000 900" role="img" aria-label="Animated map of KwaZulu-Natal showing refrigerated transport routes from the Cato Ridge hub">
+            <defs>
+              <linearGradient id="btsMapBg" x1="0" y1="0" x2="1" y2="1">
+                <stop offset="0" stop-color="#0B2545"></stop><stop offset="1" stop-color="#123B70"></stop>
+              </linearGradient>
+              <pattern id="btsMapDots" width="26" height="26" patternUnits="userSpaceOnUse">
+                <circle cx="2" cy="2" r="1.3" fill="rgba(255,255,255,0.05)"></circle>
+              </pattern>
+            </defs>
+            <rect width="1000" height="900" fill="url(#btsMapBg)"></rect>
+            <rect width="1000" height="900" fill="url(#btsMapDots)"></rect>
+            <path d="M918 68 L826 310 L747 422 L618 506 L532 627 L403 785 L350 841 L221 795 L157 739 L124 636 L81 515 L157 403 L253 254 L296 170 L478 142 L650 87 Z" fill="rgba(37,72,128,.55)" stroke="rgba(156,199,255,.35)" stroke-width="2" stroke-linejoin="round"></path>
+            <text class="bts-map-ocean" x="700" y="712" transform="rotate(-38 700 712)">INDIAN OCEAN</text>
+            <path class="bts-route-base" d="M431 595 Q490 605 532 627"></path>
+            <path class="bts-route-base" d="M431 595 Q410 580 388 571"></path>
+            <path class="bts-route-base" d="M431 595 C 500 650 470 730 403 785"></path>
+            <path class="bts-route-base" d="M431 595 C 560 600 700 500 747 422"></path>
+            <path class="bts-route-base" d="M431 595 C 360 480 290 330 292 226"></path>
+            <path class="bts-route-base" d="M431 595 C 330 660 240 720 182 748"></path>
+            <path class="bts-route-flow" d="M431 595 Q490 605 532 627"></path>
+            <path class="bts-route-flow" d="M431 595 Q410 580 388 571"></path>
+            <path class="bts-route-flow" d="M431 595 C 500 650 470 730 403 785"></path>
+            <path class="bts-route-flow" d="M431 595 C 560 600 700 500 747 422"></path>
+            <path class="bts-route-flow" d="M431 595 C 360 480 290 330 292 226"></path>
+            <path class="bts-route-flow" d="M431 595 C 330 660 240 720 182 748"></path>
+            <path class="bts-route-dash" d="M292 226 C 260 160 215 118 158 88"></path>
+            <path class="bts-route-dash" d="M182 748 C 145 788 115 818 82 848"></path>
+            <circle cx="532" cy="627" r="7" fill="#FFFFFF"></circle>
+            <circle cx="388" cy="571" r="7" fill="#FFFFFF"></circle>
+            <circle cx="403" cy="785" r="7" fill="#FFFFFF"></circle>
+            <circle cx="747" cy="422" r="7" fill="#FFFFFF"></circle>
+            <circle cx="292" cy="226" r="7" fill="#FFFFFF"></circle>
+            <circle cx="260" cy="375" r="4.5" fill="rgba(255,255,255,.7)"></circle>
+            <circle cx="182" cy="748" r="7" fill="#FFFFFF"></circle>
+            <circle class="bts-hub-ring" cx="431" cy="595" r="12" fill="none" stroke="#FFB81C" stroke-width="3"></circle>
+            <circle cx="431" cy="595" r="9" fill="#FFB81C" stroke="#0B2545" stroke-width="3"></circle>
+            <text class="bts-map-city" x="550" y="622">Durban</text>
+            <text class="bts-map-time" x="550" y="645">&#177;45 min</text>
+            <text class="bts-map-city" x="376" y="552" text-anchor="end">Pietermaritzburg</text>
+            <text class="bts-map-time" x="376" y="574" text-anchor="end">&#177;30 min</text>
+            <text class="bts-map-city" x="403" y="818" text-anchor="middle">Port Shepstone</text>
+            <text class="bts-map-time" x="403" y="840" text-anchor="middle">&#177;2 hrs</text>
+            <text class="bts-map-city" x="765" y="416">Richards Bay</text>
+            <text class="bts-map-time" x="765" y="439">&#177;2.5 hrs</text>
+            <text class="bts-map-city" x="310" y="218">Newcastle</text>
+            <text class="bts-map-time" x="310" y="241">&#177;3 hrs</text>
+            <text class="bts-map-time" x="274" y="366">Ladysmith</text>
+            <text class="bts-map-city" x="182" y="726" text-anchor="middle">Kokstad</text>
+            <text class="bts-map-hublabel" x="449" y="574">CATO RIDGE</text>
+            <text class="bts-map-hubsub" x="449" y="595">HUB &#183; N3 corridor</text>
+            <text class="bts-map-arr" x="170" y="76">Gauteng &#183; by arrangement</text>
+            <text class="bts-map-arr" x="100" y="842">Eastern Cape &#183; by arrangement</text>
+          </svg>
+          <div class="bts-map-title"><b>KZN route network</b><span>Daily refrigerated transfers &#183; surrounding provinces by arrangement</span></div>
+          <div class="bts-map-foot"><span class="bts-map-flag"></span><span>Proudly South African &#183; Transport-only operator</span></div>
         </div>
       </section>
       <section style="padding:clamp(44px,7vw,72px) 20px clamp(64px,9vw,88px)">
