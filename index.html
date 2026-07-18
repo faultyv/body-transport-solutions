@@ -171,8 +171,8 @@
     }
 
     /* Photos: slow zoom on hover */
-    img[src*="fridge"], .hero-vehicle img { transition: transform .7s cubic-bezier(.2,.6,.2,1); }
-    div:hover > img[src*="fridge"] { transform: scale(1.045); }
+    img[src*="fridge"], img[src*="airflow"], .hero-vehicle img { transition: transform .7s cubic-bezier(.2,.6,.2,1); }
+    div:hover > img[src*="fridge"], div:hover > img[src*="airflow"] { transform: scale(1.045); }
     .hero-vehicle:hover img { transform: scale(1.05); }
 
     /* Page switch: content rises in */
@@ -386,8 +386,14 @@
       <!-- Vehicle -->
       <section style="background:#F8F9FA;padding:clamp(48px,7vw,80px) 20px">
         <div style="max-width:1140px;margin:0 auto;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,340px),1fr));gap:clamp(28px,4vw,56px);align-items:center">
-          <div style="position:relative;height:clamp(240px,38vw,360px);border-radius:24px;overflow:hidden;border:1px solid #DADCE0">
-            <img src="./assets/fridge.jpg" loading="lazy" decoding="async" alt="Refrigerated compartment with stainless steel interior and dedicated loading tray" style="width:100%;height:100%;object-fit:cover;display:block">
+          <div style="display:flex;flex-direction:column;gap:12px">
+            <div style="position:relative;height:clamp(210px,30vw,300px);border-radius:24px;overflow:hidden;border:1px solid #DADCE0">
+              <img src="./assets/airflow.jpg" loading="lazy" decoding="async" alt="Forced-air refrigeration unit cooling the dedicated stainless steel compartment inside the van" style="width:100%;height:100%;object-fit:cover;display:block">
+              <div class="hero-vehicle__label"><span class="hero-vehicle__label-dot"></span>Forced-air refrigeration</div>
+            </div>
+            <div style="position:relative;height:clamp(130px,18vw,180px);border-radius:20px;overflow:hidden;border:1px solid #DADCE0">
+              <img src="./assets/fridge.jpg" loading="lazy" decoding="async" alt="Stainless steel refrigerated compartment with dedicated loading tray" style="width:100%;height:100%;object-fit:cover;object-position:50% 45%;display:block">
+            </div>
           </div>
           <div>
             <h2 style="font-weight:700;font-size:clamp(24px,4.5vw,34px);margin:0 0 12px;letter-spacing:-0.01em;color:#202124">Dedicated refrigerated VW Transporter</h2>
