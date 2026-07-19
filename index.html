@@ -63,7 +63,7 @@
     a:hover { color: #174EA6; }
     input::placeholder, textarea::placeholder { color: #9AA0A6; }
     input:focus, textarea:focus, select:focus { outline: 2px solid #1A73E8; outline-offset: 0; border-color: #1A73E8; }
-    ::-webkit-scrollbar { height: 0; }
+    ::-webkit-scrollbar { height: 0; width: 11px; }
     .hero-vehicle {
       position: relative;
       height: clamp(280px, 40vw, 410px);
@@ -530,7 +530,17 @@
     .bts-sub3 { display: inline-block; animation: btsIn .5s 1.08s both ease; color: #1A73E8; font-weight: 500; }
     .bts-ctas { animation: btsIn .5s 1.25s both ease; }
     .bts-trust { animation: btsIn .5s 1.4s both ease; }
-    .hero-vehicle { animation: btsIn .6s .45s both cubic-bezier(.2,.7,.3,1); }
+    .hero-vehicle { animation: btsHeroFrame .9s .35s both cubic-bezier(.2,.7,.3,1); }
+    @keyframes btsHeroFrame { from { opacity: 0; transform: translateY(18px) scale(.985); } to { opacity: 1; transform: none; } }
+    .hero-vehicle img { animation: btsHeroImg 1.15s .35s both cubic-bezier(.2,.7,.3,1), btsKen 26s 1.6s ease-in-out infinite alternate; }
+    @keyframes btsHeroImg { from { filter: blur(9px); transform: scale(1.09); } to { filter: blur(0); transform: scale(1.01); } }
+    .hero-vehicle::before {
+      content: ''; position: absolute; inset: 0; z-index: 2; pointer-events: none;
+      background: linear-gradient(115deg, transparent 35%, rgba(255,255,255,.20) 50%, transparent 65%);
+      transform: translateX(-130%); animation: btsHeroSweep 9s 2.4s ease-in-out infinite;
+    }
+    @keyframes btsHeroSweep { 0%, 76% { transform: translateX(-130%); } 92%, 100% { transform: translateX(130%); } }
+    .hero-vehicle__label { animation: btsIn .5s 1.2s both ease; }
     @keyframes btsIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: none; } }
 
     /* FAQ as a WhatsApp-style conversation */
@@ -585,6 +595,32 @@
     /* Sticky call button: the phone rings every few seconds */
     div[style*="position: fixed"][style*="bottom: 16px"] a:first-child svg { animation: btsRingRing 7s ease-in-out infinite; transform-origin: 50% 40%; }
     @keyframes btsRingRing { 0%, 86%, 100% { transform: none; } 89% { transform: rotate(-13deg); } 92% { transform: rotate(11deg); } 95% { transform: rotate(-6deg); } }
+
+    /* ===== Epic polish layer ===== */
+
+    /* Styled vertical scrollbar (horizontal stays hidden) */
+    ::-webkit-scrollbar-thumb { background: #DADCE0; border-radius: 8px; border: 3px solid #FFFFFF; }
+    ::-webkit-scrollbar-thumb:hover { background: #BDC1C6; }
+    ::-webkit-scrollbar-track { background: transparent; }
+
+    /* Pill chips warm to the touch */
+    span[style*="border-radius: 999px"][style*="background: rgb(248, 249, 250)"] { transition: background-color .2s ease, border-color .2s ease, transform .2s ease; }
+    span[style*="border-radius: 999px"][style*="background: rgb(248, 249, 250)"]:hover { background-color: #E8F0FE !important; border-color: #D2E3FC !important; transform: translateY(-1px); }
+
+    /* Number circles invert on card hover (text-only circles) */
+    main div:hover > div[style*="border-radius: 50%"][style*="background: rgb(232, 240, 254)"]:not(:has(svg)) {
+      background-image: linear-gradient(135deg, #1A73E8, #0B57D0);
+      color: #FFFFFF !important;
+      box-shadow: 0 4px 14px rgba(26,115,232,.35);
+    }
+
+    /* Request form: labels light up with their field */
+    [data-screen-label="Emergency Transport Request"] label > span { transition: color .2s ease; }
+    [data-screen-label="Emergency Transport Request"] label:focus-within > span { color: #1A73E8; }
+    input:hover, select:hover, textarea:hover { border-color: #BDC1C6 !important; }
+
+    /* About: plain-language box gets a spine */
+    main div[style*="background: rgb(232, 240, 254)"][style*="border-radius: 18px"] { box-shadow: inset 4px 0 0 0 rgba(26,115,232,.75); }
 
     /* Apple-style continuous corner curvature on rectangular surfaces only */
     @supports (corner-shape: squircle) {
