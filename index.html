@@ -1188,24 +1188,27 @@
           <sc-if value="{{ notSent }}" hint-placeholder-val="{{ true }}">
             <div style="background:#FFFFFF;border:1px solid #DADCE0;border-radius:18px;padding:clamp(20px,4vw,36px)">
               <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,280px),1fr));gap:16px 18px">
-                <label style="display:flex;flex-direction:column;gap:6px"><span style="font-size:13px;font-weight:500;color:#3C4043">Name</span><input type="text" style="border:1px solid #DADCE0;border-radius:12px;padding:12px 14px;font-size:15px;font-family:'Roboto',sans-serif"></label>
-                <label style="display:flex;flex-direction:column;gap:6px"><span style="font-size:13px;font-weight:500;color:#3C4043">Company / Funeral parlour</span><input type="text" style="border:1px solid #DADCE0;border-radius:12px;padding:12px 14px;font-size:15px;font-family:'Roboto',sans-serif"></label>
-                <label style="display:flex;flex-direction:column;gap:6px"><span style="font-size:13px;font-weight:500;color:#3C4043">Phone</span><input type="tel" style="border:1px solid #DADCE0;border-radius:12px;padding:12px 14px;font-size:15px;font-family:'Roboto',sans-serif"></label>
-                <label style="display:flex;flex-direction:column;gap:6px"><span style="font-size:13px;font-weight:500;color:#3C4043">WhatsApp number</span><input type="tel" style="border:1px solid #DADCE0;border-radius:12px;padding:12px 14px;font-size:15px;font-family:'Roboto',sans-serif"></label>
-                <label style="display:flex;flex-direction:column;gap:6px;grid-column:1 / -1"><span style="font-size:13px;font-weight:500;color:#3C4043">Email</span><input type="email" style="border:1px solid #DADCE0;border-radius:12px;padding:12px 14px;font-size:15px;font-family:'Roboto',sans-serif"></label>
-                <label style="display:flex;flex-direction:column;gap:6px"><span style="font-size:13px;font-weight:500;color:#3C4043">Collection point</span><input type="text" placeholder="Facility name, town / suburb" style="border:1px solid #DADCE0;border-radius:12px;padding:12px 14px;font-size:15px;font-family:'Roboto',sans-serif"></label>
-                <label style="display:flex;flex-direction:column;gap:6px"><span style="font-size:13px;font-weight:500;color:#3C4043">Destination</span><input type="text" placeholder="Facility name, town / suburb" style="border:1px solid #DADCE0;border-radius:12px;padding:12px 14px;font-size:15px;font-family:'Roboto',sans-serif"></label>
-                <label style="display:flex;flex-direction:column;gap:6px"><span style="font-size:13px;font-weight:500;color:#3C4043">Date and time required</span><input type="text" placeholder="e.g. 12 July, 08:00" style="border:1px solid #DADCE0;border-radius:12px;padding:12px 14px;font-size:15px;font-family:'Roboto',sans-serif"></label>
-                <label style="display:flex;flex-direction:column;gap:6px"><span style="font-size:13px;font-weight:500;color:#3C4043">Is this urgent?</span><select style="border:1px solid #DADCE0;border-radius:12px;padding:12px 14px;font-size:15px;font-family:'Roboto',sans-serif;background:#FFFFFF;color:#202124"><option>Not urgent — scheduled</option><option>Urgent — within 24 hours</option><option>Emergency — immediate</option></select></label>
-                <label style="display:flex;flex-direction:column;gap:6px"><span style="font-size:13px;font-weight:500;color:#3C4043">Deceased name <span style="color:#9AA0A6;font-weight:400">(optional)</span></span><input type="text" style="border:1px solid #DADCE0;border-radius:12px;padding:12px 14px;font-size:15px;font-family:'Roboto',sans-serif"></label>
-                <label style="display:flex;flex-direction:column;gap:6px"><span style="font-size:13px;font-weight:500;color:#3C4043">Documentation available?</span><select style="border:1px solid #DADCE0;border-radius:12px;padding:12px 14px;font-size:15px;font-family:'Roboto',sans-serif;background:#FFFFFF;color:#202124"><option>Yes — all documentation available</option><option>Partially — some documents pending</option><option>Not yet — need guidance</option></select></label>
-                <label style="display:flex;flex-direction:column;gap:6px"><span style="font-size:13px;font-weight:500;color:#3C4043">Special handling required?</span><select style="border:1px solid #DADCE0;border-radius:12px;padding:12px 14px;font-size:15px;font-family:'Roboto',sans-serif;background:#FFFFFF;color:#202124"><option>No</option><option>Yes — will explain in message</option><option>Unsure</option></select></label>
-                <label style="display:flex;flex-direction:column;gap:6px;grid-column:1 / -1"><span style="font-size:13px;font-weight:500;color:#3C4043">Message</span><textarea rows="4" placeholder="Any additional details" style="border:1px solid #DADCE0;border-radius:12px;padding:12px 14px;font-size:15px;font-family:'Roboto',sans-serif;resize:vertical"></textarea></label>
+                <label style="display:flex;flex-direction:column;gap:6px"><span style="font-size:13px;font-weight:500;color:#3C4043">Name <span style="color:#C5221F">*</span></span><input type="text" name="name" style="border:1px solid #DADCE0;border-radius:12px;padding:12px 14px;font-size:15px;font-family:'Roboto',sans-serif"></label>
+                <label style="display:flex;flex-direction:column;gap:6px"><span style="font-size:13px;font-weight:500;color:#3C4043">Company / Funeral parlour</span><input type="text" name="company" style="border:1px solid #DADCE0;border-radius:12px;padding:12px 14px;font-size:15px;font-family:'Roboto',sans-serif"></label>
+                <label style="display:flex;flex-direction:column;gap:6px"><span style="font-size:13px;font-weight:500;color:#3C4043">Phone <span style="color:#C5221F">*</span></span><input type="tel" name="phone" style="border:1px solid #DADCE0;border-radius:12px;padding:12px 14px;font-size:15px;font-family:'Roboto',sans-serif"></label>
+                <label style="display:flex;flex-direction:column;gap:6px"><span style="font-size:13px;font-weight:500;color:#3C4043">WhatsApp number</span><input type="tel" name="whatsapp" style="border:1px solid #DADCE0;border-radius:12px;padding:12px 14px;font-size:15px;font-family:'Roboto',sans-serif"></label>
+                <label style="display:flex;flex-direction:column;gap:6px;grid-column:1 / -1"><span style="font-size:13px;font-weight:500;color:#3C4043">Email</span><input type="email" name="email" style="border:1px solid #DADCE0;border-radius:12px;padding:12px 14px;font-size:15px;font-family:'Roboto',sans-serif"></label>
+                <label style="display:flex;flex-direction:column;gap:6px"><span style="font-size:13px;font-weight:500;color:#3C4043">Collection point</span><input type="text" name="collection" placeholder="Facility name, town / suburb" style="border:1px solid #DADCE0;border-radius:12px;padding:12px 14px;font-size:15px;font-family:'Roboto',sans-serif"></label>
+                <label style="display:flex;flex-direction:column;gap:6px"><span style="font-size:13px;font-weight:500;color:#3C4043">Destination</span><input type="text" name="destination" placeholder="Facility name, town / suburb" style="border:1px solid #DADCE0;border-radius:12px;padding:12px 14px;font-size:15px;font-family:'Roboto',sans-serif"></label>
+                <label style="display:flex;flex-direction:column;gap:6px"><span style="font-size:13px;font-weight:500;color:#3C4043">Date and time required</span><input type="text" name="datetime" placeholder="e.g. 12 July, 08:00" style="border:1px solid #DADCE0;border-radius:12px;padding:12px 14px;font-size:15px;font-family:'Roboto',sans-serif"></label>
+                <label style="display:flex;flex-direction:column;gap:6px"><span style="font-size:13px;font-weight:500;color:#3C4043">Is this urgent?</span><select name="urgency" style="border:1px solid #DADCE0;border-radius:12px;padding:12px 14px;font-size:15px;font-family:'Roboto',sans-serif;background:#FFFFFF;color:#202124"><option>Not urgent — scheduled</option><option>Urgent — within 24 hours</option><option>Emergency — immediate</option></select></label>
+                <label style="display:flex;flex-direction:column;gap:6px"><span style="font-size:13px;font-weight:500;color:#3C4043">Deceased name <span style="color:#9AA0A6;font-weight:400">(optional)</span></span><input type="text" name="deceased" style="border:1px solid #DADCE0;border-radius:12px;padding:12px 14px;font-size:15px;font-family:'Roboto',sans-serif"></label>
+                <label style="display:flex;flex-direction:column;gap:6px"><span style="font-size:13px;font-weight:500;color:#3C4043">Documentation available?</span><select name="documentation" style="border:1px solid #DADCE0;border-radius:12px;padding:12px 14px;font-size:15px;font-family:'Roboto',sans-serif;background:#FFFFFF;color:#202124"><option>Yes — all documentation available</option><option>Partially — some documents pending</option><option>Not yet — need guidance</option></select></label>
+                <label style="display:flex;flex-direction:column;gap:6px"><span style="font-size:13px;font-weight:500;color:#3C4043">Special handling required?</span><select name="handling" style="border:1px solid #DADCE0;border-radius:12px;padding:12px 14px;font-size:15px;font-family:'Roboto',sans-serif;background:#FFFFFF;color:#202124"><option>No</option><option>Yes — will explain in message</option><option>Unsure</option></select></label>
+                <label style="display:flex;flex-direction:column;gap:6px;grid-column:1 / -1"><span style="font-size:13px;font-weight:500;color:#3C4043">Message</span><textarea name="message" rows="4" placeholder="Any additional details" style="border:1px solid #DADCE0;border-radius:12px;padding:12px 14px;font-size:15px;font-family:'Roboto',sans-serif;resize:vertical"></textarea></label>
               </div>
               <div style="display:flex;align-items:center;justify-content:space-between;gap:18px;margin-top:24px;flex-wrap:wrap">
                 <p style="font-size:12.5px;color:#5F6368;margin:0;max-width:420px">Information submitted is treated confidentially and used only to respond to the transport request.</p>
-                <button onClick="{{ submitForm }}" style="background:#1A73E8;color:#FFFFFF;font-weight:500;font-size:15px;padding:13px 30px;border-radius:999px;border:none;cursor:pointer;font-family:'Roboto',sans-serif" style-hover="background:#174EA6">Submit request</button>
+                <button onClick="{{ submitForm }}" style="background:#1A73E8;color:#FFFFFF;font-weight:500;font-size:15px;padding:13px 30px;border-radius:999px;border:none;cursor:pointer;font-family:'Roboto',sans-serif" style-hover="background:#174EA6">{{ submitLabel }}</button>
               </div>
+              <sc-if value="{{ sendFailed }}" hint-placeholder-val="{{ false }}">
+                <p style="color:#C5221F;font-size:13.5px;line-height:1.5;margin:14px 0 0">{{ failMsg }}</p>
+              </sc-if>
             </div>
           </sc-if>
         </div>
@@ -1309,7 +1312,7 @@
 </x-dc>
 <script type="text/x-dc" data-dc-script data-props="{&quot;phone&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;+27 61 589 1505&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Contact details&quot;},&quot;whatsapp&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;+27 61 589 1505&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Contact details&quot;},&quot;email&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;info@bodytransportsolutions.co.za&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Contact details&quot;}}">
 class Component extends DCLogic {
-  state = { page: 'home', sent: false, scrolled: false, ind: { l: 0, w: 0 } };
+  state = { page: 'home', sent: false, scrolled: false, sending: false, failed: false, failMsg: '', ind: { l: 0, w: 0 } };
 
   pages = [
     { key: 'home', label: 'Home' },
@@ -1416,7 +1419,44 @@ class Component extends DCLogic {
       headerShadow: this.state.scrolled ? '0 1px 2px rgba(60,64,67,0.3), 0 1px 3px 1px rgba(60,64,67,0.15)' : 'none',
       sent: this.state.sent,
       notSent: !this.state.sent,
-      submitForm: () => this.setState({ sent: true }),
+      submitLabel: this.state.sending ? 'Sending…' : 'Submit request',
+      sendFailed: this.state.failed,
+      failMsg: this.state.failMsg,
+      submitForm: () => {
+        if (this.state.sending) return;
+        const root = document.querySelector('[data-screen-label="Emergency Transport Request"]');
+        const get = (n) => { const el = root && root.querySelector('[name="' + n + '"]'); return el ? String(el.value || '').trim() : ''; };
+        const fields = ['name','company','phone','whatsapp','email','collection','destination','datetime','urgency','deceased','documentation','handling','message'];
+        const data = {};
+        fields.forEach((f) => { data[f] = get(f); });
+        if (!data.name || !data.phone) {
+          this.setState({ failed: true, failMsg: 'Please fill in at least your name and phone number so we can reach you.' });
+          return;
+        }
+        this.setState({ sending: true, failed: false });
+        const dest = atob('ZGV3YWxkdmlzc2VyOTRAZ21haWwuY29t');
+        const payload = Object.assign({}, data, {
+          _subject: 'Transport request — ' + (data.company || data.name),
+          _template: 'table',
+          _captcha: 'false'
+        });
+        fetch('https://formsubmit.co/ajax/' + dest, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+          body: JSON.stringify(payload)
+        }).then((r) => {
+          if (!r.ok) throw new Error('HTTP ' + r.status);
+          return r.json();
+        }).then(() => {
+          this.setState({ sent: true, sending: false });
+        }).catch(() => {
+          this.setState({
+            sending: false,
+            failed: true,
+            failMsg: 'The request could not be sent right now. Please WhatsApp or call us directly — or try again in a moment.'
+          });
+        });
+      },
       services: [
         { num: '1', title: 'Local collection & transfer', copy: 'For hospitals, mortuaries and funeral parlours requiring local movement of human remains.' },
         { num: '2', title: 'Long-distance transport', copy: 'Transfers to surrounding provinces — Gauteng, Free State, Eastern Cape and Mpumalanga — quoted and scheduled in advance.' },
