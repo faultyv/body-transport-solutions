@@ -1,8 +1,49 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<title>BODY TRANSPORT SOLUTIONS | Refrigerated Human Remains Transport KwaZulu-Natal</title>
+<meta name="description" content="Professional refrigerated human-remains transport and repatriation support for funeral parlours, mortuaries and hospitals across KwaZulu-Natal and surrounding provinces. Based in Cato Ridge on the N3. Available 24/7.">
+<link rel="canonical" href="https://dist-pi-rosy-43.vercel.app/">
+<meta name="theme-color" content="#1A73E8">
+<link rel="icon" type="image/png" href="./assets/favicon.png">
+<link rel="apple-touch-icon" href="./assets/apple-touch-icon.png">
+<link rel="preload" as="image" href="./assets/hero-vehicle.webp">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Body Transport Solutions">
+<meta property="og:title" content="Body Transport Solutions — Refrigerated Human Remains Transport, KZN">
+<meta property="og:description" content="Transport-only human remains logistics across KwaZulu-Natal and surrounding provinces. Refrigerated at 0–3 °C, chain-of-custody on every job, available 24/7.">
+<meta property="og:url" content="https://dist-pi-rosy-43.vercel.app/">
+<meta property="og:image" content="https://dist-pi-rosy-43.vercel.app/assets/og-image.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Body Transport Solutions — Refrigerated Human Remains Transport, KZN">
+<meta name="twitter:description" content="Transport-only human remains logistics across KwaZulu-Natal and surrounding provinces. Available 24/7.">
+<meta name="twitter:image" content="https://dist-pi-rosy-43.vercel.app/assets/og-image.jpg">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "LocalBusiness",
+  "name": "Body Transport Solutions (Pty) Ltd",
+  "description": "Transport-only refrigerated human remains transport and repatriation support for funeral parlours, mortuaries, hospitals and approved providers across KwaZulu-Natal and surrounding provinces.",
+  "url": "https://dist-pi-rosy-43.vercel.app/",
+  "image": "https://dist-pi-rosy-43.vercel.app/assets/og-image.jpg",
+  "logo": "https://dist-pi-rosy-43.vercel.app/assets/logo.webp",
+  "telephone": "+27615891505",
+  "email": "info@bodytransportsolutions.co.za",
+  "address": {
+    "@type": "PostalAddress",
+    "addressLocality": "Cato Ridge",
+    "addressRegion": "KwaZulu-Natal",
+    "addressCountry": "ZA"
+  },
+  "areaServed": ["KwaZulu-Natal", "Gauteng", "Free State", "Eastern Cape", "Mpumalanga"],
+  "openingHours": "Mo-Su 00:00-24:00",
+  "taxID": "9001928366"
+}
+</script>
 <script src="./support.js"></script>
 </head>
 <body>
@@ -1329,7 +1370,7 @@ class Component extends DCLogic {
     const apply = () => {
       const h = (window.location.hash || '').replace('#', '');
       const keys = this.pages.map(p => p.key).concat(['request']);
-      if (keys.includes(h) && h !== this.state.page) { this.setState({ page: h, sent: false }); if (this._measure) this._measure(); }
+      if (keys.includes(h) && h !== this.state.page) { this.setState({ page: h, sent: false }); this._setTitle(h); if (this._measure) this._measure(); }
     };
     this._onHash = apply;
     window.addEventListener('hashchange', apply);
@@ -1361,10 +1402,19 @@ class Component extends DCLogic {
     window.removeEventListener('resize', this._measure);
   }
 
+  _setTitle(key) {
+    const found = this.pages.find(p => p.key === key);
+    const label = key === 'request' ? 'Request Transport' : (found ? found.label : '');
+    document.title = (key === 'home' || !label)
+      ? 'BODY TRANSPORT SOLUTIONS | Refrigerated Human Remains Transport KwaZulu-Natal'
+      : label + ' | Body Transport Solutions';
+  }
+
   go(key) {
     this.setState({ page: key, sent: false });
     try { history.replaceState(null, '', '#' + key); } catch (e) {}
     window.scrollTo(0, 0);
+    this._setTitle(key);
     if (this._measure) this._measure();
   }
 
