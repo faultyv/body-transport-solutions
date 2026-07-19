@@ -48,6 +48,7 @@
 }
 </script>
 <script src="./support.js"></script>
+<script src="./i18n.js" defer></script>
 </head>
 <body>
 <x-dc>
@@ -192,6 +193,40 @@
     .bts-header { animation: btsHeaderIn .45s ease both; }
     @keyframes btsHeaderIn { from { transform: translateY(-14px); opacity: 0; } to { transform: none; opacity: 1; } }
     .bts-actions { margin-left: auto; display: flex; align-items: center; gap: 10px; flex-shrink: 0; }
+    .bts-lang-wrap { flex: 0 0 auto; margin-left: 8px; }
+    .bts-lang-switch {
+      --bts-lang-index: 0;
+      position: relative; width: 108px; height: 36px; padding: 3px;
+      display: grid; grid-template-columns: repeat(3,1fr); align-items: stretch;
+      border: 1px solid #D7E2F1; border-radius: 999px; background: #F1F5FA;
+      box-shadow: inset 0 1px 3px rgba(29,67,111,.08); isolation: isolate;
+    }
+    .bts-lang-switch::before {
+      content: ''; position: absolute; z-index: -1; top: 3px; bottom: 3px; left: 3px;
+      width: calc((100% - 6px) / 3); border-radius: 999px; background: #FFFFFF;
+      box-shadow: 0 1px 2px rgba(32,63,99,.12), 0 3px 10px rgba(26,115,232,.13), inset 0 0 0 1px rgba(26,115,232,.16);
+      transform: translateX(calc(var(--bts-lang-index) * 100%));
+      transition: transform .28s cubic-bezier(.2,.8,.2,1), box-shadow .2s ease;
+    }
+    .bts-lang-switch[data-active="af"] { --bts-lang-index: 1; }
+    .bts-lang-switch[data-active="zu"] { --bts-lang-index: 2; }
+    .bts-lang-option {
+      appearance: none; border: 0; border-radius: 999px; background: transparent; padding: 0;
+      color: #68788A; font: 700 10px/1 'Roboto',Arial,sans-serif; letter-spacing: .055em;
+      cursor: pointer; position: relative; transition: color .18s ease, transform .18s ease;
+    }
+    .bts-lang-option:hover { color: #0B57D0; }
+    .bts-lang-option:active { transform: scale(.92); }
+    .bts-lang-option[aria-pressed="true"] { color: #0B57D0; }
+    .bts-lang-option:focus-visible { outline: 2px solid #1A73E8; outline-offset: 1px; }
+    @media (min-width: 980px) {
+      html[lang="af"] .bts-tab,
+      html[lang="zu"] .bts-tab { padding-inline: 8px; font-size: 13px; }
+      html[lang="af"] .bts-lang-wrap,
+      html[lang="zu"] .bts-lang-wrap { margin-left: 4px; }
+      html[lang="af"] .bts-lang-switch,
+      html[lang="zu"] .bts-lang-switch { width: 102px; }
+    }
     .bts-callbtn {
       width: 40px; height: 40px; border-radius: 50%;
       border: 1px solid #DADCE0; display: grid; place-items: center;
@@ -209,9 +244,11 @@
       .bts-header-inner { flex-wrap: wrap; padding: 8px 12px 0; min-height: 0; }
       .bts-brand { order: 1; } .bts-brand img { height: 46px; }
       .bts-actions { order: 2; margin-left: auto; }
+      .bts-lang-wrap { order: 3; margin: 4px 0 0; padding-left: 4px; align-self: stretch; display: flex; align-items: center; }
+      .bts-lang-switch { width: 101px; height: 38px; }
       .bts-tabs {
-        order: 3; flex-basis: 100%; align-self: auto;
-        margin: 4px -12px 0; padding: 0 18px 0 8px;
+        order: 4; flex: 1 1 0; flex-basis: 0; align-self: auto;
+        margin: 4px -12px 0 0; padding: 0 18px 0 8px;
         background: linear-gradient(90deg,#FFFFFF 0 8px,rgba(255,255,255,0) 24px calc(100% - 28px),#FFFFFF calc(100% - 8px));
         -webkit-mask-image: linear-gradient(90deg,transparent 0,#000 10px,#000 calc(100% - 24px),transparent 100%);
         mask-image: linear-gradient(90deg,transparent 0,#000 10px,#000 calc(100% - 24px),transparent 100%);
@@ -222,6 +259,36 @@
       .bts-callbtn { display: none; }
       .bts-cta { padding: 9px 16px; font-size: 13.5px; }
       .bts-brand img { height: 43px; }
+      .bts-lang-switch { width: 96px; }
+    }
+
+    /* Number markers stay blue on interaction; the process ends intentionally. */
+    .bts-step-number,
+    .bts-operating-num,
+    .bts-process-num { color: #1A73E8 !important; pointer-events: none; }
+    .bts-number-glyph { color: #1A73E8 !important; }
+    .bts-steps > div:hover .bts-step-number,
+    .bts-operating-step:hover .bts-operating-num,
+    .bts-process-step:hover .bts-process-num { color: #0B57D0 !important; background-color: #E8F0FE !important; }
+    .bts-process-step:last-child .bts-process-line { display: none; }
+    .bts-process-step:last-child .bts-process-num { color: #137333 !important; background: #E6F4EA !important; box-shadow: inset 0 0 0 1px rgba(19,115,51,.18), 0 4px 14px rgba(19,115,51,.12); }
+    .bts-process-step:last-child .bts-number-glyph { color: #137333 !important; }
+    .bts-process-step:last-child .bts-process-line::after { display: none !important; }
+    .bts-process-complete { display: none; }
+    .bts-process-step:last-child .bts-process-complete {
+      display: inline-flex; align-items: center; gap: 8px; margin-top: 13px; padding: 8px 12px;
+      border: 1px solid #CEEAD6; border-radius: 999px; background: #F2FBF5;
+      color: #137333; font-size: 12px; font-weight: 700; letter-spacing: .015em;
+    }
+    .bts-process-complete::before { content: '✓'; display: grid; place-items: center; width: 17px; height: 17px; border-radius: 50%; background: #137333; color: #FFFFFF; font-size: 10px; }
+
+    /* Community statement: inclusive without turning people into categories. */
+    .bts-community-panel { grid-template-columns: minmax(0,1.18fr) minmax(280px,.82fr); }
+    .bts-community-groups { padding: clamp(24px,4vw,38px); border-left: 1px solid #D2E3FC; display: flex; align-content: center; align-items: center; flex-wrap: wrap; gap: 9px; }
+    .bts-community-chip { display: inline-flex; align-items: center; min-height: 34px; padding: 8px 12px; border: 1px solid #D7E6F8; border-radius: 999px; background: #FFFFFF; color: #31506F; font-size: 12px; font-weight: 600; box-shadow: 0 3px 10px rgba(37,82,135,.06); }
+    @media (max-width: 760px) {
+      .bts-community-panel { grid-template-columns: 1fr; }
+      .bts-community-groups { border-left: 0; border-top: 1px solid #D2E3FC; padding-top: 20px; }
     }
 
     /* ===== Final editorial system ===== */
@@ -836,6 +903,13 @@
         </sc-for>
         <span class="bts-tab-ind" style="left:{{ indLeft }};width:{{ indWidth }}"></span>
       </nav>
+      <div class="bts-lang-wrap">
+        <div class="bts-lang-switch" role="group" aria-label="Website language" data-active="en">
+          <button type="button" class="bts-lang-option" data-bts-lang="en" aria-pressed="true" title="English">EN</button>
+          <button type="button" class="bts-lang-option" data-bts-lang="af" aria-pressed="false" title="Afrikaans">AF</button>
+          <button type="button" class="bts-lang-option" data-bts-lang="zu" aria-pressed="false" title="isiZulu">ZU</button>
+        </div>
+      </div>
       <div class="bts-actions">
         <a href="{{ telLink }}" class="bts-callbtn" aria-label="Call Body Transport Solutions now" title="Call now">
           <svg width="17" height="17" viewBox="0 0 16 16" fill="none"><path d="M3 2.5C3 2.5 5 2 5.5 3.5L6.5 5.5C6.8 6.2 5.5 7 5.5 7.5C5.5 8.5 7.5 10.5 8.5 10.5C9 10.5 9.8 9.2 10.5 9.5L12.5 10.5C14 11 13.5 13 13.5 13C13 14 11.5 14.2 10.5 14C6.5 13 3 9.5 2 5.5C1.8 4.5 2 3 3 2.5Z" stroke="#1A73E8" stroke-width="1.4" stroke-linejoin="round"></path></svg>
@@ -877,9 +951,9 @@
       </section>
 
       <div class="bts-lux-route" aria-hidden="true">
-        <span class="bts-lux-lbl">Cato Ridge</span>
+        <span class="bts-lux-lbl">KwaZulu-Natal daily</span>
         <span class="bts-lux-line"><i></i></span>
-        <span class="bts-lux-lbl">Durban &middot; PMB &middot; Richards Bay</span>
+        <span class="bts-lux-lbl">Surrounding provinces &middot; by arrangement</span>
       </div>
 
       <!-- Simple 1-2-3 pitch -->
@@ -889,17 +963,17 @@
           <p style="font-size:15px;color:#5F6368;margin:0 0 28px">No complicated process. No hidden steps.</p>
           <div class="bts-steps" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,260px),1fr));gap:14px">
             <div style="background:#FFFFFF;border:1px solid #DADCE0;border-radius:18px;padding:26px;display:flex;flex-direction:column;gap:10px">
-              <div style="width:40px;height:40px;border-radius:50%;background:#E8F0FE;color:#1A73E8;font-weight:700;font-size:17px;display:grid;place-items:center">1</div>
+              <div class="bts-step-number" style="width:40px;height:40px;border-radius:50%;background:#E8F0FE;color:#1A73E8;font-weight:700;font-size:17px;display:grid;place-items:center" style-hover="color:#0B57D0;background:#E8F0FE"><span class="bts-number-glyph">1</span></div>
               <div style="font-weight:700;font-size:17px;color:#202124">You call or WhatsApp</div>
               <p style="font-size:14px;line-height:1.6;color:#5F6368;margin:0">Tell us where to collect, where to deliver, and when. We confirm the price and paperwork straight away.</p>
             </div>
             <div style="background:#FFFFFF;border:1px solid #DADCE0;border-radius:18px;padding:26px;display:flex;flex-direction:column;gap:10px">
-              <div style="width:40px;height:40px;border-radius:50%;background:#E8F0FE;color:#1A73E8;font-weight:700;font-size:17px;display:grid;place-items:center">2</div>
+              <div class="bts-step-number" style="width:40px;height:40px;border-radius:50%;background:#E8F0FE;color:#1A73E8;font-weight:700;font-size:17px;display:grid;place-items:center" style-hover="color:#0B57D0;background:#E8F0FE"><span class="bts-number-glyph">2</span></div>
               <div style="font-weight:700;font-size:17px;color:#202124">We collect</div>
               <p style="font-size:14px;line-height:1.6;color:#5F6368;margin:0">Our driver collects from the hospital, mortuary or funeral parlour — respectfully, in a refrigerated vehicle, with signed records.</p>
             </div>
             <div style="background:#FFFFFF;border:1px solid #DADCE0;border-radius:18px;padding:26px;display:flex;flex-direction:column;gap:10px">
-              <div style="width:40px;height:40px;border-radius:50%;background:#E8F0FE;color:#1A73E8;font-weight:700;font-size:17px;display:grid;place-items:center">3</div>
+              <div class="bts-step-number" style="width:40px;height:40px;border-radius:50%;background:#E8F0FE;color:#1A73E8;font-weight:700;font-size:17px;display:grid;place-items:center" style-hover="color:#0B57D0;background:#E8F0FE"><span class="bts-number-glyph">3</span></div>
               <div style="font-weight:700;font-size:17px;color:#202124">We deliver, signed for</div>
               <p style="font-size:14px;line-height:1.6;color:#5F6368;margin:0">The receiving party signs the handover note. You get proper chain-of-custody paperwork on every job.</p>
             </div>
@@ -1263,17 +1337,19 @@
         <div class="bts-operating-inner">
           <div class="bts-operating-head"><div class="bts-about-kicker">How we operate</div><h2>A direct process built on dignity, documentation and control.</h2></div>
           <div class="bts-operating-flow">
-            <article class="bts-operating-step"><div class="bts-operating-num">1</div><h3>Direct collection</h3><p>We collect on instruction from an authorised facility, provider or responsible party.</p></article>
-            <article class="bts-operating-step"><div class="bts-operating-num">2</div><h3>Refrigerated transfer</h3><p>The compartment is pre-cooled and held at a steady cold temperature up to 3&nbsp;&deg;C, set for the transfer.</p></article>
-            <article class="bts-operating-step"><div class="bts-operating-num">3</div><h3>Signed handover</h3><p>Collection and delivery are recorded, with signed handover documentation.</p></article>
-            <article class="bts-operating-step"><div class="bts-operating-num">4</div><h3>Cleaning log</h3><p>The transport compartment is cleaned and the cleaning record is completed after the job.</p></article>
+            <article class="bts-operating-step"><div class="bts-operating-num" style-hover="color:#0B57D0;background:#E8F0FE"><span class="bts-number-glyph">1</span></div><h3>Direct collection</h3><p>We collect on instruction from an authorised facility, provider or responsible party.</p></article>
+            <article class="bts-operating-step"><div class="bts-operating-num" style-hover="color:#0B57D0;background:#E8F0FE"><span class="bts-number-glyph">2</span></div><h3>Refrigerated transfer</h3><p>The compartment is pre-cooled and held at a steady cold temperature up to 3&nbsp;&deg;C, set for the transfer.</p></article>
+            <article class="bts-operating-step"><div class="bts-operating-num" style-hover="color:#0B57D0;background:#E8F0FE"><span class="bts-number-glyph">3</span></div><h3>Signed handover</h3><p>Collection and delivery are recorded, with signed handover documentation.</p></article>
+            <article class="bts-operating-step"><div class="bts-operating-num" style-hover="color:#0B57D0;background:#E8F0FE"><span class="bts-number-glyph">4</span></div><h3>Cleaning log</h3><p>The transport compartment is cleaned and the cleaning record is completed after the job.</p></article>
           </div>
         </div>
       </section>
-      <section class="bts-bilingual" aria-labelledby="bilingual-heading">
-        <div class="bts-bilingual-panel">
-          <div class="bts-language"><small>English</small><h2 id="bilingual-heading">Respect, discretion and clear records.</h2><p>We provide transport only. Every transfer is handled respectfully and discreetly in a refrigerated vehicle, with signed collection and handover records.</p></div>
-          <div class="bts-language" lang="zu"><small>isiZulu</small><h2>Inhlonipho, ubumfihlo namarekhodi acacile.</h2><p>Sinikeza umsebenzi wokuthutha kuphela. Uhambo ngalunye lwenziwa ngenhlonipho nangobumfihlo ngemoto enesiqandisi, kube namarekhodi asayiniwe lapho kuthathwa nalapho kudluliswa umufi.</p></div>
+      <section class="bts-bilingual" aria-labelledby="community-heading">
+        <div class="bts-bilingual-panel bts-community-panel">
+          <div class="bts-language"><small>KZN, in all its diversity</small><h2 id="community-heading">Every community, treated with dignity.</h2><p>We work respectfully with isiZulu- and Afrikaans-speaking families and providers, and with Indian South African, Hindu, Muslim, Christian and other communities. We follow the cultural or religious instructions supplied by the authorised family or provider while keeping transport, refrigeration and chain-of-custody standards consistent.</p></div>
+          <div class="bts-community-groups" aria-label="Communities and languages we respectfully support">
+            <span class="bts-community-chip">English</span><span class="bts-community-chip">isiZulu</span><span class="bts-community-chip">Afrikaans</span><span class="bts-community-chip">Indian South African</span><span class="bts-community-chip">Hindu</span><span class="bts-community-chip">Muslim</span><span class="bts-community-chip">Christian</span><span class="bts-community-chip">Every KZN community</span>
+          </div>
         </div>
       </section>
       <section class="bts-about-cta">
@@ -1435,14 +1511,15 @@
       <section style="padding:clamp(44px,7vw,72px) 20px clamp(64px,9vw,88px)">
         <div style="max-width:760px;margin:0 auto;display:flex;flex-direction:column">
           <sc-for list="{{ steps }}" as="s" hint-placeholder-count="7">
-            <div style="display:grid;grid-template-columns:56px 1fr;gap:20px">
+            <div class="bts-process-step" style="display:grid;grid-template-columns:56px 1fr;gap:20px">
               <div style="display:flex;flex-direction:column;align-items:center">
-                <div style="width:42px;height:42px;border-radius:50%;background:#E8F0FE;color:#1A73E8;font-weight:700;font-size:16px;display:grid;place-items:center;flex-shrink:0">{{ s.num }}</div>
-                <div style="width:2px;flex:1;background:#DADCE0;min-height:24px"></div>
+                <div class="bts-process-num" style="width:42px;height:42px;border-radius:50%;background:#E8F0FE;color:#1A73E8;font-weight:700;font-size:16px;display:grid;place-items:center;flex-shrink:0" style-hover="color:#0B57D0;background:#E8F0FE"><span class="bts-number-glyph">{{ s.num }}</span></div>
+                <div class="bts-process-line" style="width:2px;flex:1;background:#DADCE0;min-height:24px"></div>
               </div>
               <div style="padding-bottom:30px">
                 <h3 style="font-weight:700;font-size:19px;margin:8px 0 6px;color:#202124">{{ s.title }}</h3>
                 <p style="font-size:15px;line-height:1.65;color:#5F6368;margin:0;max-width:600px">{{ s.copy }}</p>
+                <div class="bts-process-complete">Job complete &middot; records closed</div>
               </div>
             </div>
           </sc-for>
