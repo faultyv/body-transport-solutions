@@ -236,6 +236,24 @@
       main section [style*="display: grid"] > * { animation: btsRise both ease; animation-timeline: view(); animation-range: entry 0% entry 30%; }
       [data-screen-label="Emergency Transport Request"] [style*="display: grid"] > *,
       [data-screen-label="Emergency Transport Request"] section { animation: none; }
+      /* Paperwork writes itself: doc icon lines draw on scroll */
+      main svg[viewBox="0 0 16 16"] path {
+        stroke-dasharray: 24; animation: btsDrawDoc both linear;
+        animation-timeline: view(); animation-range: entry 20% entry 75%;
+      }
+      /* Official notices stamp on */
+      main div[style*="background: rgb(254, 247, 224)"] {
+        animation: btsStamp both ease-out; animation-timeline: view();
+        animation-range: entry 5% entry 40%; transform-origin: 30% 40%;
+      }
+      /* Job Process: titles sharpen at your reading line */
+      [data-screen-label="Job Process"] h3 {
+        animation: btsFocus both ease; animation-timeline: view();
+        animation-range: entry 0% cover 30%;
+      }
+      @keyframes btsDrawDoc { from { stroke-dashoffset: 24; } to { stroke-dashoffset: 0; } }
+      @keyframes btsStamp { 0% { opacity: 0; transform: scale(1.1) rotate(.5deg); } 60% { opacity: 1; transform: scale(.985) rotate(-.2deg); } 100% { opacity: 1; transform: none; } }
+      @keyframes btsFocus { from { color: #9AA0A6; } to { color: #202124; } }
       main div[style*="width: 2px"][style*="background: rgb(218, 220, 224)"] {
         transform-origin: top;
         animation: btsLineDraw both ease; animation-timeline: view(); animation-range: entry 0% entry 70%;
@@ -487,6 +505,59 @@
     }
     @keyframes btsCheck { to { stroke-dashoffset: 0; } }
 
+
+    /* ===== Copy choreography & clever presentation ===== */
+
+    /* Hero: the pitch enters as spoken rhythm */
+    .bts-chips { animation: btsIn .5s .1s both ease; }
+    .bts-hl1 { display: inline-block; animation: btsIn .55s .2s both cubic-bezier(.2,.7,.3,1); }
+    .bts-hl2 { display: inline-block; animation: btsIn .55s .4s both cubic-bezier(.2,.7,.3,1); }
+    .bts-grad.bts-hl2 { animation: btsIn .55s .4s both cubic-bezier(.2,.7,.3,1), btsGradShift 7s 1s ease-in-out infinite; }
+    .bts-sub1 { display: inline-block; animation: btsIn .5s .62s both ease; }
+    .bts-sub2 { display: inline-block; animation: btsIn .5s .84s both ease; }
+    .bts-sub3 { display: inline-block; animation: btsIn .5s 1.08s both ease; color: #1A73E8; font-weight: 500; }
+    .bts-ctas { animation: btsIn .5s 1.25s both ease; }
+    .bts-trust { animation: btsIn .5s 1.4s both ease; }
+    .hero-vehicle { animation: btsIn .6s .45s both cubic-bezier(.2,.7,.3,1); }
+    @keyframes btsIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: none; } }
+
+    /* FAQ accordions: questions invite, answers reveal */
+    .bts-faq { background: #FFFFFF; border: 1px solid #DADCE0; border-radius: 18px; padding: 2px 24px; }
+    .bts-faq summary { list-style: none; cursor: pointer; display: flex; justify-content: space-between; align-items: center; gap: 14px; font-weight: 700; font-size: 15.5px; color: #202124; padding: 20px 0; }
+    .bts-faq summary::-webkit-details-marker { display: none; }
+    .bts-faq-chev { width: 9px; height: 9px; border-right: 2px solid #5F6368; border-bottom: 2px solid #5F6368; transform: rotate(45deg) translateY(-2px); transition: transform .28s cubic-bezier(.2,.7,.3,1); flex-shrink: 0; }
+    .bts-faq[open] .bts-faq-chev { transform: rotate(225deg); }
+    .bts-faq > p { margin: 0; padding: 0 0 20px; font-size: 14.5px; line-height: 1.65; color: #5F6368; max-width: 720px; }
+    .bts-faq { interpolate-size: allow-keywords; }
+    .bts-faq::details-content { block-size: 0; overflow: hidden; transition: block-size .32s cubic-bezier(.2,.7,.3,1), content-visibility .32s allow-discrete; }
+    .bts-faq[open]::details-content { block-size: auto; }
+    .bts-faq summary:hover { color: #1A73E8; }
+
+    /* Emergency call button: soft radar ping */
+    main div[style*="background: rgb(26, 115, 232)"] a[style*="background: rgb(255, 255, 255)"] { position: relative; }
+    main div[style*="background: rgb(26, 115, 232)"] a[style*="background: rgb(255, 255, 255)"]::after {
+      content: ''; position: absolute; inset: -4px; border: 2px solid rgba(255,255,255,.55);
+      border-radius: 999px; pointer-events: none; animation: btsPing 2.8s ease-out infinite;
+    }
+    @keyframes btsPing { 0% { opacity: .7; transform: scale(.97); } 65%, 100% { opacity: 0; transform: scale(1.1); } }
+
+    /* Contact tiles: the action speaks */
+    [data-screen-label="Contact"] a[href^="tel"]::after { content: 'Tap to call \2192'; }
+    [data-screen-label="Contact"] a[href*="wa.me"]::after { content: 'Open WhatsApp \2192'; }
+    [data-screen-label="Contact"] a[href^="mailto"]::after { content: 'Write to us \2192'; }
+    [data-screen-label="Contact"] a[href^="tel"]::after,
+    [data-screen-label="Contact"] a[href*="wa.me"]::after,
+    [data-screen-label="Contact"] a[href^="mailto"]::after {
+      display: block; font-size: 12px; font-weight: 500; color: #1A73E8; margin-top: 6px;
+      opacity: 0; transform: translateY(-2px); transition: opacity .25s ease, transform .25s ease;
+    }
+    [data-screen-label="Contact"] a:hover::after { opacity: 1; transform: none; }
+    @media (hover: none) {
+      [data-screen-label="Contact"] a[href^="tel"]::after,
+      [data-screen-label="Contact"] a[href*="wa.me"]::after,
+      [data-screen-label="Contact"] a[href^="mailto"]::after { opacity: 1; transform: none; }
+    }
+
     /* Apple-style continuous corner curvature on rectangular surfaces only */
     @supports (corner-shape: squircle) {
       [style*="border-radius: 28px"], [style*="border-radius: 18px"], [style*="border-radius: 16px"], [style*="border-radius: 12px"],
@@ -535,17 +606,17 @@
       <section style="padding:clamp(44px,7vw,80px) 20px clamp(36px,5vw,56px)">
         <div style="max-width:1140px;margin:0 auto;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,340px),1fr));gap:clamp(28px,4vw,56px);align-items:center">
           <div style="display:flex;flex-direction:column;gap:18px">
-            <div style="display:flex;gap:8px;flex-wrap:wrap">
+            <div class="bts-chips" style="display:flex;gap:8px;flex-wrap:wrap">
               <span style="display:inline-flex;align-items:center;gap:8px;font-size:13px;font-weight:500;color:#137333;background:#E6F4EA;border-radius:999px;padding:6px 14px"><span style="width:8px;height:8px;border-radius:50%;background:#137333"></span>Available 24/7</span>
               <span style="display:inline-flex;align-items:center;gap:8px;font-size:13px;font-weight:500;color:#174EA6;background:#E8F0FE;border-radius:999px;padding:6px 14px">Proudly South African 🇿🇦</span>
             </div>
-            <h1 style="font-weight:700;font-size:clamp(32px,6vw,52px);line-height:1.12;margin:0;letter-spacing:-0.02em;color:#202124;text-wrap:balance">We move the deceased. <span class="bts-grad">Across KZN and surrounding provinces.</span></h1>
-            <p style="font-size:clamp(16px,2.5vw,19px);line-height:1.6;color:#5F6368;margin:0;max-width:520px;text-wrap:pretty">One dedicated refrigerated vehicle. A trained team. The right paperwork. You call — we collect — we deliver. Respectfully, every time.</p>
-            <div style="display:flex;gap:12px;flex-wrap:wrap;margin-top:4px">
+            <h1 style="font-weight:700;font-size:clamp(32px,6vw,52px);line-height:1.12;margin:0;letter-spacing:-0.02em;color:#202124;text-wrap:balance"><span class="bts-hl1">We move the deceased.</span> <span class="bts-grad bts-hl2">Across KZN and surrounding provinces.</span></h1>
+            <p style="font-size:clamp(16px,2.5vw,19px);line-height:1.6;color:#5F6368;margin:0;max-width:520px;text-wrap:pretty"><span class="bts-sub1">One dedicated refrigerated vehicle. A trained team. The right paperwork.</span> <span class="bts-sub2">You call — we collect — we deliver.</span> <span class="bts-sub3">Respectfully, every time.</span></p>
+            <div class="bts-ctas" style="display:flex;gap:12px;flex-wrap:wrap;margin-top:4px">
               <a href="#request" onClick="{{ goRequest }}" style="background:#1A73E8;color:#FFFFFF;font-weight:500;font-size:16px;padding:14px 28px;border-radius:999px;cursor:pointer" style-hover="background:#174EA6;color:#FFFFFF">Request transport</a>
               <a href="{{ waLink }}" style="border:1px solid #DADCE0;color:#1A73E8;font-weight:500;font-size:16px;padding:14px 28px;border-radius:999px;cursor:pointer;display:flex;align-items:center;gap:8px" style-hover="background:#F8F9FA;color:#174EA6">WhatsApp us</a>
             </div>
-            <div style="display:flex;gap:16px;flex-wrap:wrap;margin-top:8px;font-size:12.5px;color:#5F6368">
+            <div class="bts-trust" style="display:flex;gap:16px;flex-wrap:wrap;margin-top:8px;font-size:12.5px;color:#5F6368">
               <span>Registered (Pty) Ltd</span><span>·</span><span>Reg 2026/464849/07</span><span>·</span><span>Tax 9001928366</span><span>·</span><span>Based in KwaZulu-Natal</span>
             </div>
           </div>
@@ -851,26 +922,11 @@
         <div style="max-width:860px;margin:0 auto">
           <h2 style="font-weight:700;font-size:clamp(22px,4vw,30px);margin:0 0 24px;color:#202124;letter-spacing:-0.01em">Common questions</h2>
           <div style="display:flex;flex-direction:column;gap:12px">
-            <div style="background:#FFFFFF;border:1px solid #DADCE0;border-radius:18px;padding:22px 24px">
-              <div style="font-weight:700;font-size:15.5px;color:#202124;margin-bottom:6px">Are you a funeral parlour?</div>
-              <p style="font-size:14.5px;line-height:1.6;color:#5F6368;margin:0">No. We are a transport-only company. We do not arrange funerals, store, prepare, embalm, cremate or bury. We move human remains between approved facilities — that's our whole job.</p>
-            </div>
-            <div style="background:#FFFFFF;border:1px solid #DADCE0;border-radius:18px;padding:22px 24px">
-              <div style="font-weight:700;font-size:15.5px;color:#202124;margin-bottom:6px">Can a family contact you directly?</div>
-              <p style="font-size:14.5px;line-height:1.6;color:#5F6368;margin:0">Yes — we'll gladly take your call and guide you, but transport is carried out in support of an authorised funeral parlour, mortuary, hospital or insurer, with the correct documentation in place.</p>
-            </div>
-            <div style="background:#FFFFFF;border:1px solid #DADCE0;border-radius:18px;padding:22px 24px">
-              <div style="font-weight:700;font-size:15.5px;color:#202124;margin-bottom:6px">How quickly can you collect?</div>
-              <p style="font-size:14.5px;line-height:1.6;color:#5F6368;margin:0">We operate 24/7, including after-hours and weekends. Once the paperwork and route are confirmed, we dispatch — availability depends on scheduling, distance and vehicle readiness.</p>
-            </div>
-            <div style="background:#FFFFFF;border:1px solid #DADCE0;border-radius:18px;padding:22px 24px">
-              <div style="font-weight:700;font-size:15.5px;color:#202124;margin-bottom:6px">Which areas do you cover?</div>
-              <p style="font-size:14.5px;line-height:1.6;color:#5F6368;margin:0">Our core focus is KwaZulu-Natal. We are based in Cato Ridge on the N3 — under an hour from Durban, Pietermaritzburg, Hillcrest and Pinetown — and cover the greater province daily. Because we are transport-only and do not store human remains, longer routes to surrounding provinces (Gauteng, Free State, Eastern Cape, Mpumalanga) are run by prior arrangement so collection and delivery line up on one trip.</p>
-            </div>
-            <div style="background:#FFFFFF;border:1px solid #DADCE0;border-radius:18px;padding:22px 24px">
-              <div style="font-weight:700;font-size:15.5px;color:#202124;margin-bottom:6px">What paperwork is needed?</div>
-              <p style="font-size:14.5px;line-height:1.6;color:#5F6368;margin:0">Typically a collection instruction, death documentation, a release note from the facility and a receiving note at the destination. We confirm exactly what's needed for your route when you contact us — see our <a href="#compliance" onClick="{{ goCompliance }}" style="font-weight:500">Compliance page</a>.</p>
-            </div>
+            <details class="bts-faq" open><summary>Are you a funeral parlour?<span class="bts-faq-chev" aria-hidden="true"></span></summary><p>No. We are a transport-only company. We do not arrange funerals, store, prepare, embalm, cremate or bury. We move human remains between approved facilities — that's our whole job.</p></details>
+            <details class="bts-faq"><summary>Can a family contact you directly?<span class="bts-faq-chev" aria-hidden="true"></span></summary><p>Yes — we'll gladly take your call and guide you, but transport is carried out in support of an authorised funeral parlour, mortuary, hospital or insurer, with the correct documentation in place.</p></details>
+            <details class="bts-faq"><summary>How quickly can you collect?<span class="bts-faq-chev" aria-hidden="true"></span></summary><p>We operate 24/7, including after-hours and weekends. Once the paperwork and route are confirmed, we dispatch — availability depends on scheduling, distance and vehicle readiness.</p></details>
+            <details class="bts-faq"><summary>Which areas do you cover?<span class="bts-faq-chev" aria-hidden="true"></span></summary><p>Our core focus is KwaZulu-Natal. We are based in Cato Ridge on the N3 — under an hour from Durban, Pietermaritzburg, Hillcrest and Pinetown — and cover the greater province daily. Because we are transport-only and do not store human remains, longer routes to surrounding provinces (Gauteng, Free State, Eastern Cape, Mpumalanga) are run by prior arrangement so collection and delivery line up on one trip.</p></details>
+            <details class="bts-faq"><summary>What paperwork is needed?<span class="bts-faq-chev" aria-hidden="true"></span></summary><p>Typically a collection instruction, death documentation, a release note from the facility and a receiving note at the destination. We confirm exactly what's needed for your route when you contact us — see our <a href="#compliance" onClick="{{ goCompliance }}" style="font-weight:500">Compliance page</a>.</p></details>
           </div>
         </div>
       </section>
