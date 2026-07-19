@@ -223,17 +223,30 @@
     @keyframes btsKen { from { transform: scale(1.01); } to { transform: scale(1.07) translateY(-1.5%); } }
 
     /* Page switch: content rises in */
-    main > [data-screen-label] { animation: btsPage .38s cubic-bezier(.2,.7,.3,1) both; }
+    main > [data-screen-label] { animation: btsPage .38s cubic-bezier(.22,1,.36,1) both; }
     @keyframes btsPage { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: none; } }
 
     /* Sticky call bar: slides up after load */
-    div[style*="position: fixed"][style*="bottom: 16px"] { animation: btsUp .5s .35s cubic-bezier(.2,.7,.3,1) both; }
+    div[style*="position: fixed"][style*="bottom: 16px"] { animation: btsUp .5s .35s cubic-bezier(.22,1,.36,1) both; }
     @keyframes btsUp { from { opacity: 0; transform: translateY(72px); } to { opacity: 1; transform: none; } }
 
     /* Scroll-driven reveals (browsers with scroll-timeline support only) */
     @supports (animation-timeline: view()) {
-      main section { animation: btsRise both ease; animation-timeline: view(); animation-range: entry 0% entry 38%; }
-      main section [style*="display: grid"] > * { animation: btsRise both ease; animation-timeline: view(); animation-range: entry 0% entry 30%; }
+      main section { animation: btsRise both cubic-bezier(.22,1,.36,1); animation-timeline: view(); animation-range: entry 0% entry 38%; }
+      @media (min-width: 900px) {
+        main section {
+          animation: btsRise both cubic-bezier(.22,1,.36,1), btsDefocus both linear;
+          animation-timeline: view(), view();
+          animation-range: entry 0% entry 38%, exit 0% exit 100%;
+        }
+      }
+      @keyframes btsDefocus { from { opacity: 1; filter: blur(0); } to { opacity: .5; filter: blur(2.5px); } }
+      /* Dossier: compliance documents fan out as prepared paperwork */
+      [data-screen-label="Compliance"] div[style*="display: grid"] > div[style*="align-items: flex-start"] {
+        animation: btsDossier both cubic-bezier(.22,1,.36,1); animation-timeline: view(); animation-range: entry 0% entry 45%;
+      }
+      @keyframes btsDossier { from { opacity: 0; transform: translateX(-18px); } to { opacity: 1; transform: none; } }
+      main section [style*="display: grid"] > * { animation: btsRise both cubic-bezier(.22,1,.36,1); animation-timeline: view(); animation-range: entry 0% entry 30%; }
       [data-screen-label="Emergency Transport Request"] [style*="display: grid"] > *,
       [data-screen-label="Emergency Transport Request"] section { animation: none; }
       /* Diagram enters as a blueprint, resolves into the real vehicle */
@@ -242,7 +255,7 @@
         background-color: rgba(11,37,69,.4);
         background-image: linear-gradient(rgba(156,199,255,.14) 1px, transparent 1px), linear-gradient(90deg, rgba(156,199,255,.14) 1px, transparent 1px);
         background-size: 44px 44px;
-        animation: btsBlueprint both ease; animation-timeline: view(); animation-range: entry 0% entry 85%;
+        animation: btsBlueprint both cubic-bezier(.22,1,.36,1); animation-timeline: view(); animation-range: entry 0% entry 85%;
       }
       @keyframes btsBlueprint { from { opacity: 1; } to { opacity: 0; } }
       /* Quiet depth: close-up drifts against the scroll */
@@ -254,12 +267,12 @@
       .bts-sign path { stroke-dasharray: 180; animation: btsSignDraw both linear; animation-timeline: view(); animation-range: entry 15% entry 70%; }
       @keyframes btsSignDraw { from { stroke-dashoffset: 180; } to { stroke-dashoffset: 0; } }
       /* Headings settle into focus as they arrive */
-      main h2 { animation: btsHead both ease; animation-timeline: view(); animation-range: entry 0% entry 32%; }
+      main h2 { animation: btsHead both cubic-bezier(.22,1,.36,1); animation-timeline: view(); animation-range: entry 0% entry 32%; }
       @keyframes btsHead { from { opacity: 0; transform: translateY(14px); letter-spacing: .06em; } to { opacity: 1; transform: none; letter-spacing: -0.01em; } }
       /* Chat bubbles arrive as you read */
-      .bts-chat-q { animation: btsChatQ both ease; animation-timeline: view(); animation-range: entry 5% entry 40%; }
-      .bts-chat-a { animation: btsChatA both ease; animation-timeline: view(); animation-range: entry 5% entry 40%; }
-      .bts-chat-wa { animation: btsChatA both ease; animation-timeline: view(); animation-range: entry 5% entry 40%; }
+      .bts-chat-q { animation: btsChatQ both cubic-bezier(.22,1,.36,1); animation-timeline: view(); animation-range: entry 5% entry 40%; }
+      .bts-chat-a { animation: btsChatA both cubic-bezier(.22,1,.36,1); animation-timeline: view(); animation-range: entry 5% entry 40%; }
+      .bts-chat-wa { animation: btsChatA both cubic-bezier(.22,1,.36,1); animation-timeline: view(); animation-range: entry 5% entry 40%; }
       @keyframes btsChatQ { from { opacity: 0; transform: translateX(26px); } to { opacity: 1; transform: none; } }
       @keyframes btsChatA { from { opacity: 0; transform: translateX(-26px); } to { opacity: 1; transform: none; } }
       /* Paperwork writes itself: doc icon lines draw on scroll */
@@ -274,7 +287,7 @@
       }
       /* Job Process: titles sharpen at your reading line */
       [data-screen-label="Job Process"] h3 {
-        animation: btsFocus both ease; animation-timeline: view();
+        animation: btsFocus both cubic-bezier(.22,1,.36,1); animation-timeline: view();
         animation-range: entry 0% cover 30%;
       }
       @keyframes btsDrawDoc { from { stroke-dashoffset: 24; } to { stroke-dashoffset: 0; } }
@@ -282,7 +295,7 @@
       @keyframes btsFocus { from { color: #9AA0A6; } to { color: #202124; } }
       main div[style*="width: 2px"][style*="background: rgb(218, 220, 224)"] {
         transform-origin: top;
-        animation: btsLineDraw both ease; animation-timeline: view(); animation-range: entry 0% entry 70%;
+        animation: btsLineDraw both cubic-bezier(.22,1,.36,1); animation-timeline: view(); animation-range: entry 0% entry 70%;
       }
       @keyframes btsRise { from { opacity: .001; transform: translateY(26px); } to { opacity: 1; transform: none; } }
       @keyframes btsLineDraw { from { transform: scaleY(.25); opacity: .35; } to { transform: scaleY(1); opacity: 1; } }
@@ -407,6 +420,8 @@
     /* ===== Annotated fridge diagram ===== */
     .bts-diagram { position: relative; width: 100%; aspect-ratio: 16 / 9; border-radius: 28px; overflow: hidden; border: 1px solid #DADCE0; isolation: isolate; }
     .bts-diagram > img { width: 100%; height: 100%; object-fit: cover; display: block; }
+    .bts-diagram::before { content: ''; position: absolute; inset: 0; z-index: 2; pointer-events: none; border-radius: inherit; animation: btsFrost 6s ease-in-out infinite; }
+    @keyframes btsFrost { 0%, 100% { box-shadow: inset 0 0 40px rgba(214,235,255,.05); } 50% { box-shadow: inset 0 0 64px rgba(214,235,255,.22); } }
     .bts-air { position: absolute; inset: 0; width: 100%; height: 100%; z-index: 1; mix-blend-mode: screen; pointer-events: none; }
     .bts-air path { stroke-dasharray: 18 162; animation: btsFlow 3.6s linear infinite; }
     .bts-air path:nth-child(2) { animation-delay: .6s; }
@@ -447,11 +462,10 @@
     .bts-map-foot { position: absolute; bottom: 12px; left: 16px; z-index: 2; display: flex; align-items: center; gap: 10px; color: rgba(255,255,255,.65); font-size: clamp(8.5px,1.1vw,11.5px); }
     .bts-map-flag { height: 4px; width: 90px; border-radius: 2px; background: linear-gradient(90deg,#007749 0% 20%,#FFB81C 20% 40%,#E03C31 40% 60%,#001489 60% 80%,#111111 80% 100%); }
     .bts-route-base { fill: none; stroke: rgba(156,199,255,.28); stroke-width: 3; }
-    .bts-route-flow { fill: none; stroke: #9CC7FF; stroke-width: 3.5; stroke-linecap: round; stroke-dasharray: 12 138; animation: btsRouteFlow 3s linear infinite; opacity: .9; }
-    .bts-route-flow:nth-of-type(odd) { animation-delay: .8s; }
+    .bts-route-flow { fill: none; stroke: #FFB81C; stroke-width: 3; stroke-linecap: round; stroke-dasharray: 1; stroke-dashoffset: 1; opacity: 0; animation: btsThread 13s cubic-bezier(.4,0,.2,1) infinite; }
+    @keyframes btsThread { 0% { stroke-dashoffset: 1; opacity: 0; } 4% { opacity: .95; } 14% { stroke-dashoffset: 0; } 78% { stroke-dashoffset: 0; opacity: .95; } 86% { opacity: 0; } 100% { stroke-dashoffset: 1; opacity: 0; } }
     .bts-route-dash { fill: none; stroke: rgba(156,199,255,.45); stroke-width: 2.5; stroke-dasharray: 6 10; stroke-linecap: round; }
     .bts-hub-ring { transform-box: fill-box; transform-origin: center; animation: btsHubPulse 2.4s ease-out infinite; }
-    @keyframes btsRouteFlow { to { stroke-dashoffset: -150; } }
     @keyframes btsHubPulse { 0% { transform: scale(1); opacity: .9; } 100% { transform: scale(2.2); opacity: 0; } }
     .bts-map-city { fill: #E8F0FE; font-weight: 500; font-size: 21px; font-family: 'Roboto', Arial, sans-serif; }
     .bts-map-time { fill: #9CC7FF; font-weight: 400; font-size: 17px; font-family: 'Roboto', Arial, sans-serif; }
@@ -474,7 +488,7 @@
     @keyframes btsSheen { 0%, 70% { transform: translateX(-130%); } 88%, 100% { transform: translateX(130%); } }
 
     /* Sticky WhatsApp button: gentle heartbeat every few seconds */
-    div[style*="position: fixed"][style*="bottom: 16px"] a:last-child { animation: btsUp .5s .35s cubic-bezier(.2,.7,.3,1) both, btsBreath 7s 2s ease-in-out infinite; }
+    div[style*="position: fixed"][style*="bottom: 16px"] a:last-child { animation: btsUp .5s .35s cubic-bezier(.22,1,.36,1) both, btsBreath 7s 2s ease-in-out infinite; }
     @keyframes btsBreath { 0%, 86%, 100% { transform: scale(1); } 91% { transform: scale(1.045); } 95% { transform: scale(.99); } }
 
     /* Route map: larger labels on small screens, footer chip hidden */
@@ -535,18 +549,18 @@
     /* ===== Copy choreography & clever presentation ===== */
 
     /* Hero: the pitch enters as spoken rhythm */
-    .bts-chips { animation: btsIn .5s .1s both ease; }
-    .bts-hl1 { display: inline-block; animation: btsIn .55s .2s both cubic-bezier(.2,.7,.3,1); }
-    .bts-hl2 { display: inline-block; animation: btsIn .55s .4s both cubic-bezier(.2,.7,.3,1); }
-    .bts-grad.bts-hl2 { animation: btsIn .55s .4s both cubic-bezier(.2,.7,.3,1), btsGradShift 7s 1s ease-in-out infinite; }
-    .bts-sub1 { display: inline-block; animation: btsIn .5s .62s both ease; }
-    .bts-sub2 { display: inline-block; animation: btsIn .5s .84s both ease; }
-    .bts-sub3 { display: inline-block; animation: btsIn .5s 1.08s both ease; color: #1A73E8; font-weight: 500; }
-    .bts-ctas { animation: btsIn .5s 1.25s both ease; }
-    .bts-trust { animation: btsIn .5s 1.4s both ease; }
-    .hero-vehicle { animation: btsHeroFrame .9s .35s both cubic-bezier(.2,.7,.3,1); }
+    .bts-chips { animation: btsIn .5s .1s both cubic-bezier(.22,1,.36,1); }
+    .bts-hl1 { display: inline-block; animation: btsIn .55s .2s both cubic-bezier(.22,1,.36,1); }
+    .bts-hl2 { display: inline-block; animation: btsIn .55s .4s both cubic-bezier(.22,1,.36,1); }
+    .bts-grad.bts-hl2 { animation: btsIn .55s .4s both cubic-bezier(.22,1,.36,1), btsGradShift 7s 1s ease-in-out infinite; }
+    .bts-sub1 { display: inline-block; animation: btsIn .5s .62s both cubic-bezier(.22,1,.36,1); }
+    .bts-sub2 { display: inline-block; animation: btsIn .5s .84s both cubic-bezier(.22,1,.36,1); }
+    .bts-sub3 { display: inline-block; animation: btsIn .5s 1.08s both cubic-bezier(.22,1,.36,1); color: #1A73E8; font-weight: 500; }
+    .bts-ctas { animation: btsIn .5s 1.25s both cubic-bezier(.22,1,.36,1); }
+    .bts-trust { animation: btsIn .5s 1.4s both cubic-bezier(.22,1,.36,1); }
+    .hero-vehicle { animation: btsHeroFrame .9s .35s both cubic-bezier(.22,1,.36,1); }
     @keyframes btsHeroFrame { from { opacity: 0; transform: translateY(18px) scale(.985); } to { opacity: 1; transform: none; } }
-    .hero-vehicle img { animation: btsHeroImg 1.15s .35s both cubic-bezier(.2,.7,.3,1), btsKen 26s 1.6s ease-in-out infinite alternate; }
+    .hero-vehicle img { animation: btsHeroImg 1.15s .35s both cubic-bezier(.22,1,.36,1), btsKen 26s 1.6s ease-in-out infinite alternate; }
     @keyframes btsHeroImg { from { filter: blur(9px); transform: scale(1.09); } to { filter: blur(0); transform: scale(1.01); } }
     .hero-vehicle::before {
       content: ''; position: absolute; inset: 0; z-index: 2; pointer-events: none;
@@ -554,7 +568,7 @@
       transform: translateX(-130%); animation: btsHeroSweep 9s 2.4s ease-in-out infinite;
     }
     @keyframes btsHeroSweep { 0%, 76% { transform: translateX(-130%); } 92%, 100% { transform: translateX(130%); } }
-    .hero-vehicle__label { animation: btsIn .5s 1.2s both ease; }
+    .hero-vehicle__label { animation: btsIn .5s 1.2s both cubic-bezier(.22,1,.36,1); }
     @keyframes btsIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: none; } }
 
     /* FAQ as a WhatsApp-style conversation */
@@ -955,12 +969,12 @@
             <path class="bts-route-base" d="M431 595 C 560 600 700 500 747 422"></path>
             <path class="bts-route-base" d="M431 595 C 360 480 290 330 292 226"></path>
             <path class="bts-route-base" d="M431 595 C 330 660 240 720 182 748"></path>
-            <path class="bts-route-flow" d="M431 595 Q490 605 532 627"></path>
-            <path class="bts-route-flow" d="M431 595 Q410 580 388 571"></path>
-            <path class="bts-route-flow" d="M431 595 C 500 650 470 730 403 785"></path>
-            <path class="bts-route-flow" d="M431 595 C 560 600 700 500 747 422"></path>
-            <path class="bts-route-flow" d="M431 595 C 360 480 290 330 292 226"></path>
-            <path class="bts-route-flow" d="M431 595 C 330 660 240 720 182 748"></path>
+            <path class="bts-route-flow" pathLength="1" style="animation-delay:0s" d="M431 595 Q490 605 532 627"></path>
+            <path class="bts-route-flow" pathLength="1" style="animation-delay:1.1s" d="M431 595 Q410 580 388 571"></path>
+            <path class="bts-route-flow" pathLength="1" style="animation-delay:2.2s" d="M431 595 C 500 650 470 730 403 785"></path>
+            <path class="bts-route-flow" pathLength="1" style="animation-delay:3.3s" d="M431 595 C 560 600 700 500 747 422"></path>
+            <path class="bts-route-flow" pathLength="1" style="animation-delay:4.4s" d="M431 595 C 360 480 290 330 292 226"></path>
+            <path class="bts-route-flow" pathLength="1" style="animation-delay:5.5s" d="M431 595 C 330 660 240 720 182 748"></path>
             <path class="bts-route-dash" d="M292 226 C 260 160 215 118 158 88"></path>
             <path class="bts-route-dash" d="M182 748 C 145 788 115 818 82 848"></path>
             <circle cx="532" cy="627" r="7" fill="#FFFFFF"></circle>
@@ -1263,12 +1277,12 @@
             <path class="bts-route-base" d="M431 595 C 560 600 700 500 747 422"></path>
             <path class="bts-route-base" d="M431 595 C 360 480 290 330 292 226"></path>
             <path class="bts-route-base" d="M431 595 C 330 660 240 720 182 748"></path>
-            <path class="bts-route-flow" d="M431 595 Q490 605 532 627"></path>
-            <path class="bts-route-flow" d="M431 595 Q410 580 388 571"></path>
-            <path class="bts-route-flow" d="M431 595 C 500 650 470 730 403 785"></path>
-            <path class="bts-route-flow" d="M431 595 C 560 600 700 500 747 422"></path>
-            <path class="bts-route-flow" d="M431 595 C 360 480 290 330 292 226"></path>
-            <path class="bts-route-flow" d="M431 595 C 330 660 240 720 182 748"></path>
+            <path class="bts-route-flow" pathLength="1" style="animation-delay:0s" d="M431 595 Q490 605 532 627"></path>
+            <path class="bts-route-flow" pathLength="1" style="animation-delay:1.1s" d="M431 595 Q410 580 388 571"></path>
+            <path class="bts-route-flow" pathLength="1" style="animation-delay:2.2s" d="M431 595 C 500 650 470 730 403 785"></path>
+            <path class="bts-route-flow" pathLength="1" style="animation-delay:3.3s" d="M431 595 C 560 600 700 500 747 422"></path>
+            <path class="bts-route-flow" pathLength="1" style="animation-delay:4.4s" d="M431 595 C 360 480 290 330 292 226"></path>
+            <path class="bts-route-flow" pathLength="1" style="animation-delay:5.5s" d="M431 595 C 330 660 240 720 182 748"></path>
             <path class="bts-route-dash" d="M292 226 C 260 160 215 118 158 88"></path>
             <path class="bts-route-dash" d="M182 748 C 145 788 115 818 82 848"></path>
             <circle cx="532" cy="627" r="7" fill="#FFFFFF"></circle>
