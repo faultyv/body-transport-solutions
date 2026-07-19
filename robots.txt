@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://dist-pi-rosy-43.vercel.app/sitemap.xml
+Sitemap: https://www.bodytransportsolutions.co.za/sitemap.xml
