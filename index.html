@@ -331,8 +331,24 @@
     .bts-pin { position: absolute; width: 9px; height: 9px; border-radius: 50%; background: #1A73E8; box-shadow: 0 0 0 3px rgba(255,255,255,.85); z-index: 3; transform: translate(-50%,-50%); animation: btsPulseBlue 2.6s ease-out infinite; }
     .bts-pin-lbl { position: absolute; right: calc(100% + 2px); top: 50%; transform: translateY(-50%); display: flex; align-items: center; }
     .bts-pin.rev .bts-pin-lbl { right: auto; left: calc(100% + 2px); flex-direction: row-reverse; }
-    .bts-pin-chip { background: rgba(255,255,255,.95); border: 1px solid #D2E3FC; color: #0B57D0; font-weight: 600; font-size: clamp(9.5px,1.5vw,14px); line-height: 1.15; padding: 6px 12px; border-radius: 999px; box-shadow: 0 2px 8px rgba(60,64,67,.22); white-space: nowrap; backdrop-filter: blur(6px); }
-    .bts-pin-line { height: 1.5px; background: #4C8DF6; width: clamp(14px,3.5vw,48px); flex-shrink: 0; }
+    .bts-pin-chip { background: rgba(255,255,255,.96); border: 1px solid rgba(178,208,250,.9); color: #1557B0; font-weight: 600; letter-spacing: .01em; font-size: clamp(10.5px,1.35vw,13.5px); line-height: 1.15; padding: 7px 14px; border-radius: 999px; box-shadow: 0 3px 10px rgba(23,64,120,.16); white-space: nowrap; backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); }
+    .bts-pin-line { height: 1.5px; background: #4C8DF6; width: clamp(16px,3.5vw,48px); flex-shrink: 0; }
+    .bts-air .slow { stroke-dasharray: 34 226; animation: btsFlowSlow 6.5s linear infinite; }
+    @keyframes btsFlowSlow { to { stroke-dashoffset: -260; } }
+    .bts-temp { position: absolute; top: 12px; right: 12px; z-index: 3; display: flex; gap: 10px; align-items: center; background: rgba(255,255,255,.94); border: 1px solid #D2E3FC; border-radius: 14px; padding: 8px 14px; box-shadow: 0 3px 12px rgba(23,64,120,.18); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); }
+    .bts-temp b { display: block; font-size: clamp(13px,1.6vw,16px); color: #0B57D0; line-height: 1.1; }
+    .bts-temp span { display: block; font-size: clamp(8px,1vw,10.5px); color: #5F6368; margin-top: 2px; }
+    .bts-legend { display: none; margin-top: 12px; flex-wrap: wrap; gap: 8px 18px; }
+    .bts-legend span { font-size: 12.5px; color: #3C4043; display: inline-flex; gap: 8px; align-items: center; font-weight: 500; }
+    .bts-legend b { width: 19px; height: 19px; border-radius: 50%; background: #1A73E8; color: #FFFFFF; font-size: 10.5px; font-weight: 700; display: grid; place-items: center; flex-shrink: 0; }
+    @media (max-width: 640px) {
+      .bts-pin-lbl { display: none; }
+      .bts-pin { width: 20px; height: 20px; display: grid; place-items: center; box-shadow: 0 0 0 3px rgba(255,255,255,.9); }
+      .bts-pin::after { content: attr(data-n); color: #FFFFFF; font: 700 10.5px 'Roboto', Arial, sans-serif; }
+      .bts-legend { display: flex; }
+      .bts-temp { padding: 6px 10px; gap: 7px; }
+      .bts-diagram-badge { padding: 6px 10px; }
+    }
     .bts-diagram-badge { position: absolute; top: 12px; left: 12px; z-index: 3; background: #137333; color: #FFFFFF; border-radius: 12px; padding: 8px 14px; box-shadow: 0 3px 12px rgba(19,115,51,.35); }
     .bts-diagram-badge b { display: block; font-size: clamp(13px,1.6vw,17px); line-height: 1.1; }
     .bts-diagram-badge span { display: block; font-size: clamp(8px,1vw,10.5px); opacity: .92; margin-top: 2px; }
@@ -626,24 +642,43 @@
       <!-- Vehicle -->
       <section style="background:#F8F9FA;padding:clamp(48px,7vw,80px) 20px">
         <div style="max-width:1140px;margin:0 auto">
-          <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,340px),1fr));gap:clamp(28px,4vw,52px);align-items:center;margin-bottom:clamp(20px,3.5vw,32px)">
-            <div class="bts-diagram">
+          <h2 style="font-weight:700;font-size:clamp(24px,4.5vw,34px);margin:0 0 12px;letter-spacing:-0.01em;color:#202124;text-wrap:balance">A dedicated refrigeration system — <span class="bts-grad">built for direct transport.</span></h2>
+          <p style="font-size:16px;line-height:1.65;color:#5F6368;max-width:760px;margin:0 0 clamp(22px,3.5vw,32px);text-wrap:pretty">The stainless-steel compartment of our Volkswagen Transporter combines forced-air cooling, an easy-clean transport platform and a dedicated condensate drainage line — designed for respectful, hygienic conveyance of human remains.</p>
+          <div class="bts-diagram">
             <img src="./assets/airflow.jpg" loading="lazy" decoding="async" alt="Annotated view of the refrigerated compartment: evaporator cooling system, forced-air circulation, drainage pipe, non-porous stainless steel and secure transport platform">
             <svg class="bts-air" viewBox="0 0 1600 900" fill="none" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+              <defs>
+                <radialGradient id="btsGlowH"><stop offset="0" stop-color="#BFE0FF" stop-opacity=".55"></stop><stop offset="1" stop-color="#BFE0FF" stop-opacity="0"></stop></radialGradient>
+              </defs>
+              <circle cx="800" cy="285" r="95" fill="url(#btsGlowH)"><animate attributeName="opacity" values=".25;.6;.25" dur="4.5s" repeatCount="indefinite"></animate></circle>
+              <path class="slow" d="M800 265 C 728 380, 606 470, 560 560" stroke="#9CC7FF" stroke-width="16" stroke-linecap="round" opacity=".16" style="filter:blur(5px)"></path>
+              <path class="slow" d="M800 265 C 872 380, 994 470, 1040 560" stroke="#9CC7FF" stroke-width="16" stroke-linecap="round" opacity=".16" style="filter:blur(5px)"></path>
               <path d="M800 265 C 700 350, 560 390, 470 530" stroke="#9CC7FF" stroke-width="10" stroke-linecap="round" opacity=".38" style="filter:blur(2px)"></path>
               <path d="M800 265 C 762 360, 706 430, 645 565" stroke="#B7D6FF" stroke-width="9" stroke-linecap="round" opacity=".34" style="filter:blur(2px)"></path>
               <path d="M800 265 C 838 360, 894 430, 955 565" stroke="#B7D6FF" stroke-width="9" stroke-linecap="round" opacity=".34" style="filter:blur(2px)"></path>
               <path d="M800 265 C 900 350, 1040 390, 1130 530" stroke="#9CC7FF" stroke-width="10" stroke-linecap="round" opacity=".38" style="filter:blur(2px)"></path>
             </svg>
             <div class="bts-diagram-badge"><b>R363</b><span>SA Management of Human Remains Regulations</span></div>
-            <div class="bts-pin" style="top:24%;left:48%"><span class="bts-pin-lbl"><span class="bts-pin-chip">Evaporator cooling system</span><span class="bts-pin-line"></span></span></div>
-            <div class="bts-pin rev" style="top:40%;left:59%"><span class="bts-pin-lbl"><span class="bts-pin-chip">Drainage pipe</span><span class="bts-pin-line"></span></span></div>
-            <div class="bts-pin rev" style="top:58%;left:34%"><span class="bts-pin-lbl"><span class="bts-pin-chip">Non-porous stainless steel</span><span class="bts-pin-line"></span></span></div>
-            <div class="bts-pin" style="top:72%;left:66%"><span class="bts-pin-lbl"><span class="bts-pin-chip">Secure transport platform</span><span class="bts-pin-line"></span></span></div>
+            <div class="bts-temp"><svg width="12" height="28" viewBox="0 0 12 28" aria-hidden="true"><rect x="4" y="2" width="4" height="20" rx="2" fill="rgba(26,115,232,.15)"></rect><rect x="4" width="4" rx="2" fill="#4C8DF6"><animate attributeName="y" values="14;7;11;5;13;14" dur="9s" repeatCount="indefinite"></animate><animate attributeName="height" values="8;15;11;17;9;8" dur="9s" repeatCount="indefinite"></animate></rect><circle cx="6" cy="24" r="3.6" fill="#4C8DF6"></circle></svg><div><b>0–3&nbsp;°C</b><span>Compartment temperature</span></div></div>
+            <div class="bts-pin" data-n="1" style="top:24%;left:48%"><span class="bts-pin-lbl"><span class="bts-pin-chip">Evaporator cooling system</span><span class="bts-pin-line"></span></span></div>
+            <div class="bts-pin" data-n="2" style="top:42%;left:42%"><span class="bts-pin-lbl"><span class="bts-pin-chip">Forced-air circulation</span><span class="bts-pin-line"></span></span></div>
+            <div class="bts-pin rev" data-n="3" style="top:40%;left:59%"><span class="bts-pin-lbl"><span class="bts-pin-chip">Drainage pipe</span><span class="bts-pin-line"></span></span></div>
+            <div class="bts-pin" data-n="4" style="top:58%;left:34%"><span class="bts-pin-lbl"><span class="bts-pin-chip">Non-porous stainless steel</span><span class="bts-pin-line"></span></span></div>
+            <div class="bts-pin rev" data-n="5" style="top:72%;left:66%"><span class="bts-pin-lbl"><span class="bts-pin-chip">Secure transport platform</span><span class="bts-pin-line"></span></span></div>
           </div>
+          <div class="bts-legend">
+            <span><b>1</b> Evaporator cooling system</span>
+            <span><b>2</b> Forced-air circulation</span>
+            <span><b>3</b> Drainage pipe</span>
+            <span><b>4</b> Non-porous stainless steel</span>
+            <span><b>5</b> Secure transport platform</span>
+          </div>
+          <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,320px),1fr));gap:clamp(24px,4vw,44px);align-items:center;margin:clamp(24px,4vw,36px) 0">
+            <div style="position:relative;height:clamp(220px,30vw,300px);border-radius:24px;overflow:hidden;border:1px solid #DADCE0">
+              <img src="./assets/fridge.jpg" loading="lazy" decoding="async" alt="Stainless steel refrigerated compartment with dedicated loading tray" style="width:100%;height:100%;object-fit:cover;object-position:50% 45%;display:block">
+              <div class="hero-vehicle__label"><span class="hero-vehicle__label-dot"></span>Forced-air refrigeration · 0–3&nbsp;°C</div>
+            </div>
             <div>
-              <h2 style="font-weight:700;font-size:clamp(24px,4.5vw,34px);margin:0 0 12px;letter-spacing:-0.01em;color:#202124;text-wrap:balance">A dedicated refrigeration system — <span class="bts-grad">built for direct transport.</span></h2>
-              <p style="font-size:16px;line-height:1.65;color:#5F6368;margin:0 0 18px;text-wrap:pretty">The stainless-steel compartment of our Volkswagen Transporter combines forced-air cooling, an easy-clean transport platform and a dedicated condensate drainage line — designed for respectful, hygienic conveyance of human remains.</p>
               <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,220px),1fr));gap:8px 18px;margin-bottom:18px">
                 <sc-for list="{{ vehicleFeatures }}" as="v" hint-placeholder-count="6">
                   <div style="display:flex;gap:10px;align-items:center"><svg width="15" height="15" viewBox="0 0 15 15" fill="none" style="flex-shrink:0"><path d="M2 8.5L6 12L13 3.5" stroke="#137333" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"></path></svg><span style="font-size:14px;font-weight:500;color:#3C4043">{{ v }}</span></div>
@@ -888,21 +923,35 @@
           <div>
             <h2 style="font-weight:700;font-size:clamp(22px,4vw,30px);margin:0 0 6px;letter-spacing:-0.01em;color:#202124">Features aligned with <span class="bts-grad">R363</span></h2>
             <p style="font-size:14px;color:#5F6368;margin:0 0 24px">South African human-remains regulations — Regulation R363, National Health Act 61 of 2003.</p>
-            <div class="bts-diagram" style="margin-bottom:clamp(24px,4vw,36px)">
-              <img src="./assets/airflow.jpg" loading="lazy" decoding="async" alt="Annotated view of the refrigerated compartment: evaporator cooling system, forced-air circulation, drainage pipe, non-porous stainless steel and secure transport platform">
-              <svg class="bts-air" viewBox="0 0 1600 900" fill="none" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
-                <path d="M800 265 C 700 350, 560 390, 470 530" stroke="#9CC7FF" stroke-width="10" stroke-linecap="round" opacity=".38" style="filter:blur(2px)"></path>
-                <path d="M800 265 C 762 360, 706 430, 645 565" stroke="#B7D6FF" stroke-width="9" stroke-linecap="round" opacity=".34" style="filter:blur(2px)"></path>
-                <path d="M800 265 C 838 360, 894 430, 955 565" stroke="#B7D6FF" stroke-width="9" stroke-linecap="round" opacity=".34" style="filter:blur(2px)"></path>
-                <path d="M800 265 C 900 350, 1040 390, 1130 530" stroke="#9CC7FF" stroke-width="10" stroke-linecap="round" opacity=".38" style="filter:blur(2px)"></path>
-              </svg>
-              <div class="bts-diagram-badge"><b>R363</b><span>SA Management of Human Remains Regulations</span></div>
-              <div class="bts-pin" style="top:24%;left:48%"><span class="bts-pin-lbl"><span class="bts-pin-chip">Evaporator cooling system</span><span class="bts-pin-line"></span></span></div>
-              <div class="bts-pin" style="top:42%;left:42%"><span class="bts-pin-lbl"><span class="bts-pin-chip">Forced-air circulation</span><span class="bts-pin-line"></span></span></div>
-              <div class="bts-pin rev" style="top:40%;left:59%"><span class="bts-pin-lbl"><span class="bts-pin-chip">Drainage pipe</span><span class="bts-pin-line"></span></span></div>
-              <div class="bts-pin" style="top:58%;left:34%"><span class="bts-pin-lbl"><span class="bts-pin-chip">Non-porous stainless steel</span><span class="bts-pin-line"></span></span></div>
-              <div class="bts-pin rev" style="top:72%;left:66%"><span class="bts-pin-lbl"><span class="bts-pin-chip">Secure transport platform</span><span class="bts-pin-line"></span></span></div>
-            </div>
+            <div class="bts-diagram">
+            <img src="./assets/airflow.jpg" loading="lazy" decoding="async" alt="Annotated view of the refrigerated compartment: evaporator cooling system, forced-air circulation, drainage pipe, non-porous stainless steel and secure transport platform">
+            <svg class="bts-air" viewBox="0 0 1600 900" fill="none" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+              <defs>
+                <radialGradient id="btsGlowC"><stop offset="0" stop-color="#BFE0FF" stop-opacity=".55"></stop><stop offset="1" stop-color="#BFE0FF" stop-opacity="0"></stop></radialGradient>
+              </defs>
+              <circle cx="800" cy="285" r="95" fill="url(#btsGlowC)"><animate attributeName="opacity" values=".25;.6;.25" dur="4.5s" repeatCount="indefinite"></animate></circle>
+              <path class="slow" d="M800 265 C 728 380, 606 470, 560 560" stroke="#9CC7FF" stroke-width="16" stroke-linecap="round" opacity=".16" style="filter:blur(5px)"></path>
+              <path class="slow" d="M800 265 C 872 380, 994 470, 1040 560" stroke="#9CC7FF" stroke-width="16" stroke-linecap="round" opacity=".16" style="filter:blur(5px)"></path>
+              <path d="M800 265 C 700 350, 560 390, 470 530" stroke="#9CC7FF" stroke-width="10" stroke-linecap="round" opacity=".38" style="filter:blur(2px)"></path>
+              <path d="M800 265 C 762 360, 706 430, 645 565" stroke="#B7D6FF" stroke-width="9" stroke-linecap="round" opacity=".34" style="filter:blur(2px)"></path>
+              <path d="M800 265 C 838 360, 894 430, 955 565" stroke="#B7D6FF" stroke-width="9" stroke-linecap="round" opacity=".34" style="filter:blur(2px)"></path>
+              <path d="M800 265 C 900 350, 1040 390, 1130 530" stroke="#9CC7FF" stroke-width="10" stroke-linecap="round" opacity=".38" style="filter:blur(2px)"></path>
+            </svg>
+            <div class="bts-diagram-badge"><b>R363</b><span>SA Management of Human Remains Regulations</span></div>
+            <div class="bts-temp"><svg width="12" height="28" viewBox="0 0 12 28" aria-hidden="true"><rect x="4" y="2" width="4" height="20" rx="2" fill="rgba(26,115,232,.15)"></rect><rect x="4" width="4" rx="2" fill="#4C8DF6"><animate attributeName="y" values="14;7;11;5;13;14" dur="9s" repeatCount="indefinite"></animate><animate attributeName="height" values="8;15;11;17;9;8" dur="9s" repeatCount="indefinite"></animate></rect><circle cx="6" cy="24" r="3.6" fill="#4C8DF6"></circle></svg><div><b>0–3&nbsp;°C</b><span>Compartment temperature</span></div></div>
+            <div class="bts-pin" data-n="1" style="top:24%;left:48%"><span class="bts-pin-lbl"><span class="bts-pin-chip">Evaporator cooling system</span><span class="bts-pin-line"></span></span></div>
+            <div class="bts-pin" data-n="2" style="top:42%;left:42%"><span class="bts-pin-lbl"><span class="bts-pin-chip">Forced-air circulation</span><span class="bts-pin-line"></span></span></div>
+            <div class="bts-pin rev" data-n="3" style="top:40%;left:59%"><span class="bts-pin-lbl"><span class="bts-pin-chip">Drainage pipe</span><span class="bts-pin-line"></span></span></div>
+            <div class="bts-pin" data-n="4" style="top:58%;left:34%"><span class="bts-pin-lbl"><span class="bts-pin-chip">Non-porous stainless steel</span><span class="bts-pin-line"></span></span></div>
+            <div class="bts-pin rev" data-n="5" style="top:72%;left:66%"><span class="bts-pin-lbl"><span class="bts-pin-chip">Secure transport platform</span><span class="bts-pin-line"></span></span></div>
+          </div>
+          <div class="bts-legend">
+            <span><b>1</b> Evaporator cooling system</span>
+            <span><b>2</b> Forced-air circulation</span>
+            <span><b>3</b> Drainage pipe</span>
+            <span><b>4</b> Non-porous stainless steel</span>
+            <span><b>5</b> Secure transport platform</span>
+          </div>
             <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,240px),1fr));gap:16px 22px;margin-bottom:20px">
               <div style="display:flex;align-items:center;gap:14px">
                 <div style="width:38px;height:38px;border-radius:50%;background:#E8F0FE;display:grid;place-items:center;flex-shrink:0"><svg width="18" height="18" viewBox="0 0 20 20" fill="none"><path d="M10 1.5L17 4.5V9.5C17 14 14 17.5 10 18.5C6 17.5 3 14 3 9.5V4.5L10 1.5Z" stroke="#1A73E8" stroke-width="1.6" stroke-linejoin="round"></path></svg></div>
