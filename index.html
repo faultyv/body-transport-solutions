@@ -7,7 +7,8 @@
 <meta name="description" content="Professional refrigerated human-remains transport and repatriation support for funeral parlours, mortuaries and hospitals across KwaZulu-Natal and surrounding provinces. Based in Cato Ridge on the N3. Available 24/7.">
 <link rel="canonical" href="https://www.bodytransportsolutions.co.za/">
 <meta name="theme-color" content="#1A73E8">
-<link rel="icon" type="image/png" href="./assets/favicon.png">
+<link rel="icon" type="image/svg+xml" href="./assets/favicon.svg">
+<link rel="alternate icon" type="image/png" href="./assets/favicon.png">
 <link rel="apple-touch-icon" href="./assets/apple-touch-icon.png">
 <link rel="preload" as="image" href="./assets/hero-vehicle.webp">
 <meta property="og:type" content="website">
@@ -56,7 +57,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,400;0,500;0,700;0,900;1,900&display=swap" rel="stylesheet">
-  <link rel="icon" type="image/png" href="./assets/favicon.png">
+  <link rel="icon" type="image/svg+xml" href="./assets/favicon.svg">
   <style>
     :root {
       --bts-ink: #172033;
@@ -405,14 +406,6 @@
     /* Scroll-driven reveals (browsers with scroll-timeline support only) */
     @supports (animation-timeline: view()) {
       main section { animation: btsRise both cubic-bezier(.22,1,.36,1); animation-timeline: view(); animation-range: entry 0% entry 38%; }
-      @media (min-width: 900px) {
-        main section {
-          animation: btsRise both cubic-bezier(.22,1,.36,1), btsDefocus both linear;
-          animation-timeline: view(), view();
-          animation-range: entry 0% entry 38%, exit 0% exit 100%;
-        }
-      }
-      @keyframes btsDefocus { from { opacity: 1; filter: blur(0); } to { opacity: .5; filter: blur(2.5px); } }
       /* Dossier: compliance documents fan out as prepared paperwork */
       [data-screen-label="Compliance"] div[style*="display: grid"] > div[style*="align-items: flex-start"] {
         animation: btsDossier both cubic-bezier(.22,1,.36,1); animation-timeline: view(); animation-range: entry 0% entry 45%;
@@ -880,6 +873,184 @@
     .hero-vehicle::after { background: none !important; }
     .bts-floatbar a:last-child { animation: btsUp .5s .35s cubic-bezier(.22,1,.36,1) both, btsBreath 7s 2s ease-in-out infinite; }
 
+    /* ===== Final production editorial system ===== */
+    .bts-header {
+      background: #FFFFFF !important;
+      backdrop-filter: none !important;
+      -webkit-backdrop-filter: none !important;
+    }
+    .bts-page { overflow: clip; background: #FFFFFF; }
+    .bts-page > section { position: relative; filter: none !important; scroll-margin-top: 110px; }
+    .bts-page > section > [style*="max-width:1140px"] { max-width: 1240px !important; }
+    .bts-page:not(.bts-page-home):not(.bts-page-about) > section:first-child {
+      background: #FFFFFF !important;
+      padding-top: clamp(56px,7vw,88px) !important;
+      padding-bottom: clamp(48px,6vw,72px) !important;
+      border-bottom: 1px solid #EDF1F5;
+    }
+    .bts-page:not(.bts-page-home):not(.bts-page-about) > section:first-child::after {
+      content: ''; position: absolute; left: max(20px,calc((100vw - 1240px)/2)); bottom: -1px;
+      width: clamp(72px,9vw,132px); height: 2px; background: #1A73E8;
+    }
+    .bts-page-home .bts-map-wrap { display: none; }
+
+    /* Remove the old boxed-grid feel while retaining useful grouped information. */
+    .bts-open-list [style*="display:grid"] > [style*="border:1px solid #DADCE0"] {
+      border: 0 !important; border-top: 1px solid #DDE4EC !important; border-radius: 0 !important;
+      box-shadow: none !important; padding: 24px 4px !important; background: transparent !important;
+      transform: none !important;
+    }
+    .bts-open-list [style*="display:grid"] > [style*="border:1px solid #DADCE0"]:hover {
+      border-color: #AECBFA !important; box-shadow: none !important;
+    }
+    .bts-page-services > section:last-child > div > [style*="display:grid"],
+    .bts-page-partners > section:last-child [style*="display:grid"] {
+      gap: 0 40px !important;
+    }
+    .bts-page-services > section:last-child [style*="border:1px solid #DADCE0"],
+    .bts-page-partners > section:last-child [style*="border:1px solid #DADCE0"] {
+      border: 0 !important; border-top: 1px solid #DDE4EC !important; border-radius: 0 !important;
+      box-shadow: none !important; background: transparent !important; padding: 26px 2px !important;
+    }
+
+    /* Homepage: a continuous operational story replaces the duplicate 1-2-3 cards. */
+    .bts-operation-story { padding: clamp(58px,8vw,104px) 20px; background: #F7F9FC; }
+    .bts-operation-story__inner {
+      max-width: 1240px; margin: 0 auto; display: grid; grid-template-columns: minmax(210px,.7fr) minmax(0,2.3fr);
+      gap: clamp(34px,5vw,74px); align-items: start;
+    }
+    .bts-operation-story__intro { position: sticky; top: 118px; padding-top: 4px; }
+    .bts-operation-story__intro p,
+    .bts-editorial-media__copy > span {
+      margin: 0 0 14px; color: #1A73E8; font-size: 11px; line-height: 1.2; font-weight: 700;
+      letter-spacing: .13em; text-transform: uppercase;
+    }
+    .bts-operation-story__intro h2 { margin: 0 0 16px; color: #202124; font-size: clamp(28px,3.4vw,44px); line-height: 1.08; letter-spacing: -.035em; }
+    .bts-operation-story__intro > span { display: block; color: #5F6368; font-size: 15px; line-height: 1.65; }
+    .bts-story-rail { position: relative; display: grid; grid-template-columns: repeat(3,minmax(0,1fr)); gap: 18px; padding-bottom: 34px; }
+    .bts-story-rail::after {
+      content: ''; position: absolute; left: 16.666%; right: 16.666%; bottom: 15px; height: 1px;
+      background: linear-gradient(90deg,#AECBFA,#1A73E8 50%,#AECBFA);
+    }
+    .bts-story-rail::before {
+      content: ''; position: absolute; z-index: 2; bottom: 11px; left: 16.666%; width: 9px; height: 9px;
+      border-radius: 50%; background: #1A73E8; box-shadow: 0 0 0 5px #E8F0FE;
+      animation: btsStorySignal 7.5s cubic-bezier(.45,.05,.25,1) infinite;
+    }
+    @keyframes btsStorySignal { 0%,8% { left: 16.666%; } 42%,50% { left: 50%; } 84%,100% { left: calc(83.333% - 9px); } }
+    .bts-story-frame { min-width: 0; margin: 0; }
+    .bts-story-frame:nth-child(2) { padding-top: 34px; }
+    .bts-story-frame img {
+      display: block; width: 100%; aspect-ratio: 4 / 3; object-fit: cover; border-radius: 18px;
+      box-shadow: 0 12px 34px rgba(32,63,99,.11); transition: transform .65s cubic-bezier(.2,.7,.2,1),box-shadow .65s ease;
+    }
+    .bts-story-frame:hover img { transform: translateY(-5px) scale(1.012); box-shadow: 0 20px 46px rgba(32,63,99,.16); }
+    .bts-story-frame figcaption { display: grid; grid-template-columns: 30px 1fr; gap: 9px; padding: 17px 2px 0; color: #5F6368; font-size: 12.5px; line-height: 1.5; }
+    .bts-story-frame figcaption b { color: #1A73E8; font-size: 11px; letter-spacing: .08em; }
+    .bts-story-frame figcaption strong { display: block; margin-bottom: 3px; color: #202124; font-size: 13.5px; }
+
+    /* Reusable image-led moment for About, Services, Process and Partners. */
+    .bts-editorial-media { padding: clamp(62px,8vw,112px) 20px; background: #FFFFFF; }
+    .bts-editorial-media:nth-of-type(even) { background: #F7F9FC; }
+    .bts-editorial-media__inner {
+      max-width: 1240px; margin: 0 auto; display: grid; grid-template-columns: minmax(0,1.45fr) minmax(280px,.55fr);
+      gap: clamp(36px,6vw,86px); align-items: center;
+    }
+    .bts-editorial-media__inner--reverse { grid-template-columns: minmax(280px,.55fr) minmax(0,1.45fr); }
+    .bts-editorial-media__inner--reverse figure { order: 2; }
+    .bts-editorial-media figure { position: relative; margin: 0; overflow: hidden; border-radius: 22px; background: #E8EDF3; box-shadow: 0 18px 44px rgba(31,58,91,.12); }
+    .bts-editorial-media figure::after {
+      content: ''; position: absolute; left: -32%; bottom: 0; width: 32%; height: 2px;
+      background: linear-gradient(90deg,transparent,#6FB6FF,#1A73E8); animation: btsMediaScan 6.8s ease-in-out infinite;
+    }
+    @keyframes btsMediaScan { 0%,18% { left: -32%; } 70%,100% { left: 100%; } }
+    .bts-editorial-media img { display: block; width: 100%; aspect-ratio: 16 / 9; object-fit: cover; transition: transform 1s cubic-bezier(.2,.7,.2,1); }
+    .bts-editorial-media figure:hover img { transform: scale(1.025); }
+    .bts-editorial-media__copy { position: relative; padding-left: 28px; }
+    .bts-editorial-media__copy::before { content: ''; position: absolute; left: 0; top: 2px; bottom: 2px; width: 2px; background: linear-gradient(#1A73E8,#D2E3FC); }
+    .bts-editorial-media__copy h2 { margin: 0 0 16px; color: #202124; font-size: clamp(28px,3.7vw,46px); line-height: 1.08; letter-spacing: -.035em; }
+    .bts-editorial-media__copy p { margin: 0; color: #5F6368; font-size: 16px; line-height: 1.7; }
+
+    /* Process: keep the real seven-step timeline, but give it an intelligent visual lead-in. */
+    .bts-page-process > section:last-child > div { max-width: 860px !important; }
+    .bts-process-step { transition: opacity .25s ease; }
+    .bts-process-step:hover { opacity: 1; }
+    .bts-process-line { background: linear-gradient(#AECBFA,#DADCE0) !important; }
+
+    /* Request and Contact: one purposeful media frame instead of another wall of boxes. */
+    .bts-request-layout { max-width: 1240px; margin: 0 auto; display: grid; grid-template-columns: minmax(300px,.72fr) minmax(0,1.28fr); gap: clamp(28px,4vw,58px); align-items: start; }
+    .bts-request-visual { position: sticky; top: 112px; overflow: hidden; border-radius: 24px; background: #0B57D0; }
+    .bts-request-visual img { display: block; width: 100%; aspect-ratio: 4 / 3; object-fit: cover; }
+    .bts-request-visual__copy { padding: 28px; color: #FFFFFF; }
+    .bts-request-visual__copy span { display: block; margin-bottom: 10px; color: #D2E3FC; font-size: 11px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; }
+    .bts-request-visual__copy strong { display: block; font-size: clamp(22px,2.4vw,31px); line-height: 1.14; letter-spacing: -.025em; }
+    .bts-request-visual__copy p { margin: 14px 0 0; color: #D2E3FC; font-size: 14px; line-height: 1.65; }
+    .bts-request-form > div { border-radius: 20px !important; box-shadow: 0 14px 36px rgba(31,58,91,.08); }
+    .bts-contact-visual { overflow: hidden; border-radius: 24px; background: #1A73E8; }
+    .bts-contact-visual > img { display: block; width: 100%; aspect-ratio: 16 / 8; object-fit: cover; }
+    .bts-contact-visual__body { display: flex; flex-direction: column; gap: 14px; padding: clamp(26px,4vw,42px); }
+
+    /* Map: one wide Areas-page canvas, with the caption outside the drawing and a mobile legend. */
+    .bts-page-areas .bts-map-wrap { max-width: 1120px; margin: 0 auto; border-radius: 24px; box-shadow: 0 20px 54px rgba(11,37,69,.22); display: flex; flex-direction: column; }
+    .bts-page-areas .bts-map-title {
+      position: static; order: 2; text-align: left; border: 0; border-radius: 0; padding: 18px 22px 8px;
+      background: #0B2545; box-shadow: none; backdrop-filter: none; -webkit-backdrop-filter: none;
+    }
+    .bts-page-areas .bts-map-foot { position: static; order: 3; padding: 6px 22px 20px; background: #0B2545; }
+    .bts-map-mobile-key { display: none; }
+
+    img[loading="lazy"] { background: #EDF1F5; }
+
+    @supports (animation-timeline: view()) {
+      @media (min-width: 900px) {
+        main section { animation: btsRise both cubic-bezier(.22,1,.36,1) !important; animation-timeline: view() !important; animation-range: entry 0% entry 24% !important; }
+      }
+    }
+
+    @media (max-width: 899px) {
+      .bts-operation-story__inner { grid-template-columns: 1fr; }
+      .bts-operation-story__intro { position: static; max-width: 640px; }
+      .bts-editorial-media__inner,
+      .bts-editorial-media__inner--reverse { grid-template-columns: 1fr; }
+      .bts-editorial-media__inner--reverse figure { order: 0; }
+      .bts-request-layout { grid-template-columns: 1fr; }
+      .bts-request-visual { position: static; display: grid; grid-template-columns: minmax(0,1.1fr) minmax(240px,.9fr); }
+      .bts-request-visual img { height: 100%; aspect-ratio: auto; }
+    }
+
+    @media (max-width: 640px) {
+      .bts-page > section > [style*="max-width:1140px"] { max-width: 100% !important; }
+      .bts-operation-story { padding: 52px 20px 64px; }
+      .bts-operation-story__intro h2 { font-size: 31px; }
+      .bts-story-rail { grid-template-columns: 1fr; gap: 30px; padding: 0 0 0 28px; }
+      .bts-story-frame:nth-child(2) { padding-top: 0; }
+      .bts-story-frame img { aspect-ratio: 4 / 3; border-radius: 16px; }
+      .bts-story-rail::after { left: 5px; right: auto; top: 12px; bottom: 18px; width: 1px; height: auto; background: linear-gradient(#AECBFA,#1A73E8,#AECBFA); }
+      .bts-story-rail::before { left: 1px !important; bottom: auto; top: 12px; animation: btsStorySignalMobile 7.5s cubic-bezier(.45,.05,.25,1) infinite; }
+      @keyframes btsStorySignalMobile { 0%,8% { top: 12px; } 50% { top: 50%; } 90%,100% { top: calc(100% - 24px); } }
+      .bts-editorial-media { padding: 54px 20px 66px; }
+      .bts-editorial-media figure { border-radius: 16px; }
+      .bts-editorial-media img { aspect-ratio: 4 / 3; }
+      .bts-editorial-media__copy { padding-left: 20px; }
+      .bts-editorial-media__copy h2 { font-size: 30px; }
+      .bts-request-visual { display: block; border-radius: 18px; }
+      .bts-request-visual__copy { padding: 24px; }
+      .bts-contact-visual { border-radius: 18px; }
+      .bts-page-services > section:last-child > div > [style*="display:grid"],
+      .bts-page-partners > section:last-child [style*="display:grid"] { grid-template-columns: 1fr !important; }
+      .bts-page-areas .bts-map-wrap { border-radius: 18px; }
+      .bts-page-areas .bts-map-city,
+      .bts-page-areas .bts-map-time,
+      .bts-page-areas .bts-map-hublabel,
+      .bts-page-areas .bts-map-hubsub,
+      .bts-page-areas .bts-map-arr,
+      .bts-page-areas .bts-map-ocean { display: none; }
+      .bts-map-mobile-key { max-width: 1120px; margin: 14px auto 0; display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); gap: 1px; border: 1px solid #DDE4EC; border-radius: 14px; overflow: hidden; background: #DDE4EC; }
+      .bts-map-mobile-key span { min-width: 0; padding: 11px 12px; background: #FFFFFF; color: #3C4043; font-size: 12.5px; font-weight: 500; }
+      .bts-map-mobile-key span::before { content: ''; display: inline-block; width: 6px; height: 6px; margin-right: 8px; border-radius: 50%; background: #1A73E8; vertical-align: 1px; }
+      .bts-page > section:nth-child(n+3) { contain-intrinsic-size: 920px; }
+    }
+
     @media (prefers-reduced-motion: reduce) {
       *, *::before, *::after { animation: none !important; transition: none !important; }
       .bts-map-live { display: none; }
@@ -923,7 +1094,7 @@
 
   <!-- ============ HOME ============ -->
   <sc-if value="{{ pageHome }}" hint-placeholder-val="{{ true }}">
-    <div data-screen-label="Home">
+    <div class="bts-page bts-page-home" data-screen-label="Home">
 
       <!-- Hero -->
       <section class="bts-home-hero" style="padding:clamp(44px,7vw,80px) 20px clamp(36px,5vw,56px)">
@@ -956,33 +1127,33 @@
         <span class="bts-lux-lbl">Surrounding provinces &middot; by arrangement</span>
       </div>
 
-      <!-- Simple 1-2-3 pitch -->
-      <section style="background:#F8F9FA;padding:clamp(40px,6vw,64px) 20px">
-        <div style="max-width:1140px;margin:0 auto">
-          <h2 style="font-weight:700;font-size:clamp(22px,4vw,30px);margin:0 0 6px;color:#202124;letter-spacing:-0.01em">Simple as <span class="bts-grad">1 — 2 — 3</span></h2>
-          <p style="font-size:15px;color:#5F6368;margin:0 0 28px">No complicated process. No hidden steps.</p>
-          <div class="bts-steps" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,260px),1fr));gap:14px">
-            <div style="background:#FFFFFF;border:1px solid #DADCE0;border-radius:18px;padding:26px;display:flex;flex-direction:column;gap:10px">
-              <div class="bts-step-number" style="width:40px;height:40px;border-radius:50%;background:#E8F0FE;color:#1A73E8;font-weight:700;font-size:17px;display:grid;place-items:center" style-hover="color:#0B57D0;background:#E8F0FE"><span class="bts-number-glyph">1</span></div>
-              <div style="font-weight:700;font-size:17px;color:#202124">You call or WhatsApp</div>
-              <p style="font-size:14px;line-height:1.6;color:#5F6368;margin:0">Tell us where to collect, where to deliver, and when. We confirm the price and paperwork straight away.</p>
-            </div>
-            <div style="background:#FFFFFF;border:1px solid #DADCE0;border-radius:18px;padding:26px;display:flex;flex-direction:column;gap:10px">
-              <div class="bts-step-number" style="width:40px;height:40px;border-radius:50%;background:#E8F0FE;color:#1A73E8;font-weight:700;font-size:17px;display:grid;place-items:center" style-hover="color:#0B57D0;background:#E8F0FE"><span class="bts-number-glyph">2</span></div>
-              <div style="font-weight:700;font-size:17px;color:#202124">We collect</div>
-              <p style="font-size:14px;line-height:1.6;color:#5F6368;margin:0">Our driver collects from the hospital, mortuary or funeral parlour — respectfully, in a refrigerated vehicle, with signed records.</p>
-            </div>
-            <div style="background:#FFFFFF;border:1px solid #DADCE0;border-radius:18px;padding:26px;display:flex;flex-direction:column;gap:10px">
-              <div class="bts-step-number" style="width:40px;height:40px;border-radius:50%;background:#E8F0FE;color:#1A73E8;font-weight:700;font-size:17px;display:grid;place-items:center" style-hover="color:#0B57D0;background:#E8F0FE"><span class="bts-number-glyph">3</span></div>
-              <div style="font-weight:700;font-size:17px;color:#202124">We deliver, signed for</div>
-              <p style="font-size:14px;line-height:1.6;color:#5F6368;margin:0">The receiving party signs the handover note. You get proper chain-of-custody paperwork on every job.</p>
-            </div>
+      <!-- Wide operational story: one continuous journey, not another process card grid -->
+      <section class="bts-operation-story" aria-labelledby="operation-story-title">
+        <div class="bts-operation-story__inner">
+          <header class="bts-operation-story__intro">
+            <p>One controlled journey</p>
+            <h2 id="operation-story-title">From collection to handover, every stage stays connected.</h2>
+            <span>Dedicated vehicle. Refrigerated compartment. Documented delivery.</span>
+          </header>
+          <div class="bts-story-rail">
+            <figure class="bts-story-frame">
+              <img src="./assets/vehicle-exterior.webp" loading="lazy" decoding="async" width="1536" height="1024" alt="Dedicated refrigerated transport vehicle ready for collection">
+              <figcaption><b>01</b><span><strong>Direct collection</strong>Discreet dispatch in a dedicated refrigerated vehicle.</span></figcaption>
+            </figure>
+            <figure class="bts-story-frame">
+              <img src="./assets/vehicle-open.webp" loading="lazy" decoding="async" width="1600" height="901" alt="Open refrigerated conversion with secure stainless-steel transport platform">
+              <figcaption><b>02</b><span><strong>Controlled transfer</strong>Cold control, secure loading and a direct route.</span></figcaption>
+            </figure>
+            <figure class="bts-story-frame">
+              <img src="./assets/cleaning-inspection.webp" loading="lazy" decoding="async" width="1600" height="901" alt="Transport compartment being cleaned and inspected after a transfer">
+              <figcaption><b>03</b><span><strong>Closed properly</strong>Signed handover, cleaning record and completed job file.</span></figcaption>
+            </figure>
           </div>
         </div>
       </section>
 
       <!-- Why choose us -->
-      <section style="padding:clamp(48px,7vw,72px) 20px 8px">
+      <section class="bts-open-list" style="padding:clamp(48px,7vw,72px) 20px 8px">
         <div style="max-width:1140px;margin:0 auto">
           <h2 style="font-weight:700;font-size:clamp(22px,4vw,30px);margin:0 0 6px;color:#202124;letter-spacing:-0.01em">Why <span class="bts-grad">funeral parlours</span> choose us</h2>
           <p style="font-size:15px;color:#5F6368;margin:0 0 24px">What the industry expects from a transport partner — done properly.</p>
@@ -1030,7 +1201,7 @@
       </section>
 
       <!-- What we do -->
-      <section style="padding:clamp(48px,7vw,80px) 20px">
+      <section class="bts-open-list" style="padding:clamp(48px,7vw,80px) 20px">
         <div style="max-width:1140px;margin:0 auto">
           <h2 style="font-weight:700;font-size:clamp(24px,4.5vw,34px);margin:0 0 12px;letter-spacing:-0.01em;color:#202124">What we do</h2>
           <p style="font-size:16px;line-height:1.65;color:#5F6368;max-width:720px;margin:0 0 32px;text-wrap:pretty">Dedicated refrigerated transport of human remains between approved facilities — hospitals, mortuaries, funeral parlours, crematoria, burial destinations and long-distance repatriation routes. Transport support only: no funeral arrangement, storage, preparation or embalming.</p>
@@ -1235,20 +1406,20 @@
       <circle r="4" fill="#FFB81C" opacity=".85"><animateMotion dur="3.5s" begin="1s" repeatCount="indefinite" path="M431 595 Q490 605 532 627"></animateMotion></circle>
       <circle r="4.5" fill="#FFB81C" opacity=".85"><animateMotion dur="8s" begin="3.5s" repeatCount="indefinite" path="M431 595 C 360 480 290 330 292 226"></animateMotion></circle>
     </g>
-    <text class="bts-map-city" x="550" y="622">Durban</text>
-            <text class="bts-map-time" x="550" y="645">&#177;45 min</text>
-            <text class="bts-map-city" x="376" y="552" text-anchor="end">Pietermaritzburg</text>
-            <text class="bts-map-time" x="376" y="574" text-anchor="end">&#177;30 min</text>
+    <text class="bts-map-city" x="560" y="638">Durban</text>
+            <text class="bts-map-time" x="560" y="662">&#177;45 min</text>
+            <text class="bts-map-city" x="366" y="536" text-anchor="end">Pietermaritzburg</text>
+            <text class="bts-map-time" x="366" y="560" text-anchor="end">&#177;30 min</text>
             <text class="bts-map-city" x="403" y="818" text-anchor="middle">Port Shepstone</text>
             <text class="bts-map-time" x="403" y="840" text-anchor="middle">&#177;2 hrs</text>
             <text class="bts-map-city" x="765" y="416">Richards Bay</text>
             <text class="bts-map-time" x="765" y="439">&#177;2.5 hrs</text>
             <text class="bts-map-city" x="310" y="218">Newcastle</text>
             <text class="bts-map-time" x="310" y="241">&#177;3 hrs</text>
-            <text class="bts-map-time" x="274" y="366">Ladysmith</text>
+            <text class="bts-map-city" x="274" y="366">Ladysmith</text>
             <text class="bts-map-city" x="182" y="726" text-anchor="middle">Kokstad</text>
-            <text class="bts-map-hublabel" x="449" y="574">CATO RIDGE</text>
-            <text class="bts-map-hubsub" x="449" y="595">HUB &#183; N3 corridor</text>
+            <text class="bts-map-hublabel" x="458" y="566">CATO RIDGE</text>
+            <text class="bts-map-hubsub" x="458" y="588">HUB &#183; N3 corridor</text>
             <text class="bts-map-arr" x="170" y="76">Gauteng &#183; by arrangement</text>
             <text class="bts-map-arr" x="100" y="842">Eastern Cape &#183; by arrangement</text>
           </svg>
@@ -1304,12 +1475,22 @@
 
   <!-- ============ ABOUT ============ -->
   <sc-if value="{{ pageAbout }}" hint-placeholder-val="{{ false }}">
-    <div data-screen-label="About">
+    <div class="bts-page bts-page-about" data-screen-label="About">
       <section class="bts-about-hero">
         <div style="position:relative;z-index:1;max-width:1140px;margin:0 auto">
           <div class="bts-about-kicker">Transport-only human remains logistics</div>
           <h1 class="bts-about-title" style="font-weight:700;font-size:clamp(34px,5.5vw,54px);margin:0;letter-spacing:-0.03em"><span>About</span> <span class="bts-grad">Body Transport Solutions</span></h1>
           <p class="bts-about-tagline">Precision logistics with quiet dignity.</p>
+        </div>
+      </section>
+      <section class="bts-editorial-media bts-editorial-media--about">
+        <div class="bts-editorial-media__inner">
+          <figure><img src="./assets/cleaning-inspection.webp" loading="lazy" decoding="async" width="1600" height="901" alt="Cleaning and quality inspection of the refrigerated transport compartment"></figure>
+          <div class="bts-editorial-media__copy">
+            <span>Quiet work. Clear records.</span>
+            <h2>Dignity is built into the routine.</h2>
+            <p>Preparation, direct transport, signed handover and post-job cleaning are treated as one connected operational standard.</p>
+          </div>
         </div>
       </section>
       <section class="bts-about-main">
@@ -1363,10 +1544,20 @@
 
   <!-- ============ SERVICES ============ -->
   <sc-if value="{{ pageServices }}" hint-placeholder-val="{{ false }}">
-    <div data-screen-label="Services">
+    <div class="bts-page bts-page-services" data-screen-label="Services">
       <section style="background:#F8F9FA;padding:clamp(44px,7vw,72px) 20px">
         <div style="max-width:1140px;margin:0 auto">
           <h1 style="font-weight:700;font-size:clamp(28px,5.5vw,42px);margin:0;letter-spacing:-0.02em;color:#202124">Human remains <span class="bts-grad">transport services</span></h1>
+        </div>
+      </section>
+      <section class="bts-editorial-media bts-editorial-media--services">
+        <div class="bts-editorial-media__inner bts-editorial-media__inner--reverse">
+          <figure><img src="./assets/vehicle-open.webp" loading="lazy" decoding="async" width="1600" height="901" alt="Purpose-built refrigerated transport conversion open and ready"></figure>
+          <div class="bts-editorial-media__copy">
+            <span>One vehicle. Multiple approved routes.</span>
+            <h2>Configured for direct, refrigerated transfer.</h2>
+            <p>Local collections, inter-facility transfers and longer routes use the same secure compartment, clear handover process and documented chain of custody.</p>
+          </div>
         </div>
       </section>
       <section style="padding:clamp(44px,7vw,72px) 20px clamp(64px,9vw,88px)">
@@ -1385,7 +1576,7 @@
 
   <!-- ============ COMPLIANCE ============ -->
   <sc-if value="{{ pageCompliance }}" hint-placeholder-val="{{ false }}">
-    <div data-screen-label="Compliance">
+    <div class="bts-page bts-page-compliance" data-screen-label="Compliance">
       <section style="background:#F8F9FA;padding:clamp(44px,7vw,72px) 20px">
         <div style="max-width:1140px;margin:0 auto">
           <h1 style="font-weight:700;font-size:clamp(28px,5.5vw,42px);margin:0 0 16px;letter-spacing:-0.02em;color:#202124">Compliance &amp; <span class="bts-grad">documentation</span></h1>
@@ -1502,10 +1693,20 @@
 
   <!-- ============ JOB PROCESS ============ -->
   <sc-if value="{{ pageProcess }}" hint-placeholder-val="{{ false }}">
-    <div data-screen-label="Job Process">
+    <div class="bts-page bts-page-process" data-screen-label="Job Process">
       <section style="background:#F8F9FA;padding:clamp(44px,7vw,72px) 20px">
         <div style="max-width:1140px;margin:0 auto">
           <h1 style="font-weight:700;font-size:clamp(28px,5.5vw,42px);margin:0;letter-spacing:-0.02em;color:#202124">How a <span class="bts-grad">transport job</span> works</h1>
+        </div>
+      </section>
+      <section class="bts-editorial-media bts-editorial-media--process">
+        <div class="bts-editorial-media__inner">
+          <figure><img src="./assets/refrigeration-detail.webp" loading="lazy" decoding="async" width="1600" height="901" alt="Refrigeration equipment and secure transport platform inside the vehicle"></figure>
+          <div class="bts-editorial-media__copy">
+            <span>One live job state.</span>
+            <h2>Every step moves toward a recorded handover.</h2>
+            <p>The timeline below follows the real sequence from instruction and documentation through collection, controlled transport, delivery and cleaning.</p>
+          </div>
         </div>
       </section>
       <section style="padding:clamp(44px,7vw,72px) 20px clamp(64px,9vw,88px)">
@@ -1530,7 +1731,7 @@
 
   <!-- ============ AREAS ============ -->
   <sc-if value="{{ pageAreas }}" hint-placeholder-val="{{ false }}">
-    <div data-screen-label="Areas Covered">
+    <div class="bts-page bts-page-areas" data-screen-label="Areas Covered">
       <section style="background:#F8F9FA;padding:clamp(44px,7vw,72px) 20px">
         <div style="max-width:1140px;margin:0 auto">
           <h1 style="font-weight:700;font-size:clamp(28px,5.5vw,42px);margin:0 0 14px;letter-spacing:-0.02em;color:#202124"><span class="bts-grad">KZN-focused</span> transport support</h1>
@@ -1581,25 +1782,28 @@
       <circle r="4" fill="#FFB81C" opacity=".85"><animateMotion dur="3.5s" begin="1s" repeatCount="indefinite" path="M431 595 Q490 605 532 627"></animateMotion></circle>
       <circle r="4.5" fill="#FFB81C" opacity=".85"><animateMotion dur="8s" begin="3.5s" repeatCount="indefinite" path="M431 595 C 360 480 290 330 292 226"></animateMotion></circle>
     </g>
-    <text class="bts-map-city" x="550" y="622">Durban</text>
-            <text class="bts-map-time" x="550" y="645">&#177;45 min</text>
-            <text class="bts-map-city" x="376" y="552" text-anchor="end">Pietermaritzburg</text>
-            <text class="bts-map-time" x="376" y="574" text-anchor="end">&#177;30 min</text>
+    <text class="bts-map-city" x="560" y="638">Durban</text>
+            <text class="bts-map-time" x="560" y="662">&#177;45 min</text>
+            <text class="bts-map-city" x="366" y="536" text-anchor="end">Pietermaritzburg</text>
+            <text class="bts-map-time" x="366" y="560" text-anchor="end">&#177;30 min</text>
             <text class="bts-map-city" x="403" y="818" text-anchor="middle">Port Shepstone</text>
             <text class="bts-map-time" x="403" y="840" text-anchor="middle">&#177;2 hrs</text>
             <text class="bts-map-city" x="765" y="416">Richards Bay</text>
             <text class="bts-map-time" x="765" y="439">&#177;2.5 hrs</text>
             <text class="bts-map-city" x="310" y="218">Newcastle</text>
             <text class="bts-map-time" x="310" y="241">&#177;3 hrs</text>
-            <text class="bts-map-time" x="274" y="366">Ladysmith</text>
+            <text class="bts-map-city" x="274" y="366">Ladysmith</text>
             <text class="bts-map-city" x="182" y="726" text-anchor="middle">Kokstad</text>
-            <text class="bts-map-hublabel" x="449" y="574">CATO RIDGE</text>
-            <text class="bts-map-hubsub" x="449" y="595">HUB &#183; N3 corridor</text>
+            <text class="bts-map-hublabel" x="458" y="566">CATO RIDGE</text>
+            <text class="bts-map-hubsub" x="458" y="588">HUB &#183; N3 corridor</text>
             <text class="bts-map-arr" x="170" y="76">Gauteng &#183; by arrangement</text>
             <text class="bts-map-arr" x="100" y="842">Eastern Cape &#183; by arrangement</text>
           </svg>
           <div class="bts-map-title"><b>KZN route network</b><span>Daily refrigerated transfers &#183; surrounding provinces by arrangement</span></div>
           <div class="bts-map-foot"><span class="bts-map-flag"></span><span>Proudly South African &#183; Transport-only operator</span></div>
+        </div>
+        <div class="bts-map-mobile-key" aria-label="Main route destinations">
+          <span>Durban</span><span>Pietermaritzburg</span><span>Richards Bay</span><span>Newcastle</span><span>Port Shepstone</span><span>Kokstad</span>
         </div>
       </section>
       <section style="padding:clamp(44px,7vw,72px) 20px clamp(64px,9vw,88px)">
@@ -1626,11 +1830,21 @@
 
   <!-- ============ PARTNERS ============ -->
   <sc-if value="{{ pagePartners }}" hint-placeholder-val="{{ false }}">
-    <div data-screen-label="Funeral Parlour Partners">
+    <div class="bts-page bts-page-partners" data-screen-label="Funeral Parlour Partners">
       <section style="background:#F8F9FA;padding:clamp(44px,7vw,72px) 20px">
         <div style="max-width:1140px;margin:0 auto">
           <h1 style="font-weight:700;font-size:clamp(28px,5.5vw,42px);margin:0 0 14px;letter-spacing:-0.02em;color:#202124">Support for <span class="bts-grad">funeral parlours</span></h1>
           <p style="font-size:16px;line-height:1.65;color:#5F6368;max-width:760px;margin:0;text-wrap:pretty">When your vehicles are unavailable, unsuitable for long-distance work, or already booked — we provide discreet, professional overflow transport support. Invoice-based, no complications.</p>
+        </div>
+      </section>
+      <section class="bts-editorial-media bts-editorial-media--partners">
+        <div class="bts-editorial-media__inner">
+          <figure><img src="./assets/vehicle-exterior.webp" loading="lazy" decoding="async" width="1536" height="1024" alt="Dedicated refrigerated transport vehicle available for partner support"></figure>
+          <div class="bts-editorial-media__copy">
+            <span>Capacity when your operation needs it.</span>
+            <h2>Your name stays with the family. We handle the road.</h2>
+            <p>Discreet overflow capacity for funeral parlours that need reliable long-distance or after-hours transport without adding another vehicle to the fleet.</p>
+          </div>
         </div>
       </section>
       <section style="padding:clamp(44px,7vw,72px) 20px clamp(64px,9vw,88px)">
@@ -1658,15 +1872,20 @@
 
   <!-- ============ REQUEST ============ -->
   <sc-if value="{{ pageRequest }}" hint-placeholder-val="{{ false }}">
-    <div data-screen-label="Emergency Transport Request">
+    <div class="bts-page bts-page-request" data-screen-label="Emergency Transport Request">
       <section style="background:#F8F9FA;padding:clamp(44px,7vw,72px) 20px">
         <div style="max-width:1140px;margin:0 auto">
           <h1 style="font-weight:700;font-size:clamp(28px,5.5vw,42px);margin:0 0 14px;letter-spacing:-0.02em;color:#202124">Request <span class="bts-grad">transport assistance</span></h1>
           <p style="font-size:15px;line-height:1.65;color:#5F6368;max-width:640px;margin:0">Fastest response for urgent jobs: call or WhatsApp <a href="{{ waLink }}" style="font-weight:500">{{ whatsapp }}</a>. Otherwise use the form below.</p>
         </div>
       </section>
-      <section style="padding:clamp(36px,6vw,56px) 20px clamp(64px,9vw,88px)">
-        <div style="max-width:780px;margin:0 auto">
+      <section class="bts-request-section" style="padding:clamp(36px,6vw,56px) 20px clamp(64px,9vw,88px)">
+        <div class="bts-request-layout">
+          <aside class="bts-request-visual">
+            <img src="./assets/vehicle-open.webp" loading="lazy" decoding="async" width="1600" height="901" alt="Refrigerated transport vehicle ready for a direct collection and delivery">
+            <div class="bts-request-visual__copy"><span>Available 24/7</span><strong>Tell us the route. We will confirm the rest.</strong><p>Collection point, destination, timing and documentation are reviewed in one conversation.</p></div>
+          </aside>
+          <div class="bts-request-form">
           <sc-if value="{{ sent }}" hint-placeholder-val="{{ false }}">
             <div style="background:#E6F4EA;border:1px solid #CEEAD6;border-radius:18px;padding:clamp(28px,5vw,44px);text-align:center;display:flex;flex-direction:column;gap:12px;align-items:center">
               <svg width="36" height="36" viewBox="0 0 36 36" fill="none"><circle cx="18" cy="18" r="16" stroke="#137333" stroke-width="2"></circle><path d="M11 18.5L16 23L25 12.5" stroke="#137333" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"></path></svg>
@@ -1700,6 +1919,7 @@
               </sc-if>
             </div>
           </sc-if>
+          </div>
         </div>
       </section>
     </div>
@@ -1707,7 +1927,7 @@
 
   <!-- ============ CONTACT ============ -->
   <sc-if value="{{ pageContact }}" hint-placeholder-val="{{ false }}">
-    <div data-screen-label="Contact">
+    <div class="bts-page bts-page-contact" data-screen-label="Contact">
       <section style="background:#F8F9FA;padding:clamp(44px,7vw,72px) 20px">
         <div style="max-width:1140px;margin:0 auto">
           <h1 style="font-weight:700;font-size:clamp(28px,5.5vw,42px);margin:0 0 14px;letter-spacing:-0.02em;color:#202124">Contact <span class="bts-grad">Body Transport Solutions</span></h1>
@@ -1738,12 +1958,15 @@
               <span style="font-weight:500;font-size:14px;line-height:1.5;color:#202124">KwaZulu-Natal daily; surrounding provinces by arrangement</span>
             </div>
           </div>
-          <div style="background:#1A73E8;border-radius:28px;padding:clamp(28px,5vw,44px);display:flex;flex-direction:column;gap:14px">
+          <div class="bts-contact-visual">
+            <img src="./assets/vehicle-exterior.webp" loading="lazy" decoding="async" width="1536" height="1024" alt="Body Transport Solutions refrigerated vehicle ready for urgent transport">
+            <div class="bts-contact-visual__body">
             <h3 style="font-weight:700;font-size:clamp(20px,4vw,24px);margin:0;color:#FFFFFF">Available 24/7 for urgent transport</h3>
             <p style="font-size:15px;line-height:1.7;color:#D2E3FC;margin:0">We confirm the collection point, destination, documentation requirements, vehicle availability and route in one conversation.</p>
             <div style="display:flex;gap:12px;flex-wrap:wrap;margin-top:4px">
               <a href="{{ waLink }}" style="background:#FFFFFF;color:#1A73E8;font-weight:500;font-size:15px;padding:13px 24px;border-radius:999px;cursor:pointer" style-hover="background:#E8F0FE;color:#174EA6">WhatsApp now</a>
               <a href="#request" onClick="{{ goRequest }}" style="border:1px solid rgba(255,255,255,0.5);color:#FFFFFF;font-weight:500;font-size:15px;padding:13px 24px;border-radius:999px;cursor:pointer" style-hover="background:rgba(255,255,255,0.12);color:#FFFFFF">Submit a request</a>
+            </div>
             </div>
           </div>
         </div>
@@ -1813,7 +2036,7 @@ class Component extends DCLogic {
     apply();
 
     const onScroll = () => {
-      const sc = window.scrollY > 2;
+      const sc = window.scrollY > 56;
       if (sc !== this.state.scrolled) this.setState({ scrolled: sc });
     };
     this._onScroll = onScroll;

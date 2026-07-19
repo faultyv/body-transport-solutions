@@ -364,6 +364,31 @@
     ['Yes — we’ll gladly take your call and guide you, but transport is carried out in support of an authorised funeral parlour, mortuary, hospital or insurer, with the correct documentation in place.','Ja — ons neem graag u oproep en gee leiding, maar vervoer word ter ondersteuning van ’n gemagtigde begrafnisonderneming, lykshuis, hospitaal of versekeraar uitgevoer, met die korrekte dokumentasie in plek.','Yebo — sizokwamukela ucingo lwakho futhi sikuqondise, kodwa ukuthutha kwenziwa ngokusekela ikhaya labangcwabi, amakhaza, isibhedlela noma umshwalense ogunyaziwe, kube nemibhalo efanele.'],
     ['Typically a collection instruction, death documentation, a release note from the facility and a receiving note at the destination. We confirm exactly what’s needed for your route when you contact us — see our','Gewoonlik ’n afhaalinstruksie, sterftedokumentasie, ’n vrystellingsnota van die fasiliteit en ’n ontvangsnota by die bestemming. Ons bevestig presies wat vir u roete nodig is wanneer u ons kontak — sien ons','Ngokuvamile kudingeka umyalelo wokulanda, imibhalo yokushona, incwadi yokukhulula evela esikhungweni nencwadi yokwamukela endaweni okuyiwa kuyo. Siqinisekisa ngqo okudingekayo kumzila wakho uma usithinta — bheka'],
 
+    // Final production editorial moments
+    ['One controlled journey','Een beheerde rit','Uhambo olulodwa olulawulwayo'],
+    ['From collection to handover, every stage stays connected.','Van afhaal tot oorhandiging bly elke fase verbind.','Kusukela ekulandeni kuya ekudlulisweni, sonke isigaba sihlala sixhumene.'],
+    ['Dedicated vehicle. Refrigerated compartment. Documented delivery.','Toegewyde voertuig. Verkoelde kompartement. Gedokumenteerde aflewering.','Imoto ezinikele. Igumbi lesiqandisi. Ukulethwa okubhaliwe.'],
+    ['Discreet dispatch in a dedicated refrigerated vehicle.','Diskrete vertrek in ’n toegewyde verkoelde voertuig.','Ukusuka ngobumfihlo ngemoto yesiqandisi ezinikele.'],
+    ['Controlled transfer','Beheerde vervoer','Ukuthutha okulawulwayo'],
+    ['Cold control, secure loading and a direct route.','Kouebeheer, veilige laai en ’n direkte roete.','Ukulawulwa kokubanda, ukulayisha okuphephile nomzila oqondile.'],
+    ['Closed properly','Behoorlik afgehandel','Kuvalwe ngendlela efanele'],
+    ['Signed handover, cleaning record and completed job file.','Getekende oorhandiging, skoonmaakrekord en voltooide werklêer.','Ukudluliswa okusayiniwe, irekhodi lokuhlanza nefayela lomsebenzi eliphelele.'],
+    ['Quiet work. Clear records.','Stil werk. Duidelike rekords.','Umsebenzi othule. Amarekhodi acacile.'],
+    ['Dignity is built into the routine.','Waardigheid is deel van die roetine.','Isithunzi sakhelwe ohlelweni lomsebenzi.'],
+    ['Preparation, direct transport, signed handover and post-job cleaning are treated as one connected operational standard.','Voorbereiding, direkte vervoer, getekende oorhandiging en skoonmaak ná die werk word as een gekoppelde bedryfstandaard hanteer.','Ukulungiselela, ukuthutha okuqondile, ukudluliswa okusayiniwe nokuhlanza ngemva komsebenzi kuphathwa njengezinga elilodwa elixhumene lokusebenza.'],
+    ['One vehicle. Multiple approved routes.','Een voertuig. Verskeie goedgekeurde roetes.','Imoto eyodwa. Imizila eminingi egunyaziwe.'],
+    ['Configured for direct, refrigerated transfer.','Toegerus vir direkte, verkoelde vervoer.','Ihlelelwe ukuthutha okuqondile ngesiqandisi.'],
+    ['Local collections, inter-facility transfers and longer routes use the same secure compartment, clear handover process and documented chain of custody.','Plaaslike afhaalwerk, vervoer tussen fasiliteite en langer roetes gebruik dieselfde veilige kompartement, duidelike oorhandigingsproses en gedokumenteerde bewaringsketting.','Ukulanda kwasendaweni, ukudlulisa phakathi kwezikhungo nemizila emide kusebenzisa igumbi elifanayo eliphephile, inqubo ecacile yokudlulisa nochungechunge lokugcinwa olubhaliwe.'],
+    ['One live job state.','Isimo esisodwa lewendige werk.','Isimo esisodwa somsebenzi osebenzayo.'],
+    ['Every step moves toward a recorded handover.','Elke stap beweeg na ’n aangetekende oorhandiging.','Isinyathelo ngasinye siqhubekela ekudlulisweni okubhaliwe.'],
+    ['The timeline below follows the real sequence from instruction and documentation through collection, controlled transport, delivery and cleaning.','Die tydlyn hieronder volg die werklike volgorde van opdrag en dokumentasie, deur afhaal, beheerde vervoer, aflewering en skoonmaak.','Umugqa wesikhathi ongezansi ulandela ukulandelana kwangempela kusukela emyalelweni nasemibhalweni, ngokulanda, ukuthutha okulawulwayo, ukuletha nokuhlanza.'],
+    ['Capacity when your operation needs it.','Kapasiteit wanneer u onderneming dit nodig het.','Amandla uma umsebenzi wakho uwadinga.'],
+    ['Your name stays with the family. We handle the road.','U naam bly by die familie. Ons hanteer die pad.','Igama lakho lihlala nomndeni. Thina siphatha umgwaqo.'],
+    ['Discreet overflow capacity for funeral parlours that need reliable long-distance or after-hours transport without adding another vehicle to the fleet.','Diskrete bykomende kapasiteit vir begrafnisondernemings wat betroubare langafstand- of nabeurse vervoer benodig sonder om nog ’n voertuig by die vloot te voeg.','Amandla engeziwe anobumfihlo emakhaya abangcwabi adinga ukuthutha okuthembekile kwebanga elide noma kwangemva kwamahora ngaphandle kokwengeza enye imoto eqenjini.'],
+    ['Tell us the route. We will confirm the rest.','Gee ons die roete. Ons bevestig die res.','Sitshele umzila. Sizoqinisekisa okusele.'],
+    ['Collection point, destination, timing and documentation are reviewed in one conversation.','Afhaalpunt, bestemming, tydsberekening en dokumentasie word in een gesprek nagegaan.','Indawo yokulanda, indawo okuyiwa kuyo, isikhathi nemibhalo kubuyekezwa engxoxweni eyodwa.'],
+    ['Main route destinations','Belangrikste roetebestemmings','Izindawo eziyinhloko zemizila'],
+
     // MORE_ROWS
   ];
 
