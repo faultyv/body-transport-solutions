@@ -145,10 +145,10 @@
     @supports not (backdrop-filter: blur(1px)) { .bts-header { background: #FFFFFF; } }
     .bts-header-inner {
       max-width: 1180px; margin: 0 auto; padding: 0 16px;
-      display: flex; align-items: center; gap: 6px; min-height: 64px;
+      display: flex; align-items: center; gap: 6px; min-height: 74px;
     }
     .bts-brand { display: flex; align-items: center; flex-shrink: 0; cursor: pointer; }
-    .bts-brand img { height: 42px; width: auto; display: block; mix-blend-mode: multiply; }
+    .bts-brand img { height: 56px; width: auto; display: block; mix-blend-mode: multiply; }
     .bts-tabs {
       position: relative;
       display: flex; align-items: stretch; align-self: stretch; gap: 2px;
@@ -183,7 +183,7 @@
     .bts-cta:active { transform: translateY(0) scale(.975); }
     @media (max-width: 979px) {
       .bts-header-inner { flex-wrap: wrap; padding: 8px 12px 0; min-height: 0; }
-      .bts-brand { order: 1; } .bts-brand img { height: 38px; }
+      .bts-brand { order: 1; } .bts-brand img { height: 46px; }
       .bts-actions { order: 2; margin-left: auto; }
       .bts-tabs {
         order: 3; flex-basis: 100%; align-self: auto;
@@ -236,6 +236,12 @@
       main section [style*="display: grid"] > * { animation: btsRise both ease; animation-timeline: view(); animation-range: entry 0% entry 30%; }
       [data-screen-label="Emergency Transport Request"] [style*="display: grid"] > *,
       [data-screen-label="Emergency Transport Request"] section { animation: none; }
+      /* The handover signature signs itself */
+      .bts-sign path { stroke-dasharray: 180; animation: btsSignDraw both linear; animation-timeline: view(); animation-range: entry 15% entry 70%; }
+      @keyframes btsSignDraw { from { stroke-dashoffset: 180; } to { stroke-dashoffset: 0; } }
+      /* Headings settle into focus as they arrive */
+      main h2 { animation: btsHead both ease; animation-timeline: view(); animation-range: entry 0% entry 32%; }
+      @keyframes btsHead { from { opacity: 0; transform: translateY(14px); letter-spacing: .06em; } to { opacity: 1; transform: none; letter-spacing: -0.01em; } }
       /* Chat bubbles arrive as you read */
       .bts-chat-q { animation: btsChatQ both ease; animation-timeline: view(); animation-range: entry 5% entry 40%; }
       .bts-chat-a { animation: btsChatA both ease; animation-timeline: view(); animation-range: entry 5% entry 40%; }
@@ -568,6 +574,18 @@
       [data-screen-label="Contact"] a[href^="mailto"]::after { opacity: 1; transform: none; }
     }
 
+    /* Road strip: the van is always moving */
+    .bts-road { position: relative; max-width: 1140px; margin: -14px auto 0; height: 52px; overflow: hidden; }
+    .bts-road-line { position: absolute; left: 0; right: 0; bottom: 12px; height: 2px; background: repeating-linear-gradient(90deg, #DADCE0 0 22px, transparent 22px 40px); animation: btsRoadDash 1s linear infinite; }
+    .bts-road-van { position: absolute; bottom: 10px; animation: btsDrive 16s linear infinite; filter: drop-shadow(0 3px 4px rgba(60,64,67,.25)); }
+    @keyframes btsRoadDash { to { background-position: -40px 0; } }
+    @keyframes btsDrive { from { transform: translateX(-80px); } to { transform: translateX(calc(100vw + 80px)); } }
+    @media (min-width: 1180px) { @keyframes btsDrive { from { transform: translateX(-80px); } to { transform: translateX(1220px); } } }
+
+    /* Sticky call button: the phone rings every few seconds */
+    div[style*="position: fixed"][style*="bottom: 16px"] a:first-child svg { animation: btsRingRing 7s ease-in-out infinite; transform-origin: 50% 40%; }
+    @keyframes btsRingRing { 0%, 86%, 100% { transform: none; } 89% { transform: rotate(-13deg); } 92% { transform: rotate(11deg); } 95% { transform: rotate(-6deg); } }
+
     /* Apple-style continuous corner curvature on rectangular surfaces only */
     @supports (corner-shape: squircle) {
       [style*="border-radius: 28px"], [style*="border-radius: 18px"], [style*="border-radius: 16px"], [style*="border-radius: 12px"],
@@ -636,6 +654,19 @@
           </div>
         </div>
       </section>
+
+      <div class="bts-road" aria-hidden="true">
+        <svg class="bts-road-van" width="64" height="30" viewBox="0 0 64 30" fill="none">
+          <rect x="20" y="2" width="12" height="5" rx="1.5" fill="#9CC7FF"></rect>
+          <path d="M2 22 V12 C2 10 3.5 8.5 5.5 8.5 H12 L17 4 H40 C42 4 43.5 5.5 43.5 7.5 V22 Z" fill="#1C2E4A"></path>
+          <path d="M43.5 22 V8 H52 L60 14 V22 Z" fill="#1A73E8"></path>
+          <rect x="18.5" y="7" width="8" height="6" rx="1" fill="#E8F0FE"></rect>
+          <rect x="29" y="7" width="8" height="6" rx="1" fill="#E8F0FE"></rect>
+          <circle cx="14" cy="23" r="4.2" fill="#202124"></circle><circle cx="14" cy="23" r="1.8" fill="#DADCE0"></circle>
+          <circle cx="50" cy="23" r="4.2" fill="#202124"></circle><circle cx="50" cy="23" r="1.8" fill="#DADCE0"></circle>
+        </svg>
+        <div class="bts-road-line"></div>
+      </div>
 
       <!-- Simple 1-2-3 pitch -->
       <section style="background:#F8F9FA;padding:clamp(40px,6vw,64px) 20px">
@@ -819,7 +850,7 @@
           </div>
           <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,220px),1fr));gap:12px">
             <div class="card" style="background:#FFFFFF;border:1px solid #DADCE0;border-radius:18px;padding:18px 20px;display:flex;align-items:center;gap:14px"><div style="width:38px;height:38px;border-radius:50%;background:#E8F0FE;display:grid;place-items:center;flex-shrink:0" class="bts-cold"><svg width="18" height="18" viewBox="0 0 22 22" fill="none"><path d="M9 3.5C9 2.4 9.9 1.5 11 1.5C12.1 1.5 13 2.4 13 3.5V11.3C14.2 12 15 13.3 15 14.8C15 17 13.2 18.8 11 18.8C8.8 18.8 7 17 7 14.8C7 13.3 7.8 12 9 11.3V3.5Z" stroke="#1A73E8" stroke-width="1.5" stroke-linejoin="round"></path><circle cx="11" cy="14.8" r="1.8" fill="#1A73E8"></circle></svg></div><div style="display:flex;flex-direction:column;gap:2px"><span style="font-weight:700;font-size:16px;color:#202124">0–3&nbsp;°C</span><span style="font-size:12.5px;color:#5F6368">Operating range</span></div></div>
-            <div class="card" style="background:#FFFFFF;border:1px solid #DADCE0;border-radius:18px;padding:18px 20px;display:flex;align-items:center;gap:14px"><div style="width:38px;height:38px;border-radius:50%;background:#E8F0FE;display:grid;place-items:center;flex-shrink:0"><svg width="18" height="18" viewBox="0 0 22 22" fill="none"><rect x="4" y="2.5" width="14" height="17" rx="1.5" stroke="#1A73E8" stroke-width="1.6"></rect><path d="M7.5 7H14.5M7.5 10.5H14.5M7.5 14H11.5" stroke="#1A73E8" stroke-width="1.6" stroke-linecap="round"></path></svg></div><div style="display:flex;flex-direction:column;gap:2px"><span style="font-weight:700;font-size:16px;color:#202124">Signed</span><span style="font-size:12.5px;color:#5F6368">Handover records, every job</span></div></div>
+            <div class="card" style="background:#FFFFFF;border:1px solid #DADCE0;border-radius:18px;padding:18px 20px;display:flex;align-items:center;gap:14px"><div style="width:38px;height:38px;border-radius:50%;background:#E8F0FE;display:grid;place-items:center;flex-shrink:0"><svg width="18" height="18" viewBox="0 0 22 22" fill="none"><rect x="4" y="2.5" width="14" height="17" rx="1.5" stroke="#1A73E8" stroke-width="1.6"></rect><path d="M7.5 7H14.5M7.5 10.5H14.5M7.5 14H11.5" stroke="#1A73E8" stroke-width="1.6" stroke-linecap="round"></path></svg></div><div style="display:flex;flex-direction:column;gap:2px"><span style="font-weight:700;font-size:16px;color:#202124">Signed</span><span style="font-size:12.5px;color:#5F6368">Handover records, every job</span><svg class="bts-sign" width="92" height="20" viewBox="0 0 120 26" fill="none" aria-hidden="true"><path d="M4 20 C 14 4, 22 4, 26 14 S 38 24 46 12 S 60 2 66 12 C 70 18 78 18 84 10 M 90 14 C 98 6 106 6 116 12" stroke="#1A73E8" stroke-width="1.8" stroke-linecap="round"></path></svg></div></div>
             <div class="card" style="background:#FFFFFF;border:1px solid #DADCE0;border-radius:18px;padding:18px 20px;display:flex;align-items:center;gap:14px"><div style="width:38px;height:38px;border-radius:50%;background:#E8F0FE;display:grid;place-items:center;flex-shrink:0"><svg width="18" height="18" viewBox="0 0 22 22" fill="none"><path d="M5 13C5 13 6.7 11.3 8.5 13C10.3 14.7 12 13 12 13M12 8C12 8 13.7 6.3 15.5 8C17.3 9.7 19 8 19 8" stroke="#1A73E8" stroke-width="1.6" stroke-linecap="round"></path><path d="M3 18H19" stroke="#1A73E8" stroke-width="1.6" stroke-linecap="round"></path></svg></div><div style="display:flex;flex-direction:column;gap:2px"><span style="font-weight:700;font-size:16px;color:#202124">Cleaning log</span><span style="font-size:12.5px;color:#5F6368">After every transport</span></div></div>
             <div class="card" style="background:#FFFFFF;border:1px solid #DADCE0;border-radius:18px;padding:18px 20px;display:flex;align-items:center;gap:14px"><div style="width:38px;height:38px;border-radius:50%;background:#E8F0FE;display:grid;place-items:center;flex-shrink:0"><svg width="18" height="18" viewBox="0 0 20 20" fill="none"><rect x="2.5" y="5.5" width="11" height="9" rx="1.5" stroke="#1A73E8" stroke-width="1.6"></rect><path d="M13.5 8.5H16L17.5 11V14.5H13.5" stroke="#1A73E8" stroke-width="1.6" stroke-linejoin="round"></path><circle cx="6" cy="15" r="1.6" stroke="#1A73E8" stroke-width="1.4"></circle><circle cx="15" cy="15" r="1.6" stroke="#1A73E8" stroke-width="1.4"></circle></svg></div><div style="display:flex;flex-direction:column;gap:2px"><span style="font-weight:700;font-size:16px;color:#202124">Direct</span><span style="font-size:12.5px;color:#5F6368">Collect &amp; deliver — no storage</span></div></div>
           </div>
@@ -928,7 +959,7 @@
       </section>
 
       <!-- FAQ -->
-      <section style="background:#F8F9FA;padding:clamp(48px,7vw,72px) 20px;margin-bottom:clamp(48px,7vw,72px)">
+      <section style="background:#F8F9FA;padding:clamp(48px,7vw,72px) 20px;margin-bottom:clamp(20px,3vw,36px)">
         <div style="max-width:860px;margin:0 auto">
           <h2 style="font-weight:700;font-size:clamp(22px,4vw,30px);margin:0 0 24px;color:#202124;letter-spacing:-0.01em">Common questions</h2>
           <p style="font-size:15px;color:#5F6368;margin:-14px 0 24px">Asked the way parlours actually ask them — straight answers.</p>
@@ -1390,7 +1421,7 @@
     <div style="max-width:1140px;margin:0 auto;display:flex;flex-direction:column;gap:28px">
       <div style="display:flex;justify-content:space-between;gap:36px;flex-wrap:wrap">
         <div style="display:flex;flex-direction:column;gap:12px;max-width:380px">
-          <img src="./assets/logo.webp" alt="Body Transport Solutions" style="height:52px;width:auto;display:block;align-self:flex-start;object-fit:contain">
+          <img src="./assets/logo.webp" alt="Body Transport Solutions" style="height:76px;width:auto;display:block;align-self:flex-start;object-fit:contain;mix-blend-mode:multiply">
           <p style="font-size:13px;line-height:1.65;margin:0">Human remains transport &amp; repatriation support across KwaZulu-Natal and surrounding provinces. Based in Cato Ridge on the N3, KwaZulu-Natal.</p>
           <p style="font-size:12px;margin:0;color:#80868B">Reg No. 2026/464849/07 · Tax No. 9001928366</p>
           <div style="height:4px;width:120px;border-radius:2px;background:linear-gradient(90deg,#007749 0% 20%,#FFB81C 20% 40%,#E03C31 40% 60%,#001489 60% 80%,#111111 80% 100%)"></div>
