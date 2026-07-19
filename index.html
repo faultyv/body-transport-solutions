@@ -144,6 +144,81 @@
       background: #137333;
       box-shadow: 0 0 0 4px #E6F4EA;
     }
+    .hero-vehicle__signal {
+      display: inline-flex;
+      align-items: flex-end;
+      gap: 2px;
+      height: 10px;
+      margin-left: 2px;
+      padding-left: 8px;
+      border-left: 1px solid #DADCE0;
+    }
+    .hero-vehicle__signal i {
+      display: block;
+      width: 2px;
+      height: 4px;
+      border-radius: 2px;
+      background: #1A73E8;
+    }
+    .hero-vehicle__signal i:nth-child(2) { height: 8px; }
+    .hero-vehicle__signal i:nth-child(3) { height: 6px; }
+    .hero-vehicle__intelligence {
+      position: absolute;
+      inset: 0;
+      z-index: 2;
+      pointer-events: none;
+      overflow: hidden;
+      border-radius: inherit;
+    }
+    .hero-vehicle__telemetry {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      overflow: visible;
+    }
+    .hero-vehicle__trace,
+    .hero-vehicle__route {
+      fill: none;
+      stroke-linecap: round;
+      vector-effect: non-scaling-stroke;
+    }
+    .hero-vehicle__trace {
+      stroke: rgba(197, 225, 255, 0.82);
+      stroke-width: 1.35;
+      stroke-dasharray: 3 8;
+      filter: drop-shadow(0 0 4px rgba(26, 115, 232, 0.55));
+    }
+    .hero-vehicle__route {
+      stroke: rgba(174, 203, 250, 0.72);
+      stroke-width: 1.2;
+      stroke-dasharray: 2 7;
+      filter: drop-shadow(0 0 3px rgba(26, 115, 232, 0.42));
+    }
+    .hero-vehicle__node {
+      position: absolute;
+      width: 7px;
+      height: 7px;
+      margin: -3.5px 0 0 -3.5px;
+      border: 2px solid rgba(255, 255, 255, 0.94);
+      border-radius: 50%;
+      background: #1A73E8;
+      box-shadow: 0 0 0 0 rgba(174, 203, 250, 0), 0 0 10px rgba(26, 115, 232, 0.55);
+    }
+    .hero-vehicle__node--cooling { left: 61%; top: 23%; }
+    .hero-vehicle__node--cargo { left: 76%; top: 39%; }
+    .hero-vehicle__node--route { left: 84%; top: 54%; }
+    .hero-vehicle__cooling-field {
+      position: absolute;
+      left: 61%;
+      top: 23%;
+      width: 52px;
+      aspect-ratio: 1;
+      margin: -26px 0 0 -26px;
+      border: 1px solid rgba(197, 225, 255, 0.7);
+      border-radius: 50%;
+      box-shadow: 0 0 18px rgba(26, 115, 232, 0.18), inset 0 0 18px rgba(255, 255, 255, 0.16);
+    }
     @media (max-width: 720px) {
       .hero-vehicle {
         height: auto;
@@ -155,6 +230,12 @@
         left: 14px;
         top: 14px;
       }
+      .hero-vehicle__cooling-field {
+        width: 42px;
+        margin: -21px 0 0 -21px;
+      }
+      .hero-vehicle__trace { stroke-width: 1.1; }
+      .hero-vehicle__route { opacity: 0.78; }
     }
 
     /* ===== Header ===== */
@@ -776,12 +857,38 @@
     .hero-vehicle img { animation: btsHeroImg 1.15s .35s both cubic-bezier(.22,1,.36,1), btsKen 26s 1.6s ease-in-out infinite alternate; }
     @keyframes btsHeroImg { from { filter: blur(9px); transform: scale(1.09); } to { filter: blur(0); transform: scale(1.01); } }
     .hero-vehicle::before {
-      content: ''; position: absolute; inset: 0; z-index: 2; pointer-events: none;
-      background: linear-gradient(115deg, transparent 35%, rgba(255,255,255,.20) 50%, transparent 65%);
-      transform: translateX(-130%); animation: btsHeroSweep 9s 2.4s ease-in-out infinite;
+      content: ''; position: absolute; z-index: 3; pointer-events: none;
+      top: -8%; bottom: -8%; left: -28%; width: 22%;
+      background: linear-gradient(90deg, transparent 0%, rgba(232,240,254,.025) 38%, rgba(197,225,255,.16) 72%, rgba(255,255,255,.38) 96%, transparent 100%);
+      border-right: 1px solid rgba(197,225,255,.48);
+      -webkit-mask-image: linear-gradient(180deg,transparent,black 16%,black 84%,transparent);
+      mask-image: linear-gradient(180deg,transparent,black 16%,black 84%,transparent);
+      transform: translateX(0); animation: btsHeroSweep 9.2s 2.4s cubic-bezier(.45,.05,.3,1) infinite;
     }
-    @keyframes btsHeroSweep { 0%, 76% { transform: translateX(-130%); } 92%, 100% { transform: translateX(130%); } }
+    @keyframes btsHeroSweep { 0%, 58% { transform: translateX(0); opacity: 0; } 61% { opacity: 1; } 82% { transform: translateX(590%); opacity: 1; } 86%, 100% { transform: translateX(590%); opacity: 0; } }
     .hero-vehicle__label { animation: btsIn .5s 1.2s both cubic-bezier(.22,1,.36,1); }
+    .hero-vehicle__signal i { transform-origin: center bottom; animation: btsHeroSignal 2.4s ease-in-out infinite; }
+    .hero-vehicle__signal i:nth-child(2) { animation-delay: .16s; }
+    .hero-vehicle__signal i:nth-child(3) { animation-delay: .32s; }
+    @keyframes btsHeroSignal { 0%, 58%, 100% { transform: scaleY(.55); opacity: .52; } 26% { transform: scaleY(1.15); opacity: 1; } }
+    .hero-vehicle__trace { animation: btsHeroTrace 4.6s 1.6s linear infinite; }
+    .hero-vehicle__route { animation: btsHeroRoute 5.8s 2.1s linear infinite; }
+    @keyframes btsHeroTrace { to { stroke-dashoffset: -44; } }
+    @keyframes btsHeroRoute { to { stroke-dashoffset: -54; } }
+    .hero-vehicle__node { animation: btsHeroNode 4.6s 1.55s ease-out infinite; }
+    .hero-vehicle__node--cargo { animation-delay: 2.05s; }
+    .hero-vehicle__node--route { animation-delay: 2.55s; }
+    @keyframes btsHeroNode {
+      0%, 20%, 100% { box-shadow: 0 0 0 0 rgba(174,203,250,0), 0 0 8px rgba(26,115,232,.42); transform: scale(.86); opacity: .72; }
+      7% { box-shadow: 0 0 0 8px rgba(174,203,250,.2), 0 0 14px rgba(26,115,232,.72); transform: scale(1); opacity: 1; }
+    }
+    .hero-vehicle__cooling-field { animation: btsHeroCooling 4.6s 1.55s cubic-bezier(.22,1,.36,1) infinite; }
+    @keyframes btsHeroCooling {
+      0%, 100% { opacity: .2; transform: scale(.72); }
+      9% { opacity: .78; transform: scale(1); }
+      34% { opacity: 0; transform: scale(1.46); }
+      35%, 99% { opacity: 0; transform: scale(.72); }
+    }
     @keyframes btsIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: none; } }
 
     /* FAQ as a WhatsApp-style conversation */
@@ -1135,7 +1242,17 @@
           </div>
           <div class="hero-vehicle">
             <img src="./assets/hero-vehicle.webp" alt="White refrigerated Body Transport Solutions vehicle" width="1536" height="1024" fetchpriority="high">
-            <div class="hero-vehicle__label"><span class="hero-vehicle__label-dot"></span>Dedicated refrigerated vehicle</div>
+            <div class="hero-vehicle__intelligence" aria-hidden="true">
+              <svg class="hero-vehicle__telemetry" viewBox="0 0 100 75" preserveAspectRatio="none">
+                <path class="hero-vehicle__trace" d="M61 17.25 C66 18.4 70 22.8 73 27.2 S78.5 34.2 84 40.5"></path>
+                <path class="hero-vehicle__route" d="M22 59 C37 62.5 66 62.8 89 56.5"></path>
+              </svg>
+              <span class="hero-vehicle__cooling-field"></span>
+              <span class="hero-vehicle__node hero-vehicle__node--cooling"></span>
+              <span class="hero-vehicle__node hero-vehicle__node--cargo"></span>
+              <span class="hero-vehicle__node hero-vehicle__node--route"></span>
+            </div>
+            <div class="hero-vehicle__label"><span class="hero-vehicle__label-dot"></span>Dedicated refrigerated vehicle<span class="hero-vehicle__signal" aria-hidden="true"><i></i><i></i><i></i></span></div>
           </div>
         </div>
       </section>
