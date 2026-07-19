@@ -236,6 +236,12 @@
       main section [style*="display: grid"] > * { animation: btsRise both ease; animation-timeline: view(); animation-range: entry 0% entry 30%; }
       [data-screen-label="Emergency Transport Request"] [style*="display: grid"] > *,
       [data-screen-label="Emergency Transport Request"] section { animation: none; }
+      /* Chat bubbles arrive as you read */
+      .bts-chat-q { animation: btsChatQ both ease; animation-timeline: view(); animation-range: entry 5% entry 40%; }
+      .bts-chat-a { animation: btsChatA both ease; animation-timeline: view(); animation-range: entry 5% entry 40%; }
+      .bts-chat-wa { animation: btsChatA both ease; animation-timeline: view(); animation-range: entry 5% entry 40%; }
+      @keyframes btsChatQ { from { opacity: 0; transform: translateX(26px); } to { opacity: 1; transform: none; } }
+      @keyframes btsChatA { from { opacity: 0; transform: translateX(-26px); } to { opacity: 1; transform: none; } }
       /* Paperwork writes itself: doc icon lines draw on scroll */
       main svg[viewBox="0 0 16 16"] path {
         stroke-dasharray: 24; animation: btsDrawDoc both linear;
@@ -521,17 +527,21 @@
     .hero-vehicle { animation: btsIn .6s .45s both cubic-bezier(.2,.7,.3,1); }
     @keyframes btsIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: none; } }
 
-    /* FAQ accordions: questions invite, answers reveal */
-    .bts-faq { background: #FFFFFF; border: 1px solid #DADCE0; border-radius: 18px; padding: 2px 24px; }
-    .bts-faq summary { list-style: none; cursor: pointer; display: flex; justify-content: space-between; align-items: center; gap: 14px; font-weight: 700; font-size: 15.5px; color: #202124; padding: 20px 0; }
-    .bts-faq summary::-webkit-details-marker { display: none; }
-    .bts-faq-chev { width: 9px; height: 9px; border-right: 2px solid #5F6368; border-bottom: 2px solid #5F6368; transform: rotate(45deg) translateY(-2px); transition: transform .28s cubic-bezier(.2,.7,.3,1); flex-shrink: 0; }
-    .bts-faq[open] .bts-faq-chev { transform: rotate(225deg); }
-    .bts-faq > p { margin: 0; padding: 0 0 20px; font-size: 14.5px; line-height: 1.65; color: #5F6368; max-width: 720px; }
-    .bts-faq { interpolate-size: allow-keywords; }
-    .bts-faq::details-content { block-size: 0; overflow: hidden; transition: block-size .32s cubic-bezier(.2,.7,.3,1), content-visibility .32s allow-discrete; }
-    .bts-faq[open]::details-content { block-size: auto; }
-    .bts-faq summary:hover { color: #1A73E8; }
+    /* FAQ as a WhatsApp-style conversation */
+    .bts-chat { background: #FFFFFF; border: 1px solid #DADCE0; border-radius: 28px; overflow: hidden; box-shadow: 0 6px 16px rgba(60,64,67,.08), 0 18px 44px rgba(60,64,67,.10); }
+    .bts-chat-head { display: flex; gap: 12px; align-items: center; padding: 14px 22px; background: #F8F9FA; border-bottom: 1px solid #E8EAED; }
+    .bts-chat-head img { border-radius: 50%; border: 1px solid #E8EAED; display: block; }
+    .bts-chat-head b { display: block; font-size: 15px; color: #202124; line-height: 1.2; }
+    .bts-chat-head span { display: flex; align-items: center; gap: 6px; font-size: 12px; color: #137333; margin-top: 2px; }
+    .bts-chat-head i { width: 8px; height: 8px; border-radius: 50%; background: #137333; animation: btsPulse 2.2s ease-out infinite; }
+    .bts-chat-body { padding: 22px; display: flex; flex-direction: column; gap: 10px; background: linear-gradient(180deg, #FFFFFF, #FAFBFF); }
+    .bts-chat-q { align-self: flex-end; max-width: 78%; background: #E8F0FE; color: #174EA6; font-weight: 500; font-size: 14.5px; line-height: 1.5; padding: 10px 15px; border-radius: 18px 18px 6px 18px; }
+    .bts-chat-q::after { content: ' \2713\2713'; font-size: 11px; color: #1A73E8; letter-spacing: -2px; }
+    .bts-chat-a { align-self: flex-start; max-width: 86%; background: #FFFFFF; border: 1px solid #E8EAED; color: #3C4043; font-size: 14.5px; line-height: 1.6; padding: 12px 16px; border-radius: 18px 18px 18px 6px; box-shadow: 0 1px 2px rgba(60,64,67,.06); }
+    .bts-chat-last { background: #E6F4EA; border-color: #CEEAD6; color: #1E4620; font-weight: 500; }
+    .bts-chat-wa { align-self: flex-start; display: inline-flex; align-items: center; gap: 9px; background: #137333; color: #FFFFFF; font-weight: 500; font-size: 14.5px; padding: 11px 22px; border-radius: 999px; margin-top: 2px; box-shadow: 0 2px 10px rgba(19,115,51,.3); }
+    .bts-chat-wa:hover { background: #0D5626; color: #FFFFFF; transform: translateY(-1px); }
+    @media (max-width: 560px) { .bts-chat-q, .bts-chat-a { max-width: 94%; } .bts-chat-body { padding: 16px; } }
 
     /* Emergency call button: soft radar ping */
     main div[style*="background: rgb(26, 115, 232)"] a[style*="background: rgb(255, 255, 255)"] { position: relative; }
@@ -921,12 +931,26 @@
       <section style="background:#F8F9FA;padding:clamp(48px,7vw,72px) 20px;margin-bottom:clamp(48px,7vw,72px)">
         <div style="max-width:860px;margin:0 auto">
           <h2 style="font-weight:700;font-size:clamp(22px,4vw,30px);margin:0 0 24px;color:#202124;letter-spacing:-0.01em">Common questions</h2>
-          <div style="display:flex;flex-direction:column;gap:12px">
-            <details class="bts-faq" open><summary>Are you a funeral parlour?<span class="bts-faq-chev" aria-hidden="true"></span></summary><p>No. We are a transport-only company. We do not arrange funerals, store, prepare, embalm, cremate or bury. We move human remains between approved facilities — that's our whole job.</p></details>
-            <details class="bts-faq"><summary>Can a family contact you directly?<span class="bts-faq-chev" aria-hidden="true"></span></summary><p>Yes — we'll gladly take your call and guide you, but transport is carried out in support of an authorised funeral parlour, mortuary, hospital or insurer, with the correct documentation in place.</p></details>
-            <details class="bts-faq"><summary>How quickly can you collect?<span class="bts-faq-chev" aria-hidden="true"></span></summary><p>We operate 24/7, including after-hours and weekends. Once the paperwork and route are confirmed, we dispatch — availability depends on scheduling, distance and vehicle readiness.</p></details>
-            <details class="bts-faq"><summary>Which areas do you cover?<span class="bts-faq-chev" aria-hidden="true"></span></summary><p>Our core focus is KwaZulu-Natal. We are based in Cato Ridge on the N3 — under an hour from Durban, Pietermaritzburg, Hillcrest and Pinetown — and cover the greater province daily. Because we are transport-only and do not store human remains, longer routes to surrounding provinces (Gauteng, Free State, Eastern Cape, Mpumalanga) are run by prior arrangement so collection and delivery line up on one trip.</p></details>
-            <details class="bts-faq"><summary>What paperwork is needed?<span class="bts-faq-chev" aria-hidden="true"></span></summary><p>Typically a collection instruction, death documentation, a release note from the facility and a receiving note at the destination. We confirm exactly what's needed for your route when you contact us — see our <a href="#compliance" onClick="{{ goCompliance }}" style="font-weight:500">Compliance page</a>.</p></details>
+          <p style="font-size:15px;color:#5F6368;margin:-14px 0 24px">Asked the way parlours actually ask them — straight answers.</p>
+          <div class="bts-chat">
+            <div class="bts-chat-head">
+              <img src="./assets/favicon.png" alt="" width="38" height="38">
+              <div><b>Body Transport Solutions</b><span><i></i>Online — replies 24/7</span></div>
+            </div>
+            <div class="bts-chat-body">
+              <div class="bts-chat-q">Are you a funeral parlour?</div>
+              <div class="bts-chat-a">No. We are a transport-only company. We do not arrange funerals, store, prepare, embalm, cremate or bury. We move human remains between approved facilities — that's our whole job.</div>
+              <div class="bts-chat-q">Can a family contact you directly?</div>
+              <div class="bts-chat-a">Yes — we'll gladly take your call and guide you, but transport is carried out in support of an authorised funeral parlour, mortuary, hospital or insurer, with the correct documentation in place.</div>
+              <div class="bts-chat-q">How quickly can you collect?</div>
+              <div class="bts-chat-a">We operate 24/7, including after-hours and weekends. Once the paperwork and route are confirmed, we dispatch — availability depends on scheduling, distance and vehicle readiness.</div>
+              <div class="bts-chat-q">Which areas do you cover?</div>
+              <div class="bts-chat-a">Our core focus is KwaZulu-Natal — we are based in Cato Ridge on the N3, under an hour from Durban and Pietermaritzburg. Because we are transport-only and do not store human remains, longer routes to surrounding provinces are run by prior arrangement so collection and delivery line up on one trip.</div>
+              <div class="bts-chat-q">What paperwork is needed?</div>
+              <div class="bts-chat-a">Typically a collection instruction, death documentation, a release note from the facility and a receiving note at the destination. We confirm exactly what's needed for your route when you contact us — see our <a href="#compliance" onClick="{{ goCompliance }}" style="font-weight:500">Compliance page</a>.</div>
+              <div class="bts-chat-a bts-chat-last">Have a different question? Message us — we reply around the clock.</div>
+              <a href="{{ waLink }}" class="bts-chat-wa"><svg width="16" height="16" viewBox="0 0 18 18" fill="none"><path d="M9 1.5C13.1 1.5 16.5 4.9 16.5 9C16.5 13.1 13.1 16.5 9 16.5C7.7 16.5 6.5 16.2 5.4 15.6L1.5 16.5L2.5 12.8C1.9 11.7 1.5 10.4 1.5 9C1.5 4.9 4.9 1.5 9 1.5Z" stroke="#FFFFFF" stroke-width="1.4" stroke-linejoin="round"></path><path d="M6.2 6.8C6.2 6.8 6.6 6 7 6C7.4 6 8 7.2 8 7.5C8 7.8 7.4 8.2 7.4 8.5C7.4 9 8.9 10.6 9.5 10.6C9.8 10.6 10.2 10 10.5 10C10.8 10 12 10.7 12 11C12 11.5 11.2 11.9 11.2 11.9" stroke="#FFFFFF" stroke-width="1.3" stroke-linecap="round"></path></svg>WhatsApp us now</a>
+            </div>
           </div>
         </div>
       </section>
