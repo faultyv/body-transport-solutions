@@ -60,10 +60,32 @@
   <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,400;0,500;0,700;0,900;1,900&display=swap" rel="stylesheet">
   <link rel="icon" type="image/png" href="./assets/favicon.png">
   <style>
-    html, body { margin: 0; padding: 0; background: #FFFFFF; }
-    body { font-family: 'Roboto', Arial, sans-serif; color: #202124; -webkit-font-smoothing: antialiased; }
+    :root {
+      --bts-ink: #172033;
+      --bts-text: #3C4043;
+      --bts-muted: #5F6368;
+      --bts-blue: #1A73E8;
+      --bts-blue-deep: #0B57D0;
+      --bts-blue-soft: #E8F0FE;
+      --bts-green: #137333;
+      --bts-line: #DADCE0;
+      --bts-band: #F8F9FA;
+      --bts-r-lg: 28px;
+      --bts-r-md: 18px;
+      --bts-r-sm: 12px;
+      --bts-shadow-lg: 0 18px 48px rgba(60,64,67,.14);
+    }
+    html, body { margin: 0; padding: 0; background: #FFFFFF; max-width: 100%; overflow-x: clip; }
+    body { font-family: 'Roboto', Arial, sans-serif; color: #202124; -webkit-font-smoothing: antialiased; text-rendering: optimizeLegibility; }
+    *, *::before, *::after { box-sizing: border-box; }
     a { color: #1A73E8; text-decoration: none; }
     a:hover { color: #174EA6; }
+    .bts-skip {
+      position: fixed; top: 10px; left: 10px; z-index: 1000; transform: translateY(-150%);
+      background: #FFFFFF; color: #0B57D0; border: 2px solid #1A73E8; border-radius: 12px;
+      padding: 10px 14px; font-size: 14px; font-weight: 700; box-shadow: 0 6px 18px rgba(60,64,67,.2);
+    }
+    .bts-skip:focus { transform: none; }
     input::placeholder, textarea::placeholder { color: #9AA0A6; }
     input:focus, textarea:focus, select:focus { outline: 2px solid #1A73E8; outline-offset: 0; border-color: #1A73E8; }
     ::-webkit-scrollbar { height: 0; width: 11px; }
@@ -155,13 +177,14 @@
     .bts-tabs {
       position: relative;
       display: flex; align-items: stretch; align-self: stretch; gap: 2px;
-      margin-left: 10px; overflow-x: auto; scrollbar-width: none; white-space: nowrap;
+      margin-left: 10px; overflow-x: auto; overflow-y: hidden; scrollbar-width: none; white-space: nowrap;
+      overscroll-behavior-inline: contain; scroll-snap-type: x proximity; min-width: 0;
     }
     .bts-tabs::-webkit-scrollbar { display: none; }
     .bts-tab {
       display: flex; align-items: center; padding: 0 13px;
       font-size: 14px; font-weight: 500; cursor: pointer;
-      transition: color .15s ease, background-color .15s ease;
+      transition: color .15s ease, background-color .15s ease; scroll-snap-align: center;
     }
     .bts-tab:hover { background: rgba(26,115,232,.05); border-radius: 12px 12px 0 0; }
     .bts-tab-ind {
@@ -190,13 +213,119 @@
       .bts-actions { order: 2; margin-left: auto; }
       .bts-tabs {
         order: 3; flex-basis: 100%; align-self: auto;
-        margin: 4px -12px 0; padding: 0 8px;
+        margin: 4px -12px 0; padding: 0 18px 0 8px;
+        background: linear-gradient(90deg,#FFFFFF 0 8px,rgba(255,255,255,0) 24px calc(100% - 28px),#FFFFFF calc(100% - 8px));
+        -webkit-mask-image: linear-gradient(90deg,transparent 0,#000 10px,#000 calc(100% - 24px),transparent 100%);
+        mask-image: linear-gradient(90deg,transparent 0,#000 10px,#000 calc(100% - 24px),transparent 100%);
       }
       .bts-tab { padding: 9px 13px 10px; }
     }
     @media (max-width: 419px) {
       .bts-callbtn { display: none; }
       .bts-cta { padding: 9px 16px; font-size: 13.5px; }
+      .bts-brand img { height: 43px; }
+    }
+
+    /* ===== Final editorial system ===== */
+    .bts-home-hero { background: #FFFFFF; }
+    .bts-hero-grid { max-width: 1180px !important; }
+    .bts-floatbar {
+      position: fixed; bottom: max(14px, env(safe-area-inset-bottom)); right: 24px; left: auto; z-index: 60;
+      display: flex; gap: 0; justify-content: center; pointer-events: none;
+      width: min(390px, calc(100vw - 32px)); padding: 6px;
+      border: 1px solid rgba(218,220,224,.88); border-radius: 999px;
+      background: rgba(255,255,255,.9); box-shadow: 0 10px 30px rgba(60,64,67,.2);
+      backdrop-filter: blur(16px) saturate(1.4); -webkit-backdrop-filter: blur(16px) saturate(1.4);
+    }
+    .bts-floatbar a { min-height: 44px; box-shadow: none !important; }
+    .bts-floatbar a:first-child { border-radius: 999px 0 0 999px !important; }
+    .bts-floatbar a:last-child { border-radius: 0 999px 999px 0 !important; }
+
+    .bts-techstage { display: grid; grid-template-columns: 178px minmax(0,1fr) 178px; gap: 16px; align-items: stretch; }
+    .bts-techrail { display: flex; flex-direction: column; justify-content: space-around; gap: 18px; padding: 72px 0 28px; }
+    .bts-techrail-item { position: relative; color: #172033; font-size: 13px; font-weight: 700; line-height: 1.35; }
+    .bts-techrail-item b { display: inline-grid; place-items: center; width: 23px; height: 23px; margin-right: 7px; border-radius: 50%; background: #1A73E8; color: #FFFFFF; font-size: 11px; }
+    .bts-techrail--left .bts-techrail-item::after,
+    .bts-techrail--right .bts-techrail-item::before { content: ''; position: absolute; top: 12px; width: 28px; height: 1px; background: #4C8DF6; }
+    .bts-techrail--left .bts-techrail-item::after { left: calc(100% + 4px); }
+    .bts-techrail--right .bts-techrail-item::before { right: calc(100% + 4px); }
+    .bts-techrail--right { justify-content: flex-start; gap: 112px; padding-top: 118px; }
+    .bts-techstage .bts-diagram { align-self: center; }
+    @media (min-width: 1000px) { .bts-techstage .bts-pin-lbl { display: none; } }
+    @media (max-width: 999px) {
+      .bts-techstage { display: block; }
+      .bts-techrail { display: none; }
+    }
+
+    .bts-about-hero { position: relative; overflow: hidden; background: #F8F9FA; padding: clamp(52px,7vw,86px) 20px; border-bottom: 1px solid #E8EAED; }
+    .bts-about-hero::after {
+      content: ''; position: absolute; right: -30px; bottom: -82px; width: min(52vw,660px); aspect-ratio: 16/7;
+      background: url('./assets/hero-vehicle.webp') center/cover no-repeat; opacity: .055; filter: grayscale(1); border-radius: 50% 0 0 0;
+      pointer-events: none;
+    }
+    .bts-about-kicker { color: #1A73E8; font-size: 12px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; margin-bottom: 12px; }
+    .bts-about-title { max-width: 760px; color: #172033 !important; }
+    .bts-about-title span { display: block; }
+    .bts-about-tagline { position: relative; z-index: 1; margin: 14px 0 0; color: #5F6368; font-size: clamp(16px,2vw,20px); }
+    .bts-about-main { padding: clamp(52px,7vw,82px) 20px; }
+    .bts-about-grid { max-width: 1140px; margin: 0 auto; display: grid; grid-template-columns: minmax(0,1fr) minmax(360px,.92fr); gap: clamp(42px,7vw,86px); align-items: start; }
+    .bts-about-role h2 { margin: 0 0 18px; color: #172033; font-size: clamp(25px,4vw,36px); line-height: 1.15; letter-spacing: -.02em; }
+    .bts-about-role > p { font-size: 16px; line-height: 1.75; color: #3C4043; margin: 0 0 22px; }
+    .bts-plain { background: #E8F0FE; border-radius: 18px; padding: 22px 26px; box-shadow: inset 4px 0 0 #1A73E8; }
+    .bts-plain strong { display: block; margin-bottom: 8px; color: #174EA6; font-size: 12px; letter-spacing: .1em; text-transform: uppercase; }
+    .bts-plain p { margin: 0; color: #202124; font-size: 14px; line-height: 1.7; }
+    .bts-company { border-top: 2px solid #1A73E8; padding-top: 18px; }
+    .bts-company h2 { margin: 0 0 10px; color: #174EA6; font-size: 12px; letter-spacing: .1em; text-transform: uppercase; }
+    .bts-company dl { margin: 0; }
+    .bts-company-row { display: grid; grid-template-columns: 92px 1fr; gap: 16px; padding: 13px 0; border-bottom: 1px solid #E8EAED; font-size: 14px; line-height: 1.5; }
+    .bts-company dt { color: #5F6368; }
+    .bts-company dd { margin: 0; color: #202124; font-weight: 500; }
+    .bts-operating { background: #F8F9FA; padding: clamp(52px,7vw,78px) 20px; border-block: 1px solid #E8EAED; }
+    .bts-operating-inner { max-width: 1140px; margin: 0 auto; }
+    .bts-operating-head { text-align: center; max-width: 760px; margin: 0 auto 36px; }
+    .bts-operating-head h2 { margin: 8px 0 0; color: #172033; font-size: clamp(24px,4vw,32px); letter-spacing: -.015em; }
+    .bts-operating-flow { display: grid; grid-template-columns: repeat(4,1fr); }
+    .bts-operating-step { position: relative; text-align: center; padding: 0 clamp(10px,2vw,22px); }
+    .bts-operating-step:not(:last-child)::after { content: ''; position: absolute; top: 23px; left: calc(50% + 34px); right: calc(-50% + 34px); height: 1px; background: #C7D8F7; }
+    .bts-operating-num { position: relative; z-index: 1; width: 48px; height: 48px; margin: 0 auto 14px; display: grid; place-items: center; border-radius: 50%; background: #FFFFFF; border: 1px solid #C7D8F7; color: #1A73E8; font-weight: 700; box-shadow: 0 6px 20px rgba(60,64,67,.1); }
+    .bts-operating-step h3 { margin: 0 0 7px; color: #172033; font-size: 15px; }
+    .bts-operating-step p { margin: 0; color: #5F6368; font-size: 13px; line-height: 1.6; }
+    .bts-bilingual { padding: clamp(48px,7vw,72px) 20px; }
+    .bts-bilingual-panel { max-width: 1140px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; background: #F4F7FD; border: 1px solid #D2E3FC; border-left: 4px solid #1A73E8; border-radius: 18px; overflow: hidden; }
+    .bts-language { padding: clamp(24px,4vw,38px); }
+    .bts-language + .bts-language { border-left: 1px solid #D2E3FC; }
+    .bts-language small { display: block; margin-bottom: 9px; color: #5F6368; font-size: 11px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; }
+    .bts-language h2 { margin: 0 0 10px; color: #0B57D0; font-size: clamp(19px,3vw,24px); line-height: 1.2; }
+    .bts-language p { margin: 0; color: #3C4043; font-size: 15px; line-height: 1.7; }
+    .bts-about-cta { padding: 0 20px clamp(64px,8vw,86px); }
+    .bts-about-cta-inner { max-width: 1140px; margin: 0 auto; padding: clamp(30px,5vw,46px); border-radius: 28px; background: #1A73E8; color: #FFFFFF; display: flex; align-items: center; justify-content: space-between; gap: 28px; }
+    .bts-about-cta h2 { margin: 0 0 8px; font-size: clamp(22px,4vw,30px); }
+    .bts-about-cta p { margin: 0; color: #D2E3FC; line-height: 1.6; }
+    .bts-about-cta-actions { display: flex; flex-wrap: wrap; gap: 10px; flex-shrink: 0; }
+    .bts-about-cta-actions a { padding: 13px 22px; border-radius: 999px; font-weight: 500; white-space: nowrap; }
+    .bts-about-cta-actions a:first-child { background: #FFFFFF; color: #0B57D0; }
+    .bts-about-cta-actions a:last-child { background: #137333; color: #FFFFFF; }
+    @media (max-width: 760px) {
+      .bts-about-grid { grid-template-columns: 1fr; gap: 34px; }
+      .bts-company { padding-top: 16px; }
+      .bts-operating-flow { grid-template-columns: 1fr 1fr; gap: 26px 8px; }
+      .bts-operating-step:nth-child(2)::after { display: none; }
+      .bts-operating-step p { max-width: 240px; margin-inline: auto; }
+      .bts-bilingual-panel { grid-template-columns: 1fr; }
+      .bts-language + .bts-language { border-left: 0; border-top: 1px solid #D2E3FC; }
+      .bts-about-cta-inner { align-items: flex-start; flex-direction: column; }
+    }
+    @media (max-width: 520px) {
+      .bts-home-hero { padding-inline: 20px !important; }
+      .bts-home-hero h1 { font-size: clamp(32px,10vw,43px) !important; }
+      .bts-floatbar { left: 16px; right: 16px; width: auto; bottom: max(10px, env(safe-area-inset-bottom)); padding: 5px; }
+      .bts-floatbar a { padding: 12px 10px !important; font-size: 14px !important; }
+      .bts-operating-flow { grid-template-columns: 1fr; gap: 24px; }
+      .bts-operating-step:not(:last-child)::after { top: 51px; bottom: -24px; left: 50%; right: auto; width: 1px; height: auto; }
+      .bts-company-row { grid-template-columns: 78px 1fr; gap: 10px; }
+      .bts-about-cta-actions { width: 100%; }
+      .bts-about-cta-actions a { flex: 1 1 100%; text-align: center; }
+      .bts-about-hero::after { width: 88vw; }
     }
 
     /* ===== UI polish & motion ===== */
@@ -660,6 +789,9 @@
       input, select, textarea { corner-shape: squircle; }
     }
 
+    .hero-vehicle::after { background: none !important; }
+    .bts-floatbar a:last-child { animation: btsUp .5s .35s cubic-bezier(.22,1,.36,1) both, btsBreath 7s 2s ease-in-out infinite; }
+
     @media (prefers-reduced-motion: reduce) {
       *, *::before, *::after { animation: none !important; transition: none !important; }
       .bts-map-live { display: none; }
@@ -670,6 +802,7 @@
 <div style="min-height:100vh;display:flex;flex-direction:column;background:#FFFFFF">
 
   <!-- ============ HEADER ============ -->
+  <a class="bts-skip" href="#main-content">Skip to main content</a>
   <div class="bts-ribbon"></div>
   <header class="bts-header" style="border-bottom:{{ headerBorder }};box-shadow:{{ headerShadow }}">
     <div class="bts-header-inner">
@@ -678,7 +811,7 @@
       </a>
       <nav class="bts-tabs" aria-label="Main navigation">
         <sc-for list="{{ navItems }}" as="item" hint-placeholder-count="8">
-          <a href="{{ item.href }}" onClick="{{ item.onClick }}" class="bts-tab" data-act="{{ item.act }}" style="color:{{ item.color }}" style-hover="color:#202124">{{ item.label }}</a>
+          <a href="{{ item.href }}" onClick="{{ item.onClick }}" class="bts-tab" data-act="{{ item.act }}" aria-current="{{ item.current }}" style="color:{{ item.color }}" style-hover="color:#202124">{{ item.label }}</a>
         </sc-for>
         <span class="bts-tab-ind" style="left:{{ indLeft }};width:{{ indWidth }}"></span>
       </nav>
@@ -691,19 +824,19 @@
     </div>
   </header>
 
-  <main style="flex:1">
+  <main id="main-content" style="flex:1" tabindex="-1">
 
   <!-- ============ HOME ============ -->
   <sc-if value="{{ pageHome }}" hint-placeholder-val="{{ true }}">
     <div data-screen-label="Home">
 
       <!-- Hero -->
-      <section style="padding:clamp(44px,7vw,80px) 20px clamp(36px,5vw,56px)">
-        <div style="max-width:1140px;margin:0 auto;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,340px),1fr));gap:clamp(28px,4vw,56px);align-items:center">
+      <section class="bts-home-hero" style="padding:clamp(44px,7vw,80px) 20px clamp(36px,5vw,56px)">
+        <div class="bts-hero-grid" style="max-width:1140px;margin:0 auto;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,340px),1fr));gap:clamp(28px,4vw,56px);align-items:center">
           <div style="display:flex;flex-direction:column;gap:18px">
             <div class="bts-chips" style="display:flex;gap:8px;flex-wrap:wrap">
               <span style="display:inline-flex;align-items:center;gap:8px;font-size:13px;font-weight:500;color:#137333;background:#E6F4EA;border-radius:999px;padding:6px 14px"><span style="width:8px;height:8px;border-radius:50%;background:#137333"></span>Available 24/7</span>
-              <span style="display:inline-flex;align-items:center;gap:8px;font-size:13px;font-weight:500;color:#174EA6;background:#E8F0FE;border-radius:999px;padding:6px 14px">Proudly South African 🇿🇦</span>
+              <span style="display:inline-flex;align-items:center;gap:8px;font-size:13px;font-weight:500;color:#174EA6;background:#E8F0FE;border-radius:999px;padding:6px 14px">Proudly South African</span>
             </div>
             <h1 style="font-weight:700;font-size:clamp(32px,6vw,52px);line-height:1.12;margin:0;letter-spacing:-0.02em;color:#202124;text-wrap:balance"><span class="bts-hl1">We move the deceased.</span> <span class="bts-grad bts-hl2">Across KZN and surrounding provinces.</span></h1>
             <p style="font-size:clamp(16px,2.5vw,19px);line-height:1.6;color:#5F6368;margin:0;max-width:520px;text-wrap:pretty"><span class="bts-sub1">One dedicated refrigerated vehicle. A trained team. The right paperwork.</span> <span class="bts-sub2">You call — we collect — we deliver.</span> <span class="bts-sub3">Respectfully, every time.</span></p>
@@ -864,6 +997,12 @@
         <div style="max-width:1140px;margin:0 auto">
           <h2 style="font-weight:700;font-size:clamp(24px,4.5vw,34px);margin:0 0 12px;letter-spacing:-0.01em;color:#202124;text-wrap:balance">A dedicated refrigeration system — <span class="bts-grad">built for direct transport.</span></h2>
           <p style="font-size:16px;line-height:1.65;color:#5F6368;max-width:760px;margin:0 0 clamp(22px,3.5vw,32px);text-wrap:pretty">The stainless-steel compartment of our Volkswagen Transporter combines forced-air cooling, an easy-clean transport platform and a dedicated condensate drainage line — designed for respectful, hygienic conveyance of human remains.</p>
+          <div class="bts-techstage">
+            <div class="bts-techrail bts-techrail--left" aria-hidden="true">
+              <div class="bts-techrail-item"><b>1</b>Evaporator cooling system</div>
+              <div class="bts-techrail-item"><b>2</b>Forced-air circulation</div>
+              <div class="bts-techrail-item"><b>4</b>Non-porous stainless steel</div>
+            </div>
           <div class="bts-diagram">
             <img src="./assets/airflow.jpg" loading="lazy" decoding="async" alt="Annotated view of the refrigerated compartment: evaporator cooling system, forced-air circulation, drainage pipe, non-porous stainless steel and secure transport platform">
             <svg class="bts-air" viewBox="0 0 1600 900" fill="none" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
@@ -885,6 +1024,11 @@
             <div class="bts-pin rev" data-n="3" style="top:40%;left:59%"><span class="bts-pin-lbl"><span class="bts-pin-chip">Drainage pipe</span><span class="bts-pin-line"></span></span></div>
             <div class="bts-pin" data-n="4" style="top:58%;left:34%"><span class="bts-pin-lbl"><span class="bts-pin-chip">Non-porous stainless steel</span><span class="bts-pin-line"></span></span></div>
             <div class="bts-pin rev" data-n="5" style="top:72%;left:66%"><span class="bts-pin-lbl"><span class="bts-pin-chip">Secure transport platform</span><span class="bts-pin-line"></span></span></div>
+          </div>
+            <div class="bts-techrail bts-techrail--right" aria-hidden="true">
+              <div class="bts-techrail-item"><b>3</b>Drainage pipe</div>
+              <div class="bts-techrail-item"><b>5</b>Secure transport platform</div>
+            </div>
           </div>
           <div class="bts-legend">
             <span><b>1</b> Evaporator cooling system</span>
@@ -1066,31 +1210,55 @@
   <!-- ============ ABOUT ============ -->
   <sc-if value="{{ pageAbout }}" hint-placeholder-val="{{ false }}">
     <div data-screen-label="About">
-      <section style="background:#F8F9FA;padding:clamp(44px,7vw,72px) 20px">
-        <div style="max-width:1140px;margin:0 auto">
-          <h1 style="font-weight:700;font-size:clamp(28px,5.5vw,42px);margin:0;letter-spacing:-0.02em;color:#202124">About <span class="bts-grad">Body Transport Solutions</span></h1>
+      <section class="bts-about-hero">
+        <div style="position:relative;z-index:1;max-width:1140px;margin:0 auto">
+          <div class="bts-about-kicker">Transport-only human remains logistics</div>
+          <h1 class="bts-about-title" style="font-weight:700;font-size:clamp(34px,5.5vw,54px);margin:0;letter-spacing:-0.03em"><span>About</span> <span class="bts-grad">Body Transport Solutions</span></h1>
+          <p class="bts-about-tagline">Precision logistics with quiet dignity.</p>
         </div>
       </section>
-      <section style="padding:clamp(44px,7vw,72px) 20px clamp(64px,9vw,88px)">
-        <div style="max-width:1140px;margin:0 auto;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,320px),1fr));gap:32px;align-items:start">
-          <div style="display:flex;flex-direction:column;gap:24px">
-            <p style="font-size:17px;line-height:1.7;color:#3C4043;margin:0;text-wrap:pretty">BODY TRANSPORT SOLUTIONS (PTY) LTD is a South African transport-only company focused on refrigerated human-remains transport and repatriation support. We support funeral parlours, mortuaries, hospitals and approved service providers that require reliable, respectful and professional transport capacity.</p>
-            <div style="background:#E8F0FE;border-radius:18px;padding:24px 28px">
-              <div style="font-weight:700;font-size:13px;letter-spacing:0.08em;text-transform:uppercase;color:#174EA6;margin-bottom:10px">In plain language</div>
-              <p style="font-size:15px;line-height:1.7;color:#202124;margin:0">We are not a funeral parlour. We are not a mortuary. We do not prepare, embalm, store, cremate, bury or arrange funerals. We transport — that's our whole job, and we do it properly.</p>
-            </div>
+      <section class="bts-about-main">
+        <div class="bts-about-grid">
+          <div class="bts-about-role">
+            <div class="bts-about-kicker">Our role</div>
+            <h2>We provide transport-only human remains logistics.</h2>
+            <p>BODY TRANSPORT SOLUTIONS (PTY) LTD is a South African transport-only company focused on refrigerated human-remains transport and repatriation support. We support funeral parlours, mortuaries, hospitals, insurers and approved service providers that require reliable, respectful and professional transport capacity.</p>
+            <div class="bts-plain"><strong>In plain language</strong><p>We are not a funeral parlour. We are not a mortuary. We do not prepare, embalm, store, cremate, bury or arrange funerals. We transport &mdash; that is our whole job, and we do it properly.</p></div>
           </div>
-          <div style="background:#FFFFFF;border:1px solid #DADCE0;border-radius:18px;padding:clamp(24px,4vw,34px)">
-            <div style="font-weight:700;font-size:13px;letter-spacing:0.08em;text-transform:uppercase;color:#5F6368;margin-bottom:20px">Company details</div>
-            <div style="display:grid;grid-template-columns:auto 1fr;gap:14px 20px;font-size:14px;line-height:1.5">
-              <span style="color:#5F6368">Company</span><span style="color:#202124;font-weight:500">BODY TRANSPORT SOLUTIONS (PTY) LTD</span>
-              <span style="color:#5F6368">Reg No.</span><span style="color:#202124;font-weight:500">2026/464849/07</span>
-              <span style="color:#5F6368">Tax No.</span><span style="color:#202124;font-weight:500">9001928366</span>
-              <span style="color:#5F6368">Base</span><span style="color:#202124;font-weight:500">Cato Ridge / Camperdown / Durban corridor, KwaZulu-Natal</span>
-              <span style="color:#5F6368">Vehicle</span><span style="color:#202124;font-weight:500">Refrigerated Volkswagen Transporter</span>
-              <span style="color:#5F6368">Service</span><span style="color:#202124;font-weight:500">Transport-only human remains logistics</span>
-            </div>
+          <div class="bts-company">
+            <h2>Company details</h2>
+            <dl>
+              <div class="bts-company-row"><dt>Company</dt><dd>BODY TRANSPORT SOLUTIONS (PTY) LTD</dd></div>
+              <div class="bts-company-row"><dt>Reg No.</dt><dd>2026/464849/07</dd></div>
+              <div class="bts-company-row"><dt>Tax No.</dt><dd>9001928366</dd></div>
+              <div class="bts-company-row"><dt>Base</dt><dd>Cato Ridge / Camperdown / Durban corridor, KwaZulu-Natal</dd></div>
+              <div class="bts-company-row"><dt>Vehicle</dt><dd>Refrigerated Volkswagen Transporter</dd></div>
+              <div class="bts-company-row"><dt>Service</dt><dd>Transport-only human remains logistics</dd></div>
+            </dl>
           </div>
+        </div>
+      </section>
+      <section class="bts-operating">
+        <div class="bts-operating-inner">
+          <div class="bts-operating-head"><div class="bts-about-kicker">How we operate</div><h2>A direct process built on dignity, documentation and control.</h2></div>
+          <div class="bts-operating-flow">
+            <article class="bts-operating-step"><div class="bts-operating-num">1</div><h3>Direct collection</h3><p>We collect on instruction from an authorised facility, provider or responsible party.</p></article>
+            <article class="bts-operating-step"><div class="bts-operating-num">2</div><h3>Refrigerated transfer</h3><p>The compartment is pre-cooled and held at a steady cold temperature up to 3&nbsp;&deg;C, set for the transfer.</p></article>
+            <article class="bts-operating-step"><div class="bts-operating-num">3</div><h3>Signed handover</h3><p>Collection and delivery are recorded, with signed handover documentation.</p></article>
+            <article class="bts-operating-step"><div class="bts-operating-num">4</div><h3>Cleaning log</h3><p>The transport compartment is cleaned and the cleaning record is completed after the job.</p></article>
+          </div>
+        </div>
+      </section>
+      <section class="bts-bilingual" aria-labelledby="bilingual-heading">
+        <div class="bts-bilingual-panel">
+          <div class="bts-language"><small>English</small><h2 id="bilingual-heading">Respect, discretion and clear records.</h2><p>We provide transport only. Every transfer is handled respectfully and discreetly in a refrigerated vehicle, with signed collection and handover records.</p></div>
+          <div class="bts-language" lang="zu"><small>isiZulu</small><h2>Inhlonipho, ubumfihlo namarekhodi acacile.</h2><p>Sinikeza umsebenzi wokuthutha kuphela. Uhambo ngalunye lwenziwa ngenhlonipho nangobumfihlo ngemoto enesiqandisi, kube namarekhodi asayiniwe lapho kuthathwa nalapho kudluliswa umufi.</p></div>
+        </div>
+      </section>
+      <section class="bts-about-cta">
+        <div class="bts-about-cta-inner">
+          <div><h2>Need to arrange a transport?</h2><p>We are ready to discuss the collection point, destination, documentation and timing.</p></div>
+          <div class="bts-about-cta-actions"><a href="#request" onClick="{{ goRequest }}">Discuss a transport request</a><a href="{{ waLink }}">WhatsApp us</a></div>
         </div>
       </section>
     </div>
@@ -1142,6 +1310,12 @@
           <div>
             <h2 style="font-weight:700;font-size:clamp(22px,4vw,30px);margin:0 0 6px;letter-spacing:-0.01em;color:#202124">Features aligned with <span class="bts-grad">R363</span></h2>
             <p style="font-size:14px;color:#5F6368;margin:0 0 24px">South African human-remains regulations — Regulation R363, National Health Act 61 of 2003.</p>
+            <div class="bts-techstage">
+              <div class="bts-techrail bts-techrail--left" aria-hidden="true">
+                <div class="bts-techrail-item"><b>1</b>Evaporator cooling system</div>
+                <div class="bts-techrail-item"><b>2</b>Forced-air circulation</div>
+                <div class="bts-techrail-item"><b>4</b>Non-porous stainless steel</div>
+              </div>
             <div class="bts-diagram">
             <img src="./assets/airflow.jpg" loading="lazy" decoding="async" alt="Annotated view of the refrigerated compartment: evaporator cooling system, forced-air circulation, drainage pipe, non-porous stainless steel and secure transport platform">
             <svg class="bts-air" viewBox="0 0 1600 900" fill="none" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
@@ -1164,6 +1338,11 @@
             <div class="bts-pin" data-n="4" style="top:58%;left:34%"><span class="bts-pin-lbl"><span class="bts-pin-chip">Non-porous stainless steel</span><span class="bts-pin-line"></span></span></div>
             <div class="bts-pin rev" data-n="5" style="top:72%;left:66%"><span class="bts-pin-lbl"><span class="bts-pin-chip">Secure transport platform</span><span class="bts-pin-line"></span></span></div>
           </div>
+              <div class="bts-techrail bts-techrail--right" aria-hidden="true">
+                <div class="bts-techrail-item"><b>3</b>Drainage pipe</div>
+                <div class="bts-techrail-item"><b>5</b>Secure transport platform</div>
+              </div>
+            </div>
           <div class="bts-legend">
             <span><b>1</b> Evaporator cooling system</span>
             <span><b>2</b> Forced-air circulation</span>
@@ -1508,7 +1687,7 @@
   </footer>
 
   <!-- Sticky call / WhatsApp bar -->
-  <div style="position:fixed;bottom:16px;left:16px;right:16px;z-index:60;display:flex;gap:10px;justify-content:center;pointer-events:none">
+  <div class="bts-floatbar">
     <a href="{{ telLink }}" style="pointer-events:auto;flex:1;max-width:220px;background:#1A73E8;color:#FFFFFF;display:flex;align-items:center;justify-content:center;gap:9px;padding:14px 20px;border-radius:999px;box-shadow:0 4px 16px rgba(60,64,67,0.3);cursor:pointer;font-weight:500;font-size:15px" style-hover="background:#174EA6;color:#FFFFFF">
       <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 2.5C3 2.5 5 2 5.5 3.5L6.5 5.5C6.8 6.2 5.5 7 5.5 7.5C5.5 8.5 7.5 10.5 8.5 10.5C9 10.5 9.8 9.2 10.5 9.5L12.5 10.5C14 11 13.5 13 13.5 13C13 14 11.5 14.2 10.5 14C6.5 13 3 9.5 2 5.5C1.8 4.5 2 3 3 2.5Z" stroke="#FFFFFF" stroke-width="1.3" stroke-linejoin="round"></path></svg>
       Call now
@@ -1560,6 +1739,11 @@ class Component extends DCLogic {
       if (!el) return;
       const l = el.offsetLeft, w = el.offsetWidth;
       if (this.state.ind.l !== l || this.state.ind.w !== w) this.setState({ ind: { l, w } });
+      const tabs = el.parentElement;
+      if (tabs && tabs.scrollWidth > tabs.clientWidth) {
+        const target = Math.max(0, l - (tabs.clientWidth - w) / 2);
+        if (Math.abs(tabs.scrollLeft - target) > 6) tabs.scrollTo({ left: target, behavior: 'smooth' });
+      }
     };
     this._measure = () => setTimeout(measure, 40);
     window.addEventListener('resize', this._measure);
@@ -1604,7 +1788,8 @@ class Component extends DCLogic {
       href: '#' + it.key,
       onClick: mk(it.key),
       color: p === it.key ? '#1A73E8' : '#5F6368',
-      act: p === it.key ? '1' : '0'
+      act: p === it.key ? '1' : '0',
+      current: p === it.key ? 'page' : null
     }));
 
     const footerNav = this.pages.concat([{ key: 'request', label: 'Request Transport' }]).map(it => ({
