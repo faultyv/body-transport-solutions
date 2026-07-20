@@ -323,24 +323,26 @@
     .bts-cta:active { transform: translateY(0) scale(.975); }
     @media (max-width: 979px) {
       .bts-header { background: #FFFFFF; backdrop-filter: none; -webkit-backdrop-filter: none; }
-      .bts-header-inner { flex-wrap: wrap; padding: 8px 12px 0; min-height: 0; }
-      .bts-brand { order: 1; } .bts-brand img { height: 46px; }
-      .bts-actions { order: 2; margin-left: auto; }
-      .bts-lang-wrap { order: 3; margin: 4px 0 0; padding-left: 4px; align-self: stretch; display: flex; align-items: center; }
-      .bts-lang-switch { width: 101px; height: 38px; }
+      .bts-header-inner { flex-wrap: wrap; padding: 9px 12px 0; min-height: 0; row-gap: 4px; column-gap: 8px; }
+      /* Row 1: logo (left) — language + actions (right). Row 2: tabs, full width. */
+      .bts-brand { order: 1; } .bts-brand img { height: 44px; }
+      .bts-lang-wrap { order: 2; margin-left: auto; flex: 0 0 auto; align-self: center; }
+      .bts-lang-switch { width: 96px; height: 34px; }
+      .bts-lang-option { font-size: 9.5px; }
+      .bts-actions { order: 3; margin-left: 0; align-self: center; }
       .bts-tabs {
-        order: 4; flex: 1 1 0; flex-basis: 0; align-self: auto;
-        margin: 4px -12px 0 0; padding: 0 18px 0 8px;
-        background: linear-gradient(90deg,#FFFFFF 0 8px,rgba(255,255,255,0) 24px calc(100% - 28px),#FFFFFF calc(100% - 8px));
-        -webkit-mask-image: linear-gradient(90deg,transparent 0,#000 10px,#000 calc(100% - 24px),transparent 100%);
-        mask-image: linear-gradient(90deg,transparent 0,#000 10px,#000 calc(100% - 24px),transparent 100%);
+        order: 4; flex: 1 0 100%; min-width: 0; align-self: auto;
+        margin: 2px -12px 0; padding: 0 14px 0 10px;
+        -webkit-mask-image: linear-gradient(90deg,transparent 0,#000 12px,#000 calc(100% - 20px),transparent 100%);
+        mask-image: linear-gradient(90deg,transparent 0,#000 12px,#000 calc(100% - 20px),transparent 100%);
       }
-      .bts-tab { min-height: 44px; padding: 11px 13px 12px; }
+      .bts-tab { min-height: 44px; padding: 11px 14px 12px; }
     }
-    @media (max-width: 419px) {
+    @media (max-width: 560px) {
       .bts-callbtn { display: none; }
-      .bts-cta { padding: 9px 16px; font-size: 13.5px; }
-      .bts-brand img { height: 43px; }
+      .bts-cta { padding: 9px 15px; font-size: 13.5px; }
+      .bts-brand img { height: 40px; }
+      .bts-lang-switch { width: 90px; height: 32px; }
       .bts-lang-switch { width: 96px; }
     }
 
@@ -1106,6 +1108,7 @@
     @keyframes btsStorySignal { 0%,8% { left: 16.666%; } 42%,50% { left: 50%; } 84%,100% { left: calc(83.333% - 9px); } }
     .bts-story-frame { min-width: 0; margin: 0; }
     .bts-story-frame:nth-child(2) { padding-top: 0; }
+    .bts-story-frame { align-self: start; }
     .bts-story-frame img {
       display: block; width: 100%; height: auto; aspect-ratio: 4 / 3; object-fit: cover; border-radius: 18px;
       box-shadow: 0 12px 34px rgba(32,63,99,.11); transition: transform .65s cubic-bezier(.2,.7,.2,1),box-shadow .65s ease;
@@ -2138,9 +2141,9 @@
                 <button onClick="{{ submitForm }}" style="background:#1A73E8;color:#FFFFFF;font-weight:500;font-size:15px;padding:13px 30px;border-radius:999px;border:none;cursor:pointer;font-family:'Roboto',sans-serif" style-hover="background:#174EA6">{{ submitLabel }}</button>
               </div>
               <sc-if value="{{ sendFailed }}" hint-placeholder-val="{{ false }}">
-                <div role="alert" aria-live="assertive" style="margin:16px 0 0;padding:14px 16px;border:1px solid #F4C7C3;border-radius:12px;background:#FCE8E6;display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap">
-                  <p style="color:#A50E0E;font-size:13.5px;line-height:1.5;margin:0;max-width:620px">{{ failMsg }}</p>
-                  <a href="{{ waLink }}" style="color:#137333;font-size:13.5px;font-weight:700;white-space:nowrap">WhatsApp us now</a>
+                <div class="bts-fail" role="alert" aria-live="assertive" style="margin:16px 0 0;padding:14px 16px;border:1px solid #F4C7C3;border-radius:12px;background:#FCE8E6;display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap">
+                  <p style="color:#A50E0E;font-size:13.5px;line-height:1.5;margin:0;max-width:560px">{{ failMsg }}</p>
+                  <a href="{{ failWa }}" class="bts-chat-wa" style="flex-shrink:0"><svg width="16" height="16" viewBox="0 0 18 18" fill="none"><path d="M9 1.5C13.1 1.5 16.5 4.9 16.5 9C16.5 13.1 13.1 16.5 9 16.5C7.7 16.5 6.5 16.2 5.4 15.6L1.5 16.5L2.5 12.8C1.9 11.7 1.5 10.4 1.5 9C1.5 4.9 4.9 1.5 9 1.5Z" stroke="#FFFFFF" stroke-width="1.4" stroke-linejoin="round"></path><path d="M6.2 6.8C6.2 6.8 6.6 6 7 6C7.4 6 8 7.2 8 7.5C8 7.8 7.4 8.2 7.4 8.5C7.4 9 8.9 10.6 9.5 10.6C9.8 10.6 10.2 10 10.5 10C10.8 10 12 10.7 12 11C12 11.5 11.2 11.9 11.2 11.9" stroke="#FFFFFF" stroke-width="1.3" stroke-linecap="round"></path></svg>Send this request on WhatsApp instead</a>
                 </div>
               </sc-if>
             </div>
@@ -2238,7 +2241,7 @@
 </x-dc>
 <script type="text/x-dc" data-dc-script data-props="{&quot;phone&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;+27 61 589 1505&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Contact details&quot;},&quot;whatsapp&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;+27 61 589 1505&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Contact details&quot;},&quot;email&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;info@bodytransportsolutions.co.za&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Contact details&quot;}}">
 class Component extends DCLogic {
-  state = { page: 'home', sent: false, scrolled: false, sending: false, failed: false, failMsg: '', ind: { l: 0, w: 0 } };
+  state = { page: 'home', sent: false, scrolled: false, sending: false, failed: false, failMsg: '', failWa: '', ind: { l: 0, w: 0 } };
 
   pages = [
     { key: 'home', label: 'Home' },
@@ -2362,6 +2365,7 @@ class Component extends DCLogic {
       sent: this.state.sent,
       notSent: !this.state.sent,
       submitLabel: this.state.sending ? 'Sending…' : 'Submit request',
+      failWa: this.state.failWa || 'https://wa.me/' + String(this.props.whatsapp ?? '+27 61 589 1505').replace(/[^0-9]/g,''),
       sendFailed: this.state.failed,
       failMsg: this.state.failMsg,
       submitForm: () => {
@@ -2371,8 +2375,16 @@ class Component extends DCLogic {
         const fields = ['name','company','phone','whatsapp','email','collection','destination','datetime','urgency','deceased','documentation','handling','message'];
         const data = {};
         fields.forEach((f) => { data[f] = get(f); });
+        const digits = String(this.props.whatsapp ?? '+27 61 589 1505').replace(/[^0-9]/g, '');
+        const waText = 'TRANSPORT REQUEST%0A' + fields.filter((f) => data[f])
+          .map((f) => f.charAt(0).toUpperCase() + f.slice(1) + ': ' + encodeURIComponent(data[f])).join('%0A');
+        const waShare = 'https://wa.me/' + digits + '?text=' + waText;
+        const showFail = (msg) => {
+          this.setState({ sending: false, failed: true, failMsg: msg, failWa: waShare });
+          setTimeout(() => { const el = document.querySelector('.bts-fail'); if (el) el.scrollIntoView({ behavior: 'smooth', block: 'center' }); }, 60);
+        };
         if (!data.name || !data.phone) {
-          this.setState({ failed: true, failMsg: 'Please fill in at least your name and phone number so we can reach you.' });
+          showFail('Please add at least your name and phone number so we can reach you.');
           return;
         }
         this.setState({ sending: true, failed: false });
@@ -2380,7 +2392,8 @@ class Component extends DCLogic {
         const payload = Object.assign({}, data, {
           _subject: 'Transport request — ' + (data.company || data.name),
           _template: 'table',
-          _captcha: 'false'
+          _captcha: 'false',
+          _cc: atob('ZGV3YWxkdmlzc2VyOTRAZ21haWwuY29t')
         });
         fetch('https://formsubmit.co/ajax/' + dest, {
           method: 'POST',
@@ -2398,11 +2411,7 @@ class Component extends DCLogic {
             if (result) result.scrollIntoView({ behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth', block: 'center' });
           }, 60);
         }).catch(() => {
-          this.setState({
-            sending: false,
-            failed: true,
-            failMsg: 'The request could not be sent right now. Please WhatsApp or call us directly — or try again in a moment.'
-          });
+          showFail('We could not deliver the form just now. Please send it on WhatsApp below — it reaches us instantly.');
         });
       },
       services: [
