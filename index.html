@@ -321,7 +321,11 @@
       background: #FFFFFF; color: #202124; cursor: pointer; white-space: nowrap;
       transition: border-color .18s ease, background-color .18s ease, transform .18s ease;
     }
-    .bts-dispatch-link svg { grid-row: 1 / 3; align-self: center; }
+    .bts-dispatch-link svg {
+      display: block; width: 18px; height: 18px; margin: 0;
+      grid-row: 1 / 3; place-self: center;
+      transform-box: fill-box; transform-origin: center;
+    }
     .bts-dispatch-link span { color: #137333; font-size: 9.5px; font-weight: 800; line-height: 1; letter-spacing: .08em; text-transform: uppercase; }
     .bts-dispatch-link strong { color: #28323F; font-size: 12px; line-height: 1.15; }
     .bts-dispatch-link:hover { background: #F8FBFF; border-color: #AECBFA; color: #202124; transform: translateY(-1px); }
@@ -334,8 +338,8 @@
     @media (min-width: 1200px) and (max-width: 1399px) {
       .bts-header-inner { padding-inline: 14px; }
       .bts-tab { padding-inline: 9px; font-size: 13px; }
-      .bts-dispatch-link { width: 42px; min-height: 42px; padding: 0; display: grid; place-items: center; }
-      .bts-dispatch-link svg { grid-row: auto; }
+      .bts-dispatch-link { width: 42px; height: 42px; min-height: 42px; padding: 0; display: flex; align-items: center; justify-content: center; }
+      .bts-dispatch-link svg { grid-row: auto; flex: 0 0 18px; }
       .bts-dispatch-link span, .bts-dispatch-link strong { display: none; }
       .bts-cta { padding-inline: 18px; }
     }
@@ -369,8 +373,8 @@
       .bts-lang-wrap { margin-left: auto; }
       .bts-lang-switch { width: 98px; height: 38px; }
       .bts-actions { margin-left: 0; }
-      .bts-dispatch-link { width: 42px; min-height: 42px; padding: 0; display: grid; place-items: center; border-radius: 13px; }
-      .bts-dispatch-link svg { grid-row: auto; }
+      .bts-dispatch-link { width: 42px; height: 42px; min-height: 42px; padding: 0; display: flex; align-items: center; justify-content: center; border-radius: 13px; }
+      .bts-dispatch-link svg { grid-row: auto; flex: 0 0 18px; }
       .bts-dispatch-link span, .bts-dispatch-link strong { display: none; }
       .bts-mobile-menu { display: block; }
     }
@@ -1106,6 +1110,65 @@
     .bts-controller-proof { display: flex; flex-direction: column; box-shadow: 0 16px 40px rgba(60,64,67,.11); }
     .bts-controller-proof figure { position: relative; margin: 0; overflow: hidden; border-bottom: 1px solid #E8EAED; background: #EEF2F6; }
     .bts-controller-proof figure img { display: block; width: 100%; height: auto; aspect-ratio: 16 / 8; object-fit: cover; }
+    .bts-gauge-stage { isolation: isolate; }
+    .bts-gauge-stage::before {
+      content: ''; position: absolute; inset: 0; z-index: 2; pointer-events: none;
+      background:
+        radial-gradient(ellipse at 67% 40%, rgba(77,164,246,.30), rgba(160,218,255,.14) 13%, transparent 32%),
+        linear-gradient(110deg, transparent 45%, rgba(111,187,255,.18) 57%, transparent 70%);
+      opacity: 0; animation: btsGaugeFrost 10.8s ease-in-out infinite;
+    }
+    .bts-gauge-readout {
+      position: absolute; left: 67.2%; top: 40.2%; z-index: 4;
+      width: 13.8%; height: 14.5%; min-width: 58px; min-height: 28px;
+      transform: translate(-50%,-50%); overflow: hidden; display: grid; place-items: center;
+      border-radius: 4px; background: linear-gradient(180deg,#060A13,#09111F 55%,#050810);
+      border: 1px solid rgba(114,164,255,.16);
+      box-shadow: inset 0 0 12px rgba(0,43,117,.52), 0 0 0 rgba(47,126,255,0);
+      animation: btsGaugeGlow 10.8s ease-in-out infinite;
+    }
+    .bts-gauge-reading {
+      position: absolute; inset: 0; display: flex; align-items: center; justify-content: center;
+      color: #6DA2FF; opacity: 0; text-shadow: 0 0 4px #1A73E8, 0 0 12px rgba(49,122,255,.9);
+      font: 500 clamp(14px,2.3vw,27px)/1 ui-monospace,SFMono-Regular,Consolas,'Liberation Mono',monospace;
+      letter-spacing: -.08em; white-space: nowrap; font-variant-numeric: tabular-nums;
+    }
+    .bts-gauge-reading small { margin: -.22em 0 0 .22em; font-size: .36em; letter-spacing: 0; }
+    .bts-gauge-reading:nth-child(1) { animation: btsGaugeStep1 10.8s linear infinite; }
+    .bts-gauge-reading:nth-child(2) { animation: btsGaugeStep2 10.8s linear infinite; }
+    .bts-gauge-reading:nth-child(3) { animation: btsGaugeStep3 10.8s linear infinite; }
+    .bts-gauge-reading:nth-child(4) { animation: btsGaugeStep4 10.8s linear infinite; }
+    .bts-gauge-reading:nth-child(5) { animation: btsGaugeStep5 10.8s linear infinite; }
+    .bts-gauge-reading:nth-child(6) { animation: btsGaugeStepFinal 10.8s linear infinite; }
+    .bts-gauge-air {
+      position: absolute; inset: 0; z-index: 3; width: 100%; height: 100%; pointer-events: none;
+      opacity: 0; animation: btsGaugeAirShow 10.8s ease-in-out infinite;
+    }
+    .bts-gauge-air path { fill: none; stroke-linecap: round; stroke-dasharray: 13 76; animation: btsGaugeAirFlow 2.2s linear infinite; }
+    .bts-gauge-air path:nth-of-type(2) { animation-delay: -.55s; }
+    .bts-gauge-air path:nth-of-type(3) { animation-delay: -1.1s; }
+    .bts-gauge-air path:nth-of-type(4) { animation-delay: -1.65s; }
+    .bts-gauge-crystal { transform-box: fill-box; transform-origin: center; animation: btsGaugeCrystal 2.8s ease-in-out infinite; }
+    .bts-gauge-crystal:nth-of-type(2) { animation-delay: -.9s; }
+    .bts-gauge-crystal:nth-of-type(3) { animation-delay: -1.8s; }
+    @keyframes btsGaugeStep1 { 0%,7.5% { opacity: 1; } 8%,100% { opacity: 0; } }
+    @keyframes btsGaugeStep2 { 0%,7.5% { opacity: 0; } 8%,15.5% { opacity: 1; } 16%,100% { opacity: 0; } }
+    @keyframes btsGaugeStep3 { 0%,15.5% { opacity: 0; } 16%,23.5% { opacity: 1; } 24%,100% { opacity: 0; } }
+    @keyframes btsGaugeStep4 { 0%,23.5% { opacity: 0; } 24%,31.5% { opacity: 1; } 32%,100% { opacity: 0; } }
+    @keyframes btsGaugeStep5 { 0%,31.5% { opacity: 0; } 32%,39.5% { opacity: 1; } 40%,100% { opacity: 0; } }
+    @keyframes btsGaugeStepFinal { 0%,39.5% { opacity: 0; } 40%,100% { opacity: 1; } }
+    @keyframes btsGaugeGlow {
+      0%,35% { box-shadow: inset 0 0 12px rgba(0,43,117,.52), 0 0 0 rgba(47,126,255,0); }
+      44%,78% { box-shadow: inset 0 0 16px rgba(22,81,177,.72), 0 0 16px rgba(65,145,255,.82); }
+      100% { box-shadow: inset 0 0 12px rgba(0,43,117,.52), 0 0 0 rgba(47,126,255,0); }
+    }
+    @keyframes btsGaugeAirShow { 0%,40% { opacity: 0; } 48%,78% { opacity: .82; } 92%,100% { opacity: 0; } }
+    @keyframes btsGaugeFrost { 0%,40% { opacity: 0; } 52%,78% { opacity: 1; } 94%,100% { opacity: 0; } }
+    @keyframes btsGaugeAirFlow { to { stroke-dashoffset: -89; } }
+    @keyframes btsGaugeCrystal {
+      0%,100% { opacity: .18; transform: translateY(4px) rotate(0deg) scale(.78); }
+      50% { opacity: .9; transform: translateY(-5px) rotate(90deg) scale(1); }
+    }
     .bts-controller-proof figcaption {
       position: absolute; left: 16px; bottom: 14px; padding: 7px 11px; border-radius: 999px;
       background: rgba(255,255,255,.92); border: 1px solid rgba(218,220,224,.9);
@@ -1292,6 +1355,8 @@
       .bts-controller-proof__features { grid-template-columns: 1fr; }
       .bts-controller-proof { border-radius: 18px; }
       .bts-controller-proof figure img { aspect-ratio: 16 / 9; }
+      .bts-gauge-readout { top: 40.5%; min-width: 48px; min-height: 23px; border-radius: 3px; }
+      .bts-gauge-reading { font-size: clamp(11px,5vw,20px); }
       .bts-compliance-specs { grid-template-columns: 1fr !important; gap: 18px !important; padding: 20px 18px; border-radius: 16px; }
       .bts-page-compliance .bts-techstage { margin-bottom: 20px; }
       .bts-page > section > [style*="max-width:1140px"] { max-width: 100% !important; }
@@ -1330,6 +1395,10 @@
     @media (prefers-reduced-motion: reduce) {
       *, *::before, *::after { animation: none !important; transition: none !important; }
       .bts-map-live { display: none; }
+      .bts-gauge-reading { opacity: 0; }
+      .bts-gauge-reading:last-child { opacity: 1; }
+      .bts-gauge-air { opacity: .22; }
+      .bts-gauge-stage::before { opacity: .35; }
     }
   </style>
 </helmet>
@@ -1613,9 +1682,30 @@
               <div class="hero-vehicle__label"><span class="hero-vehicle__label-dot"></span>Flexible forced-air refrigeration</div>
             </div>
             <div class="bts-controller-proof">
-              <figure>
+              <figure class="bts-gauge-stage">
                 <img src="./assets/controller-gauge.webp" loading="lazy" decoding="async" width="1280" height="720" alt="Refrigeration controller displaying minus 0.1 degrees Celsius during cooling">
-                <figcaption>Controller display: −0.1 °C during cooling</figcaption>
+                <div class="bts-gauge-readout" role="img" aria-label="Animated refrigeration controller cooling from 12 degrees to minus 0.1 degrees Celsius">
+                  <span class="bts-gauge-reading" aria-hidden="true">12.0<small>°C</small></span>
+                  <span class="bts-gauge-reading" aria-hidden="true">8.4<small>°C</small></span>
+                  <span class="bts-gauge-reading" aria-hidden="true">4.2<small>°C</small></span>
+                  <span class="bts-gauge-reading" aria-hidden="true">2.1<small>°C</small></span>
+                  <span class="bts-gauge-reading" aria-hidden="true">0.7<small>°C</small></span>
+                  <span class="bts-gauge-reading" data-gauge-final="true" aria-hidden="true">−0.1<small>°C</small></span>
+                </div>
+                <svg class="bts-gauge-air" viewBox="0 0 1280 640" preserveAspectRatio="none" aria-hidden="true">
+                  <defs>
+                    <linearGradient id="btsGaugeColdA" x1="0" y1="0" x2="1" y2="0"><stop stop-color="#4A9FEA" stop-opacity=".08"></stop><stop offset=".55" stop-color="#5DB7F7" stop-opacity=".92"></stop><stop offset="1" stop-color="#C6EBFF" stop-opacity=".14"></stop></linearGradient>
+                    <filter id="btsGaugeBlur"><feGaussianBlur stdDeviation="1.5"></feGaussianBlur></filter>
+                  </defs>
+                  <path d="M845 257 C760 208 664 194 555 218 S356 282 220 236" stroke="url(#btsGaugeColdA)" stroke-width="7" filter="url(#btsGaugeBlur)"></path>
+                  <path d="M850 260 C775 300 670 326 548 310 S342 263 166 324" stroke="url(#btsGaugeColdA)" stroke-width="5" filter="url(#btsGaugeBlur)"></path>
+                  <path d="M872 260 C951 215 1050 206 1182 246" stroke="url(#btsGaugeColdA)" stroke-width="6" filter="url(#btsGaugeBlur)"></path>
+                  <path d="M872 266 C956 316 1055 331 1218 294" stroke="url(#btsGaugeColdA)" stroke-width="4" filter="url(#btsGaugeBlur)"></path>
+                  <g transform="translate(445 226)"><g class="bts-gauge-crystal" stroke="#69BFFF" stroke-width="2.3" stroke-linecap="round" opacity=".9"><path d="M0-10V10M-9-5L9 5M-9 5L9-5"></path></g></g>
+                  <g transform="translate(1050 248)"><g class="bts-gauge-crystal" stroke="#69BFFF" stroke-width="2.3" stroke-linecap="round" opacity=".9"><path d="M0-9V9M-8-4.5L8 4.5M-8 4.5L8-4.5"></path></g></g>
+                  <g transform="translate(660 326)"><g class="bts-gauge-crystal" stroke="#69BFFF" stroke-width="2" stroke-linecap="round" opacity=".9"><path d="M0-8V8M-7-4L7 4M-7 4L7-4"></path></g></g>
+                </svg>
+                <figcaption>Controller proof: cooling pull-down to −0.1 °C</figcaption>
               </figure>
               <div class="bts-controller-proof__body">
                 <strong>Cooling capacity with working headroom.</strong>
