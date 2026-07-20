@@ -259,7 +259,7 @@
     .bts-brand-copy { display: none; padding-left: 12px; border-left: 1px solid #DADCE0; }
     .bts-brand-copy strong { display: block; color: #172033; font-size: 11px; line-height: 1.25; letter-spacing: .04em; text-transform: uppercase; }
     .bts-brand-copy span { display: block; margin-top: 3px; color: #6A7480; font-size: 10.5px; line-height: 1.2; }
-    @media (min-width: 1280px) { .bts-brand-copy { display: block; } }
+    @media (min-width: 1560px) { .bts-brand-copy { display: block; } }
     .bts-tabs {
       position: relative;
       display: flex; align-items: stretch; align-self: stretch; gap: 2px;
@@ -331,6 +331,14 @@
     }
     .bts-cta:hover { background: #1B66C9; color: #FFFFFF; box-shadow: 0 2px 10px rgba(26,115,232,.4); transform: translateY(-1px); }
     .bts-cta:active { transform: translateY(0) scale(.975); }
+    @media (min-width: 1200px) and (max-width: 1399px) {
+      .bts-header-inner { padding-inline: 14px; }
+      .bts-tab { padding-inline: 9px; font-size: 13px; }
+      .bts-dispatch-link { width: 42px; min-height: 42px; padding: 0; display: grid; place-items: center; }
+      .bts-dispatch-link svg { grid-row: auto; }
+      .bts-dispatch-link span, .bts-dispatch-link strong { display: none; }
+      .bts-cta { padding-inline: 18px; }
+    }
     .bts-mobile-menu { display: none; position: relative; }
     .bts-mobile-menu summary {
       list-style: none; width: 42px; height: 42px; display: grid; place-items: center;
@@ -945,21 +953,55 @@
     }
     @keyframes btsPing { 0% { opacity: .7; transform: scale(.97); } 65%, 100% { opacity: 0; transform: scale(1.1); } }
 
-    /* Contact tiles: the action speaks */
-    [data-screen-label="Contact"] a[href^="tel"]::after { content: 'Tap to call \2192'; }
-    [data-screen-label="Contact"] a[href*="wa.me"]::after { content: 'Open WhatsApp \2192'; }
-    [data-screen-label="Contact"] a[href^="mailto"]::after { content: 'Write to us \2192'; }
-    [data-screen-label="Contact"] a[href^="tel"]::after,
-    [data-screen-label="Contact"] a[href*="wa.me"]::after,
-    [data-screen-label="Contact"] a[href^="mailto"]::after {
-      display: block; font-size: 12px; font-weight: 500; color: #1A73E8; margin-top: 6px;
-      opacity: 0; transform: translateY(-2px); transition: opacity .25s ease, transform .25s ease;
+    /* Contact actions: clear, stable rows rather than hover-dependent labels. */
+    .bts-contact-layout {
+      max-width: 1140px; margin: 0 auto; display: grid;
+      grid-template-columns: minmax(0,1.04fr) minmax(340px,.96fr);
+      gap: clamp(24px,4vw,48px); align-items: stretch;
     }
-    [data-screen-label="Contact"] a:hover::after { opacity: 1; transform: none; }
-    @media (hover: none) {
-      [data-screen-label="Contact"] a[href^="tel"]::after,
-      [data-screen-label="Contact"] a[href*="wa.me"]::after,
-      [data-screen-label="Contact"] a[href^="mailto"]::after { opacity: 1; transform: none; }
+    .bts-contact-panel { display: flex; min-width: 0; flex-direction: column; gap: 18px; }
+    .bts-contact-list { overflow: hidden; border: 1px solid #DADCE0; border-radius: 22px; background: #FFFFFF; }
+    .bts-contact-method {
+      display: grid; grid-template-columns: 42px minmax(0,1fr) auto; align-items: center; gap: 14px;
+      min-height: 86px; padding: 17px 20px; color: #202124; border-bottom: 1px solid #E8EAED;
+    }
+    .bts-contact-method:last-child { border-bottom: 0; }
+    .bts-contact-method:hover { background: #F7FAFF; color: #202124; }
+    .bts-contact-method__icon {
+      width: 42px; height: 42px; display: grid; place-items: center; border-radius: 50%;
+      color: #1A73E8; background: #E8F0FE; box-shadow: inset 0 0 0 1px rgba(26,115,232,.08);
+    }
+    .bts-contact-method__copy { min-width: 0; }
+    .bts-contact-method__copy small {
+      display: block; margin-bottom: 3px; color: #5F6368; font-size: 11px; font-weight: 700;
+      letter-spacing: .1em; text-transform: uppercase;
+    }
+    .bts-contact-method__copy strong { display: block; overflow-wrap: anywhere; font-size: clamp(14px,1.6vw,17px); line-height: 1.35; }
+    .bts-contact-method__action {
+      display: inline-flex; align-items: center; gap: 7px; padding: 9px 12px; border-radius: 999px;
+      color: #0B57D0; background: #F1F6FE; font-size: 12px; font-weight: 700; white-space: nowrap;
+    }
+    .bts-contact-method:hover .bts-contact-method__action { background: #DCEAFF; }
+    .bts-contact-meta { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+    .bts-contact-meta > div { padding: 18px 20px; border-left: 2px solid #AECBFA; background: #F8FAFD; }
+    .bts-contact-meta small { display: block; margin-bottom: 6px; color: #5F6368; font-size: 11px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; }
+    .bts-contact-meta span { color: #3C4043; font-size: 13.5px; line-height: 1.55; }
+    .bts-contact-actions { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 4px; }
+    .bts-contact-actions a {
+      display: inline-flex; min-height: 46px; align-items: center; justify-content: center;
+      padding: 0 20px; border-radius: 13px; font-size: 14px; font-weight: 700;
+    }
+    .bts-contact-actions__primary { background: #FFFFFF; color: #0B57D0; box-shadow: 0 4px 14px rgba(11,37,69,.16); }
+    .bts-contact-actions__primary:hover { background: #E8F0FE; color: #0B57D0; transform: translateY(-1px); }
+    .bts-contact-actions__secondary { color: #FFFFFF; border: 1px solid rgba(255,255,255,.5); }
+    .bts-contact-actions__secondary:hover { color: #FFFFFF; background: rgba(255,255,255,.12); transform: translateY(-1px); }
+    @media (max-width: 760px) {
+      .bts-contact-layout { grid-template-columns: minmax(0,1fr); }
+      .bts-contact-method { grid-template-columns: 40px minmax(0,1fr); padding: 15px 16px; }
+      .bts-contact-method__action { grid-column: 2; width: max-content; margin-top: 2px; }
+      .bts-contact-meta { grid-template-columns: minmax(0,1fr); }
+      .bts-contact-actions { display: grid; grid-template-columns: 1fr; }
+      .bts-contact-actions a { width: 100%; }
     }
 
     /* Route hairline: precision movement, quietly */
@@ -1402,11 +1444,11 @@
               <figcaption><b>01</b><span><strong>Authorised collection</strong>Dispatch against confirmed collection details and documentation.</span></figcaption>
             </figure>
             <figure class="bts-story-frame">
-              <img src="./assets/vehicle-open.webp" loading="lazy" decoding="async" width="1600" height="901" alt="Open refrigerated conversion with secure stainless-steel transport platform">
+              <img src="./assets/vehicle-liftgate-open.webp" loading="lazy" decoding="async" width="1664" height="934" alt="Refrigerated conversion with its lift-up rear hatch open and secure stainless-steel transport platform visible">
               <figcaption><b>02</b><span><strong>Controlled transfer</strong>Cold control, secure loading and a direct route.</span></figcaption>
             </figure>
             <figure class="bts-story-frame">
-              <img src="./assets/cleaning-inspection.webp" loading="lazy" decoding="async" width="1600" height="901" alt="Transport compartment being cleaned and inspected after a transfer">
+              <img src="./assets/vehicle-liftgate-cleaning.webp" loading="lazy" decoding="async" width="1664" height="934" alt="Transport compartment being cleaned and inspected beneath the lift-up rear hatch">
               <figcaption><b>03</b><span><strong>Documented close-out</strong>Signed handover, cleaning record and completed job file.</span></figcaption>
             </figure>
           </div>
@@ -1531,7 +1573,7 @@
               <div class="bts-techrail-item"><b>4</b>Non-porous stainless steel</div>
             </div>
           <div class="bts-diagram">
-            <img src="./assets/airflow.jpg" loading="lazy" decoding="async" alt="Annotated view of the refrigerated compartment: evaporator cooling system, forced-air circulation, drainage pipe, non-porous stainless steel and secure transport platform">
+            <img src="./assets/vehicle-liftgate-open.webp" loading="lazy" decoding="async" width="1664" height="934" alt="Annotated view beneath the lift-up rear hatch showing the refrigerated compartment, forced-air system and secure transport platform">
             <svg class="bts-air" viewBox="0 0 1600 900" fill="none" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
               <defs>
                 <radialGradient id="btsGlowH"><stop offset="0" stop-color="#BFE0FF" stop-opacity=".55"></stop><stop offset="1" stop-color="#BFE0FF" stop-opacity="0"></stop></radialGradient>
@@ -1566,7 +1608,7 @@
           </div>
           <div class="bts-refrigeration-proof">
             <div class="bts-refrigeration-photo">
-              <img src="./assets/fridge.jpg" loading="lazy" decoding="async" alt="Stainless steel refrigerated compartment with dedicated loading tray">
+              <img src="./assets/vehicle-liftgate-open.webp" loading="lazy" decoding="async" width="1664" height="934" alt="Stainless-steel refrigerated compartment with the lift-up rear hatch open and dedicated transport platform visible">
               <div class="hero-vehicle__label"><span class="hero-vehicle__label-dot"></span>Flexible forced-air refrigeration</div>
             </div>
             <div class="bts-controller-proof">
@@ -1756,7 +1798,7 @@
       </section>
       <section class="bts-editorial-media bts-editorial-media--about">
         <div class="bts-editorial-media__inner">
-          <figure><img src="./assets/cleaning-inspection.webp" loading="lazy" decoding="async" width="1600" height="901" alt="Cleaning and quality inspection of the refrigerated transport compartment"></figure>
+          <figure><img src="./assets/vehicle-liftgate-cleaning.webp" loading="lazy" decoding="async" width="1664" height="934" alt="Cleaning and quality inspection of the refrigerated transport compartment beneath the lift-up rear hatch"></figure>
           <div class="bts-editorial-media__copy">
             <span>Controlled work. Clear records.</span>
             <h2>Every job closes with a traceable handover.</h2>
@@ -1823,7 +1865,7 @@
       </section>
       <section class="bts-editorial-media bts-editorial-media--services">
         <div class="bts-editorial-media__inner bts-editorial-media__inner--reverse">
-          <figure><img src="./assets/vehicle-open.webp" loading="lazy" decoding="async" width="1600" height="901" alt="Purpose-built refrigerated transport conversion open and ready"></figure>
+          <figure><img src="./assets/vehicle-liftgate-open.webp" loading="lazy" decoding="async" width="1664" height="934" alt="Purpose-built refrigerated transport conversion open beneath its lift-up rear hatch"></figure>
           <div class="bts-editorial-media__copy">
             <span>One vehicle. Multiple approved routes.</span>
             <h2>Configured for direct, refrigerated transfer.</h2>
@@ -1876,7 +1918,7 @@
                 <div class="bts-techrail-item"><b>4</b>Non-porous stainless steel</div>
               </div>
             <div class="bts-diagram">
-            <img src="./assets/airflow.jpg" loading="lazy" decoding="async" alt="Annotated view of the refrigerated compartment: evaporator cooling system, forced-air circulation, drainage pipe, non-porous stainless steel and secure transport platform">
+            <img src="./assets/vehicle-liftgate-open.webp" loading="lazy" decoding="async" width="1664" height="934" alt="Annotated view beneath the lift-up rear hatch showing the refrigerated compartment, forced-air system and secure transport platform">
             <svg class="bts-air" viewBox="0 0 1600 900" fill="none" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
               <defs>
                 <radialGradient id="btsGlowC"><stop offset="0" stop-color="#BFE0FF" stop-opacity=".55"></stop><stop offset="1" stop-color="#BFE0FF" stop-opacity="0"></stop></radialGradient>
@@ -1972,7 +2014,7 @@
       </section>
       <section class="bts-editorial-media bts-editorial-media--process">
         <div class="bts-editorial-media__inner">
-          <figure><img src="./assets/refrigeration-detail.webp" loading="lazy" decoding="async" width="1600" height="901" alt="Refrigeration equipment and secure transport platform inside the vehicle"></figure>
+          <figure><img src="./assets/vehicle-liftgate-open.webp" loading="lazy" decoding="async" width="1664" height="934" alt="Refrigeration equipment and secure transport platform beneath the vehicle's lift-up rear hatch"></figure>
           <div class="bts-editorial-media__copy">
             <span>One controlled job state</span>
             <h2>Every stage has an owner and a record.</h2>
@@ -2153,7 +2195,7 @@
       <section class="bts-request-section" style="padding:clamp(36px,6vw,56px) 20px clamp(64px,9vw,88px)">
         <div class="bts-request-layout">
           <aside class="bts-request-visual">
-            <img src="./assets/vehicle-open.webp" loading="lazy" decoding="async" width="1600" height="901" alt="Refrigerated transport vehicle ready for a direct collection and delivery">
+            <img src="./assets/vehicle-liftgate-open.webp" loading="lazy" decoding="async" width="1664" height="934" alt="Refrigerated transport vehicle ready for direct collection and delivery with its lift-up rear hatch open">
             <div class="bts-request-visual__copy"><span>24/7 dispatch line</span><strong>Send the transport brief.</strong><p>We confirm collection, destination, timing, documentation status, vehicle availability and route scope.</p></div>
           </aside>
           <div class="bts-request-form">
@@ -2209,27 +2251,28 @@
         </div>
       </section>
       <section style="padding:clamp(44px,7vw,72px) 20px clamp(64px,9vw,88px)">
-        <div style="max-width:1140px;margin:0 auto;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,320px),1fr));gap:24px;align-items:start">
-          <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,200px),1fr));gap:12px">
-            <a href="{{ telLink }}" style="background:#FFFFFF;border:1px solid #DADCE0;border-radius:18px;padding:22px;display:flex;flex-direction:column;gap:6px;cursor:pointer" style-hover="box-shadow:0 1px 6px rgba(60,64,67,0.15)">
-              <span style="font-size:12px;font-weight:500;letter-spacing:0.08em;text-transform:uppercase;color:#5F6368">Phone</span>
-              <span style="font-weight:700;font-size:17px;color:#202124">{{ phone }}</span>
-            </a>
-            <a href="{{ waLink }}" style="background:#FFFFFF;border:1px solid #DADCE0;border-radius:18px;padding:22px;display:flex;flex-direction:column;gap:6px;cursor:pointer" style-hover="box-shadow:0 1px 6px rgba(60,64,67,0.15)">
-              <span style="font-size:12px;font-weight:500;letter-spacing:0.08em;text-transform:uppercase;color:#5F6368">WhatsApp</span>
-              <span style="font-weight:700;font-size:17px;color:#202124">{{ whatsapp }}</span>
-            </a>
-            <a href="{{ mailLink }}" style="background:#FFFFFF;border:1px solid #DADCE0;border-radius:18px;padding:22px;display:flex;flex-direction:column;gap:6px;cursor:pointer;grid-column:1 / -1" style-hover="box-shadow:0 1px 6px rgba(60,64,67,0.15)">
-              <span style="font-size:12px;font-weight:500;letter-spacing:0.08em;text-transform:uppercase;color:#5F6368">Email</span>
-              <span style="font-weight:700;font-size:16px;color:#202124;word-break:break-all">{{ email }}</span>
-            </a>
-            <div style="background:#FFFFFF;border:1px solid #DADCE0;border-radius:18px;padding:22px;display:flex;flex-direction:column;gap:6px">
-              <span style="font-size:12px;font-weight:500;letter-spacing:0.08em;text-transform:uppercase;color:#5F6368">Base</span>
-              <span style="font-weight:500;font-size:14px;line-height:1.5;color:#202124">Cato Ridge / Camperdown / Durban corridor, KwaZulu-Natal</span>
+        <div class="bts-contact-layout">
+          <div class="bts-contact-panel">
+            <div class="bts-contact-list">
+              <a class="bts-contact-method" href="{{ telLink }}" aria-label="Call Body Transport Solutions">
+                <span class="bts-contact-method__icon"><svg width="19" height="19" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M7.2 3.8 10 7.4 8.4 9.5c1.3 2.7 3.4 4.8 6.1 6.1l2.1-1.6 3.6 2.8-.9 3.1c-.2.7-.9 1.2-1.7 1.2C9.5 20.5 3.5 14.5 2.9 6.4c0-.8.5-1.5 1.2-1.7l3.1-.9Z" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/></svg></span>
+                <span class="bts-contact-method__copy"><small>Phone</small><strong>{{ phone }}</strong></span>
+                <span class="bts-contact-method__action">Call now <span aria-hidden="true">&rarr;</span></span>
+              </a>
+              <a class="bts-contact-method" href="{{ waLink }}" aria-label="Message Body Transport Solutions on WhatsApp">
+                <span class="bts-contact-method__icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M20.5 11.7a8.5 8.5 0 0 1-12.7 7.4L3 20.5l1.4-4.7a8.5 8.5 0 1 1 16.1-4.1Z" stroke="currentColor" stroke-width="1.7"/><path d="M8.1 7.6c.3-.3.8-.2 1 .2l.8 1.7c.1.3.1.6-.1.8l-.6.7c.8 1.6 2.1 2.9 3.8 3.6l.7-.7c.2-.2.5-.2.8-.1l1.7.8c.4.2.5.7.2 1-.6.8-1.5 1.2-2.5 1-3.3-.6-6-3.2-6.7-6.5-.2-1 .1-1.9.9-2.5Z" fill="currentColor"/></svg></span>
+                <span class="bts-contact-method__copy"><small>WhatsApp</small><strong>{{ whatsapp }}</strong></span>
+                <span class="bts-contact-method__action">Message <span aria-hidden="true">&rarr;</span></span>
+              </a>
+              <a class="bts-contact-method" href="{{ mailLink }}" aria-label="Email Body Transport Solutions">
+                <span class="bts-contact-method__icon"><svg width="19" height="19" viewBox="0 0 24 24" fill="none" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2" stroke="currentColor" stroke-width="1.7"/><path d="m4.5 7 7.5 5.6L19.5 7" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/></svg></span>
+                <span class="bts-contact-method__copy"><small>Email</small><strong>{{ email }}</strong></span>
+                <span class="bts-contact-method__action">Email us <span aria-hidden="true">&rarr;</span></span>
+              </a>
             </div>
-            <div style="background:#FFFFFF;border:1px solid #DADCE0;border-radius:18px;padding:22px;display:flex;flex-direction:column;gap:6px">
-              <span style="font-size:12px;font-weight:500;letter-spacing:0.08em;text-transform:uppercase;color:#5F6368">Service</span>
-              <span style="font-weight:500;font-size:14px;line-height:1.5;color:#202124">KwaZulu-Natal daily; surrounding provinces by arrangement</span>
+            <div class="bts-contact-meta">
+              <div><small>Dispatch base</small><span>Cato Ridge / Camperdown, KwaZulu-Natal</span></div>
+              <div><small>Route coverage</small><span>KwaZulu-Natal daily; inter-provincial transfers by arrangement</span></div>
             </div>
           </div>
           <div class="bts-contact-visual">
@@ -2237,9 +2280,9 @@
             <div class="bts-contact-visual__body">
             <h3 style="font-weight:700;font-size:clamp(20px,4vw,24px);margin:0;color:#FFFFFF">24/7 dispatch for urgent requests</h3>
             <p style="font-size:15px;line-height:1.7;color:#D2E3FC;margin:0">We confirm the instructing party, collection, destination, documentation status, vehicle availability and route scope.</p>
-            <div style="display:flex;gap:12px;flex-wrap:wrap;margin-top:4px">
-              <a href="{{ waLink }}" style="background:#FFFFFF;color:#1A73E8;font-weight:500;font-size:15px;padding:13px 24px;border-radius:999px;cursor:pointer" style-hover="background:#E8F0FE;color:#174EA6">WhatsApp now</a>
-              <a href="#request" onClick="{{ goRequest }}" style="border:1px solid rgba(255,255,255,0.5);color:#FFFFFF;font-weight:500;font-size:15px;padding:13px 24px;border-radius:999px;cursor:pointer" style-hover="background:rgba(255,255,255,0.12);color:#FFFFFF">Submit a request</a>
+            <div class="bts-contact-actions">
+              <a class="bts-contact-actions__primary" href="{{ waLink }}">WhatsApp dispatch</a>
+              <a class="bts-contact-actions__secondary" href="#request" onClick="{{ goRequest }}">Submit a transport brief</a>
             </div>
             </div>
           </div>
