@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Privacy &amp; Cookie Notice | Body Transport Solutions</title>
-  <meta name="description" content="How Body Transport Solutions handles website enquiries, transport request details and optional Meta advertising measurement.">
+  <meta name="description" content="How Body Transport Solutions handles website enquiries, transport request details and optional Google Analytics and Meta advertising measurement.">
   <meta name="robots" content="index, follow">
   <link rel="canonical" href="https://bodytransportsolutions.co.za/privacy.html">
   <link rel="icon" type="image/png" sizes="192x192" href="/assets/favicon.png">
@@ -51,9 +51,9 @@
   <main>
     <p class="eyebrow">Privacy &amp; cookies</p>
     <h1>Clear handling of website and enquiry data.</h1>
-    <p class="intro">This notice explains how Body Transport Solutions (Pty) Ltd processes information submitted through this website and how optional advertising measurement works.</p>
+    <p class="intro">This notice explains how Body Transport Solutions (Pty) Ltd processes information submitted through this website and how optional website and advertising measurement works.</p>
 
-    <div class="summary"><strong>The short version</strong>Essential website functions operate without advertising cookies. The Meta Pixel loads only after you choose “Allow measurement”. We do not send names, email addresses, phone numbers or transport-form contents to Meta.</div>
+    <div class="summary"><strong>The short version</strong>Essential website functions operate without measurement cookies. Google Analytics and the Meta Pixel load only after you choose &ldquo;Allow measurement&rdquo;. We do not send names, email addresses, phone numbers or transport-form contents to either provider.</div>
 
     <section>
       <h2>Who is responsible</h2>
@@ -67,7 +67,7 @@
         <li>Contact and organisation details supplied in a transport enquiry.</li>
         <li>Collection point, destination, requested timing, documentation status and operational instructions supplied for a proposed transport job.</li>
         <li>Technical request information normally transmitted when a browser connects to a website, such as IP address, device and browser information.</li>
-        <li>With permission, website visits and contact actions measured through the Meta Pixel.</li>
+        <li>With permission, website visits and contact actions measured through Google Analytics and the Meta Pixel.</li>
       </ul>
       <p>Please provide only the case information needed to assess and coordinate the transport request. Do not include unrelated medical or personal information.</p>
     </section>
@@ -75,19 +75,19 @@
     <section>
       <h2>Why we use it</h2>
       <p>Enquiry information is used to respond, assess route and vehicle availability, prepare a quote, coordinate an authorised collection and delivery, maintain required operational records, prevent misuse and meet applicable legal obligations.</p>
-      <p>Where applicable, processing is based on steps requested before entering into a service arrangement, performance of that arrangement, legitimate business and security interests, legal obligations, or consent for optional advertising measurement.</p>
+      <p>Where applicable, processing is based on steps requested before entering into a service arrangement, performance of that arrangement, legitimate business and security interests, legal obligations, or consent for optional website and advertising measurement.</p>
     </section>
 
     <section>
       <h2>Service providers and transfers</h2>
-      <p>The transport request form is delivered using FormSubmit. Hosting and content delivery are provided by Vercel. Optional advertising measurement is provided by Meta Platforms. These providers may process technical information in countries outside South Africa. Their own safeguards and privacy terms also apply.</p>
+      <p>The transport request form is delivered using FormSubmit. Hosting and content delivery are provided by Vercel. Optional website measurement is provided by Google Analytics, and optional advertising measurement is provided by Meta Platforms. These providers may process technical information in countries outside South Africa. Their own safeguards and privacy terms also apply.</p>
       <p>We do not sell personal information. We disclose it only where needed to operate the website, respond to an enquiry, deliver an authorised service, protect rights and safety, or comply with law.</p>
     </section>
 
     <section>
-      <h2>Meta Pixel and cookie choices</h2>
-      <p>If you allow measurement, the Meta Pixel records page views and website actions such as starting a request, calling, emailing or opening WhatsApp. Meta may use cookies or similar technology to provide measurement, advertising delivery and audience services. The Pixel remains off when you decline.</p>
-      <p>Your choice is stored in this browser so the website can remember it. You can change that choice below. You may also review advertising choices through <a href="https://www.facebook.com/adpreferences/ad_settings" rel="noopener noreferrer">Meta Ad Preferences</a> and <a href="https://www.youronlinechoices.com/" rel="noopener noreferrer">Your Online Choices</a>.</p>
+      <h2>Google Analytics, Meta Pixel and cookie choices</h2>
+      <p>If you allow measurement, Google Analytics records page views and website actions such as starting or submitting a request, calling, emailing or opening WhatsApp. The Meta Pixel records similar actions for advertising measurement and may use cookies or similar technology for advertising delivery and audience services. We do not send enquiry-form contents or direct contact details to either service. Both services remain off when you decline.</p>
+      <p>Your choice is stored in this browser so the website can remember it. You can change that choice below. You may also use the <a href="https://tools.google.com/dlpage/gaoptout" rel="noopener noreferrer">Google Analytics opt-out browser add-on</a>, review <a href="https://www.facebook.com/adpreferences/ad_settings" rel="noopener noreferrer">Meta Ad Preferences</a>, or visit <a href="https://www.youronlinechoices.com/" rel="noopener noreferrer">Your Online Choices</a>.</p>
       <div class="controls">
         <button class="primary" type="button" data-choice="accepted">Allow measurement</button>
         <button type="button" data-choice="declined">Decline measurement</button>
@@ -113,7 +113,7 @@
       var status = document.querySelector('[data-status]');
       function show(value) {
         if (!status) return;
-        status.textContent = value === 'accepted' ? 'Advertising measurement is allowed in this browser.' : value === 'declined' ? 'Advertising measurement is declined in this browser.' : 'No measurement choice is stored in this browser.';
+        status.textContent = value === 'accepted' ? 'Optional measurement is allowed in this browser.' : value === 'declined' ? 'Optional measurement is declined in this browser.' : 'No measurement choice is stored in this browser.';
       }
       try { show(localStorage.getItem(key)); } catch (error) { show(null); }
       document.addEventListener('click', function (event) {

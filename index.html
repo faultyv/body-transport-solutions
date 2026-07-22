@@ -339,10 +339,11 @@
   ]
 }
 </script>
-<!-- Consent-aware Meta Pixel Code -->
+<!-- Consent-aware Meta Pixel and Google Analytics -->
 <script>
 (function (window, document) {
   var consentKey = 'bts_marketing_consent_v1';
+  var googleMeasurementId = 'G-ENLSDKGPEM';
   var lastRoute = window.location.hash || '#home';
 
   function getConsent() {
@@ -369,14 +370,70 @@
     window.fbq('track','PageView');
   }
 
+  function googleRoutePath(route) {
+    return '/' + String(route || '#home').replace(/^#/, '');
+  }
+
+  function trackGooglePageView(route) {
+    if (!window.gtag || !window.__btsGoogleLoaded) return;
+    window.gtag('event', 'page_view', {
+      page_title: document.title,
+      page_location: window.location.origin + window.location.pathname + (route || '#home'),
+      page_path: googleRoutePath(route)
+    });
+  }
+
+  function loadGoogleAnalytics() {
+    if (window.__btsGoogleLoaded) return;
+    window.__btsGoogleLoaded = true;
+    window.dataLayer = window.dataLayer || [];
+    window.gtag = window.gtag || function () { window.dataLayer.push(arguments); };
+    window.gtag('consent', 'default', {
+      analytics_storage: 'granted',
+      ad_storage: 'denied',
+      ad_user_data: 'denied',
+      ad_personalization: 'denied'
+    });
+    window.gtag('js', new Date());
+    window.gtag('config', googleMeasurementId, {
+      send_page_view: false,
+      allow_google_signals: false,
+      allow_ad_personalization_signals: false,
+      anonymize_ip: true
+    });
+    var script = document.createElement('script');
+    script.async = true;
+    script.src = 'https://www.googletagmanager.com/gtag/js?id=' + encodeURIComponent(googleMeasurementId);
+    document.head.appendChild(script);
+    trackGooglePageView(lastRoute);
+  }
+
   window.btsSetMarketingConsent = function (choice) {
     try { window.localStorage.setItem(consentKey, choice); } catch (error) {}
     setBannerVisible(false);
     if (choice === 'accepted') {
       if (window.fbq && window.__btsMetaLoaded) window.fbq('consent', 'grant');
       else loadMetaPixel();
-    } else if (window.fbq && window.__btsMetaLoaded) {
-      window.fbq('consent', 'revoke');
+      if (window.gtag && window.__btsGoogleLoaded) {
+        window.gtag('consent', 'update', {
+          analytics_storage: 'granted',
+          ad_storage: 'denied',
+          ad_user_data: 'denied',
+          ad_personalization: 'denied'
+        });
+      } else {
+        loadGoogleAnalytics();
+      }
+    } else {
+      if (window.fbq && window.__btsMetaLoaded) window.fbq('consent', 'revoke');
+      if (window.gtag && window.__btsGoogleLoaded) {
+        window.gtag('consent', 'update', {
+          analytics_storage: 'denied',
+          ad_storage: 'denied',
+          ad_user_data: 'denied',
+          ad_personalization: 'denied'
+        });
+      }
     }
   };
 
@@ -384,7 +441,10 @@
     setBannerVisible(true);
   };
 
-  if (getConsent() === 'accepted') loadMetaPixel();
+  if (getConsent() === 'accepted') {
+    loadMetaPixel();
+    loadGoogleAnalytics();
+  }
 
   document.addEventListener('DOMContentLoaded', function () {
     setBannerVisible(!getConsent());
@@ -399,26 +459,31 @@
     if (route === lastRoute) return;
     lastRoute = route;
     if (window.fbq) window.fbq('track','PageView',{ page_route: route.slice(1) || 'home' });
+    trackGooglePageView(route);
   });
 
   document.addEventListener('click', function (event) {
     var origin = event.target;
     var link = origin && origin.closest ? origin.closest('a') : null;
-    if (!link || !window.fbq) return;
+    if (!link) return;
     var href = String(link.getAttribute('href') || '');
     if (href === '#request') {
-      window.fbq('trackCustom','TransportRequestStarted',{ source: 'website' });
+      if (window.fbq) window.fbq('trackCustom','TransportRequestStarted',{ source: 'website' });
+      if (window.gtag) window.gtag('event','transport_request_started',{ source: 'website' });
     } else if (href.indexOf('tel:') === 0) {
-      window.fbq('track','Contact',{ contact_method: 'phone' });
+      if (window.fbq) window.fbq('track','Contact',{ contact_method: 'phone' });
+      if (window.gtag) window.gtag('event','contact',{ contact_method: 'phone' });
     } else if (href.indexOf('https://wa.me/') === 0) {
-      window.fbq('track','Contact',{ contact_method: 'whatsapp' });
+      if (window.fbq) window.fbq('track','Contact',{ contact_method: 'whatsapp' });
+      if (window.gtag) window.gtag('event','contact',{ contact_method: 'whatsapp' });
     } else if (href.indexOf('mailto:') === 0) {
-      window.fbq('track','Contact',{ contact_method: 'email' });
+      if (window.fbq) window.fbq('track','Contact',{ contact_method: 'email' });
+      if (window.gtag) window.gtag('event','contact',{ contact_method: 'email' });
     }
   });
 })(window, document);
 </script>
-<!-- End Meta Pixel Code -->
+<!-- End consent-aware measurement -->
 <script src="./support.js"></script>
 <script src="./i18n.js" defer></script>
 </head>
@@ -464,7 +529,7 @@ Body Transport Solutions (Pty) Ltd &middot; Registration 2026/464849/07</p>
 </div>
 </noscript>
 <aside class="bts-cookie" data-bts-cookie-banner hidden aria-label="Privacy and cookie choices">
-  <div class="bts-cookie__copy"><strong>Your privacy choices</strong><span>We use the Meta Pixel only with your permission to measure advertising and website enquiries. Essential site functions work without it. <a href="/privacy.html">Privacy &amp; cookies</a></span></div>
+  <div class="bts-cookie__copy"><strong>Your privacy choices</strong><span>We use Google Analytics and the Meta Pixel only with your permission to measure website use and enquiries. Essential site functions work without them. <a href="/privacy.html">Privacy &amp; cookies</a></span></div>
   <div class="bts-cookie__actions">
     <button type="button" data-bts-consent="declined">Decline</button>
     <button type="button" class="bts-cookie__accept" data-bts-consent="accepted">Allow measurement</button>
@@ -3012,6 +3077,7 @@ class Component extends DCLogic {
           const accepted = body && (body.success === true || body.success === 'true');
           if (!accepted) throw new Error((body && body.message) || 'FormSubmit did not accept the request.');
           if (window.fbq) window.fbq('track','Lead',{ content_name: 'Transport request submitted', content_category: 'B2B refrigerated transport' });
+          if (window.gtag) window.gtag('event','generate_lead',{ lead_source: 'transport_request_form' });
           this.setState({ sent: true, sending: false });
           window.setTimeout(() => {
             const result = document.querySelector('[data-screen-label="Emergency Transport Request"] .bts-request-form');
