@@ -7,8 +7,8 @@
 <meta name="description" content="Dedicated refrigerated human remains transport for funeral parlours, mortuaries, hospitals and insurers across KZN. Direct transfers and 24/7 dispatch.">
 <meta name="google-site-verification" content="arupmHcmeZQoG6hYCWYQwElfNUMr89PwPaOAiniqjMs">
 <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1">
-<meta name="keywords" content="human remains transport KwaZulu-Natal, body transport Durban, refrigerated body transport, mortuary transport KZN, funeral parlour transport support, deceased transport Cato Ridge, repatriation transport South Africa, inter-provincial body transfer">
 <meta name="author" content="Body Transport Solutions (Pty) Ltd">
+<meta name="referrer" content="strict-origin-when-cross-origin">
 <meta name="geo.region" content="ZA-NL">
 <meta name="geo.placename" content="Cato Ridge, KwaZulu-Natal">
 <meta name="geo.position" content="-29.7830;30.5847">
@@ -21,7 +21,12 @@
 <link rel="apple-touch-icon" sizes="180x180" href="/assets/apple-touch-icon.png">
 <link rel="manifest" href="/site.webmanifest">
 <link rel="image_src" href="https://bodytransportsolutions.co.za/assets/og-facebook-2026.jpg">
-<link rel="preload" as="image" href="./assets/hero-vehicle.webp">
+<link rel="preload" as="image" href="/assets/hero-vehicle.webp" type="image/webp" fetchpriority="high">
+<link rel="preload" as="script" href="/assets/vendor/react-18.3.1.min.js" integrity="sha384-DGyLxAyjq0f9SPpVevD6IgztCFlnMF6oW/XQGmfe+IsZ8TqEiDrcHkMLKI6fiB/Z" crossorigin="anonymous">
+<link rel="preload" as="script" href="/assets/vendor/react-dom-18.3.1.min.js" integrity="sha384-gTGxhz21lVGYNMcdJOyq01Edg0jhn/c22nsx0kyqP0TxaV5WVdsSH1fSDUf5YJj1" crossorigin="anonymous">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,400;0,500;0,700;0,900;1,900&amp;display=swap" rel="stylesheet">
 <link rel="preconnect" href="https://connect.facebook.net" crossorigin>
 <link rel="dns-prefetch" href="//www.facebook.com">
 <meta property="og:type" content="website">
@@ -42,6 +47,30 @@
 <meta name="twitter:description" content="Dedicated B2B refrigerated transport across KwaZulu-Natal, with inter-provincial routes by arrangement and a 24/7 dispatch line.">
 <meta name="twitter:image" content="https://bodytransportsolutions.co.za/assets/og-facebook-2026.jpg">
 <meta name="twitter:image:alt" content="Body Transport Solutions refrigerated transport vehicle and 24/7 KwaZulu-Natal dispatch details">
+<style>
+  .bts-cookie[hidden] { display: none !important; }
+  .bts-cookie {
+    position: fixed; z-index: 10000; left: max(14px, env(safe-area-inset-left)); right: max(14px, env(safe-area-inset-right)); bottom: max(14px, env(safe-area-inset-bottom));
+    width: min(820px, calc(100% - 28px)); margin: 0 auto; padding: 14px 16px; display: flex; align-items: center; justify-content: space-between; gap: 18px;
+    color: #202124; background: rgba(255,255,255,.97); border: 1px solid #DADCE0; border-radius: 18px; box-shadow: 0 18px 52px rgba(23,32,51,.2);
+    font-family: Roboto, Arial, sans-serif; backdrop-filter: blur(18px); -webkit-backdrop-filter: blur(18px);
+  }
+  .bts-cookie__copy { display: grid; gap: 3px; min-width: 0; }
+  .bts-cookie__copy strong { font-size: 14px; }
+  .bts-cookie__copy span { color: #5F6368; font-size: 12.5px; line-height: 1.5; }
+  .bts-cookie__copy a { color: #0B57D0; font-weight: 600; }
+  .bts-cookie__actions { display: flex; gap: 8px; flex: 0 0 auto; }
+  .bts-cookie button { min-height: 40px; padding: 0 14px; border: 1px solid #DADCE0; border-radius: 999px; color: #3C4043; background: #FFFFFF; font: 600 12.5px/1 Roboto, Arial, sans-serif; cursor: pointer; }
+  .bts-cookie button:hover { background: #F8F9FA; }
+  .bts-cookie .bts-cookie__accept { color: #FFFFFF; background: #1A73E8; border-color: #1A73E8; }
+  .bts-cookie .bts-cookie__accept:hover { background: #0B57D0; }
+  .bts-cookie button:focus-visible { outline: 3px solid rgba(26,115,232,.28); outline-offset: 2px; }
+  @media (max-width: 680px) {
+    .bts-cookie { align-items: stretch; flex-direction: column; gap: 12px; padding: 15px; border-radius: 16px; }
+    .bts-cookie__actions { display: grid; grid-template-columns: 1fr 1fr; }
+    .bts-cookie button { width: 100%; }
+  }
+</style>
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -77,6 +106,20 @@
         "email": "info@bodytransportsolutions.co.za",
         "contactType": "dispatch",
         "areaServed": "ZA",
+        "hoursAvailable": {
+          "@type": "OpeningHoursSpecification",
+          "dayOfWeek": [
+            "Monday",
+            "Tuesday",
+            "Wednesday",
+            "Thursday",
+            "Friday",
+            "Saturday",
+            "Sunday"
+          ],
+          "opens": "00:00",
+          "closes": "23:59"
+        },
         "availableLanguage": [
           "English",
           "Afrikaans",
@@ -296,21 +339,61 @@
   ]
 }
 </script>
-<!-- Meta Pixel Code -->
+<!-- Consent-aware Meta Pixel Code -->
 <script>
-!function(f,b,e,v,n,t,s)
-{if(f.fbq)return;n=f.fbq=function(){n.callMethod?
-n.callMethod.apply(n,arguments):n.queue.push(arguments)};
-if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
-n.queue=[];t=b.createElement(e);t.async=!0;
-t.src=v;s=b.getElementsByTagName(e)[0];
-s.parentNode.insertBefore(t,s)}(window,document,'script',
-'https://connect.facebook.net/en_US/fbevents.js');
-fbq('init','27659132467077469');
-fbq('track','PageView');
-
-(function () {
+(function (window, document) {
+  var consentKey = 'bts_marketing_consent_v1';
   var lastRoute = window.location.hash || '#home';
+
+  function getConsent() {
+    try { return window.localStorage.getItem(consentKey); } catch (error) { return null; }
+  }
+
+  function setBannerVisible(visible) {
+    var banner = document.querySelector('[data-bts-cookie-banner]');
+    if (banner) banner.hidden = !visible;
+  }
+
+  function loadMetaPixel() {
+    if (window.__btsMetaLoaded) return;
+    window.__btsMetaLoaded = true;
+    !function(f,b,e,v,n,t,s)
+    {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+    n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+    if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+    n.queue=[];t=b.createElement(e);t.async=!0;
+    t.src=v;s=b.getElementsByTagName(e)[0];
+    s.parentNode.insertBefore(t,s)}(window,document,'script',
+    'https://connect.facebook.net/en_US/fbevents.js');
+    window.fbq('init','27659132467077469');
+    window.fbq('track','PageView');
+  }
+
+  window.btsSetMarketingConsent = function (choice) {
+    try { window.localStorage.setItem(consentKey, choice); } catch (error) {}
+    setBannerVisible(false);
+    if (choice === 'accepted') {
+      if (window.fbq && window.__btsMetaLoaded) window.fbq('consent', 'grant');
+      else loadMetaPixel();
+    } else if (window.fbq && window.__btsMetaLoaded) {
+      window.fbq('consent', 'revoke');
+    }
+  };
+
+  window.btsOpenCookieSettings = function () {
+    setBannerVisible(true);
+  };
+
+  if (getConsent() === 'accepted') loadMetaPixel();
+
+  document.addEventListener('DOMContentLoaded', function () {
+    setBannerVisible(!getConsent());
+    document.addEventListener('click', function (event) {
+      var control = event.target && event.target.closest ? event.target.closest('[data-bts-consent]') : null;
+      if (control) window.btsSetMarketingConsent(control.getAttribute('data-bts-consent'));
+    });
+  });
+
   window.addEventListener('hashchange', function () {
     var route = window.location.hash || '#home';
     if (route === lastRoute) return;
@@ -333,21 +416,18 @@ fbq('track','PageView');
       window.fbq('track','Contact',{ contact_method: 'email' });
     }
   });
-})();
+})(window, document);
 </script>
 <!-- End Meta Pixel Code -->
 <script src="./support.js"></script>
 <script src="./i18n.js" defer></script>
 </head>
 <body>
-<noscript><img height="1" width="1" style="display:none" alt=""
-src="https://www.facebook.com/tr?id=27659132467077469&amp;ev=PageView&amp;noscript=1"
-></noscript>
 <noscript>
 <div style="max-width:860px;margin:0 auto;padding:32px 20px;font-family:Arial,Helvetica,sans-serif;color:#202124;line-height:1.65">
 <h1>Refrigerated Human Remains Transport &mdash; KwaZulu-Natal &amp; South Africa</h1>
 <p><strong>Body Transport Solutions (Pty) Ltd</strong> is a registered, transport-only operator providing dedicated refrigerated transport of human remains for funeral parlours, mortuaries, hospitals, insurers and repatriation coordinators. We are based in the Cato Ridge / Camperdown corridor on the N3 in KwaZulu-Natal, within an hour of Durban and Pietermaritzburg, and we operate 24 hours a day for urgent and after-hours collections. Call or WhatsApp <a href="tel:+27615891505">+27&nbsp;61&nbsp;589&nbsp;1505</a>.</p>
-<p>We are <strong>not</strong> a funeral parlour, mortuary, embalming facility, crematorium or burial service. We do not store, prepare, embalm or arrange funerals. Every transfer is a direct collect-and-deliver run in a purpose-built refrigerated vehicle held at 0&ndash;3&nbsp;&deg;C, with signed chain-of-custody documentation at collection and delivery, vehicle cleaning logs and respectful, discreet handling, aligned with Regulation R363 (Management of Human Remains) and the National Health Act.</p>
+<p>We are <strong>not</strong> a funeral parlour, mortuary, embalming facility, crematorium or burial service. We do not store, prepare, embalm or arrange funerals. Every transfer is a direct collect-and-deliver run in a purpose-built refrigerated vehicle. The compartment can be pre-cooled and maintained at a steady cold temperature up to 3&nbsp;&deg;C according to the transfer requirements, with signed chain-of-custody documentation at collection and delivery, vehicle cleaning logs and respectful, discreet handling, aligned with Regulation R363 (Management of Human Remains) and the National Health Act.</p>
 
 <h2>Human remains transport services</h2>
 <ul>
@@ -373,7 +453,7 @@ src="https://www.facebook.com/tr?id=27659132467077469&amp;ev=PageView&amp;noscri
 <p>Long-distance funeral transport and province-to-province body transport from KwaZulu-Natal to Gauteng (Johannesburg, Pretoria), the Free State (Bloemfontein), the Eastern Cape and Mpumalanga. Because we are transport-only and do not store human remains, longer routes are scheduled in advance so collection and delivery line up on a single trip.</p>
 
 <h2>Why funeral parlours choose us</h2>
-<p>Temperature-controlled refrigeration at 0&ndash;3&nbsp;&deg;C, signed chain-of-custody on every job, a dedicated vehicle that never carries shared loads, 24/7/365 availability, and straightforward invoice-based billing. Serving the funeral industry across South Africa with reliable, respectful and compliant refrigerated body transport.</p>
+<p>Flexible refrigeration maintained at a steady cold temperature up to 3&nbsp;&deg;C according to the transfer requirements, signed chain-of-custody on every job, a dedicated vehicle that never carries shared loads, 24/7 dispatch availability, and straightforward invoice-based billing. Serving the funeral industry across South Africa with reliable, respectful and controlled refrigerated body transport.</p>
 
 <h2>Contact Body Transport Solutions</h2>
 <p>Phone &amp; WhatsApp (24/7 dispatch): <a href="tel:+27615891505">+27&nbsp;61&nbsp;589&nbsp;1505</a><br>
@@ -383,11 +463,15 @@ Body Transport Solutions (Pty) Ltd &middot; Registration 2026/464849/07</p>
 <p><em>This page uses JavaScript for its full interactive experience. Please enable JavaScript, or contact us directly using the details above.</em></p>
 </div>
 </noscript>
+<aside class="bts-cookie" data-bts-cookie-banner hidden aria-label="Privacy and cookie choices">
+  <div class="bts-cookie__copy"><strong>Your privacy choices</strong><span>We use the Meta Pixel only with your permission to measure advertising and website enquiries. Essential site functions work without it. <a href="/privacy.html">Privacy &amp; cookies</a></span></div>
+  <div class="bts-cookie__actions">
+    <button type="button" data-bts-consent="declined">Decline</button>
+    <button type="button" class="bts-cookie__accept" data-bts-consent="accepted">Allow measurement</button>
+  </div>
+</aside>
 <x-dc>
 <helmet>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,400;0,500;0,700;0,900;1,900&display=swap" rel="stylesheet">
   <link rel="icon" type="image/png" sizes="192x192" href="/assets/favicon.png">
   <style>
     :root {
@@ -1741,7 +1825,7 @@ Body Transport Solutions (Pty) Ltd &middot; Registration 2026/464849/07</p>
   <header class="bts-header" style="border-bottom:{{ headerBorder }};box-shadow:{{ headerShadow }}">
     <div class="bts-header-inner">
       <a href="#home" onClick="{{ goHome }}" class="bts-brand" aria-label="Body Transport Solutions — home">
-        <img src="./assets/logo.webp" alt="Body Transport Solutions">
+        <img src="./assets/logo.webp" alt="Body Transport Solutions" width="600" height="204">
         <span class="bts-brand-copy"><strong>Refrigerated transport</strong><span>Human remains logistics</span></span>
       </a>
       <nav class="bts-tabs" aria-label="Main navigation">
@@ -2719,7 +2803,7 @@ Body Transport Solutions (Pty) Ltd &middot; Registration 2026/464849/07</p>
     <div style="max-width:1140px;margin:0 auto;display:flex;flex-direction:column;gap:28px">
       <div style="display:flex;justify-content:space-between;gap:36px;flex-wrap:wrap">
         <div style="display:flex;flex-direction:column;gap:12px;max-width:380px">
-          <img src="./assets/logo.webp" alt="Body Transport Solutions" style="height:76px;width:auto;display:block;align-self:flex-start;object-fit:contain">
+          <img src="./assets/logo.webp" alt="Body Transport Solutions" width="600" height="204" loading="lazy" decoding="async" style="height:76px;width:auto;display:block;align-self:flex-start;object-fit:contain">
           <p style="font-size:13px;line-height:1.65;margin:0">Dedicated refrigerated human remains transport for funeral parlours, mortuaries, hospitals, insurers and repatriation coordinators across KwaZulu-Natal.</p>
           <p style="font-size:12px;margin:0;color:#80868B">Reg No. 2026/464849/07 · Tax No. 9001928366</p>
           <div style="height:4px;width:120px;border-radius:2px;background:linear-gradient(90deg,#007749 0% 20%,#FFB81C 20% 40%,#E03C31 40% 60%,#001489 60% 80%,#111111 80% 100%)"></div>
@@ -2741,6 +2825,7 @@ Body Transport Solutions (Pty) Ltd &middot; Registration 2026/464849/07</p>
       </div>
       <div style="border-top:1px solid #DADCE0;padding-top:20px">
         <p style="font-size:12px;line-height:1.7;margin:0;color:#80868B;max-width:1040px">BODY TRANSPORT SOLUTIONS (PTY) LTD is a transport-only service provider. We do not operate as a funeral parlour, mortuary, embalming facility, crematorium, burial service or funeral policy provider. All services are subject to applicable documentation, legal, municipal, health and transport requirements.</p>
+        <p style="font-size:12px;line-height:1.7;margin:10px 0 0;color:#80868B"><a href="/privacy.html" style="color:#5F6368;text-decoration:underline">Privacy &amp; cookies</a> &middot; <button type="button" onClick="{{ openCookieSettings }}" style="appearance:none;border:0;background:none;padding:0;color:#5F6368;text-decoration:underline;font:inherit;cursor:pointer">Cookie settings</button></p>
       </div>
     </div>
   </footer>
@@ -2872,6 +2957,7 @@ class Component extends DCLogic {
       goRequest: mk('request'),
       goAreas: mk('areas'),
       goCompliance: mk('compliance'),
+      openCookieSettings: () => { if (window.btsOpenCookieSettings) window.btsOpenCookieSettings(); },
       phone,
       whatsapp,
       email,

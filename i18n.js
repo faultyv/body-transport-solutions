@@ -598,13 +598,42 @@
       });
     });
     const page = (location.hash || '#home').slice(1);
-    const pageLabels = {
-      en: { home:'', about:'Company', services:'Services', compliance:'Standards', process:'Process', areas:'Coverage', partners:'Partner Support', request:'Request Transport', contact:'Contact' },
-      af: { home:'', about:'Maatskappy', services:'Dienste', compliance:'Standaarde', process:'Proses', areas:'Dekking', partners:'Vennootondersteuning', request:'Versoek vervoer', contact:'Kontak' },
-      zu: { home:'', about:'Inkampani', services:'Izinsizakalo', compliance:'Amazinga', process:'Inqubo', areas:'Indawo esiyisebenzelayo', partners:'Ukusekela ozakwethu', request:'Cela ukuthuthwa', contact:'Xhumana' }
+    const pageTitles = {
+      en: {
+        home:'Refrigerated Human Remains Transport KZN | Body Transport Solutions',
+        about:'Transport-Only Human Remains Logistics Company | Body Transport Solutions',
+        services:'Human Remains Transport Services KZN | Body Transport Solutions',
+        compliance:'Refrigerated Transport Standards & Documentation | Body Transport Solutions',
+        process:'Human Remains Transport Process | Body Transport Solutions',
+        areas:'Human Remains Transport Coverage KZN | Body Transport Solutions',
+        partners:'Overflow Transport Support for Funeral Parlours | Body Transport Solutions',
+        request:'Request Refrigerated Transport | Body Transport Solutions',
+        contact:'24/7 Transport Dispatch KZN | Body Transport Solutions'
+      },
+      af: {
+        home:'Verkoelde vervoer van menslike oorskot KZN | Body Transport Solutions',
+        about:'Vervoermaatskappy vir menslike oorskot | Body Transport Solutions',
+        services:'Vervoerdienste vir menslike oorskot KZN | Body Transport Solutions',
+        compliance:'Standaarde en dokumentasie vir verkoelde vervoer | Body Transport Solutions',
+        process:'Vervoerproses vir menslike oorskot | Body Transport Solutions',
+        areas:'Vervoerdekking vir menslike oorskot in KZN | Body Transport Solutions',
+        partners:'Bykomende vervoerondersteuning vir begrafnisondernemings | Body Transport Solutions',
+        request:'Versoek verkoelde vervoer | Body Transport Solutions',
+        contact:'24/7-vervoerkoordinasie in KZN | Body Transport Solutions'
+      },
+      zu: {
+        home:'Ukuthuthwa kwabashonile ngesiqandisi e-KZN | Body Transport Solutions',
+        about:'Inkampani yezokuthutha kwabashonile kuphela | Body Transport Solutions',
+        services:'Izinsizakalo zokuthutha kwabashonile e-KZN | Body Transport Solutions',
+        compliance:'Amazinga nemibhalo yokuthutha ngesiqandisi | Body Transport Solutions',
+        process:'Inqubo yokuthutha kwabashonile | Body Transport Solutions',
+        areas:'Izindawo zokuthutha kwabashonile e-KZN | Body Transport Solutions',
+        partners:'Ukusekela amakhaya abangcwabi ngezokuthutha | Body Transport Solutions',
+        request:'Cela ukuthuthwa ngesiqandisi | Body Transport Solutions',
+        contact:'Ukuthunyelwa kwezokuthutha 24/7 e-KZN | Body Transport Solutions'
+      }
     };
-    const label = pageLabels[current][page] || '';
-    document.title = label ? `${label} | Body Transport Solutions` : 'Refrigerated Human Remains Transport KZN | Body Transport Solutions';
+    document.title = (pageTitles[current] && pageTitles[current][page]) || pageTitles.en.home;
   }
 
   function applyLanguage(lang, persist = true) {
