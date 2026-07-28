@@ -165,6 +165,64 @@ h1 {
   margin-top: 28px;
 }
 
+.featured-link {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 18px;
+  margin: 0 auto;
+  padding: 18px 20px;
+  color: #174EA6;
+  background: linear-gradient(110deg, #E8F0FE, #F8FBFF 72%);
+  border: 1px solid #C8DCF8;
+  border-radius: 16px;
+  box-shadow: 0 12px 28px rgba(26,115,232,.08);
+}
+
+.featured-link-copy { display: grid; gap: 4px; }
+.featured-link-copy strong { color: #174EA6; font-size: 15px; }
+.featured-link-copy span { color: #3C4043; font-size: 13px; line-height: 1.45; }
+.featured-link-arrow {
+  display: inline-flex;
+  min-width: 38px;
+  height: 38px;
+  align-items: center;
+  justify-content: center;
+  color: #FFFFFF;
+  background: #1A73E8;
+  border-radius: 999px;
+  font-size: 19px;
+  transition: transform .2s ease, background .2s ease;
+}
+.featured-link:hover .featured-link-arrow,
+.featured-link:focus-visible .featured-link-arrow { background: #0B57D0; transform: translateX(3px); }
+
+.seo-route-links {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 12px;
+  margin-top: 28px;
+}
+.seo-route-links a {
+  display: flex;
+  min-height: 78px;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 16px 18px;
+  color: #202124;
+  background: #FFFFFF;
+  border: 1px solid #DADCE0;
+  border-radius: 14px;
+  font-size: 14px;
+  font-weight: 700;
+  line-height: 1.35;
+  transition: border-color .2s ease, box-shadow .2s ease, transform .2s ease;
+}
+.seo-route-links a::after { content: '\2192'; flex: 0 0 auto; color: #1A73E8; font-size: 18px; }
+.seo-route-links a:hover,
+.seo-route-links a:focus-visible { border-color: #AECBFA; box-shadow: 0 10px 24px rgba(60,64,67,.1); transform: translateY(-2px); }
+
 .proof-strip {
   display: grid;
   grid-template-columns: repeat(4, minmax(0, 1fr));
@@ -407,6 +465,14 @@ p {
 
   .proof-strip div {
     min-height: auto;
+  }
+
+  .featured-link {
+    align-items: flex-start;
+  }
+
+  .seo-route-links {
+    grid-template-columns: 1fr;
   }
 }
 

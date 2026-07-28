@@ -1683,6 +1683,21 @@ Body Transport Solutions (Pty) Ltd &middot; Registration 2026/464849/07</p>
     .bts-open-list [style*="display:grid"] > [style*="border:1px solid #DADCE0"]:hover {
       border-color: #AECBFA !important; box-shadow: none !important;
     }
+    .bts-home-service-links {
+      display: grid; grid-template-columns: repeat(3,minmax(0,1fr)); gap: 12px; margin: 0 0 32px;
+    }
+    .bts-home-service-links a {
+      display: flex; min-height: 86px; align-items: center; justify-content: space-between; gap: 12px;
+      padding: 16px 18px; color: #202124; background: #FFFFFF; border: 1px solid #DADCE0; border-radius: 16px;
+      box-shadow: 0 8px 22px rgba(60,64,67,.06); transition: border-color .2s ease, box-shadow .2s ease, transform .2s ease;
+    }
+    .bts-home-service-links a:hover,
+    .bts-home-service-links a:focus-visible { border-color: #AECBFA; box-shadow: 0 12px 28px rgba(60,64,67,.12); transform: translateY(-2px); }
+    .bts-home-service-links a > span:first-child { display: grid; gap: 5px; min-width: 0; }
+    .bts-home-service-links strong { color: #202124; font-size: 14px; line-height: 1.3; }
+    .bts-home-service-links small { color: #5F6368; font-size: 12.5px; line-height: 1.4; }
+    .bts-home-service-links a > span:last-child { color: #1A73E8; font-size: 20px; flex: 0 0 auto; }
+    .bts-home-service-links__primary { background: linear-gradient(110deg,#E8F0FE,#FFFFFF 78%) !important; border-color: #C8DCF8 !important; }
     .bts-page-services > section:last-child > div > [style*="display:grid"],
     .bts-page-partners > section:last-child [style*="display:grid"] {
       gap: 0 40px !important;
@@ -1824,6 +1839,7 @@ Body Transport Solutions (Pty) Ltd &middot; Registration 2026/464849/07</p>
 
     @media (max-width: 640px) {
       .bts-home-coverage { padding: 52px 20px 64px !important; }
+      .bts-home-service-links { grid-template-columns: 1fr; }
       .bts-page-home .bts-map-wrap { border-radius: 18px; }
       .bts-page-home .bts-map-city,
       .bts-page-home .bts-map-time,
@@ -2057,6 +2073,11 @@ Body Transport Solutions (Pty) Ltd &middot; Registration 2026/464849/07</p>
         <div style="max-width:1140px;margin:0 auto">
           <h2 style="font-weight:700;font-size:clamp(24px,4.5vw,34px);margin:0 0 12px;letter-spacing:-0.01em;color:#202124">Refrigerated transport services</h2>
           <p style="font-size:16px;line-height:1.65;color:#5F6368;max-width:780px;margin:0 0 32px;text-wrap:pretty">Direct human remains transport between authorised facilities and destinations, including hospitals, mortuaries, funeral parlours, crematoria and burial locations. We also support scheduled inter-provincial and repatriation routes where the responsible parties supply the required authorisations and permits.</p>
+          <div class="bts-home-service-links" aria-label="Explore transport service pages">
+            <a href="/services/refrigerated-human-remains-transport-kzn/" class="bts-home-service-links__primary"><span><strong>Refrigerated body transport KZN</strong><small>See the full facility-to-facility service scope</small></span><span aria-hidden="true">&rarr;</span></a>
+            <a href="/services/human-remains-repatriation-durban/"><span><strong>Repatriation transport Durban</strong><small>Ground transport support for coordinators</small></span><span aria-hidden="true">&rarr;</span></a>
+            <a href="/services/funeral-home-transport-partner-kzn/"><span><strong>Funeral home partner capacity</strong><small>Overflow refrigerated transport across KZN</small></span><span aria-hidden="true">&rarr;</span></a>
+          </div>
           <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,260px),1fr));gap:14px">
             <div style="background:#FFFFFF;border:1px solid #DADCE0;border-radius:18px;padding:22px;display:flex;align-items:center;gap:14px" style-hover="box-shadow:0 1px 6px rgba(60,64,67,0.15)">
               <div style="width:38px;height:38px;border-radius:50%;background:#E8F0FE;display:grid;place-items:center;flex-shrink:0">
