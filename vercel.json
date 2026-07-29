@@ -2,6 +2,36 @@
   "$schema": "https://openapi.vercel.sh/vercel.json",
   "redirects": [
     {
+      "source": "/body-transport-kzn",
+      "destination": "/services/refrigerated-human-remains-transport-kzn/",
+      "permanent": true
+    },
+    {
+      "source": "/body-transport",
+      "destination": "/services/refrigerated-human-remains-transport-kzn/",
+      "permanent": true
+    },
+    {
+      "source": "/dead-body-transport-kzn",
+      "destination": "/services/refrigerated-human-remains-transport-kzn/",
+      "permanent": true
+    },
+    {
+      "source": "/hospital-to-mortuary-transport",
+      "destination": "/services/refrigerated-human-remains-transport-kzn/",
+      "permanent": true
+    },
+    {
+      "source": "/funeral-home-body-transport",
+      "destination": "/services/funeral-home-transport-partner-kzn/",
+      "permanent": true
+    },
+    {
+      "source": "/body-repatriation",
+      "destination": "/services/human-remains-repatriation-durban/",
+      "permanent": true
+    },
+    {
       "source": "/",
       "has": [
         {
