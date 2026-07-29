@@ -484,14 +484,21 @@
       if (window.gtag) window.gtag('event','transport_request_started',{ source: 'website' });
     } else if (href.indexOf('tel:') === 0) {
       if (window.fbq) window.fbq('track','Contact',{ contact_method: 'phone' });
-      if (window.gtag) window.gtag('event','contact',{ contact_method: 'phone' });
+      if (window.gtag) window.gtag('event','phone_click',{ link_url: href, page_path: window.location.pathname });
     } else if (href.indexOf('https://wa.me/') === 0) {
       if (window.fbq) window.fbq('track','Contact',{ contact_method: 'whatsapp' });
-      if (window.gtag) window.gtag('event','contact',{ contact_method: 'whatsapp' });
+      if (window.gtag) window.gtag('event','whatsapp_click',{ link_url: href.split('?')[0], page_path: window.location.pathname });
     } else if (href.indexOf('mailto:') === 0) {
       if (window.fbq) window.fbq('track','Contact',{ contact_method: 'email' });
-      if (window.gtag) window.gtag('event','contact',{ contact_method: 'email' });
+      if (window.gtag) window.gtag('event','email_click',{ link_url: href.split('?')[0], page_path: window.location.pathname });
     }
+  });
+  document.addEventListener('focusin', function (event) {
+    var target = event.target;
+    if (!target || !target.closest || !target.closest('[data-screen-label="Emergency Transport Request"]') || window.__btsRequestFormStarted) return;
+    window.__btsRequestFormStarted = true;
+    if (window.fbq) window.fbq('trackCustom','TransportRequestFormStarted',{ source: 'website' });
+    if (window.gtag) window.gtag('event','form_start',{ form_name: 'transport_request', page_path: window.location.pathname });
   });
 })(window, document);
 </script>
@@ -3052,7 +3059,7 @@ class Component extends DCLogic {
     const whatsapp = this.props.whatsapp ?? '+27 61 589 1505';
     const email = this.props.email ?? 'info@bodytransportsolutions.co.za';
     const digits = String(whatsapp).replace(/[^0-9]/g, '');
-    const waText = encodeURIComponent('Hello Body Transport Solutions. I need refrigerated transport capacity. Organisation: ___. Collection facility/location: ___. Destination: ___. Required date/time: ___. Documentation status: ___.');
+    const waText = encodeURIComponent('Hi Body Transport Solutions. I need refrigerated body transport. Please reply for collection location, destination and date/time.');
 
     const mk = (key) => (e) => { if (e && e.preventDefault) e.preventDefault(); this.go(key); };
 
