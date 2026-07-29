@@ -1,8 +1,24 @@
 # Handoff — organic growth work on bodytransportsolutions.co.za
 
 Written for whoever (human or agent) picks this up next. Branch:
-`claude/marketing-audit-organic-growth-57kc9p`, 6 commits ahead of `main`,
-working tree clean as of this handoff. Not yet merged or PR'd.
+`claude/marketing-audit-organic-growth-57kc9p`, working tree clean as of
+this handoff. Not yet merged or PR'd.
+
+**Update, same day:** Codex picked this branch up and pushed
+`911cda6 Improve SEO body transport search routing`. Its `vercel.json`
+redirects (guessed-URL → real-page 301s, e.g. `/body-transport-kzn` →
+`/services/refrigerated-human-remains-transport-kzn/`) are good and are
+still in the branch. But it also rewrote the homepage and KZN service
+page's `<title>`, `<h1>`, meta description, `og:*`/`twitter:*` tags, and
+two body `<h2>`s from "refrigerated human remains transport" to blunter
+"body transport"/"body collection" phrasing — the same colloquial-search
+gap flagged earlier in this doc, but applied to headline copy, not FAQ
+questions. **The user was asked directly and had already scoped that
+work to FAQ-only** to keep the primary headline copy clinical (see
+"Guardrails" below) — so that copy was reverted back
+(`127bc76`), keeping Codex's redirects. If you're about to reach for the
+same "blunter phrasing" fix again: it's been proposed and bounded twice
+now. Don't redo the headline rewrite without asking first.
 
 ## The business, in one paragraph
 
