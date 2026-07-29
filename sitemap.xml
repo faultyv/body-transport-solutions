@@ -1,10 +1,30 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
   <url>
     <loc>https://bodytransportsolutions.co.za/</loc>
     <lastmod>2026-07-28</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
+    <image:image>
+      <image:loc>https://bodytransportsolutions.co.za/assets/hero-vehicle.webp</image:loc>
+      <image:title>Body Transport Solutions refrigerated transport vehicle</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://bodytransportsolutions.co.za/assets/vehicle-exterior.webp</image:loc>
+      <image:title>Dedicated refrigerated transport vehicle</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://bodytransportsolutions.co.za/assets/vehicle-liftgate-open.webp</image:loc>
+      <image:title>Refrigerated compartment beneath the lift-up rear hatch</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://bodytransportsolutions.co.za/assets/vehicle-liftgate-cleaning.webp</image:loc>
+      <image:title>Transport compartment cleaning and inspection</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://bodytransportsolutions.co.za/assets/controller-gauge.webp</image:loc>
+      <image:title>Refrigeration controller during cooling</image:title>
+    </image:image>
   </url>
   <url>
     <loc>https://bodytransportsolutions.co.za/services/refrigerated-human-remains-transport-kzn/</loc>
@@ -101,6 +121,10 @@
     <lastmod>2026-07-28</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.75</priority>
+    <image:image>
+      <image:loc>https://bodytransportsolutions.co.za/assets/vehicle-liftgate-open.webp</image:loc>
+      <image:title>Refrigerated transport compartment beneath a lift-up rear hatch</image:title>
+    </image:image>
   </url>
   <url>
     <loc>https://bodytransportsolutions.co.za/contact/</loc>
