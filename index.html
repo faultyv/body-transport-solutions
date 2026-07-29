@@ -848,6 +848,8 @@ Body Transport Solutions (Pty) Ltd &middot; Registration 2026/464849/07</p>
       border: 1px solid #DCE4EE; border-radius: 20px; background: rgba(255,255,255,.98);
       box-shadow: 0 20px 55px rgba(24,44,70,.20); backdrop-filter: blur(18px); -webkit-backdrop-filter: blur(18px);
     }
+    /* Closed <details> does not reliably collapse custom panel children across browsers. */
+    .bts-mobile-menu:not([open]) .bts-mobile-panel { display: none; }
     .bts-mobile-links { display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); gap: 4px; }
     .bts-mobile-link { padding: 13px 14px; border-radius: 12px; color: #3C4043; font-size: 14px; font-weight: 600; }
     .bts-mobile-link[data-act="1"] { background: #E8F0FE; color: #0B57D0; }
