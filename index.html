@@ -949,7 +949,8 @@ Body Transport Solutions (Pty) Ltd &middot; Registration 2026/464849/07</p>
     }
 
     /* Footer resource hub: a compact, scannable hand-off for professional buyers. */
-    .bts-footer { position: relative; }
+    .bts-footer { position: relative; overflow: hidden; }
+    .bts-footer img { background: transparent !important; }
     .bts-footer__inner > div:first-child {
       display: grid !important; grid-template-columns: minmax(250px,.85fr) minmax(0,1.55fr);
       align-items: start; gap: 44px !important;
@@ -960,7 +961,7 @@ Body Transport Solutions (Pty) Ltd &middot; Registration 2026/464849/07</p>
     .bts-footer__inner > div:first-child > div:last-child {
       display: grid !important; grid-template-columns: repeat(3,minmax(0,1fr)); gap: 30px !important; min-width: 0;
     }
-    .bts-footer__inner nav { min-width: 0; display: flex !important; gap: 9px !important; }
+    .bts-footer__inner nav { min-width: 0; max-width: none !important; display: flex !important; gap: 9px !important; }
     .bts-footer__inner nav span { color: #263B53 !important; }
     .bts-footer__inner nav a,
     .bts-footer__inner > div:first-child > div:last-child > div a { color: #5F6368 !important; transition: color .15s ease, transform .15s ease; }
@@ -968,7 +969,7 @@ Body Transport Solutions (Pty) Ltd &middot; Registration 2026/464849/07</p>
     .bts-footer__inner > div:first-child > div:last-child > div a:hover { color: #0B57D0 !important; transform: translateX(2px); }
     .bts-footer__inner > div:first-child > div:last-child > div:last-child {
       min-width: 0; padding: 17px 17px 16px; border: 1px solid #DCE4EE; border-radius: 16px;
-      background: #FFFFFF; box-shadow: 0 10px 24px rgba(60,64,67,.07);
+      background: #F8FBFF; box-shadow: none;
     }
     .bts-footer__inner > div:first-child > div:last-child > div:last-child span { color: #263B53 !important; }
     .bts-footer__inner > div:last-child { border-top-color: #DCE4EE !important; }
@@ -979,9 +980,9 @@ Body Transport Solutions (Pty) Ltd &middot; Registration 2026/464849/07</p>
       .bts-footer__inner > div:first-child > div:first-child { max-width: 620px !important; }
     }
     @media (max-width: 560px) {
-      .bts-footer__inner > div:first-child > div:last-child { grid-template-columns: repeat(2,minmax(0,1fr)); gap: 24px 18px !important; }
-      .bts-footer__inner > div:first-child > div:last-child > div:last-child { grid-column: 1 / -1; }
-      .bts-footer { padding-bottom: 108px !important; }
+      .bts-footer__inner > div:first-child > div:last-child { grid-template-columns: 1fr; gap: 24px !important; }
+      .bts-footer__inner > div:first-child > div:last-child > div:last-child { grid-column: auto; }
+      .bts-footer { padding-bottom: 96px !important; }
     }
 
     /* Number markers stay blue on interaction; the process ends intentionally. */
@@ -3131,7 +3132,7 @@ Body Transport Solutions (Pty) Ltd &middot; Registration 2026/464849/07</p>
           </nav>
           <nav style="display:flex;flex-direction:column;gap:9px;max-width:240px">
             <span style="font-size:11px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:#80868B;margin-bottom:4px">Services, coverage &amp; resources</span>
-            <sc-for list="{{ seoNav }}" as="s" hint-placeholder-count="6">
+            <sc-for list="{{ footerSeoNav }}" as="s" hint-placeholder-count="6">
               <a href="{{ s.href }}" style="font-size:13px;color:#5F6368;line-height:1.35" style-hover="color:#1A73E8">{{ s.label }}</a>
             </sc-for>
           </nav>
@@ -3255,7 +3256,14 @@ class Component extends DCLogic {
       current: p === it.key ? 'page' : null
     }));
 
-    const footerNav = this.pages.concat([{ key: 'request', label: 'Request Transport' }]).map(it => ({
+    const footerPages = [
+      { key: 'home', label: 'Home' },
+      { key: 'services', label: 'Services' },
+      { key: 'areas', label: 'Coverage' },
+      { key: 'contact', label: 'Contact' },
+      { key: 'request', label: 'Request Transport' }
+    ];
+    const footerNav = footerPages.map(it => ({
       label: it.label,
       href: '#' + it.key,
       onClick: mk(it.key)
@@ -3280,6 +3288,9 @@ class Component extends DCLogic {
       { label: 'Procurement guidance', href: '/resources/procurement/' },
       { label: 'Healthcare workflows', href: '/resources/healthcare-workflows/' }
     ];
+    const footerSeoNav = [
+      seoNav[0], seoNav[1], seoNav[2], seoNav[4], seoNav[15], seoNav[16]
+    ];
 
     return {
       pageHome: p === 'home',
@@ -3294,6 +3305,7 @@ class Component extends DCLogic {
       navItems,
       footerNav,
       seoNav,
+      footerSeoNav,
       goHome: mk('home'),
       goRequest: mk('request'),
       goAreas: mk('areas'),
