@@ -786,13 +786,13 @@ Body Transport Solutions (Pty) Ltd &middot; Registration 2026/464849/07</p>
     @media (min-width: 1560px) { .bts-brand-copy { display: block; } }
     .bts-tabs {
       position: relative;
-      display: flex; align-items: stretch; align-self: stretch; gap: 2px;
+      display: flex; align-items: stretch; align-self: stretch; gap: 2px; flex: 1 1 auto;
       margin-left: 14px; overflow-x: auto; overflow-y: hidden; scrollbar-width: none; white-space: nowrap;
       overscroll-behavior-inline: contain; scroll-snap-type: x proximity; min-width: 0;
     }
     .bts-tabs::-webkit-scrollbar { display: none; }
     .bts-tab {
-      display: flex; align-items: center; padding: 0 11px;
+      display: flex; flex: 0 0 auto; align-items: center; padding: 0 11px;
       font-size: 13.5px; font-weight: 600; cursor: pointer;
       transition: color .15s ease, background-color .15s ease; scroll-snap-align: center;
     }
@@ -927,6 +927,11 @@ Body Transport Solutions (Pty) Ltd &middot; Registration 2026/464849/07</p>
       .bts-dispatch-link span, .bts-dispatch-link strong { display: none; }
       .bts-mobile-menu { display: block; }
       .bts-mobile-panel { top: 104px; }
+    }
+    @media (max-width: 1450px) and (min-width: 1200px) {
+      /* Keep every primary tab readable at laptop widths; Explore remains
+         available on wide desktop where it has room to breathe. */
+      .bts-explore-menu { display: none; }
     }
     @media (max-width: 419px) {
       .bts-header-inner { gap: 6px; }
