@@ -13,12 +13,27 @@
     },
     {
       "source": "/dead-body-transport-kzn",
-      "destination": "/services/refrigerated-human-remains-transport-kzn/",
+      "destination": "/services/deceased-removal-transport-kzn/",
       "permanent": true
     },
     {
       "source": "/hospital-to-mortuary-transport",
-      "destination": "/services/refrigerated-human-remains-transport-kzn/",
+      "destination": "/services/hospital-to-mortuary-transport-kzn/",
+      "permanent": true
+    },
+    {
+      "source": "/hospital-to-mortuary-transport-kzn",
+      "destination": "/services/hospital-to-mortuary-transport-kzn/",
+      "permanent": true
+    },
+    {
+      "source": "/deceased-removal-transport",
+      "destination": "/services/deceased-removal-transport-kzn/",
+      "permanent": true
+    },
+    {
+      "source": "/deceased-removal-kzn",
+      "destination": "/services/deceased-removal-transport-kzn/",
       "permanent": true
     },
     {
