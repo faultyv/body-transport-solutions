@@ -2331,6 +2331,7 @@ Body Transport Solutions (Pty) Ltd &middot; Registration 2026/464849/07</p>
             <h2 style="font-weight:700;font-size:clamp(24px,4.5vw,34px);margin:0 0 12px;letter-spacing:-0.01em;color:#202124">Cato Ridge based. <span class="bts-grad">KZN focused.</span></h2>
             <p style="font-size:16px;line-height:1.65;color:#5F6368;margin:0 0 20px;text-wrap:pretty">Our base in Cato Ridge sits right on the N3 — ±10 minutes from Camperdown, ±30 from Pietermaritzburg and ±45 from Durban. We are transport-only and do not store human remains, so we focus on routes we can collect and deliver quickly, with surrounding provinces by prior arrangement.</p>
             <a href="#areas" onClick="{{ goAreas }}" style="font-weight:500;font-size:15px;color:#1A73E8;display:inline-flex;align-items:center;gap:8px">View all areas covered <span aria-hidden="true">→</span></a>
+            <a href="/areas/kzn/locations/" style="font-weight:500;font-size:15px;color:#1A73E8;display:inline-flex;align-items:center;gap:8px;margin-top:10px">Search 300+ KZN locations <span aria-hidden="true">→</span></a>
           </div>
           <div class="bts-home-coverage-routes" style="background:#FFFFFF;border:1px solid #DADCE0;border-radius:18px;overflow:hidden">
             <sc-for list="{{ routes }}" as="r" hint-placeholder-count="7">
@@ -2403,7 +2404,7 @@ Body Transport Solutions (Pty) Ltd &middot; Registration 2026/464849/07</p>
             <text class="bts-map-arr" x="170" y="76">Gauteng &#183; by arrangement</text>
             <text class="bts-map-arr" x="100" y="842">Eastern Cape &#183; by arrangement</text>
           </svg>
-          <div class="bts-map-title"><b>KZN route network</b><span>Daily refrigerated transfers &#183; surrounding provinces by arrangement</span></div>
+          <div class="bts-map-title"><b>KZN corridor overview</b><span>300+ places indexed &#183; route confirmed at dispatch</span></div>
           <div class="bts-map-foot"><span class="bts-map-flag"></span><span>Proudly South African &#183; Transport-only operator</span></div>
         </div>
           <div class="bts-map-mobile-key" aria-label="Key KZN service areas and route context">
@@ -2799,7 +2800,7 @@ Body Transport Solutions (Pty) Ltd &middot; Registration 2026/464849/07</p>
             <text class="bts-map-arr" x="170" y="76">Gauteng &#183; by arrangement</text>
             <text class="bts-map-arr" x="100" y="842">Eastern Cape &#183; by arrangement</text>
           </svg>
-          <div class="bts-map-title"><b>KZN route network</b><span>Daily refrigerated transfers &#183; surrounding provinces by arrangement</span></div>
+          <div class="bts-map-title"><b>KZN corridor overview</b><span>300+ places indexed &#183; route confirmed at dispatch</span></div>
           <div class="bts-map-foot"><span class="bts-map-flag"></span><span>Proudly South African &#183; Transport-only operator</span></div>
         </div>
         <div class="bts-map-mobile-key" aria-label="Main route destinations and route context">
@@ -3142,7 +3143,8 @@ class Component extends DCLogic {
       { label: 'Transport resources', href: '/resources/' },
       { label: 'KZN transport knowledge centre', href: '/resources/knowledge-centre/' },
       { label: 'KZN transport network', href: '/resources/kzn-transport-network/' },
-      { label: 'KZN area network', href: '/areas/kzn/' }
+      { label: 'KZN area network', href: '/areas/kzn/' },
+      { label: '300+ KZN location index', href: '/areas/kzn/locations/' }
     ];
 
     return {
