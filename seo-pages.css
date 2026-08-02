@@ -352,6 +352,91 @@ p {
   background: #1A73E8;
 }
 
+.graph {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 10px;
+  margin-top: 24px;
+  counter-reset: graph-step;
+}
+
+.graph-step {
+  position: relative;
+  min-height: 142px;
+  padding: 18px 16px;
+  background: linear-gradient(160deg, #FFFFFF, #F7FAFE);
+  border: 1px solid #D2E3FC;
+  border-radius: 16px;
+  box-shadow: 0 10px 24px rgba(26, 115, 232, .06);
+}
+
+.graph-step::before {
+  display: grid;
+  width: 30px;
+  height: 30px;
+  margin-bottom: 13px;
+  place-items: center;
+  color: #FFFFFF;
+  background: #1A73E8;
+  border-radius: 10px;
+  content: counter(graph-step);
+  counter-increment: graph-step;
+  font-size: 13px;
+  font-weight: 900;
+}
+
+.graph-step::after {
+  position: absolute;
+  top: 32px;
+  right: -14px;
+  color: #8AB4F8;
+  content: "→";
+  font-size: 22px;
+  font-weight: 700;
+}
+
+.graph-step:last-child::after { display: none; }
+.graph-step strong { display: block; color: #174EA6; font-size: 14px; line-height: 1.3; }
+.graph-step span { display: block; margin-top: 7px; color: #5F6368; font-size: 13px; line-height: 1.5; }
+
+.entity-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 12px;
+  margin-top: 24px;
+}
+
+.entity {
+  padding: 16px;
+  border: 1px solid #DADCE0;
+  border-radius: 14px;
+  background: #FFFFFF;
+}
+
+.entity strong { display: block; color: #202124; font-size: 14px; line-height: 1.35; }
+.entity span { display: block; margin-top: 6px; color: #5F6368; font-size: 12.5px; line-height: 1.5; }
+
+.source-note {
+  margin-top: 20px;
+  padding: 14px 16px;
+  color: #3C4043;
+  background: #F8FAFD;
+  border-left: 3px solid #1A73E8;
+  font-size: 13px;
+  line-height: 1.65;
+}
+
+@media (max-width: 860px) {
+  .graph { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .graph-step::after { display: none; }
+  .entity-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+
+@media (max-width: 520px) {
+  .graph,
+  .entity-grid { grid-template-columns: 1fr; }
+}
+
 .disclaimer {
   padding: 18px 20px;
   margin-top: 26px;
