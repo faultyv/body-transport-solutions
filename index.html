@@ -758,6 +758,25 @@ Body Transport Solutions (Pty) Ltd &middot; Registration 2026/464849/07</p>
       max-width: 1360px; margin: 0 auto; padding: 0 20px;
       display: flex; align-items: center; gap: 8px; min-height: 78px;
     }
+    /* The header is a trust surface first: concise operating facts sit above
+       the navigation without competing with the primary transport CTA. */
+    .bts-utility {
+      border-top: 1px solid #F1F3F4;
+      background: #FBFCFE;
+    }
+    .bts-utility__inner {
+      max-width: 1360px; min-height: 31px; margin: 0 auto; padding: 5px 20px;
+      display: flex; align-items: center; justify-content: space-between; gap: 18px;
+    }
+    .bts-utility__items { min-width: 0; display: flex; align-items: center; gap: 18px; overflow: hidden; }
+    .bts-utility__item {
+      min-width: 0; color: #5F6B7A; font-size: 11px; line-height: 1.25; white-space: nowrap;
+    }
+    .bts-utility__item strong { color: #263B53; font-weight: 700; }
+    .bts-utility__item::before { content: ''; display: inline-block; width: 6px; height: 6px; margin: 0 7px 1px 0; border-radius: 50%; background: #1A73E8; vertical-align: middle; }
+    .bts-utility__item:first-child::before { background: #137333; }
+    .bts-utility__contact { flex: 0 0 auto; color: #0B57D0; font-size: 11px; font-weight: 700; white-space: nowrap; }
+    .bts-utility__contact:hover { color: #174EA6; }
     .bts-brand { display: flex; align-items: center; flex-shrink: 0; cursor: pointer; gap: 12px; color: #202124; }
     .bts-brand:hover { color: #202124; }
     .bts-brand img { height: 54px; width: auto; display: block; }
@@ -786,6 +805,29 @@ Body Transport Solutions (Pty) Ltd &middot; Registration 2026/464849/07</p>
     .bts-header { animation: btsHeaderIn .45s ease both; }
     @keyframes btsHeaderIn { from { transform: translateY(-14px); opacity: 0; } to { transform: none; opacity: 1; } }
     .bts-actions { margin-left: auto; display: flex; align-items: center; gap: 10px; flex-shrink: 0; }
+    .bts-explore-menu { position: relative; display: flex; align-items: center; align-self: stretch; flex: 0 0 auto; }
+    .bts-explore-menu summary {
+      list-style: none; display: inline-flex; align-items: center; gap: 6px; height: 100%; padding: 0 11px;
+      border-radius: 12px 12px 0 0; color: #5F6368; font-size: 13.5px; font-weight: 600; cursor: pointer;
+      transition: color .15s ease, background-color .15s ease;
+    }
+    .bts-explore-menu summary::-webkit-details-marker { display: none; }
+    .bts-explore-menu summary svg { transition: transform .2s ease; }
+    .bts-explore-menu summary:hover,
+    .bts-explore-menu[open] summary { color: #0B57D0; background: #F1F5FA; }
+    .bts-explore-menu[open] summary svg { transform: rotate(180deg); }
+    .bts-explore-menu summary:focus-visible { outline: 2px solid #1A73E8; outline-offset: -2px; }
+    .bts-explore-panel {
+      position: absolute; top: calc(100% - 4px); right: -18px; z-index: 70; width: min(700px, calc(100vw - 32px));
+      padding: 18px; border: 1px solid #DCE4EE; border-radius: 18px; background: rgba(255,255,255,.98);
+      box-shadow: 0 20px 55px rgba(24,44,70,.18); backdrop-filter: blur(18px); -webkit-backdrop-filter: blur(18px);
+    }
+    .bts-explore-grid { display: grid; grid-template-columns: repeat(3,minmax(0,1fr)); gap: 18px; }
+    .bts-explore-group { min-width: 0; display: grid; align-content: start; gap: 8px; }
+    .bts-explore-group strong { color: #172033; font-size: 11px; letter-spacing: .09em; text-transform: uppercase; }
+    .bts-explore-group a { color: #3C4043; font-size: 13px; line-height: 1.35; }
+    .bts-explore-group a:hover { color: #0B57D0; }
+    .bts-explore-group a:focus-visible { outline: 2px solid #1A73E8; outline-offset: 2px; border-radius: 4px; }
     .bts-lang-wrap { flex: 0 0 auto; margin-left: 6px; }
     .bts-lang-switch {
       --bts-lang-index: 0;
@@ -876,7 +918,7 @@ Body Transport Solutions (Pty) Ltd &middot; Registration 2026/464849/07</p>
       .bts-header { background: #FFFFFF; backdrop-filter: none; -webkit-backdrop-filter: none; }
       .bts-header-inner { min-height: 68px; padding: 8px 12px; }
       .bts-brand img { height: 45px; }
-      .bts-tabs, .bts-cta { display: none; }
+      .bts-tabs, .bts-cta, .bts-explore-menu { display: none; }
       .bts-lang-wrap { margin-left: auto; }
       .bts-lang-switch { width: 98px; height: 38px; }
       .bts-actions { margin-left: 0; }
@@ -884,13 +926,57 @@ Body Transport Solutions (Pty) Ltd &middot; Registration 2026/464849/07</p>
       .bts-dispatch-link svg { grid-row: auto; flex: 0 0 18px; }
       .bts-dispatch-link span, .bts-dispatch-link strong { display: none; }
       .bts-mobile-menu { display: block; }
+      .bts-mobile-panel { top: 104px; }
     }
     @media (max-width: 419px) {
       .bts-header-inner { gap: 6px; }
       .bts-brand img { height: 40px; }
       .bts-lang-switch { width: 88px; height: 36px; }
       .bts-dispatch-link { display: none; }
-      .bts-mobile-panel { top: 64px; }
+      .bts-mobile-panel { top: 96px; }
+    }
+    @media (max-width: 640px) {
+      .bts-utility__inner { min-height: 28px; padding: 5px 12px; }
+      .bts-utility__items { gap: 12px; width: 100%; }
+      .bts-utility__item { font-size: 10px; }
+      .bts-utility__item:nth-child(n+2) { display: none; }
+      .bts-utility__contact { display: none; }
+    }
+
+    /* Footer resource hub: a compact, scannable hand-off for professional buyers. */
+    .bts-footer { position: relative; }
+    .bts-footer__inner > div:first-child {
+      display: grid !important; grid-template-columns: minmax(250px,.85fr) minmax(0,1.55fr);
+      align-items: start; gap: 44px !important;
+    }
+    .bts-footer__inner > div:first-child > div:first-child { min-width: 0; max-width: 390px !important; }
+    .bts-footer__inner > div:first-child > div:first-child img { height: 68px !important; }
+    .bts-footer__inner > div:first-child > div:first-child p { color: #5F6368; }
+    .bts-footer__inner > div:first-child > div:last-child {
+      display: grid !important; grid-template-columns: repeat(3,minmax(0,1fr)); gap: 30px !important; min-width: 0;
+    }
+    .bts-footer__inner nav { min-width: 0; display: flex !important; gap: 9px !important; }
+    .bts-footer__inner nav span { color: #263B53 !important; }
+    .bts-footer__inner nav a,
+    .bts-footer__inner > div:first-child > div:last-child > div a { color: #5F6368 !important; transition: color .15s ease, transform .15s ease; }
+    .bts-footer__inner nav a:hover,
+    .bts-footer__inner > div:first-child > div:last-child > div a:hover { color: #0B57D0 !important; transform: translateX(2px); }
+    .bts-footer__inner > div:first-child > div:last-child > div:last-child {
+      min-width: 0; padding: 17px 17px 16px; border: 1px solid #DCE4EE; border-radius: 16px;
+      background: #FFFFFF; box-shadow: 0 10px 24px rgba(60,64,67,.07);
+    }
+    .bts-footer__inner > div:first-child > div:last-child > div:last-child span { color: #263B53 !important; }
+    .bts-footer__inner > div:last-child { border-top-color: #DCE4EE !important; }
+    .bts-footer__inner > div:last-child a { color: #3C4043 !important; }
+    .bts-footer__inner > div:last-child a:hover { color: #0B57D0 !important; }
+    @media (max-width: 899px) {
+      .bts-footer__inner > div:first-child { grid-template-columns: 1fr; gap: 30px !important; }
+      .bts-footer__inner > div:first-child > div:first-child { max-width: 620px !important; }
+    }
+    @media (max-width: 560px) {
+      .bts-footer__inner > div:first-child > div:last-child { grid-template-columns: repeat(2,minmax(0,1fr)); gap: 24px 18px !important; }
+      .bts-footer__inner > div:first-child > div:last-child > div:last-child { grid-column: 1 / -1; }
+      .bts-footer { padding-bottom: 108px !important; }
     }
 
     /* Number markers stay blue on interaction; the process ends intentionally. */
@@ -1993,6 +2079,36 @@ Body Transport Solutions (Pty) Ltd &middot; Registration 2026/464849/07</p>
         </sc-for>
         <span class="bts-tab-ind" style="left:{{ indLeft }};width:{{ indWidth }}"></span>
       </nav>
+      <details class="bts-explore-menu">
+        <summary aria-label="Explore services, coverage and resources">Explore
+          <svg width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="m2.25 4.5 3.75 3.75L9.75 4.5" stroke="currentColor" stroke-width="1.35" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+        </summary>
+        <div class="bts-explore-panel">
+          <div class="bts-explore-grid">
+            <div class="bts-explore-group">
+              <strong>Services</strong>
+              <a href="/services/refrigerated-human-remains-transport-kzn/">Refrigerated body transport KZN</a>
+              <a href="/services/human-remains-repatriation-durban/">Human remains repatriation Durban</a>
+              <a href="/services/funeral-home-transport-partner-kzn/">Funeral home transport partner KZN</a>
+              <a href="#services">View service overview</a>
+            </div>
+            <div class="bts-explore-group">
+              <strong>Who we support</strong>
+              <a href="#partners">Hospitals &amp; mortuaries</a>
+              <a href="#partners">Funeral parlours</a>
+              <a href="#partners">Insurers &amp; repatriation teams</a>
+              <a href="#partners">Partner support</a>
+            </div>
+            <div class="bts-explore-group">
+              <strong>Knowledge &amp; routes</strong>
+              <a href="/resources/knowledge-hub/">Knowledge hub</a>
+              <a href="/resources/procurement/">Procurement guidance</a>
+              <a href="/resources/healthcare-workflows/">Healthcare workflows</a>
+              <a href="/areas/kzn/locations/">KZN area network</a>
+            </div>
+          </div>
+        </div>
+      </details>
       <div class="bts-lang-wrap">
         <div class="bts-lang-switch" role="group" aria-label="Website language" data-active="en">
           <button type="button" class="bts-lang-option" data-bts-lang="en" aria-pressed="true" title="English">EN</button>
@@ -2022,6 +2138,16 @@ Body Transport Solutions (Pty) Ltd &middot; Registration 2026/464849/07</p>
             </div>
           </div>
         </details>
+      </div>
+    </div>
+    <div class="bts-utility" aria-label="Operating information">
+      <div class="bts-utility__inner">
+        <div class="bts-utility__items">
+          <span class="bts-utility__item"><strong>Dispatch enquiries 24/7</strong></span>
+          <span class="bts-utility__item">Cato Ridge / Camperdown &middot; N3 corridor</span>
+          <span class="bts-utility__item">KwaZulu-Natal daily &middot; longer routes by arrangement</span>
+        </div>
+        <a class="bts-utility__contact" href="{{ telLink }}">Call {{ phone }}</a>
       </div>
     </div>
   </header>
@@ -2982,8 +3108,8 @@ Body Transport Solutions (Pty) Ltd &middot; Registration 2026/464849/07</p>
   </main>
 
   <!-- ============ FOOTER ============ -->
-  <footer style="background:#F8F9FA;border-top:1px solid #DADCE0;color:#5F6368;padding:clamp(40px,6vw,56px) 20px 120px">
-    <div style="max-width:1140px;margin:0 auto;display:flex;flex-direction:column;gap:28px">
+  <footer class="bts-footer" style="background:#F8F9FA;border-top:1px solid #DADCE0;color:#5F6368;padding:clamp(40px,6vw,56px) 20px 120px">
+    <div class="bts-footer__inner" style="max-width:1140px;margin:0 auto;display:flex;flex-direction:column;gap:28px">
       <div style="display:flex;justify-content:space-between;gap:36px;flex-wrap:wrap">
         <div style="display:flex;flex-direction:column;gap:12px;max-width:380px">
           <img src="./assets/logo.webp" alt="Body Transport Solutions" width="600" height="204" loading="lazy" decoding="async" style="height:76px;width:auto;display:block;align-self:flex-start;object-fit:contain">
@@ -2993,13 +3119,13 @@ Body Transport Solutions (Pty) Ltd &middot; Registration 2026/464849/07</p>
         </div>
         <div style="display:flex;gap:56px;flex-wrap:wrap">
           <nav style="display:flex;flex-direction:column;gap:9px">
-            <span style="font-size:11px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:#80868B;margin-bottom:4px">Pages</span>
+            <span style="font-size:11px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:#80868B;margin-bottom:4px">Company &amp; contact</span>
             <sc-for list="{{ footerNav }}" as="f" hint-placeholder-count="5">
               <a href="{{ f.href }}" onClick="{{ f.onClick }}" style="font-size:13px;color:#5F6368;cursor:pointer" style-hover="color:#1A73E8">{{ f.label }}</a>
             </sc-for>
           </nav>
           <nav style="display:flex;flex-direction:column;gap:9px;max-width:240px">
-            <span style="font-size:11px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:#80868B;margin-bottom:4px">SEO Routes</span>
+            <span style="font-size:11px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:#80868B;margin-bottom:4px">Services, coverage &amp; resources</span>
             <sc-for list="{{ seoNav }}" as="s" hint-placeholder-count="6">
               <a href="{{ s.href }}" style="font-size:13px;color:#5F6368;line-height:1.35" style-hover="color:#1A73E8">{{ s.label }}</a>
             </sc-for>
