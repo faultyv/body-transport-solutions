@@ -1310,7 +1310,9 @@ Body Transport Solutions (Pty) Ltd &middot; Registration 2026/464849/07</p>
       border: 1px solid rgba(103,163,232,.38); border-radius: 24px; background: #061426;
       box-shadow: 0 24px 64px rgba(11,37,69,.18), 0 0 0 1px rgba(255,255,255,.55) inset;
     }
-    .bts-diagram > img { width: 100%; height: 100%; object-fit: cover; display: block; }
+    /* Keep the photo surface and every diagram edge on the same radius.
+       Without this, the parent frame and image can read as two nested cards. */
+    .bts-diagram > img { width: 100%; height: 100%; object-fit: cover; display: block; border-radius: inherit; }
     .bts-diagram::before {
       content: ''; position: absolute; inset: 0; z-index: 2; pointer-events: none; border-radius: inherit;
       background: linear-gradient(180deg,rgba(3,14,29,.28),transparent 24%,transparent 72%,rgba(3,14,29,.24));
@@ -1318,7 +1320,7 @@ Body Transport Solutions (Pty) Ltd &middot; Registration 2026/464849/07</p>
       animation: btsFrost 7s ease-in-out infinite;
     }
     .bts-diagram::after {
-      content: ''; position: absolute; inset: 0; z-index: 2; pointer-events: none;
+      content: ''; position: absolute; inset: 0; z-index: 2; pointer-events: none; border-radius: inherit;
       background-image: linear-gradient(rgba(134,193,255,.08) 1px, transparent 1px), linear-gradient(90deg,rgba(134,193,255,.08) 1px,transparent 1px);
       background-size: 52px 52px; opacity: .32;
       -webkit-mask-image: linear-gradient(180deg,#000,transparent 38%); mask-image: linear-gradient(180deg,#000,transparent 38%);
@@ -1940,7 +1942,8 @@ Body Transport Solutions (Pty) Ltd &middot; Registration 2026/464849/07</p>
     .bts-page-compliance .bts-diagram::after { display: none !important; }
     .bts-page-compliance .bts-diagram::before {
       background: linear-gradient(180deg,rgba(3,14,29,.08),transparent 22%,transparent 78%,rgba(3,14,29,.08));
-      box-shadow: inset 0 0 0 1px rgba(197,225,255,.12); animation: none !important;
+      /* The diagram already owns the single visible frame ring. */
+      box-shadow: none; animation: none !important;
     }
 
     img[loading="lazy"] { background: #EDF1F5; }
