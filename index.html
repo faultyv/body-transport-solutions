@@ -1307,8 +1307,9 @@ Body Transport Solutions (Pty) Ltd &middot; Registration 2026/464849/07</p>
     /* ===== Refrigeration systems interface ===== */
     .bts-diagram {
       position: relative; width: 100%; aspect-ratio: 16 / 9; overflow: hidden; isolation: isolate;
-      border: 1px solid rgba(103,163,232,.38); border-radius: 24px; background: #061426;
-      box-shadow: 0 24px 64px rgba(11,37,69,.18), 0 0 0 1px rgba(255,255,255,.55) inset;
+      border: 0; border-radius: 24px; background: #061426;
+      /* One outer ring keeps the image surface and frame on the same curve. */
+      box-shadow: 0 24px 64px rgba(11,37,69,.18), 0 0 0 1px rgba(103,163,232,.38);
     }
     /* Keep the photo surface and every diagram edge on the same radius.
        Without this, the parent frame and image can read as two nested cards. */
@@ -1316,7 +1317,7 @@ Body Transport Solutions (Pty) Ltd &middot; Registration 2026/464849/07</p>
     .bts-diagram::before {
       content: ''; position: absolute; inset: 0; z-index: 2; pointer-events: none; border-radius: inherit;
       background: linear-gradient(180deg,rgba(3,14,29,.28),transparent 24%,transparent 72%,rgba(3,14,29,.24));
-      box-shadow: inset 0 0 0 1px rgba(197,225,255,.16), inset 0 0 70px rgba(87,164,255,.08);
+      box-shadow: inset 0 0 70px rgba(87,164,255,.08);
       animation: btsFrost 7s ease-in-out infinite;
     }
     .bts-diagram::after {
@@ -1325,7 +1326,7 @@ Body Transport Solutions (Pty) Ltd &middot; Registration 2026/464849/07</p>
       background-size: 52px 52px; opacity: .32;
       -webkit-mask-image: linear-gradient(180deg,#000,transparent 38%); mask-image: linear-gradient(180deg,#000,transparent 38%);
     }
-    @keyframes btsFrost { 0%, 100% { box-shadow: inset 0 0 0 1px rgba(197,225,255,.16), inset 0 0 60px rgba(87,164,255,.05); } 50% { box-shadow: inset 0 0 0 1px rgba(197,225,255,.22), inset 0 0 90px rgba(87,164,255,.13); } }
+    @keyframes btsFrost { 0%, 100% { box-shadow: inset 0 0 60px rgba(87,164,255,.05); } 50% { box-shadow: inset 0 0 90px rgba(87,164,255,.13); } }
     .bts-air { position: absolute; inset: 0; width: 100%; height: 100%; z-index: 1; mix-blend-mode: screen; pointer-events: none; }
     .bts-air path { stroke-dasharray: 18 162; animation: btsFlow 3.6s linear infinite; }
     .bts-air path:nth-child(2) { animation-delay: .6s; }
@@ -1937,7 +1938,7 @@ Body Transport Solutions (Pty) Ltd &middot; Registration 2026/464849/07</p>
       animation: none !important; opacity: 1 !important; transform: none !important;
     }
     .bts-page-compliance .bts-diagram {
-      box-shadow: 0 14px 36px rgba(11,37,69,.13), 0 0 0 1px rgba(255,255,255,.55) inset;
+      box-shadow: 0 14px 36px rgba(11,37,69,.13), 0 0 0 1px rgba(103,163,232,.38);
     }
     .bts-page-compliance .bts-diagram::after { display: none !important; }
     .bts-page-compliance .bts-diagram::before {
